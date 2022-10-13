@@ -29,7 +29,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Chatpage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChatpageView.vue')
   },
   {
     path: '/profile', // Profile
@@ -37,7 +37,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profilepage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProfilepageView.vue')
   },
   {
     path: '/signup', // Sign Up
@@ -53,7 +53,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Taskpage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/TaskpageView.vue')
   }
 ]
 
