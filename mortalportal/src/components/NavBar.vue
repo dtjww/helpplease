@@ -2,7 +2,7 @@
 <template>
     <div class="nav-bar">
     <div class="nav-bar__logo">
-        <img src="../assets/logo.png" alt="logo" />
+        <img src="../assets/MainLogo.png" alt="logo" />
     </div>
     <div class="nav-bar__links">
         <a href="#">Home</a>
