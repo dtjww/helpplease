@@ -21,14 +21,31 @@
     
             <q-space />
     
-            <q-btn stretch flat label="Saved" />
+            <!-- <q-btn stretch flat label="Saved" />
             <q-separator dark vertical />
 
-            <q-btn stretch flat label="Notifications" />
+            <q-btn-dropdown stretch flat label="Notifications"> 
+                <q-list>
+                    <q-item-label header>Recently Received Notifications</q-item-label>
+                    <q-item v-for="n in 3" :key="`x.${n}`" clickable v-close-popup tabindex="0">
+                    <q-item-section avatar>
+                            <q-icon name="notifications" color="secondary"/>
+                        </q-item-section>
+                    <q-item-section side>
+                        <q-item-section>
+                            <q-item-label>Notification</q-item-label>
+                            <q-item-label caption>Message from User1231</q-item-label>
+                        </q-item-section>
+                    </q-item-section>
+                    </q-item>
+
+                    <q-separator inset spaced />
+                </q-list>
+            </q-btn-dropdown>
             <q-separator dark vertical />
             
             <q-btn stretch flat label="Top Angels" />
-            <q-separator dark vertical />
+            <q-separator dark vertical /> -->
 
             <q-btn stretch flat label="Log In" />
             <q-separator dark vertical />
