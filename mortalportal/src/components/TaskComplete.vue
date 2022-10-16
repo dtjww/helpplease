@@ -7,7 +7,7 @@
         <q-dialog v-model="alert">
         <q-card>
             <q-card-section>
-            <div class="text-h6">Mission Launched Successfully!</div>
+                <div class="text-h6">Mission Launched Successfully!</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
