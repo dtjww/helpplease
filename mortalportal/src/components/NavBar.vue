@@ -7,12 +7,12 @@
                 <img src="../assets/MainLogo.png">
             </q-avatar> -->
             <q-item clickable v-ripple>
-            <q-item-section side>
-                <q-avatar rounded size="48px">
-                    <img src="../assets/MainLogo.png" />
-                <!-- <q-badge floating color="teal">new</q-badge> -->
-                </q-avatar>
-            </q-item-section>
+                <q-item-section side>
+                    <q-avatar square size="60px">
+                        <img src="../assets/MainLogo.png" />
+                    <!-- <q-badge floating color="teal">new</q-badge> -->
+                    </q-avatar>
+                </q-item-section>
             </q-item>
             
             <q-separator dark vertical inset />
