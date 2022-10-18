@@ -1,15 +1,15 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-md">
-        <q-toolbar class="navbar-bg text-black q-my-md shadow-2">
+        <q-toolbar class="text-black q-my-md shadow-2" style="background: #eaac8b;">
             <!-- <q-btn flat round dense icon="menu" class="q-mr-sm" /> -->
             <!-- <q-avatar>
                 <img src="../assets/MainLogo.png">
             </q-avatar> -->
             
             <q-item clickable v-ripple>
-                <q-item-section side>
-                    <q-avatar size="60px">
+                <q-item-section side class="logo">
+                    <q-avatar size="100px">
                         <img src="../assets/MainLogo.png" />
                     <!-- <q-badge floating color="teal">new</q-badge> -->
                     </q-avatar>
@@ -57,8 +57,12 @@
 </template>
 
 <style>
-    .navbar-bg {
+    /* .navbar-bg {
         background-color: #eaac8b;
+    } */
+    .logo {
+        width: 120px;
+        height: 60px;
     }
 </style>
 

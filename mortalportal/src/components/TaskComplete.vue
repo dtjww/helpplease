@@ -5,7 +5,7 @@
         <q-btn label="Launch Mission!" style="background: #e56a6e; color: white" @click="alert = true" />
 
         <q-dialog v-model="alert">
-        <q-card>
+        <q-card style="background: #eaac8b;">
             <q-card-section>
                 <div class="text-h6">Mission Launched Successfully!</div>
             </q-card-section>
@@ -19,7 +19,7 @@
             </q-card-section>
 
             <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" v-close-popup />
+            <q-btn flat label="Close" style="color: black" v-close-popup />
             </q-card-actions>
         </q-card>
         </q-dialog>
