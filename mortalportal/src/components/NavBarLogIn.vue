@@ -1,23 +1,25 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-md">
-        <q-toolbar class="navbar-bg text-black q-my-md shadow-2">
+        <q-toolbar class="text-black q-my-md shadow-2" style="background: #eaac8b;">
             <!-- <q-btn flat round dense icon="menu" class="q-mr-sm" /> -->
             <!-- <q-avatar>
                 <img src="../assets/MainLogo.png">
             </q-avatar> -->
             
             <q-item clickable v-ripple>
-            <q-item-section side>
-                <q-avatar rounded size="48px">
-                    <img src="../assets/MainLogo.png" />
-                <!-- <q-badge floating color="teal">new</q-badge> -->
-                </q-avatar>
-            </q-item-section>
+                <q-item-section side class="logo">
+                    <q-avatar size="100px">
+                        <img src="../assets/MainLogo.png" />
+                    <!-- <q-badge floating color="teal">new</q-badge> -->
+                    </q-avatar>
+                </q-item-section>
             </q-item>
 
             <q-separator dark vertical inset />
-            <q-btn stretch flat label="Home" />
+            <router-link to="/">
+                <q-btn stretch flat label="Home" style="color:black"/>
+            </router-link>
     
             <q-space />
     
@@ -47,18 +49,27 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical /> -->
 
-            <q-btn stretch flat label="Log In" />
+            <router-link to="/signup">
+                <q-btn stretch flat label="Log In" style="color:black"/>
+            </router-link>
+            
             <q-separator dark vertical />
             
-            <q-btn stretch flat label="Sign Up" />
+            <router-link to="/signup">
+                <q-btn stretch flat label="Sign Up" style="color:black"/>
+            </router-link>
 
         </q-toolbar>
     </div>
 </template>
 
 <style>
-    .navbar-bg {
+    /* .navbar-bg {
         background-color: #eaac8b;
+    } */
+    .logo {
+        width: 120px;
+        height: 60px;
     }
 </style>
 
