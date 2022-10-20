@@ -1,104 +1,94 @@
 <!-- Ban -->
 <template>
-    <div class="home">
-    <img alt="MainLogo" src="../assets/MainLogo.png">
-    <h1>This is a home page</h1>
-  </div>
-
   <NavBarLogIn msg="This is the LogIn page NavBar"/>
   <div class="home">
-    <div class="wassup">
-      <h1> {{msg}}</h1>
-      <h2 v-if="user"> Signed In User: {{user}}</h2>
-  
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">Loading...</div>
-  
-      <div v-if="isSignedIn">
-        <button @click="handleSignOut">Sign Out</button>
+  <img alt="MainLogo" src="../assets/MainLogo.png" style="max-width: 300px">
+</div>
+<div class="q-pa-md">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+    <div class="col">
+      <div class="q-gutter-md" style="max-width: 300px" >
+          <q-input rounded standout="bg-teal text-white" v-model="text" label="Search for a Task!" />
+          <br>
       </div>
     </div>
+  </div>
+  
+  
+  <q-carousel
+    v-model="slide"
+    transition-prev="slide-right"
+    transition-next="slide-left"
+    swipeable
+    animated
+    control-color="primary"
+    navigation
+    padding
+    arrows
+    height="300px"
+    class="bg-grey-1 shadow-2 rounded-borders"
+  >
+    <q-carousel-slide :name="1" class="column no-wrap">
+      <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <q-img class="rounded-borders col-6 full-height" src="../assets/MainLogo.png" />
+        <q-img class="rounded-borders col-6 full-height" src="../assets/Mortals.png" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide :name="2" class="column no-wrap">
+      <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/parallax2.jpg" />
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/quasar.jpg" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide :name="3" class="column no-wrap">
+      <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/cat.jpg" />
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/linux-avatar.png" />
+      </div>
+    </q-carousel-slide>
+    <q-carousel-slide :name="4" class="column no-wrap">
+      <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/material.png" />
+        <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/donuts.png" />
+      </div>
+    </q-carousel-slide>
+  </q-carousel>
 </div>
-  </template>
-  
-  <script>
-  import NavBar from '@/components/NavBar.vue';
-  import NavBarLogIn from '@/components/NavBarLogIn.vue';
-  import {ref} from 'vue';
-  import firebaseConfig from '../firebaseConfig.js';
-  import firebase from 'firebase/compat/app';
-  
-  firebase.initializeApp(firebaseConfig);
-  import * as firebaseui from 'firebaseui';
-  import 'firebaseui/dist/firebaseui.css';
-  import { getAuth, signOut} from "firebase/auth";
-  const auth = getAuth();
-  
-  export default {
-    name: 'HomeView',
-    props: {
-      msg: String
-    },
-    setup(){
-      const user = ref(null);
-      const isSignedIn = ref(false);
-  
-      const uiConfig = {
-        signInSuccessUrl: 'http://localhost:8080/',
-        signInFlow: 'popup',
-        signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  <h4>Lend your hand in everyday tasks.</h4>
+  <h4>Find jobs on the go!</h4>
 
-        ],
-        callbacks: {
-          signInSuccessWithAuthResult: function(authResult) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            
-            user.value = authResult.user.displayName;
-            console.log(authResult)
-            isSignedIn.value = true;
-            console.log('Signed in by user: ', user.value);
-            return false; // meaning we don't redirect/refresh the page
+  <div class="gayButton">
+      <q-btn color="primary" label="Be an Angel" @click="goToSignUp" />
+  </div>
+
+
+
+</template>
+
+<script>
+import NavBarLogIn from '@/components/NavBarLogIn.vue';
+import {ref} from 'vue';
   
-          },
-          uiShown: function() {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader').style.display = 'none';
-            }
-          }
-        }
-  
-      
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-  
-      // To add email provider to Firebase
-      ui.start('#firebaseui-auth-container', uiConfig);
-      const handleSignOut = () => {
-        signOut(auth).then(() => {
-        // Sign-out successful.
-        user.value = null;
-        isSignedIn.value = false;
-        console.log('Signed out');
-        ui.start('#firebaseui-auth-container', uiConfig); // relogin aft signout
-        
-        }).catch((error) => {
-          // An error happened.
-          console.log(error); // for reference
-        });
-      }
-      return {
-        user,
-        isSignedIn,
-        handleSignOut,
-        NavBarLogIn,
-        NavBar
-      }
-      }
+export default {
+  name: 'HomeView',
+  props: {
+    
+  },
+  components: {
+      NavBarLogIn
+    },
+  setup(){
+    
+    return {
+      slide: ref(1),
+      NavBarLogIn
     }
+    }
+  }
   
-  </script>
-  
+
+</script>
