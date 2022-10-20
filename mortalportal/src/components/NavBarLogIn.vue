@@ -17,7 +17,9 @@
             </q-item>
 
             <q-separator dark vertical inset />
-            <q-btn stretch flat label="Home" />
+            <router-link to="/">
+                <q-btn stretch flat label="Home" style="color:black"/>
+            </router-link>
     
             <q-space />
     
@@ -47,10 +49,15 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical /> -->
 
-            <q-btn stretch flat label="Log In" />
+            <router-link to="/signup">
+                <q-btn stretch flat label="Log In" style="color:black"/>
+            </router-link>
+            
             <q-separator dark vertical />
             
-            <q-btn stretch flat label="Sign Up" />
+            <router-link to="/signup">
+                <q-btn stretch flat label="Sign Up" style="color:black"/>
+            </router-link>
 
         </q-toolbar>
     </div>

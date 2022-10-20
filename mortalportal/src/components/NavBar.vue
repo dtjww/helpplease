@@ -16,7 +16,10 @@
             </q-item>
             
             <q-separator dark vertical inset />
-            <q-btn stretch flat label="Home" />
+            
+                <router-link to="/">
+                    <q-btn stretch flat label="Home" style="color:black"/>
+                </router-link>
     
             <q-space />
     
