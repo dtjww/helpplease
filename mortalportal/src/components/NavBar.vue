@@ -1,7 +1,7 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-md">
-        <q-toolbar class="text-black q-my-md shadow-2" style="background: #eaac8b;">
+        <q-toolbar class="text-white q-my-md shadow-2" style="background: #3e79b5;">
             <!-- <q-btn flat round dense icon="menu" class="q-mr-sm" /> -->
             <!-- <q-avatar>
                 <img src="../assets/MainLogo.png">
@@ -17,8 +17,8 @@
             
             <q-separator dark vertical inset />
             
-                <router-link to="/">
-                    <q-btn stretch flat label="Home" style="color:black"/>
+                <router-link to="/" style="color: white">
+                    <q-btn stretch flat label="Home" style="color:white"/>
                 </router-link>
     
             <q-space />
@@ -66,7 +66,11 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical />
 
-            <q-btn-dropdown flat dense icon="person_outline"> 
+            <router-link to="/" style="color: white">
+                <q-btn flat dense icon="person_outline" style="color:white"/>
+            </router-link>
+            
+            <q-btn-dropdown flat dense> 
                 <q-list>
                     <q-item-label header>Profile</q-item-label>
                     <q-item clickable v-ripple >
