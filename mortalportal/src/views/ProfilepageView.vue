@@ -1,20 +1,17 @@
-<!-- Ban QAjaxBar -->
 <!-- Ban -->
 <template>
+  <NavBar />
     <div class="q-pa-md">
         <q-layout view="lHh Lpr lff" container style="height: 600px" class="shadow-2 rounded-borders">
-            
 
         <q-drawer
         v-model="drawer"
         show-if-above
         :width="200"
-        :breakpoint="400"
+        :breakpoint="400"      
         >
-      
-      
-      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-          <q-list padding>
+        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+           <q-list padding>
 
             <q-item active clickable v-ripple>
               <q-item-section avatar>
@@ -80,26 +77,25 @@
   </template>
   
   <script>
-  import NavBarLogIn from '@/components/NavBarLogIn.vue';
+  import NavBar from '@/components/NavBar.vue';
   import {ref} from 'vue';
     
   export default {
-    name: 'HomeView',
+    name: 'ProfileView',
     props: {
       
     },
     components: {
-        
+        NavBar
       },
     setup(){
       
       return {
-        NavBarLogIn,
+        NavBar,
         drawer: ref(false)
       }
       }
     }
-    
   
   </script>
   
