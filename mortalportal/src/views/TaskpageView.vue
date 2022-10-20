@@ -1,25 +1,26 @@
 <!-- Mel -->
 
 <template>
-
+    <NavBar/>
     <div>
-        <q-card class="card">
+        <form>
+            <q-card class="card">
             <h6>Category of Task</h6>
             <q-select outlined v-model="model" :options="task" label="Choose a Task" class="inputboxes" />
-            <h6>Name of Task</h6>
+            <label>Name of Task</label>
             <input v-model="title" placeholder="Name of Tasks" maxlength="30" class="inputboxes">
             <h6>Price</h6>
-            <input v-model="title" placeholder="Name of Tasks" maxlength="30    " class="inputboxes">
+            <input v-model="title" placeholder="Price" maxlength="30" class="inputboxes">
 
         </q-card>
-
-
+        </form>
     </div>
 
 </template>
 
 <script>
 import { ref } from 'vue'
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   setup () {
@@ -29,6 +30,9 @@ export default {
         'Shopping', 'Physical', 'Assignment/Project', 'Hardware/Software'
       ]
     }
+  },
+  components:{
+        NavBar
   }
 }
 </script>
@@ -51,11 +55,10 @@ h6{
     width:300px;
     margin-top:10px;
     margin-bottom: 10px;
+    margin-left:0px;
+    text-align:left;
     
 }
 
-br{
-    display: block;
-    margin: 5px 0;
-}
+
 </style>
