@@ -1,6 +1,6 @@
 <!-- Ban -->
 <template>
-  <NavBarLogIn msg="This is the LogIn page NavBar"/>
+  <NavBarLogIn/>
   <div class="home">
   <img alt="MainLogo" src="../assets/MainLogo.png" style="max-width: 300px">
     </div>
@@ -8,30 +8,31 @@
   <div class="q-pa-md">
     
     <div class="row justify-end">
+      <div class="col-6 col-sm-3 col-md-2">
         <div class="q-gutter-md" style="max-width: 700px" >
         <q-input rounded standout="bg-teal text-white" v-model="text" label="Search for a Task!" />
         <br>
           </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md-2"></div>
     </div>
   
     <q-carousel
+      animated
       v-model="slide"
+      navigation
+      infinite
+      :autoplay="autoplay"
+      arrows
       transition-prev="slide-right"
       transition-next="slide-left"
-      swipeable
-      animated
-      infinite
-      control-color="primary"
-      navigation
-      padding
-      arrows
-      height="300px"
-      class="bg-grey-1 shadow-2 rounded-borders"
-      >
-      <q-carousel-slide :name="1" class="column no-wrap">
+      @mouseenter="autoplay = false"
+      @mouseleave="autoplay = true"
+    >
+    <q-carousel-slide :name="1" class="column no-wrap">
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-          <q-img class="rounded-borders col-6 full-height" src="https://st3.depositphotos.com/12548352/16352/i/600/depositphotos_163528228-stock-photo-african-american-child-with-swimming.jpg" />
-          <q-img class="rounded-borders col-6 full-height" src="../assets/Mortals.png" />
+          <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/mountains.jpg" />
+          <q-img class="rounded-borders col-6 full-height" src="https://cdn.quasar.dev/img/parallax1.jpg" />
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="2" class="column no-wrap">
@@ -63,7 +64,6 @@
       <q-btn color="primary" label="Be an Angel" />
       </router-link>
     </nav>
-    <router-view/>
   </div>
 
   <div class="q-gutter-md row justify-end items-start">
@@ -100,6 +100,7 @@ export default {
     
     return {
       slide: ref(1),
+      autoplay: ref(true),
       NavBarLogIn,
       modelMultiple: ref(['Academics']),
 
