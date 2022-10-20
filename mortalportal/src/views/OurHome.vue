@@ -1,8 +1,9 @@
 <template>
+
     <div>
         <button @click="getPost">Get Post</button>
     </div>
-
+<!-- 
     <div class="grid" > 
         <div v-for="post in posts" v-bind:key="post.name" class="grid-item">
             <q-card :style="height= post.width">
@@ -16,9 +17,9 @@
                 </q-card-section>
             </q-card>
             </div>
-        </div>
+        </div> -->
 
-        <!-- <div class="grid"> 
+        <div class="grid"> 
             <div class=" q-card grid-item">
                 <q-card-section>
                     Clean my Car<br>
@@ -100,7 +101,7 @@
                 </q-card-section>
             </q-card>
         
-    </div>  -->
+    </div> 
         <!-- <div class="grid">
             <q-card class="my-card grid-item">
                 <q-card-section>
@@ -220,7 +221,8 @@ return console.log('Layout Complete');
             tab: ref('mails')
             }
         },
-        
+
+                
         name: 'PageIndex', 
         data(){
             return{
@@ -231,11 +233,8 @@ return console.log('Layout Complete');
                 
             }
         },
-        component(){
-            return{
-                Masonry
-            }
-        },
+
+        
         methods: {
             getPost(){
                 axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/DreemTeem.json')
