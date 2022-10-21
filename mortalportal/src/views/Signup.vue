@@ -2,7 +2,7 @@
 <template>
     <q-layout>
         <q-page-container>
-            <q-page class="window-height window-width row justify-center items-center">
+            <q-page class="page-height page-width row justify-center items-center ">
                         <q-card square bordered class="q-pa-lg shadow-1">
                             <q-card-section>
                                 <div class="text-h6">Mortal Portal</div>
@@ -29,7 +29,7 @@
                                 </q-card-actions>
                             </q-tab-panel>
 
-                            <q-tab-panel name="Sign Up">
+                            <q-tab-panel name="Sign Up" >
                                 <q-card-section class="text-center q-pa-none">
                                     <p class="text-grey-6">Already have an account? Log in!</p>
                                 </q-card-section>
