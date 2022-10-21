@@ -7,14 +7,16 @@
                 <img src="../assets/MainLogo.png">
             </q-avatar> -->
             
-            <q-item clickable v-ripple>
-                <q-item-section side class="logo">
-                    <q-avatar size="100px">
-                        <img src="../assets/MainLogo.png" />
-                    <!-- <q-badge floating color="teal">new</q-badge> -->
-                    </q-avatar>
-                </q-item-section>
-            </q-item>
+            <router-link to="/" style="color: white">
+                <q-item clickable v-ripple>
+                    <q-item-section side>
+                        <q-avatar square size="60px">
+                            <img src="../assets/MainLogo.png" />
+                        <!-- <q-badge floating color="teal">new</q-badge> -->
+                        </q-avatar>
+                    </q-item-section>
+                </q-item>
+            </router-link>
 
             <q-separator dark vertical inset />
             <router-link to="/" style="color: white">

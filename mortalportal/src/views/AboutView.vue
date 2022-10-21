@@ -1,11 +1,24 @@
 <!--Renee testing NavBar output here-->
 <template>
-  <NavBar msg="This is my NavBar bro"/>
-  <div class="about">
+  
+  <div class="about bg-image" style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp');
+      height: 100vh;
+    ">
+    <NavBar/>
+    <BackgroundImage/>
     <h1>This is an about page</h1>
+    <NavBarLogIn/>
+    <TaskComplete/>
   </div>
-  <NavBarLogIn msg="This is the LogIn page NavBar"/>
-  <TaskComplete msg="This is my TaskComplete Pop Up"/>
+  
+  <!-- <div
+    class="bg-image"
+    style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp');
+      height: 100vh;
+    "
+  ></div> -->
 </template>
 
 <script>
@@ -13,13 +26,16 @@
   import NavBar from '@/components/NavBar.vue'
   import NavBarLogIn from '@/components/NavBarLogIn.vue'
   import TaskComplete from '@/components/TaskComplete.vue'
+  import BackgroundImage from '@/components/BackgroundImage.vue'
+
 
   export default {
     name: 'AboutView',
     components: {
       NavBar,
       NavBarLogIn,
-      TaskComplete
+      TaskComplete,
+      BackgroundImage
     }
   }
 </script>
