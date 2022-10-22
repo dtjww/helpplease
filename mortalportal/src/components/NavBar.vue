@@ -6,7 +6,7 @@
             <!-- <q-avatar>
                 <img src="../assets/MainLogo.png">
             </q-avatar> -->
-            <router-link to="/" style="color: white">
+            <router-link to="/" style="color: white; text-decoration: none">
                 <q-item clickable v-ripple>
                     <q-item-section side>
                         <q-avatar square size="60px">
@@ -19,7 +19,7 @@
             
             <q-separator dark vertical inset />
             
-            <router-link to="/" style="color: white">
+            <router-link to="/" style="color: white; text-decoration: none">
                 <q-btn stretch flat label="Home" style="color:white"/>
             </router-link>
     
@@ -68,7 +68,7 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical />
 
-            <router-link to="/" style="color: white">
+            <router-link to="/" style="color: white; text-decoration: none">
                 <q-btn flat dense icon="person_outline" style="color:white"/>
             </router-link>
             

@@ -19,7 +19,7 @@
             </router-link>
 
             <q-separator dark vertical inset />
-            <router-link to="/" style="color: white">
+            <router-link to="/" style="color: white; text-decoration: none">
                 <q-btn stretch flat label="Home" style="color: white"/>
             </router-link>
     
@@ -51,13 +51,13 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical /> -->
 
-            <router-link to="/signup" style="color: white">
+            <router-link to="/signup" style="color: white; text-decoration: none">
                 <q-btn stretch flat label="Log In" style="color: white"/>
             </router-link>
             
             <q-separator dark vertical />
             
-            <router-link to="/signup" style="color: white">
+            <router-link to="/signup" style="color: white; text-decoration: none">
                 <q-btn stretch flat label="Sign Up" style="color: white"/>
             </router-link>
 
