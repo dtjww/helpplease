@@ -183,4 +183,12 @@ h3{
 .button{
     margin:15px;
 }
+
+/* body{
+  background-image: url("https://marketplace.canva.com/EAFHm4JWsu8/1/0/1600w/canva-pink-landscape-desktop-wallpaper-HGxdJA_xIx0.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position:center;
+  background-size:cover;
+  } */
 </style>
