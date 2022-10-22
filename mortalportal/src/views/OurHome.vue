@@ -117,6 +117,7 @@ body {
   img {
     max-width: 100%;
     display: block;
+    margin: auto;
   }
   
   figure {
@@ -151,6 +152,8 @@ body {
     //display: grid;
     grid-template-columns: repeat(4, 1fr);
     //grid-template-rows: masonry;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   @media (max-width: 950px) {

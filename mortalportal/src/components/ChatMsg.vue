@@ -33,14 +33,13 @@
             >
             <q-spinner-dots size="2rem" />
         </q-chat-message>
-
         
     </div>
 </template>
 
-<style>
+<!-- <style>
     .font{
         font-size: 60px;
         font-weight: bold;
     }
-</style>
+</style> -->
