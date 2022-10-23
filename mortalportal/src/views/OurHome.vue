@@ -136,6 +136,7 @@ body {
     max-width: 100%;
     display: block;
     border-radius: 10%;
+    margin: auto;
   }
   
   figure {
@@ -170,6 +171,8 @@ body {
     //display: grid;
     grid-template-columns: repeat(4, 1fr);
     //grid-template-rows: masonry;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   @media (max-width: 1000px) {

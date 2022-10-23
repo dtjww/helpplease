@@ -83,25 +83,76 @@ export default {
                 <q-tab-panels
                   v-model="tab"
                   animated
-                  swipeable
                   vertical
                   transition-prev="jump-up"
                   transition-next="jump-up"
                   class="bg-deep-purple-1"
                 >
+                  <!-- FIRST TAB - PERSON A CHAT -->
                   <q-tab-panel name="chat1">
                 
                       <div class="q-ma-md">
                           <!-- for scroll area -->
                           <q-scroll-area style="height: 300px; max-width: auto;">
                               <!-- for chat -->
-                              <ChatMsg class="textinput2"></ChatMsg>
+                              <!-- <ChatMsg class="textinput2"></ChatMsg> -->
+
+                              <div class="bg-bg-deep-purple-1 back">
+                                <q-chat-message
+                                label='Sunday, 19th'
+                                style="font-size: 60px; font-weight: bold;"
+                                />
+                        
+                                <q-chat-message
+                                name="me"
+                                avatar="https://cdn.quasar.dev/img/avatar1.jpg"
+                                :text="['eh bojio']"
+                                stamp="12:30"
+                                sent
+                                />
+                        
+                                <q-chat-message
+                                name="Jane"
+                                avatar="https://cdn.quasar.dev/img/avatar2.jpg"
+                                :text="['dont liddat ah', 'i sumpah not doing anything']"
+                                stamp="12:32"
+                                />
+                                <q-chat-message
+                                name="me"
+                                avatar="https://cdn.quasar.dev/img/avatar1.jpg"
+                                :text="['eh bojio agn fr']"
+                                stamp="12:34"
+                                sent
+                                />
+                              
+
+                                <template v-for="text in this.textList" v-bind:key="text">
+                                  <q-chat-message
+                                  name="me"
+                                  avatar="https://cdn.quasar.dev/img/avatar1.jpg"
+                                  :text="[text]"
+                                  stamp="12:34"
+                                  sent
+                                  />
+                                  <q-chat-message
+                                  name="Jane"
+                                  avatar="https://cdn.quasar.dev/img/avatar2.jpg"
+                                  >
+                                  <q-spinner-dots size="2rem" />
+                                  </q-chat-message>
+
+                                </template>
+                                
+                            </div>
+
+
+
                           </q-scroll-area>
                       </div>
                 
             
-                      <!-- for  -->
-                      <q-input class="textinput" rounded outlined v-model="text" placeholder="Send a Text Here">
+                      <!-- FOR INPUT OF TEXT -->
+                      <q-input class="textinput" rounded outlined v-model="text" placeholder="Send a Text Here" @keyup.enter="dothis()">
                         <template v-slot:after>
                           <q-btn round dense flat icon="send" @click="dothis()"/>
                         </template>
@@ -109,7 +160,8 @@ export default {
             
             
                   </q-tab-panel>
-            
+                  
+                  <!-- SECOND TAB - PERSON B -->
                   <q-tab-panel name="chat2">
                     <div class="text-h4 q-mb-md">chat2</div>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
@@ -139,14 +191,14 @@ export default {
 <script>
   // @ is an alias to /src
   import NavBar from '@/components/NavBar.vue'
-  import ChatMsg from '@/components/ChatMsg.vue'
+  // import ChatMsg from '@/components/ChatMsg.vue'
   import { ref } from 'vue';
 
   export default {
     name: 'AboutView',
     components: {
     NavBar,
-    ChatMsg
+    // ChatMsg
 },
   setup () {
       return {
@@ -157,9 +209,20 @@ export default {
     data() {
         return {
           message: 'successfully passing data',
-          message2: 'hellooo'
+          message2: 'hellooo',
+          text: '',
+          textList: []
         }
-    }
+    },
+    methods: {   
+      dothis(){
+        // alert("go to else");
+        console.log(this.text);
+        this.textList.push(this.text);
+        this.text = '';
+        console.log(this.textList);
+            }
+      }
   }
 </script>
 
@@ -175,6 +238,7 @@ export default {
 .back{
   height: max-content;
   width: auto;
+  text-align: left;
 }
 .textformat{
   color: darkgray;
