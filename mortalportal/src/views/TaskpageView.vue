@@ -26,7 +26,7 @@
                     <td><h6>Description of Task</h6></td>
                 </tr>
                 <tr>
-                    <td><q-input outlined v-model="inputData.desc" placeholder="Description of Task" maxlength="30" class="inputboxes"/></td>
+                    <td><q-input outlined v-model="inputData.desc" placeholder="Description of Task" maxlength="500" class="inputboxes"/></td>
                 </tr>
 
                 <tr>
@@ -81,9 +81,7 @@
                     </td>
                 </tr>
             </table>
-            <router-link to="/home">
                 <q-btn color="white" text-color="black" label="Post Task" class='button' @click=submitDB />
-            </router-link>
         </form>
     </q-card>
     </div>
@@ -147,7 +145,7 @@ export default {
             // Parsing the data into firebase Realtime Database
             let key;
             let ext;
-            push(dbRef(db, 'DreemTeem') , this.inputData)
+            push(dbRef(db, 'TaskData') , this.inputData)
             .then((data) => {
                 // to get the key of the file                
                 key = data.key;
@@ -157,11 +155,11 @@ export default {
                 // to get the extension of the file + uploading onto firebase
                 const filename = this.image.name;
                 ext = filename.slice(filename.lastIndexOf('.'));
-                return uploadBytes(stRef(storage, 'DreemTeem/' + key + '.' + ext), this.image)
+                return uploadBytes(stRef(storage, 'TaskData/' + key + '.' + ext), this.image)
             })
             .then(() => {
                 // Get the download URL from the storage and then pushing that URL onto Firebase Database "file" key. 
-                getDownloadURL(stRef(storage, 'DreemTeem/' + key + '.' + ext))    
+                getDownloadURL(stRef(storage, 'TaskData/' + key + '.' + ext))    
                     .then((url) => {
                         console.log('123')
                         console.log(url)
@@ -169,13 +167,19 @@ export default {
                         const updates = {
                         file: url
                     }
-                    return update(dbRef(db,'DreemTeem/' + key),updates)
+                    return update(dbRef(db,'TaskData/' + key),updates)
                     })
                     .catch(catchError => {
                         console.log(catchError)
                     })
                 
             })
+            .catch((error) => {
+                console.log(error)
+            })
+            setTimeout(() => {
+                this.$router.push('/home')
+            }, 3150);
             }
         }
     }

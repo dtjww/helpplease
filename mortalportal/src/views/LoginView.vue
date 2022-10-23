@@ -43,7 +43,7 @@
                                     </q-form>
                                 </q-card-section>
                                 <q-card-actions class="q-px-md">
-                                    <q-btn unelevated color="primary" size="lg" class="full-width qBtn" label="Sign up" @click=login />
+                                    <q-btn unelevated color="primary" size="lg" class="full-width qBtn" label="Sign up" />
                                 </q-card-actions>
                             </q-tab-panel>
                         </q-tab-panels>
@@ -86,7 +86,7 @@ const storeName = useCounterStore()
 export default {
   setup () {
     return {
-      tab: ref('Sign Up'),
+      tab: ref('Login'),
     }
   },
   data(){
@@ -104,8 +104,7 @@ export default {
   methods:{
     login(){
       storeName.username = this.email_login
-      this.$router.push('/home')
-
+      
     }
   }
 }

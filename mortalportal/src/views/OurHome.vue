@@ -5,30 +5,31 @@
     <!-- <div>
         <button @click="getPost">Get Post</button>
     </div> -->
-
+    <div>
+        <q-btn flat rounded v-model="angel"><h5>Angel</h5></q-btn> | <q-btn flat rounded v-model="mortal" ><h5>Mortal</h5></q-btn> <br>
+        <q-btn color='dark' @click=goToTask>New Post</q-btn>
+        
+    </div>
 
 
             <div class="container box">
                 <figure v-for="post in posts" v-bind:key="post.name">
-                    <q-card class="my-card grid-item" :style="height=post.width">
+                    <q-card class="my-card grid-item" >
+                        
+                            <img :src="post.file">
                         <q-card-section class="fontAlign">
-                            {{ post.task }}<br>
-                            {{ post.category }}<br>
-                            <img :src="post.file" style="max-width:200px" ><br>
-                            {{ post.date }}<br>
-                            {{ post.time }}<br>
-                            {{ post.price }}<br>
-                            {{ post.loc }}<br>
-                            {{ post.name }}<br>
-                            {{ post.email }}<br>
-                            {{ post.phone }}<br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+                            Location: {{ post.loc }}<br>
+                            Category: {{ post.category }}<br>
+                    
                             
                         </q-card-section>
                     </q-card>
                 </figure>
             </div>
-
-
 
 </template>
 
@@ -70,6 +71,8 @@ export default{
             useData: false,
             useWifi: false,
             posts:[],
+            angel: false,
+            mortal: false,
             
         }
     },
@@ -80,7 +83,7 @@ export default{
     ,
     methods: {
         getPost(){
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/DreemTeem.json')
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData.json')
                 .then(response => {
                     console.log(response.data)
                     this.posts = response.data
@@ -88,6 +91,9 @@ export default{
                 .catch(error => {
                     console.log(error)
                 })
+        },
+        goToTask(){
+            this.$router.push('/task')         
         }
     },
     created(){
@@ -99,22 +105,18 @@ export default{
 
 <style lang="scss" scoped>
 .my-card{
-    //width: 100%;
-    max-width: 100%;
-    display: block;
+    max-width: 250px;
+    width:100%;
+
     }
 .grid-item{
     max-width: 300px;
     display: block;
     border:1px solid black;
-    img{
-        max-width:200px;
-    }
-
 }
 
 .box{
-    padding:20px;
+    padding:50px 10%;
 }
 
 .fontAlign{
@@ -136,7 +138,6 @@ body {
     max-width: 100%;
     display: block;
     border-radius: 10%;
-    margin: auto;
   }
   
   figure {
@@ -166,36 +167,72 @@ body {
   //}
   
   .container {
-    column-count: 4;
+    column-count: 5;
     column-gap: 10px;
     //display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     //grid-template-rows: masonry;
-    margin-left: 5%;
-    margin-right: 5%;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1850px) {
+    .container { 
+        grid-template-columns: repeat(4, 1fr);
+        column-count: 4;
+        column-gap: 10px;   
+    }
+
+    .q-card {
+        max-width: 100%;
+    }
+
+    }
+    @media (max-width: 1650px) {
     .container { 
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;
         column-gap: 10px;
     }
-  }
-  @media (max-width: 800px) {
+
+    .q-card {
+        max-width: 100%;
+    }
+
+    }
+
+  @media (max-width: 1300px) {
     .container { 
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
         column-gap: 10px;
     }
+    .q-card {
+        max-width: 100%;
+    }
+
+    }
+  
+  @media (max-width: 1200px) {
+    .container { 
+        grid-template-columns: repeat(2, 1fr);
+        column-count: 2;
+        column-gap: 10px;
+    }
+
+    .q-card {
+        max-width: 100%;
+    }
   }
-  @media (max-width: 550px) {
+  @media (max-width: 900px) {
     .container { 
         grid-template-columns: repeat(1, 1fr);
         column-count: 1;
         column-gap: 10px;
     }
-  }
+
+    .q-card {
+        max-width: 100%;
+    }
+}
 
 
 </style>
