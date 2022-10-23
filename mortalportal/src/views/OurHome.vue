@@ -1,21 +1,28 @@
 <!-- Mel -->
 
 <template>
-    <div>
+    <NavBar/>
+    <!-- <div>
         <button @click="getPost">Get Post</button>
-    </div>
+    </div> -->
 
 
 
-            <div class="container">
+            <div class="container box">
                 <figure v-for="post in posts" v-bind:key="post.name">
                     <q-card class="my-card grid-item" :style="height=post.width">
-                        <q-card-section>
-                            {{ post.Task }}<br>
-                            {{ post.Mortal }}<br>
-                            <img :src="post.Image" style="max-width:200px" ><br>
-                            {{ post.DateTime }}<br>
-                            {{ post.Amount }}<br>
+                        <q-card-section class="fontAlign">
+                            {{ post.task }}<br>
+                            {{ post.category }}<br>
+                            <img :src="post.file" style="max-width:200px" ><br>
+                            {{ post.date }}<br>
+                            {{ post.time }}<br>
+                            {{ post.price }}<br>
+                            {{ post.loc }}<br>
+                            {{ post.name }}<br>
+                            {{ post.email }}<br>
+                            {{ post.phone }}<br>
+                            
                         </q-card-section>
                     </q-card>
                 </figure>
@@ -29,6 +36,7 @@
 import axios from 'axios';
 import Masonry from 'masonry-layout'
 import { ref } from 'vue'
+import NavBar from '@/components/NavBar.vue';
 
 
 // var Masonry = require('masonry-layout');
@@ -65,11 +73,11 @@ export default{
             
         }
     },
-    component(){
-        return{
-            Masonry
-        }
-    },
+    components: {
+        NavBar
+    }            
+
+    ,
     methods: {
         getPost(){
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/DreemTeem.json')
@@ -82,29 +90,38 @@ export default{
                 })
         }
     },
-    // created(){
-    //     this.getPost();
-    // },
+    created(){
+        this.getPost();
+    },
 
 }
 </script>
 
 <style lang="scss" scoped>
 .my-card{
-//width: 100%;
-max-width: 100%;
-display: block;
-}
+    //width: 100%;
+    max-width: 100%;
+    display: block;
+    }
 .grid-item{
-max-width: 300px;
-display: block;
-border:1px solid black;
-img{
-    max-width:200px;
-}
+    max-width: 300px;
+    display: block;
+    border:1px solid black;
+    img{
+        max-width:200px;
+    }
 
 }
-//----------------------------------
+
+.box{
+    padding:20px;
+}
+
+.fontAlign{
+    text-align: left;
+    padding-left: 30px;
+}
+// ----------------------------------
 
 
 /////////////////////////////////////////////////////////////
@@ -112,11 +129,13 @@ img{
 body {
     background-color: #000;
     font: 1.1em Arial, Helvetica, sans-serif;
+    
   }
   
   img {
     max-width: 100%;
     display: block;
+    border-radius: 10%;
   }
   
   figure {
@@ -153,21 +172,21 @@ body {
     //grid-template-rows: masonry;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 1000px) {
     .container { 
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;
         column-gap: 10px;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     .container { 
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
         column-gap: 10px;
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 550px) {
     .container { 
         grid-template-columns: repeat(1, 1fr);
         column-count: 1;

@@ -1,7 +1,7 @@
 <!-- Renee -->
 <template>
-    <div class="q-pa-md">
-        <q-toolbar class="text-black q-my-md shadow-2" style="background: #f78185;">
+    <div class="q-pa-none">
+        <q-toolbar class="text-black q-my-none shadow-2" style="background: #f78185;">
             <!-- <q-btn flat round dense icon="menu" class="q-mr-sm" /> -->
             <!-- <q-avatar>
                 <img src="../assets/MainLogo.png">
