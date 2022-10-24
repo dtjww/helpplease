@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-input outlined v-model="inputData.name" maxlength="50" lazy-rules label="Name of Task"
+                            <q-field outlined v-model="inputData.name" maxlength="50" lazy-rules label="Name of Task"
                             :rules="[ val => val && val.length > 0 || 'Please Enter a Name for the Task']" class="inputboxes" />
                         </td>
                     </tr>
