@@ -1,6 +1,13 @@
 <!-- Mel -->
 
 <template>
+
+    <head>
+        <title>
+            Home
+        </title>
+    </head>
+
     <NavBar />
     <!-- <div>
         <button @click="getPost">Get Post</button>
@@ -28,7 +35,7 @@
                     Location: {{ post.loc }}<br>
                     Category: {{ post.category }}<br>
 
-                    <q-btn color='info' @click=iTask>Details</q-btn>
+                    <q-btn color='info' @click=iTask(post.id)>Details</q-btn>
                 </q-card-section>
             </q-card>
         </figure>
@@ -41,8 +48,8 @@ import axios from 'axios';
 import Masonry from 'masonry-layout'
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
-import {useCounterStore } from "@/store/store";
-const storeName = useCounterStore()
+// import { useCounterStore } from "@/store/store";
+// const storeName = useCounterStore()
 
 
 // var Masonry = require('masonry-layout');
@@ -100,12 +107,12 @@ export default {
         goToTask() {
             this.$router.push('/task')
         },
-        iTask() {
-            storeName.currentTask = this.id
-            this.$router.push('/task');
-            
+        iTask(id) {
+            console.log(this.posts.id)
+            this.$router.push({ name:'Task Details', params: { id: id } })
         }
-    },
+    }
+    ,
     created() {
         this.getPost();
     },

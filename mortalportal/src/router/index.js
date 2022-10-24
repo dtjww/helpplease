@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/NewUserHome.vue'
+// import HomeView from '../views/NewUserHome.vue'
 
 const routes = [
   {
     path: '/', // NewUserHome
-    name: 'home',
-    component: HomeView
+    name: 'Landing',
+    component: () => import(/* webpackChunkName: "about" */ '../views/NewUserHome.vue')
   },
   { 
     path: '/about', // About Page
-    name: 'about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/home', // OurHome
-    name: 'loginhome',
+    name: 'Home',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: '/chat', // ChatPage
-    name: 'chatpage',
+    name: 'Chat',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/signup', // Sign Up
-    name: 'signup',
+    name: 'Sign Up',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -49,7 +49,7 @@ const routes = [
   },
   {
     path: '/task', // Task Page
-    name: 'task',
+    name: 'Creating Task',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -57,17 +57,35 @@ const routes = [
   },
   {
     path: '/login', // Task Page
-    name: 'login',
+    name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+  },
+  {
+    path: '/detailedTask/:id', // Task Page
+    name: 'Task Details',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/TaskDetailView.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // ...
+  // explicitly return false to cancel the navigation
+  document.title=to.name
+  console.log(from.name)
+  console.log(to.name)
+  next()
+  return false
 })
 
 export default router

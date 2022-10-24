@@ -2,107 +2,63 @@
 
 <template>
     <NavBar />
-
-
     <div>
         <q-card class="card">
-            <h3>Create a New Task</h3><br>
-            <q-form @submit="submitDB">
-
+            <h3>{{ posts.name }}</h3><br>
+            <img :src=" posts.file ">   
                 <table>
                     <tr>
                         <td>
-                            <h6>Category of Task</h6>
+                            <h6>Description</h6>
+                            <q-field>
+                                <template v-slot:control>
+                                    <div>{{ posts.desc }}</div>
+                                </template>
+                            </q-field>    
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Choose a Category']"
-                                class="inputboxes" />
+                            <h6>Category</h6>
+                            <q-field>
+                                <template v-slot:control>
+                                    <div>{{ posts.category }}</div>
+                                </template>
+                            </q-field>    
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>
-                            <h6>Name of Task</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-field outlined v-model="inputData.name" maxlength="50" lazy-rules label="Name of Task"
-                            :rules="[ val => val && val.length > 0 || 'Please Enter a Name for the Task']" class="inputboxes" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h6>Description of Task</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Description']"
-                                maxlength="500" class="inputboxes" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h6>Price</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Price']"
-                                prefix='$' />
-                        </td>
-                    </tr>
-
                     <tr>
                         <td>
                             <h6>Location</h6>
+                            <q-field>
+                                <template v-slot:control>
+                                    <div>{{ posts.loc }}</div>
+                                </template>
+                            </q-field>    
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <q-input outlined v-model="inputData.loc" label="Location of Task" maxlength="30" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Location']"
-                                class="inputboxes" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h6>Date & Time</h6>
+                            <h6>Price</h6>
+                            <q-field>
+                                <template v-slot:control>
+                                    <div>{{ posts.price }}</div>
+                                </template>
+                            </q-field>    
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules :rules="[ val => val && val.length > 0 || 'Please Input a Time']" />
-                            <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Input a Date']" />
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Image (Optional)</h6>
+                            <h6>Date & Time</h6>
+                            <q-field>
+                                <template v-slot:control>
+                                    <div>{{ posts.date }} {{ posts.time }}</div>
+                                </template>
+                            </q-field>    
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <q-btn color="dark" label="upload image" @click="uploadImage" class="date" />
-                            <input type="file" style="display: none" ref="fileInput" accept='image/*'
-                                @change=onFilePicked />
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
-                        </td>
-                    </tr>
-                </table>
-                <q-btn color="white" text-color="black" label="Post Task" class='button' type="submit" />
-            </q-form>
+                </table><br>
+                <q-btn color='info' @click=goToTask>Accept Task</q-btn>
         </q-card>
 
         <q-dialog v-model="submit">
@@ -132,6 +88,7 @@ import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
 import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
+import axios from 'axios';
 
 export default {
 
@@ -141,17 +98,7 @@ export default {
             task: [
                 'Shopping', 'Physical', 'Assignment/Project', 'Hardware/Software'
             ],
-            inputData: {
-                time: '',
-                date: '',
-                loc: '',
-                name: '',
-                desc: '',
-                category: '',
-                file: '',
-                price: '',
-                id:''
-            },
+            posts:[],
             imageUrl: '',
             image: null,
             submit: ref(false)
@@ -231,7 +178,23 @@ export default {
                 window.location.reload()
             }, 3200);
                 
-        }
+        },
+        getPost() {
+            this.id = this.$route.params.id
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
+                .then(response => {
+                    console.log(response.data)
+                    this.posts = response.data
+                    console.log(this.posts.name)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+    },
+    created() {
+        
+        this.getPost();
     }
 
 }
