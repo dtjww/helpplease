@@ -37,7 +37,7 @@ export default {
  -->
 
 <template class="back">
-  <div class="bg-blue-grey-1 back">
+  <div class="back">
   <NavBar msg="This is my NavBar bro"/>
   <!-- <div class="about">
     <h1> hellooo </h1>
@@ -93,7 +93,7 @@ export default {
                 
                       <div class="q-ma-md">
                           <!-- for scroll area -->
-                          <q-scroll-area style="height: 300px; max-width: auto;">
+                          <q-scroll-area v-model="scrollAreaRef" style="height: 300px; max-width: auto;">
                               <!-- for chat -->
                               <!-- <ChatMsg class="textinput2"></ChatMsg> -->
 
@@ -197,32 +197,33 @@ export default {
   export default {
     name: 'AboutView',
     components: {
-    NavBar,
+    NavBar
     // ChatMsg
-},
+    },
   setup () {
       return {
         tab: ref('chat1'),
-        splitterModel: ref(27.3)
+        splitterModel: ref(27.3),
+
       }
     },
-    data() {
-        return {
-          message: 'successfully passing data',
-          message2: 'hellooo',
-          text: '',
-          textList: []
-        }
-    },
-    methods: {   
-      dothis(){
-        // alert("go to else");
-        console.log(this.text);
-        this.textList.push(this.text);
-        this.text = '';
-        console.log(this.textList);
-            }
+  data() {
+      return {
+        message: 'successfully passing data',
+        message2: 'hellooo',
+        text: '',
+        textList: []
       }
+  },
+  methods: {   
+    dothis(){
+      // alert("go to else");
+      console.log(this.text);
+      this.textList.push(this.text);
+      this.text = '';
+      console.log(this.textList);
+          }
+    }
   }
 </script>
 
