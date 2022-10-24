@@ -1,4 +1,4 @@
-<!-- Daryl -->
+<!-- daryl-->
 <template>
     <q-layout>
         <q-page-container>
@@ -20,12 +20,12 @@
                                 </q-card-section>
                                 <q-card-section>
                                     <q-form class="q-gutter-md">
-                                        <q-input square filled clearable v-model="email" type="email" label="Email" />
-                                        <q-input square filled clearable v-model="password" type="password" label="Password" />
+                                        <q-input square filled clearable v-model="email_login" type="text" placeholder="Email" />
+                                        <q-input square filled clearable v-model="password_login" type="password" placeholder="Password" />
                                     </q-form>
                                 </q-card-section>
                                 <q-card-actions class="q-px-md">
-                                    <q-btn unelevated color="primary" size="lg" class="full-width" label="Login" />
+                                    <q-btn unelevated color="primary" size="lg" class="full-width " label="Login" @click=login /> 
                                 </q-card-actions>
                             </q-tab-panel>
 
@@ -35,15 +35,15 @@
                                 </q-card-section>
                                 <q-card-section>
                                     <q-form class="q-gutter-md">
-                                        <q-input square filled clearable v-model="name" type="text" label="First Name" />
-                                        <q-input square filled clearable v-model="name" type="text" label="Last Name" />
-                                        <q-input square filled clearable v-model="password" type="password" label="Password" />
-                                        <q-input square filled clearable v-model="confirmpassword" type="password" label="Confirm Password" />
-                                        <q-input square filled clearable v-model="email" type="email" label="Email" />
+                                        <q-input square filled clearable v-model="fName_SU" type="text" label="First Name" />
+                                        <q-input square filled clearable v-model="lName_SU" type="text" label="Last Name" />
+                                        <q-input square filled clearable v-model="password_SU" type="password" label="Password" />
+                                        <q-input square filled clearable v-model="cPassword_SU" type="password" label="Confirm Password" />
+                                        <q-input square filled clearable v-model="email_SU" type="email" label="Email" />
                                     </q-form>
                                 </q-card-section>
                                 <q-card-actions class="q-px-md">
-                                    <q-btn unelevated color="primary" size="lg" class="full-width" label="Sign up" />
+                                    <q-btn unelevated color="primary" size="lg" class="full-width qBtn" label="Sign up" @click=login />
                                 </q-card-actions>
                             </q-tab-panel>
                         </q-tab-panels>
@@ -81,11 +81,31 @@
 
 <script>
 import { ref } from 'vue'
-
+import {useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
 export default {
   setup () {
     return {
-      tab: ref('Login')
+      tab: ref('Sign Up'),
+    }
+  },
+  data(){
+    return {
+      email_login: '',
+      password_login: '',
+      fName_SU: '',
+      lName_SU: '',
+      password_SU: '',
+      cPassword_SU: '',
+      email_SU: '',
+    }
+  },
+
+  methods:{
+    login(){
+      storeName.username = this.email_login
+      this.$router.push('/home')
+
     }
   }
 }
@@ -96,7 +116,8 @@ export default {
   .q-card {
     width: 360px;
   }
-  .q-page {
+  /* .q-page {
     background-color: #eaac8b;
-  }
+  } */
+
   </style>
