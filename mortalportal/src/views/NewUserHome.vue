@@ -3,18 +3,21 @@
   <NavBarLogIn/>
 
   <div class="q-pa-md">
+    <table>
+        <tr style="border: 1px solid #ddd">
+          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd">
+            <img alt="MainLogo" src="../assets/MainLogo.png" style="max-width: 600px">
+          </td>
+          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd"></td>
+          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd">
+            <div class="q-gutter-md" style="max-width: 700px">
+              <q-input rounded standout="bg-teal text-white" v-model="text" label="Search for a Task!" />
+              <br>
+            </div>
+          </td>
+        </tr>
+    </table>
     
-    <div class="row justify-end" style="border: 1px solid #ddd">
-      <div class="col-6 col-sm-3 col-md-2" style="border: 1px solid #ddd">
-        <img alt="MainLogo" src="../assets/MainLogo.png" style="max-width: 300px">
-      </div>
-      <div class="col-6 col-sm-3 col-md-2" style="border: 1px solid #ddd">
-        <div class="q-gutter-md" style="max-width: 700px" >
-          <q-input rounded standout="bg-teal text-white" v-model="text" label="Search for a Task!" />
-          <br>
-        </div>
-      </div>
-    </div>
   
     <q-carousel
       animated
@@ -40,15 +43,15 @@
       <q-carousel-slide :name="2" class="column no-wrap">
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/500/300/nature" />
-          <q-img class="rounded-borders col-3 full-height" src="https://cdn.quasar.dev/img/quasar.jpg" />
-          <q-img class="rounded-borders col-3 full-height" src="https://cdn.quasar.dev/img/material.png" />
-          <q-img class="rounded-borders col-3 full-height" src="https://cdn.quasar.dev/img/linux-avatar.png" />
+          <q-img class="rounded-borders col-3 full-height" src="https://i.picsum.photos/id/201/5184/3456.jpg?hmac=3SX-1t9hHlAmc653Ox-EmJonZBCaCSK5b9FayvY4sbI" />
+          <q-img class="rounded-borders col-3 full-height" src="https://i.picsum.photos/id/1066/2144/1424.jpg?hmac=J3AeMzlHPnXjRZdkB3pj5QrRPY8kPPqGjfRjgGyP4NI" />
+          <q-img class="rounded-borders col-3 full-height" src="https://picsum.photos/id/1011/367/267" />
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="3" class="column no-wrap">
         <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
           <q-img class="rounded-borders col-3 full-height" src="https://cdn.quasar.dev/img/mountains.jpg" />
-          <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/people?t=1666261624394" />
+          <q-img class="rounded-borders col-3 full-height" src="https://picsum.photos/id/1010/367/267" />
           <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/people?t=1666261665705" />
           <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/tech" />
         </div>
@@ -68,8 +71,8 @@
 
   <div class="angelSignupButton">
     <nav>
-    <router-link to="/SignUp">
-      <q-btn color="primary" label="Be an Angel" />
+    <router-link to="/SignUp" style="text-decoration:none">
+      <q-btn color="negative" label="Be an Angel"/>
       </router-link>
     </nav>
   </div>

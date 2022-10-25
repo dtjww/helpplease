@@ -46,7 +46,7 @@
             <q-btn stretch flat label="Top Angels" />
             <q-separator dark vertical /> -->
 
-            <router-link to="/signup" style="color: white; text-decoration: none">
+            <router-link to="/login" style="color: white; text-decoration: none">
                 <q-btn stretch flat label="Log In" style="color: white"/>
             </router-link>
             
