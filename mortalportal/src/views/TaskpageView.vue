@@ -132,6 +132,8 @@ import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
 import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
 
 export default {
 
@@ -150,7 +152,8 @@ export default {
                 category: '',
                 file: '',
                 price: '',
-                id:''
+                id:'',
+                user: storeName.username,
             },
             imageUrl: '',
             image: null,

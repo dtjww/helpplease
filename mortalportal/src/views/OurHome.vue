@@ -13,27 +13,56 @@
         <button @click="getPost">Get Post</button>
     </div> -->
     <div>
-        <q-btn flat rounded v-model="angel">
-            <h5>Angel</h5>
-        </q-btn> | <q-btn flat rounded v-model="mortal">
-            <h5>Mortal</h5>
-        </q-btn> <br>
+        <table align="center">
+            <tr>
+                <td class="actionbtns">
+                    <q-btn flat rounded v-model="angel">
+                        <h5>Angel</h5>
+                    </q-btn>
+                </td>
+                <td width:10px>
+                    |
+                </td>
+                <td class="actionbtns">
+                    <q-btn flat rounded v-model="mortal">
+                        <h5>Mortal</h5>
+                    </q-btn>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <q-btn class="actionbtns">Find</q-btn>
+                </td>
+                <td>
+                    <q-btn class="actionbtns">Saved</q-btn>
+                </td>
+                <td>
+                    <q-btn class="actionbtns">Active</q-btn>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <q-input rounded outlined label="Search" class="search" v-model="search"></q-input>
+                </td>
+            </tr>
+        </table>
+
         <q-btn color='dark' @click=goToTask>New Post</q-btn>
 
     </div>
 
 
     <div class="container box">
-        <figure v-for="post in posts" v-bind:key="post.id">
-            <q-card class="my-card grid-item" style="background: #f2cbb6"  >
+        <figure v-for="post in searchForTask " v-bind:key="post.id">
+            <q-card class="my-card grid-item" style="background: #f2cbb6">
                 <img :src="post.file">
                 <q-card-section class="fontAlign">
+                    Mortal: {{ post.username }} <br>
                     Task: {{ post.name }}<br>
                     Date: {{ post.date }}<br>
                     Time: {{ post.time }}<br>
                     Amount: ${{ post.price }}<br>
-                    Location: {{ post.loc }}<br>
-                    Category: {{ post.category }}<br>
 
                     <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
                 </q-card-section>
@@ -52,6 +81,7 @@ import NavBar from '@/components/NavBar.vue';
 
 export default {
     setup() {
+
         return {
             tab: ref('mails')
         }
@@ -63,10 +93,11 @@ export default {
             isLoading: true,
             useData: false,
             useWifi: false,
-            posts: [],
+            posts: {},
             angel: false,
             mortal: false,
-
+            search: '',
+            searchPost: [],
         }
     },
     components: {
@@ -90,10 +121,21 @@ export default {
         },
         iTask(id) {
             console.log(this.posts.id)
-            this.$router.push({ name:'Task Details', params: { id: id } })
+            this.$router.push({ name: 'Task Details', params: { id: id } })
+        },
+
+
+    },
+
+    computed: {
+        searchForTask() {
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.name.toLowerCase().includes(this.search.toLowerCase()))
+            return result
         }
-    }
-    ,
+    },
+
+
     created() {
         this.getPost();
     },
@@ -102,6 +144,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.actionbtns {
+    width: 150px;
+}
+
 .my-card {
     max-width: 250px;
     width: 100%;
@@ -225,7 +276,7 @@ figure>q-card {
     }
 }
 
-@media (max-width: 500px) { 
+@media (max-width: 500px) {
     .container {
         grid-template-columns: repeat(1, 1fr);
         column-count: 1;

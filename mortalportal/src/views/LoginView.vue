@@ -111,10 +111,7 @@ export default {
     },
 
   methods:{
-    login(){
-      storeName.username = this.email_login
-      
-    },
+
     getUser() {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login.json')
                 .then(response => {
@@ -123,7 +120,8 @@ export default {
                     var valid = false;
                     for(var key in this.users){
                         if(this.users[key].email == this.email_login && this.users[key].password == this.password_login){
-                            this.login()
+                            storeName.email = this.email_login
+                            storeName.username = this.users[key].username
                             this.$router.push('/home')
                             valid = true;
                           } 
