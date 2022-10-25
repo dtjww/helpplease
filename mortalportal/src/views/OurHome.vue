@@ -25,7 +25,7 @@
 
     <div class="container box">
         <figure v-for="post in posts" v-bind:key="post.id">
-            <q-card class="my-card grid-item">
+            <q-card class="my-card grid-item" style="background: #f2cbb6"  >
                 <img :src="post.file">
                 <q-card-section class="fontAlign">
                     Task: {{ post.name }}<br>
@@ -35,7 +35,7 @@
                     Location: {{ post.loc }}<br>
                     Category: {{ post.category }}<br>
 
-                    <q-btn color='info' @click=iTask(post.id)>Details</q-btn>
+                    <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
                 </q-card-section>
             </q-card>
         </figure>
@@ -45,29 +45,10 @@
 
 <script>
 import axios from 'axios';
-import Masonry from 'masonry-layout'
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
 // import { useCounterStore } from "@/store/store";
 // const storeName = useCounterStore()
-
-
-// var Masonry = require('masonry-layout');
-window.onload = () => {
-    const grid = document.querySelector('.grid');
-
-    const masonry = new Masonry(grid, {
-        itemSelector: '.grid-item',
-        gutter: 10,
-        originBottom: false
-    });
-
-
-    masonry.on('layoutComplete', () => {
-        return console.log('Layout Complete');
-    })
-}
-
 
 export default {
     setup() {
@@ -186,27 +167,27 @@ figure>q-card {
 //}
 
 .container {
-    column-count: 5;
+    column-count: 4;
     column-gap: 10px;
     //display: grid;
     grid-template-columns: repeat(5, 1fr);
     //grid-template-rows: masonry;
 }
 
-@media (max-width: 1850px) {
-    .container {
-        grid-template-columns: repeat(4, 1fr);
-        column-count: 4;
-        column-gap: 10px;
-    }
+// @media (max-width: 1850px) {
+//     .container {
+//         grid-template-columns: repeat(4, 1fr);
+//         column-count: 4;
+//         column-gap: 10px;
+//     }
 
-    .q-card {
-        max-width: 100%;
-    }
+//     .q-card {
+//         max-width: 100%;
+//     }
 
-}
+// }
 
-@media (max-width: 1650px) {
+@media (max-width: 1080px) {
     .container {
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;
@@ -219,7 +200,7 @@ figure>q-card {
 
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 800px) {
     .container {
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
@@ -232,7 +213,7 @@ figure>q-card {
 
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
     .container {
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
@@ -244,7 +225,7 @@ figure>q-card {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 500px) { 
     .container {
         grid-template-columns: repeat(1, 1fr);
         column-count: 1;
