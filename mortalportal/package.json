@@ -19,6 +19,7 @@
     "jslint": "^0.12.1",
     "masonry-layout": "^4.2.2",
     "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^2.3.0",
     "popper.js": "^1.16.1",
     "quasar": "^2.0.0",
     "ui": "^0.2.4",

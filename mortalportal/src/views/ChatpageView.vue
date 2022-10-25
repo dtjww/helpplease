@@ -49,20 +49,36 @@ export default {
 
 <!-- ---------------------------------------- -->
 <div id="q-app" style="min-height: 100vh;">
-  <div class="q-pa-md">
+  <div class="q-pa-md container">
 
     <div class="row justify-center">
-      <div class="col-3 bg-pink-3">
-        insert profile here here
+      <div class="col-12 col-sm-3 bg-pink-3" style="border-radius:7px; ">
+        Angel | Mortal <br>
+        Angel | Mortal <br>
+        Angel | Mortal <br>
+        Angel | Mortal <br>
       </div>
-      <div class="col-8 bg-pink-1">
-        HELLO
+      <div class="col-sm-8 col-12 bg-pink-1" style="border-radius:7px; text-align:left;">
+        <q-item style="height: 150px;">
+          <q-item-section side>
+            <q-avatar rounded size="100px">
+              <img src="https://cdn.quasar.dev/img/avatar.png" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Mary</q-item-label>
+            <q-item-label caption>This is my profile</q-item-label>
+          </q-item-section>
+          <q-item-section side>
+            smth here
+          </q-item-section>
+        </q-item>
       </div>
     </div>
 
 
     <div class="row justify-center">
-      <div class="col-11" style="background:#b56576">
+      <div class="col-sm-11 col-12" style="background:#b56576; border-radius:7px; margin:2px" >
         
           <div>
             <q-splitter v-model="splitterModel" style="height: auto" limits="[30,70]">
@@ -72,10 +88,9 @@ export default {
                   vertical
                   inline-label
                   class="text-white"
-                  style="width='500px'"
                 >
-                  <q-tab name="chat1" icon="mail" label="Person A" />
-                  <q-tab name="chat2" icon="mail" label="Person B" />
+                  <q-tab name="chat1" icon="mail" label="Person A"> <q-item-label caption>hellooo</q-item-label></q-tab> 
+                  <q-tab name="chat2" icon="mail" label="Person B" alert/> 
                 </q-tabs>
               </template>
             
@@ -87,10 +102,21 @@ export default {
                   transition-prev="jump-up"
                   transition-next="jump-up"
                   class="bg-deep-purple-1"
+                  style="border-radius: 0 7px 7px 0;"
                 >
                   <!-- FIRST TAB - PERSON A CHAT -->
                   <q-tab-panel name="chat1">
-                
+
+                      <q-item class="bg-pink-1" style="margin:0%; border:solid red 2px; border-radius:7px; text-align:left">
+                        <q-item-section>
+                          <q-item-label overline>LIST TASK HERE</q-item-label>
+                          <q-item-label caption>author??</q-item-label>
+                        </q-item-section>
+                        <q-item-section side>
+                          <q-item-label>Task button here</q-item-label>
+                        </q-item-section>
+                      </q-item>
+
                       <div class="q-ma-md">
                           <!-- for scroll area -->
                           <q-scroll-area v-model="scrollAreaRef" style="height: 300px; max-width: auto;">
@@ -142,10 +168,7 @@ export default {
                                   </q-chat-message>
 
                                 </template>
-                                
                             </div>
-
-
 
                           </q-scroll-area>
                       </div>
@@ -192,7 +215,16 @@ export default {
   // @ is an alias to /src
   import NavBar from '@/components/NavBar.vue'
   // import ChatMsg from '@/components/ChatMsg.vue'
-  import { ref } from 'vue';
+  import { ref } from 'vue'
+  
+  // import { scroll } from 'quasar';
+  // const { setVerticalScrollPosition } = scroll
+  // var offset = 0;
+  // var scrollTargetElement = null; 
+
+  // // Setting scroll position of an element or page:
+  // setVerticalScrollPosition (scrollTargetElement, offset)
+  // // if "duration" is specified then it will animate the scrolling
 
   export default {
     name: 'AboutView',
@@ -222,6 +254,7 @@ export default {
       this.textList.push(this.text);
       this.text = '';
       console.log(this.textList);
+      // setVerticalScrollPosition(this.scrollAreaRef, 1000);
           }
     }
   }
@@ -259,4 +292,12 @@ export default {
   margin-bottom: 10px;
   text-align: left;
 }
+@media (max-width: 600px) {
+  .container { 
+    margin: 0;
+    margin-top: 17px;
+    padding: 0;
+  }
+}
+
 </style>
