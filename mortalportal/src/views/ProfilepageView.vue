@@ -10,8 +10,7 @@
         :width="200"
         :breakpoint="400"      
         >
-        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
-           <q-list padding>
+           <q-list style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd" padding>
 
             <q-item active clickable v-ripple>
               <q-item-section avatar>
@@ -28,7 +27,7 @@
                 <q-icon name="assignment" />
               </q-item-section>
 
-              <q-item-section>
+              <q-item-section  @click=gotoMyTasks>
                 My Tasks
               </q-item-section>
             </q-item>
@@ -38,18 +37,12 @@
                 <q-icon name="logout" />
               </q-item-section>
 
-              <q-item-section>
-                <nav>
-                <router-link to="/SignUp">
+              <q-item-section @click=gotoHome>
                 Logout
-                </router-link>
-                </nav>
-                <router-view/>
               </q-item-section>
             </q-item>
 
           </q-list>
-        </q-scroll-area>
         <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
@@ -64,11 +57,7 @@
 
       <q-page-container>
         <!-- need to add the account and task components in here -->
-        <q-page padding>
-          <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-          </p>
-        </q-page>
+        <MyAccount />
       </q-page-container>
     </q-layout>
     </div>
@@ -78,6 +67,7 @@
   
   <script>
   import NavBar from '@/components/NavBar.vue';
+  import MyAccount from '@/components/MyAccount.vue';
   import {ref} from 'vue';
     
   export default {
@@ -86,7 +76,8 @@
       
     },
     components: {
-        NavBar
+        NavBar,
+        MyAccount
       },
     setup(){
       
@@ -94,7 +85,16 @@
         NavBar,
         drawer: ref(false)
       }
-      }
+      },
+    methods: {
+      gotoHome(){
+        this.$router.push('/home')
+      },
+
+      gotoMyTasks() {
+        this.$router.push('/home')
+          },
+    }
     }
   
   </script>
