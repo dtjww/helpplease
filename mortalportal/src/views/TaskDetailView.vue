@@ -10,7 +10,7 @@
                     <tr>
                         <td>
                             <h6>Description</h6>
-                            <q-field>
+                            <q-field :dense="dense" readonly>
                                 <template v-slot:control>
                                     <div>{{ posts.desc }}</div>
                                 </template>
@@ -20,7 +20,7 @@
                     <tr>
                         <td>
                             <h6>Category</h6>
-                            <q-field>
+                            <q-field :dense="dense" readonly>
                                 <template v-slot:control>
                                     <div>{{ posts.category }}</div>
                                 </template>
@@ -30,7 +30,7 @@
                     <tr>
                         <td>
                             <h6>Location</h6>
-                            <q-field>
+                            <q-field :dense="dense" readonly>
                                 <template v-slot:control>
                                     <div>{{ posts.loc }}</div>
                                 </template>
@@ -40,7 +40,7 @@
                     <tr>
                         <td>
                             <h6>Price</h6>
-                            <q-field>
+                            <q-field :dense="dense" readonly prefix="$">
                                 <template v-slot:control>
                                     <div>{{ posts.price }}</div>
                                 </template>
@@ -50,33 +50,26 @@
                     <tr>
                         <td>
                             <h6>Date & Time</h6>
-                            <q-field>
+                            <q-field :dense="dense" readonly>
                                 <template v-slot:control>
                                     <div>{{ posts.date }} {{ posts.time }}</div>
                                 </template>
                             </q-field>    
                         </td>
+                    </tr>   
+                    <tr>
+                            <td align="left">
+                            <q-btn size="lg" class="btn iconbtn" icon="favorite"  flat></q-btn>
+                            </td>
+                            <td align="right">
+                            <q-btn color='info' class="btn">Accept Task</q-btn>
+                            <q-btn color="dark" class="btn" @click=gotoChat >Chat Now</q-btn>
+                        </td>
                     </tr>
                 </table><br>
-                <q-btn color='info' @click=goToTask>Accept Task</q-btn>
+
         </q-card>
 
-        <q-dialog v-model="submit">
-            <q-card>
-                <q-card-section>
-                    <div class="text-h6">Success!</div>
-                </q-card-section>
-
-                <q-card-section class="q-pt-none">
-                    Your task has been successfully published for our Angels to pick up ! 
-                </q-card-section>
-
-                <q-card-actions align="right">
-                    <q-btn flat label="Home" color="dark" v-close-popup @click=gotoHome />
-                    <q-btn flat label="Post Another Task" color="dark" v-close-popup @click=gotoTask />
-                </q-card-actions>
-            </q-card>
-        </q-dialog>
 
     </div>
 
@@ -191,6 +184,9 @@ export default {
                     console.log(error)
                 })
         },
+        gotoChat(){
+            this.$router.push({name: 'Chat', params: {id: this.id}})
+        }
     },
     created() {
         
@@ -202,6 +198,14 @@ export default {
 </script>
 
 <style>
+.iconbtn{
+    color : red;
+}
+
+.btn{
+    margin: 10px;
+}
+
 .card {
     width: 700px;
     margin-left: auto;

@@ -6,4 +6,5 @@ export const useCounterStore = defineStore({
         username: '',
         currentTask: '',
 })
+    ,persist: true,
 })
