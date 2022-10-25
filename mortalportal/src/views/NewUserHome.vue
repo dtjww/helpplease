@@ -1,23 +1,31 @@
 <!-- Ban -->
 <template>
   <NavBarLogIn/>
-
   <div class="q-pa-md">
-    <table>
-        <tr style="border: 1px solid #ddd">
-          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd">
-            <img alt="MainLogo" src="../assets/MainLogo.png" style="max-width: 600px">
-          </td>
-          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd"></td>
-          <td class="col-4 col-sm-2 col-md-1" style="border: 1px solid #ddd">
-            <div class="q-gutter-md" style="max-width: 700px">
-              <q-input rounded standout="bg-teal text-white" v-model="text" label="Search for a Task!" />
-              <br>
-            </div>
-          </td>
-        </tr>
-    </table>
-    
+    <div class="row bg-primary" style="height: auto;">
+      <div class="col">
+        <div style="max-width: 650px; text-align: center; margin-left:auto; margin-right: auto">
+          <div class="text-h4 text-bold text-white q-mt-xl q-pt-xl q-pb-lg"> Find your angels on Mortal Portal </div>
+          <div class="text-h6 text-white q-pl-lg q-pr-lg q-pb-sm"> What do you need help with today?</div>
+          <q-input class="q-pl-md"
+          color="black"
+          bg-color="white"
+          rounded
+          filled
+          placeholder="Search for a task!"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </div>
+      </div>
+      <div class="col gt-sm" style="height: 350px; max-height: 350px;">
+        <q-img class="q-pb-none" src="../assets/MainLogo.png"
+        style="height: 100% ; max-height: 350px; max-width: 600px;"
+        ></q-img>
+      </div>
+    </div>    
   
     <q-carousel
       animated
@@ -66,20 +74,24 @@
       </q-carousel-slide>
     </q-carousel>
   </div>
-  <h4>Lend your hand in everyday tasks.</h4>
-  <h4>Find jobs on the go!</h4>
+  <div class="text-h4 text-white"> Lend your hand in everyday tasks </div>
+  <div class="text-h4 text-white"> Find jobs on the go and get paid for your time! </div>
+
 
   <div class="angelSignupButton">
     <nav>
     <router-link to="/SignUp" style="text-decoration:none">
-      <q-btn color="negative" label="Be an Angel"/>
+      <div class="text-h6 text-white"> Interested? </div>
+      <q-btn color="negative" label="Become an Angel"/>
       </router-link>
     </nav>
   </div>
 
-  <div class="q-gutter-md row justify-end items-start">
-      <div style="min-width: 250px; max-width: 300px">
-        
+  <div class="q-gutter-md row justify-end items-start q-pr-md q-pb-md">
+    <div class="col-3">
+      <div class="text-h4 text-primary"> Find an angel for </div>
+    </div>
+      <div style="min-width: 250px; max-width: 300px" class="bg-primary">
         <q-select
           filled
           v-model="modelMultiple"
@@ -89,6 +101,13 @@
           stack-label
           label="Task Category"
         />
+      </div>
+
+      <div class="row">
+      <div class="text-h4 text-primary">
+        Explore active missions
+        <q-btn color="primary" label="Post a Mission Now!" push @click=gotoTask />
+      </div>
       </div>
     </div>
 
@@ -107,6 +126,13 @@ export default {
   components: {
       NavBarLogIn
     },
+  methods: {
+    gotoHome() {
+            setTimeout(() => {
+                this.$router.push('/home')
+            }, 3000);
+        },
+  },
   setup(){
     
     return {
