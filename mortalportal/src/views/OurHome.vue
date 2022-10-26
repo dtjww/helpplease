@@ -12,62 +12,103 @@
     <!-- <div>
         <button @click="getPost">Get Post</button>
     </div> -->
-    <div>
+
+    <table align="center">
+        <tr>
+            <td class="actionbtns">
+                <q-btn flat rounded v-model="Selection" @click='angelBtn'>
+                    <h5>Angel</h5>
+                </q-btn>
+            </td>
+            <td width:10px>
+                |
+            </td>
+            <td class="actionbtns">
+                <q-btn flat rounded v-model="Selection" @click="mortalBtn">
+                    <h5>Mortal</h5>
+                </q-btn>
+            </td>
+        </tr>
+    </table>
+
+    <div v-if="Selection == 'Angel'">
         <table align="center">
             <tr>
-                <td class="actionbtns">
-                    <q-btn flat rounded v-model="angel">
-                        <h5>Angel</h5>
-                    </q-btn>
-                </td>
-                <td width:10px>
-                    |
-                </td>
-                <td class="actionbtns">
-                    <q-btn flat rounded v-model="mortal">
-                        <h5>Mortal</h5>
-                    </q-btn>
-                </td>
-            </tr>
-            <tr>
+
                 <td>
-                    <q-btn class="actionbtns">Find</q-btn>
+                    <q-btn v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
                 </td>
                 <td>
-                    <q-btn class="actionbtns">Saved</q-btn>
+                    <q-btn v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
                 </td>
                 <td>
-                    <q-btn class="actionbtns">Active</q-btn>
+                    <q-btn v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
                 </td>
 
             </tr>
             <tr>
                 <td colspan="3">
-                    <q-input rounded outlined label="Search" class="search" v-model="search"></q-input>
+                    <q-input rounded outlined label="Search" class="search" v-model="search" v-if="activeBtn == 'Find'">
+                    </q-input>
                 </td>
             </tr>
         </table>
 
-        <q-btn color='dark' @click=goToTask>New Post</q-btn>
+        <div class="container box">
+            <div v-if="activeBtn == 'Find'">
+                <figure v-for="post in searchForTask " v-bind:key="post.id">
+                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
 
+                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                        </q-card-section>
+                    </q-card>
+                </figure>
+            </div>
+            <div v-else-if="activeBtn == 'Saved'">
+                <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
+                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+
+                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                        </q-card-section>
+                    </q-card>
+                </figure>
+            </div>
+            <div v-else-if="activeBtn == 'Active'">
+                <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
+                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+
+                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                        </q-card-section>
+                    </q-card>
+                </figure>
+            </div>
+
+        </div>
     </div>
 
-
-    <div class="container box">
-        <figure v-for="post in searchForTask " v-bind:key="post.id">
-            <q-card class="my-card grid-item" style="background: #f2cbb6">
-                <img :src="post.file">
-                <q-card-section class="fontAlign">
-                    Mortal: {{ post.username }} <br>
-                    Task: {{ post.name }}<br>
-                    Date: {{ post.date }}<br>
-                    Time: {{ post.time }}<br>
-                    Amount: ${{ post.price }}<br>
-
-                    <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
-                </q-card-section>
-            </q-card>
-        </figure>
+    <div v-else>
+        <q-btn color='dark' @click=goToTask>New Post</q-btn>
     </div>
 
 </template>
@@ -76,8 +117,8 @@
 import axios from 'axios';
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
-// import { useCounterStore } from "@/store/store";
-// const storeName = useCounterStore()
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
 
 export default {
     setup() {
@@ -98,6 +139,9 @@ export default {
             mortal: false,
             search: '',
             searchPost: [],
+            activeBtn: 'Find',
+            interactedTasks: [],
+            Selection: 'Angel',
         }
     },
     components: {
@@ -116,6 +160,16 @@ export default {
                     console.log(error)
                 })
         },
+        getOwnTask() {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '/tasksInteracted.json')
+                .then(response => {
+                    console.log(response.data)
+                    this.interactedTasks = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
         goToTask() {
             this.$router.push('/task')
         },
@@ -123,21 +177,58 @@ export default {
             console.log(this.posts.id)
             this.$router.push({ name: 'Task Details', params: { id: id } })
         },
+        FindBtn() {
+            this.activeBtn = 'Find'
+            console.log(this.activeBtn)
+        },
+        SavedBtn() {
+            this.activeBtn = 'Saved'
+            console.log(this.activeBtn)
+        },
+        ActiveBtn() {
+            this.activeBtn = 'Active'
+            console.log(this.activeBtn)
+        },
+        angelBtn() {
+            this.Selection = 'Angel'
+        },
+        mortalBtn() {
+            this.Selection = 'Mortal'
+        }
+
 
 
     },
 
     computed: {
+
         searchForTask() {
             var values = Object.values(this.posts)
             var result = values.filter(post => post.name.toLowerCase().includes(this.search.toLowerCase()))
             return result
-        }
+        },
+        searchForSavedTask() {
+            var allTask = Object.values(this.posts)
+            var values = Object.values(this.interactedTasks)
+            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
+            console.log(result)
+            return result
+        },
+        searchForActiveTask() {
+            var allTask = Object.values(this.posts)
+            var values = Object.values(this.interactedTasks)
+            console.log(allTask)
+            console.log(values)
+            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'active')).length > 0)
+            console.log(result)
+            return result
+        },
     },
 
 
     created() {
         this.getPost();
+        this.getOwnTask();
     },
 
 }
