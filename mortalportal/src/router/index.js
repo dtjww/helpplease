@@ -89,9 +89,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // ...
   // explicitly return false to cancel the navigation
-  document.title=to.name
-  console.log(from.name)
-  console.log(to.name)
+  document.title= `${ process.env.VUE_APP_TITLE } | ${ to.name }`
   next()
   return false
 })

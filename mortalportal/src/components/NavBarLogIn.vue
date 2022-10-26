@@ -4,12 +4,7 @@
         <q-toolbar class="text-black q-my-none shadow-2 bg-positive" >
             <router-link to="/" style="color: white">
                 <q-item clickable v-ripple>
-                    <q-item-section side>
-                        <q-avatar square size="60px">
-                            <img src="../assets/MainLogo.png" />
-                        <!-- <q-badge floating color="teal">new</q-badge> -->
-                        </q-avatar>
-                    </q-item-section>
+                    <q-img src="../assets/MainLogo3.png" style="width:170px"></q-img>
                 </q-item>
             </router-link>
 
