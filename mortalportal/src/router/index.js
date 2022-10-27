@@ -78,6 +78,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/TaskDetailView.vue')
+  },
+  {
+    path: '/carousel', // Carousel testing
+    name: 'Testing Carousel Page',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/TestCarousel.vue')
   }
 ]
 
