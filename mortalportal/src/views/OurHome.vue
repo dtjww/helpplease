@@ -16,7 +16,10 @@
     <table align="center">
         <tr>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click='angelBtn'>
+                <q-btn v-if="targetP == 'angel'" color="dark" flat rounded v-model="Selection" @click='angelBtn'>
+                    <h5>Angel</h5>
+                </q-btn>
+                <q-btn v-else flat rounded v-model="Selection" @click='angelBtn'>
                     <h5>Angel</h5>
                 </q-btn>
             </td>
@@ -24,25 +27,33 @@
                 |
             </td>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click="mortalBtn">
+                <q-btn v-if="targetP == 'mortal'" flat color="primary" rounded v-model="Selection" @click="mortalBtn">
+                    <h5>Mortal</h5>
+                </q-btn>
+                <q-btn v-else flat rounded v-model="Selection" @click="mortalBtn">
                     <h5>Mortal</h5>
                 </q-btn>
             </td>
         </tr>
     </table>
 
-    <div v-if="Selection == 'Angel'">
+    <div v-if="Selection == 'Angel' && targetP == 'angel'"> <!-- Angel -->
         <table align="center">
             <tr>
-
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
+                    <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
+                        @click="FindBtn">Find</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
                 </td>
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
+                    <q-btn v-if="activeBtn == 'Saved'" color='dark' v-model="activeBtn" class="actionbtns"
+                        @click="SavedBtn">Saved</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
                 </td>
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
+                    <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='dark' class="actionbtns"
+                        @click="ActiveBtn">Active</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
                 </td>
 
             </tr>
@@ -57,18 +68,20 @@
         <div class="container box">
             <div v-if="activeBtn == 'Find'">
                 <figure v-for="post in searchForTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
-
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
-                        </q-card-section>
-                    </q-card>
+                    <div v-if="post.username != currUser">
+                        <q-card class="my-card grid-item" style="background: #f2cbb6">
+                            <img :src="post.file">
+                            <q-card-section class="fontAlign">
+                                Mortal: {{ post.username }} <br>
+                                Task: {{ post.name }}<br>
+                                Date: {{ post.date }}<br>
+                                Time: {{ post.time }}<br>
+                                Amount: ${{ post.price }}<br>
+                                <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                    <b>Details</b></q-btn>
+                            </q-card-section>
+                        </q-card>
+                    </div>
                 </figure>
             </div>
             <div v-else-if="activeBtn == 'Saved'">
@@ -107,8 +120,30 @@
         </div>
     </div>
 
-    <div v-else>
+    <div v-else> <!-- Mortal -->
         <q-btn color='dark' @click=goToTask>New Post</q-btn>
+        <div class="container box">
+            <figure v-for="post in MortalTasks" v-bind:key="post.id">
+                <div v-if="post.username == currUser">
+                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+
+                            <q-btn v-if="post.username == currUser" color='white' text-color="black"
+                                @click="iTask(post.id, post.username)"><b>Edit</b></q-btn>
+                                <q-btn v-if="post.active != null" color="white" text-color="red" 
+                                @click="viewOffer(post.id)">View Offers</q-btn>
+                        </q-card-section>
+                    </q-card>
+                </div>
+            </figure>
+        </div>
+
     </div>
 
 </template>
@@ -142,6 +177,9 @@ export default {
             activeBtn: 'Find',
             interactedTasks: [],
             Selection: 'Angel',
+            currUser: storeName.username,
+            targetP: 'angel',
+            statusCount: ref(0)
         }
     },
     components: {
@@ -173,9 +211,9 @@ export default {
         goToTask() {
             this.$router.push('/task')
         },
-        iTask(id) {
-            console.log(this.posts.id)
-            this.$router.push({ name: 'Task Details', params: { id: id } })
+        iTask(id, username) {
+            console.log(username)
+            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
         },
         FindBtn() {
             this.activeBtn = 'Find'
@@ -191,44 +229,73 @@ export default {
         },
         angelBtn() {
             this.Selection = 'Angel'
+            this.targetP = 'angel'
         },
         mortalBtn() {
             this.Selection = 'Mortal'
+            this.targetP = 'mortal'
+        },
+        viewOffer(id){
+
+            this.$router.push({name:'Offers', params:{id: id}})
         }
-
-
-
     },
 
     computed: {
 
         searchForTask() {
             var values = Object.values(this.posts)
-            var result = values.filter(post => post.name.toLowerCase().includes(this.search.toLowerCase()))
+            var result = values.filter(post => 
+                post.name.toLowerCase().includes(this.search.toLowerCase())
+            )
             return result
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            var values = Object.values(this.interactedTasks)
-            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
-            console.log(result)
-            return result
+            if (this.interactedTasks == null) {
+                return []
+            } else {
+                var values = Object.values(this.interactedTasks.saved)
+                var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
+                console.log(result)
+                return result
+            }
+
         },
         searchForActiveTask() {
             var allTask = Object.values(this.posts)
-            var values = Object.values(this.interactedTasks)
-            console.log(allTask)
-            console.log(values)
-            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'active')).length > 0)
-            console.log(result)
+            console.log(this.interactedTasks)
+            if (this.interactedTasks == null) {
+                return []
+            } else {
+                var values = Object.values(this.interactedTasks.active)
+                console.log(allTask)
+                console.log(values)
+                var result = allTask.filter(post =>
+                    (values.filter(task =>
+                        task.taskid == post.id && (task.status == 'active' || task.status == 'offer'))).length > 0)
+                console.log(result)
+                return result
+            }
+        },
+        MortalTasks() {
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.username == this.currUser)
             return result
         },
-    },
+
+},
 
 
     created() {
         this.getPost();
         this.getOwnTask();
+        if (this.$route.params.targetP == 'angel') {
+            this.targetP = 'angel'
+        }
+        else {
+            this.targetP = 'mortal'
+        }
     },
 
 }
