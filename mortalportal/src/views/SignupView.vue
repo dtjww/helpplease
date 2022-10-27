@@ -1,5 +1,6 @@
 <!-- daryl-->
 <template>
+
   <q-layout>
       <q-page-container>
           <q-page class="page-height page-width row justify-center items-center ">
@@ -18,6 +19,7 @@
                               <q-card-section class="text-center q-pa-none">
                                   <p class="text-grey-6">Not registered? Sign up for an account!</p>
                               </q-card-section>
+                         
                               <q-card-section>
                                   <q-form class="q-gutter-md">
                                       <q-input square filled clearable v-model="email_login" type="text" label="Email" />
@@ -48,6 +50,7 @@
                           </q-tab-panel>
                       </q-tab-panels>
                   </q-card>
+                  
           </q-page>
       </q-page-container>
   </q-layout>
@@ -76,11 +79,33 @@
       </div>
     </div>
   </q-page> -->
+
+  <!-- Google login code is in start and end comments, only works on localhost for now -->
+  <div class="googleLogin">
+    <h6 v-if="user" class="text-white">Signed In User: {{ user }}</h6>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    <div v-if="isSignedIn">
+      <button @click="handleSignOut">Sign Out</button>
+    </div>
+  </div>
 </template>
 
 
 <script>
 import { ref } from 'vue'
+
+// google login start
+import {firebaseConfig} from '../firebase.js';
+import firebase from 'firebase/compat/app';
+firebase.initializeApp(firebaseConfig);
+import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
+import { getAuth, signOut } from "firebase/auth";
+const auth = getAuth();
+// google login end
+
+
 import {useCounterStore } from "@/store/store";
 import axios from "axios";
 import { db } from '../firebase.js';
@@ -88,8 +113,58 @@ import { push, ref as dbRef } from "firebase/database";
 const storeName = useCounterStore()
 export default {
 setup () {
+
+  // google login start
+  const user = ref(null);
+  const isSignedIn = ref(false);
+  const uiConfig = {
+    signInFlow: 'popup',
+    signinSuccessUrl: 'http://localhost:8080/',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      signInSuccessWithAuthResult: function (authResult) {
+        user.value = authResult.user.displayName;
+        console.log(authResult)
+        isSignedIn.value = true;
+        console.log('Signed in by user ' + user.value);
+        // so it doesn't refresh the page
+        return false;
+      },
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      }
+    }
+  }
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  ui.start('#firebaseui-auth-container', uiConfig);
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      user.value = null;
+      isSignedIn.value = false;
+      console.log('Signed out');
+      ui.start('#firebaseui-auth-container', uiConfig);
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+  }
+  // google login end
+
   return {
     tab: ref('Sign Up'),
+    
+    // google login start
+    user,
+    isSignedIn,
+    handleSignOut,
+    // google login end
+
   }
 },
 data(){
