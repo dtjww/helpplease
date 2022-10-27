@@ -10,7 +10,7 @@
     <NavBarLogIn/>
     <TaskComplete/>
   </div>
-  
+
 </template>
 
 <script>
