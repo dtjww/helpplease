@@ -2,16 +2,11 @@
 <template>
     <div class="q-pa-none">
         <q-toolbar class="text-black q-my-none shadow-2 bg-positive" >
-            <router-link to="/" style="color: white">
-                <q-item clickable v-ripple>
-                    <q-img src="../assets/MainLogo3.png" style="width:170px"></q-img>
-                </q-item>
-            </router-link>
-
-            <q-separator dark vertical inset />
-            <router-link to="/" style="color: white; text-decoration: none">
-                <q-btn stretch flat label="Home" style="color: white"/>
-            </router-link>
+            <q-toolbar-title shrink>
+                <router-link to="/" style="color: white; text-decoration: none">
+                    <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                </router-link>
+            </q-toolbar-title>
     
             <q-space />
     

@@ -10,15 +10,11 @@
 
             <q-toolbar-title shrink>
                 <router-link to="/" style="color: white; text-decoration: none">
-                    <q-img src="../assets/MainLogo3.png" style="width:170px"></q-img>
+                    <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
                 </router-link>
             </q-toolbar-title>
             
-            <q-separator dark vertical inset />
-            
-            <router-link to="/" style="color: white; text-decoration: none">
-                <q-btn stretch flat label="Home" style="color: white"/>
-            </router-link>
+        
     
             <q-space />
             
@@ -72,43 +68,24 @@
             
             <q-btn stretch flat label="Top Angels" />
 
-            <router-link to="/" style="color: white; text-decoration: none">
-                <q-btn flat dense icon="person_outline" style="color:white"/>
-            </router-link>
-            
-            <q-btn-dropdown flat dense> 
+            <q-btn-dropdown flat icon ="person_outline" split @click="handleClick" auto-close>
                 <q-list>
-                    <q-item-label header>Profile</q-item-label>
-                    <q-item clickable v-ripple >
+                    <q-item clickable v-for="item in menuItems" :key="item.label" :to="item.to" style="color: black">
                         <q-item-section avatar>
-                            <q-icon name="face 6" />
+                            <q-icon :name="item.icon" />
                         </q-item-section>
-                        <q-item-section>My Account</q-item-section>
-                    </q-item>
-                    <q-item clickable v-ripple>
-                        <q-item-section avatar>
-                            <q-icon name="assignment" />
-                        </q-item-section>
-                        <q-item-section>My Tasks</q-item-section>
-                        <q-item-section side>
-                            <q-badge floating color="teal">new</q-badge>
+                        <q-item-section>
+                            {{item.label}}
                         </q-item-section>
                     </q-item>
-                    <q-item clickable v-ripple>
-                        <q-item-section avatar>
-                            <q-icon name="logout" />
-                        </q-item-section>
-                        <q-item-section>Logout</q-item-section>
-                    </q-item>
-
-                    <q-separator inset spaced />
                 </q-list>
             </q-btn-dropdown>
+
             </div>
 
             <div class="gt-s">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=true> 
+                <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
                 <q-list>
                     <q-item-label header>Menu</q-item-label>
                     <q-item clickable v-ripple >
@@ -123,9 +100,9 @@
                             <q-icon name="emoji_events" />
                         </q-item-section>
                         <q-item-section>Top Angels</q-item-section>
-                        <q-item-section side>
+                        <!-- <q-item-section side>
                             <q-badge floating color="teal">new</q-badge>
-                        </q-item-section>
+                        </q-item-section> -->
                     </q-item>
                     <q-item clickable v-ripple>
                         <q-item-section avatar>
@@ -183,7 +160,6 @@
             </div>
 
         </q-toolbar>
-        
     </div>
     
 </template>
@@ -204,4 +180,36 @@
     }
 </style>
 
+<script>
+    export default {
 
+        data() {
+            return {
+                menuItems: [
+                    {
+                        label: "My Account",
+                        to: "/profile",
+                        icon: "person"
+                    },
+                    {
+                        label: "My Tasks",
+                        to: "/profile",
+                        icon: "assignment"
+                    },
+                    {
+                        label: "Logout",
+                        to: "/home",
+                        icon: "exit_to_app"
+                    }
+                ]
+            }
+        },
+
+        methods: {
+            handleClick () {
+                this.$router.push('/profile')
+            }
+        }
+    }
+
+</script>
