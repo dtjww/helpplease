@@ -37,7 +37,7 @@
         </tr>
     </table>
 
-    <div v-if="Selection == 'Angel' && targetP == 'angel'"> <!-- Angel -->
+    <div v-if="Selection == 'Angel' && targetP == 'angel'"> <!-- Angel -->  
         <table align="center">
             <tr>
                 <td>
@@ -95,7 +95,7 @@
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
 
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)"><b>Details</b></q-btn>
                         </q-card-section>
                     </q-card>
                 </figure>
@@ -111,7 +111,7 @@
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
 
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)"><b>Details</b></q-btn>
                         </q-card-section>
                     </q-card>
                 </figure>
