@@ -109,7 +109,7 @@ const auth = getAuth();
 import { useCounterStore } from "@/store/store";
 import axios from "axios";
 import { db } from '../firebase.js';
-import { push, ref as dbRef } from "firebase/database";
+import {set, ref as dbRef } from "firebase/database";
 const storeName = useCounterStore()
 export default {
   setup() {
@@ -178,10 +178,10 @@ export default {
       email_SU: '',
       users: [],
       signupData: {
-        email_SU: '',
-        password_SU: '',
-        username_SU: '',
-        name_SU: ''
+        email: '',
+        password: '',
+        username: '',
+        name: ''
       }
     }
   },
@@ -215,16 +215,18 @@ export default {
     },
     submitData() {
       if (this.password_SU == this.cPassword_SU) {
-        this.signupData.email_SU = this.email_SU
-        this.signupData.password_SU = this.password_SU
-        this.signupData.username_SU = this.username_SU
-        this.signupData.name_SU = this.name_SU
+        this.signupData.email = this.email_SU
+        this.signupData.password = this.password_SU
+        this.signupData.username = this.username_SU
+        this.signupData.name = this.name_SU
       }
       else {
         alert("Passwords do not match")
       }
-      push(dbRef(db, 'Login'), this.signupData);
-      this.$router.push('/home');
+      set(dbRef(db, 'Login/'+ this.signupData.username), this.signupData);
+      storeName.username = this.signupData.username;
+      storeName.email = this.signupData.email
+      this.$router.push('/home/angel');
     }
     // valLogin(){
     //   console.log(this.users)

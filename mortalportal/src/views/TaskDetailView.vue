@@ -61,14 +61,23 @@
                 </tr>
                 <tr>
                     <td align="left">
+                        <div v-if="posts.accepted == null">
                         <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true" flat
                             @click=like></q-btn>
                         <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false" flat
                             @click=like></q-btn>
+                        </div>
                     </td>
                     <td align="right">
-                        <q-btn color='info' class="btn" @click=offerPopup>Make an Offer</q-btn>
-                        <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
+                        <div v-if="posts.accepted == null">
+                            <q-btn color='info' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                            <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
+                        </div>
+
+                        <div v-else>
+                            <q-btn color="red" class="btn" @click="finishTask">Task Completed</q-btn>
+                        </div>
+
                     </td>
                 </tr>
             </table>
@@ -143,6 +152,7 @@
             <q-btn class="btn" @click=gotoHomeInstant>Cancel</q-btn>
         </q-card>
     </div>
+
     <q-dialog v-model="submit">
         <q-card>
             <q-card-section>
@@ -158,6 +168,7 @@
             </q-card-actions>
         </q-card>
     </q-dialog>
+
     <q-dialog v-model="deletePost">
         <q-card>
             <q-card-section>
@@ -173,6 +184,7 @@
             </q-card-actions>
         </q-card>
     </q-dialog>
+
     <q-dialog v-model="Offer">
         <q-card>
             <q-card-section>
@@ -369,7 +381,7 @@ export default {
                 taskid: this.id,
                 offer: this.offer_price
             })
-            set(dbRef(db, 'TaskData/' + this.id + "/active/" + storeName.username ), {
+            set(dbRef(db, 'TaskData/' + this.id + "/offer/" + storeName.username ), {
                 status: 'offer',
                 taskid: this.id,
                 offer: this.offer_price,

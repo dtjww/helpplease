@@ -54,7 +54,7 @@
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 import { ref } from 'vue'
-import {update, ref as dbRef, remove } from "firebase/database";
+import {update, ref as dbRef, remove, set } from "firebase/database";
 import {db} from '../firebase.js'
 
 const columns = [
@@ -97,7 +97,7 @@ export default {
 
     methods: {
         getPost() {
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '/active.json')
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '/offer.json')
                 .then(response => {
                     console.log(response)
                     console.log(response.data)
@@ -124,31 +124,29 @@ export default {
             this.currRow = row
             console.log(this.currRow)
             this.getcurrPost()
-            update(dbRef(db, 'TaskData/' + this.id + '/active/' + row.Angel), {
-                status: 'accepted'
-            });
-            for(var offer in this.offers){
-                if(this.offers[offer].angel != row.Angel){
-                    remove(dbRef(db, 'TaskData/' + this.id + '/active/' + this.offers[offer].angel))
-                    update(dbRef(db, 'Login/' + this.offers[offer].angel + '/tasksInteracted/active/' + this.id), {
-                        status: 'rejected'
-                    });
-                }
-            }
             this.confirm = true 
         },
         updateDB(){
-            update(dbRef(db, 'TaskData/' + this.id + '/active/' + this.currRow.Angel), {
-                status: 'accepted'
+            set(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.currRow.Angel), {
+                status: 'accepted',
+                angel: this.currRow.Angel,
+                offer: this.currRow.Offer
             });
+            update(dbRef(db,'TaskData/' + this.id), {
+                price: this.currRow.Offer
+            })
+            remove(dbRef(db, 'TaskData/' + this.id + '/offer'))
             for(var offer in this.offers){
                 if(this.offers[offer].angel != this.currRow.Angel){
-                    remove(dbRef(db, 'TaskData/' + this.id + '/active/' + this.offers[offer].angel))
                     update(dbRef(db, 'Login/' + this.offers[offer].angel + '/tasksInteracted/active/' + this.id), {
                         status: 'rejected'
                     });
                 }
             }
+            setTimeout(() => {
+                this.$router.push({name: 'Home', params:{targetP:'mortal'}})
+            }, 1500)
+            
         },
         updateReject(){
             
