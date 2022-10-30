@@ -9,9 +9,6 @@
     </head>
 
     <NavBar />
-    <!-- <div>
-        <button @click="getPost">Get Post</button>
-    </div> -->
 
     <table align="center">
         <tr>
@@ -62,6 +59,9 @@
                 <td colspan="3">
                     <q-input rounded outlined label="Search" class="search" v-model="search" v-if="activeBtn == 'Find'">
                     </q-input>
+                </td>
+                <td>
+                    <q-btn flat icon="filter_alt" size="xl" @click="filter = true"></q-btn>
                 </td>
             </tr>
         </table>
@@ -164,6 +164,22 @@
 
     </div>
 
+    <div>
+        <q-dialog v-model="filter">
+            <q-card class="dCard">
+                <q-card-section>
+                    <div class="text-h6">Filter</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <Filter/>
+                </q-card-section>
+                <q-card-actions align="center" class="dActions">
+                    <q-btn flat label="Filter" color="dark" v-close-popup @click="taskFilter" />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+    </div>
 </template>
 
 <script>
@@ -171,6 +187,7 @@ import axios from 'axios';
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
 import { useCounterStore } from "@/store/store";
+import  Filter, { default as fData } from '@/components/FilterTable.vue'
 const storeName = useCounterStore()
 
 export default {
@@ -197,11 +214,13 @@ export default {
             Selection: 'Angel',
             currUser: storeName.username,
             targetP: 'angel',
-            statusCount: ref(0)
+            statusCount: ref(0),
+            filter: false, 
         }
     },
     components: {
-        NavBar
+        NavBar,
+        Filter
     }
 
     ,
@@ -281,6 +300,9 @@ export default {
             console.log(result)
 
             return result
+        },
+        taskFilter() {
+            console.log(fData.data().selectedLoc)
         }
     },
 
@@ -355,6 +377,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.qcardsec {
+  width: 200px
+}
+
+.qCard {
+  width: 600px
+}
+.dCard {
+    width: 800px;
+}
+
+.dActions {
+    clear: left;
+}
+
 .search {
     margin-top: 15px;
     margin-bottom: 15px;
