@@ -9,14 +9,14 @@
     </head>
 
     <NavBar />
-    <!-- <div>
-        <button @click="getPost">Get Post</button>
-    </div> -->
 
     <table align="center">
         <tr>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click='angelBtn'>
+                <q-btn v-if="targetP == 'angel'" color="dark" flat rounded v-model="Selection" @click='angelBtn'>
+                    <h5>Angel</h5>
+                </q-btn>
+                <q-btn v-else flat rounded v-model="Selection" @click='angelBtn'>
                     <h5>Angel</h5>
                 </q-btn>
             </td>
@@ -24,25 +24,34 @@
                 |
             </td>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click="mortalBtn">
+                <q-btn v-if="targetP == 'mortal'" flat color="primary" rounded v-model="Selection" @click="mortalBtn">
+                    <h5>Mortal</h5>
+                </q-btn>
+                <q-btn v-else flat rounded v-model="Selection" @click="mortalBtn">
                     <h5>Mortal</h5>
                 </q-btn>
             </td>
         </tr>
     </table>
 
-    <div v-if="Selection == 'Angel'">
+    <div v-if="Selection == 'Angel' && targetP == 'angel'">
+        <!-- Angel -->
         <table align="center">
             <tr>
-
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
+                    <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
+                        @click="FindBtn">Find</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
                 </td>
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
+                    <q-btn v-if="activeBtn == 'Saved'" color='dark' v-model="activeBtn" class="actionbtns"
+                        @click="SavedBtn">Saved</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
                 </td>
                 <td>
-                    <q-btn v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
+                    <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='dark' class="actionbtns"
+                        @click="ActiveBtn">Active</q-btn>
+                    <q-btn v-else v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
                 </td>
 
             </tr>
@@ -51,24 +60,30 @@
                     <q-input rounded outlined label="Search" class="search" v-model="search" v-if="activeBtn == 'Find'">
                     </q-input>
                 </td>
+                <td>
+                    <q-btn flat icon="filter_alt" size="xl" @click="filter = true"></q-btn>
+                </td>
             </tr>
         </table>
 
         <div class="container box">
             <div v-if="activeBtn == 'Find'">
                 <figure v-for="post in searchForTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
-
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
-                        </q-card-section>
-                    </q-card>
+                    <div v-if="post.username != currUser && post.accepted == null">
+                        <q-card class="my-card grid-item" style="background: #f2cbb6">
+                            <img :src="post.file">
+                            <q-card-section class="fontAlign">
+                                Mortal: {{ post.username }} <br>
+                                Task: {{ post.name }}<br>
+                                Date: {{ post.date }}<br>
+                                Time: {{ post.time }}<br>
+                                Amount: ${{ post.price }}<br>
+                                <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                    <b>Details</b>
+                                </q-btn>
+                            </q-card-section>
+                        </q-card>
+                    </div>
                 </figure>
             </div>
             <div v-else-if="activeBtn == 'Saved'">
@@ -82,7 +97,9 @@
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
 
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
                         </q-card-section>
                     </q-card>
                 </figure>
@@ -96,9 +113,18 @@
                             Task: {{ post.name }}<br>
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
+                            Amount: ${{ ownOffer(post) }}<br>
 
-                            <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
+                            <div v-if="post.accepted != null">
+                                Status: In Progress
+                            </div>
+                            <div v-else-if="activeCheck(post.offer)">
+                                Status: Offered
+                            </div>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
+
                         </q-card-section>
                     </q-card>
                 </figure>
@@ -108,9 +134,52 @@
     </div>
 
     <div v-else>
+        <!-- Mortal -->
         <q-btn color='dark' @click=goToTask>New Post</q-btn>
+        <div class="container box">
+            <figure v-for="post in MortalTasks" v-bind:key="post.id">
+                <div v-if="post.username == currUser">
+                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+
+                            <div v-if="post.accepted == null">
+                                <q-btn v-if="post.username == currUser" color='white' text-color="black"
+                                    @click="iTask(post.id, post.username)"><b>Edit</b></q-btn>
+                                <q-btn v-if="post.offer != null" color="white" text-color="red"
+                                    @click="viewOffer(post.id)">View Offers</q-btn>
+                            </div>
+                            <div v-else>
+                                Status: In Progress
+                            </div>
+                        </q-card-section>
+                    </q-card>
+                </div>
+            </figure>
+        </div>
+
     </div>
 
+    <div>
+        <q-dialog v-model="filter">
+            <q-card class="dCard">
+                <q-card-section>
+                    <div class="text-h6">Filter</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <Filter/>
+                </q-card-section>
+                <q-card-actions align="center" class="dActions">
+                    <q-btn flat label="Filter" color="dark" v-close-popup @click="taskFilter" />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+    </div>
 </template>
 
 <script>
@@ -118,6 +187,7 @@ import axios from 'axios';
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
 import { useCounterStore } from "@/store/store";
+import  Filter, { default as fData } from '@/components/FilterTable.vue'
 const storeName = useCounterStore()
 
 export default {
@@ -142,10 +212,15 @@ export default {
             activeBtn: 'Find',
             interactedTasks: [],
             Selection: 'Angel',
+            currUser: storeName.username,
+            targetP: 'angel',
+            statusCount: ref(0),
+            filter: false, 
         }
     },
     components: {
-        NavBar
+        NavBar,
+        Filter
     }
 
     ,
@@ -173,9 +248,9 @@ export default {
         goToTask() {
             this.$router.push('/task')
         },
-        iTask(id) {
-            console.log(this.posts.id)
-            this.$router.push({ name: 'Task Details', params: { id: id } })
+        iTask(id, username) {
+            console.log(username)
+            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
         },
         FindBtn() {
             this.activeBtn = 'Find'
@@ -191,50 +266,132 @@ export default {
         },
         angelBtn() {
             this.Selection = 'Angel'
+            this.targetP = 'angel'
         },
         mortalBtn() {
             this.Selection = 'Mortal'
+            this.targetP = 'mortal'
+        },
+        viewOffer(id) {
+
+            this.$router.push({ name: 'Offers', params: { id: id } })
+        },
+        ownOffer(iOffer) {
+            if (iOffer.accepted == null) {
+                for (var cOffer in iOffer.offer) {
+                    if (cOffer == this.currUser) {
+                        return iOffer.offer[cOffer].offer
+                    }
+                }
+            } else {
+                for (var eOffer in iOffer.accepted) {
+                    if (eOffer == this.currUser) {
+                        return iOffer.accepted[eOffer].offer
+                    }
+                }
+            }
+        }, activeCheck(currPost) {
+
+            // var values = Object.values(currPost.active)
+            // var result = values.filter(user => user.status == 'accepted' && currPost.username == this.currUser)
+            // console.log(result)
+            var values = Object.values(currPost)
+            var result = values.filter(post => post.angel == this.currUser)
+            console.log(result)
+
+            return result
+        },
+        taskFilter() {
+            console.log(fData.data().selectedLoc)
         }
-
-
-
     },
 
     computed: {
 
         searchForTask() {
             var values = Object.values(this.posts)
-            var result = values.filter(post => post.name.toLowerCase().includes(this.search.toLowerCase()))
+            var result = values.filter(post =>
+                post.name.toLowerCase().includes(this.search.toLowerCase())
+            )
             return result
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            var values = Object.values(this.interactedTasks)
-            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
-            console.log(result)
-            return result
+            if (this.interactedTasks.saved == null) {
+                return []
+            } else {
+                var values = Object.values(this.interactedTasks.saved)
+                var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
+                console.log(result)
+                return result
+            }
+
         },
         searchForActiveTask() {
             var allTask = Object.values(this.posts)
-            var values = Object.values(this.interactedTasks)
-            console.log(allTask)
-            console.log(values)
-            var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'active')).length > 0)
-            console.log(result)
+            console.log(this.interactedTasks)
+            if (this.interactedTasks == null) {
+                return []
+            } else {
+                var values = Object.values(this.interactedTasks.active)
+                console.log(allTask)
+                console.log(values)
+                var result = allTask.filter(post =>
+                    (values.filter(task =>
+                        task.taskid == post.id && (task.status == 'accepted' || task.status == 'offer'))).length > 0)
+                console.log(result)
+                return result
+            }
+        },
+        MortalTasks() {
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.username == this.currUser)
             return result
         },
+        // activeCheck(currPost) {
+
+        //     // var values = Object.values(currPost.active)
+        //     // var result = values.filter(user => user.status == 'accepted' && currPost.username == this.currUser)
+        //     // console.log(result)
+        //     var values = currPost
+        //     console.log(values)
+
+        //     return console.log(currPost)
+        // }
+
     },
 
 
     created() {
         this.getPost();
         this.getOwnTask();
+        if (this.$route.params.targetP == 'angel') {
+            this.targetP = 'angel'
+        }
+        else {
+            this.targetP = 'mortal'
+        }
     },
 
 }
 </script>
 
 <style lang="scss" scoped>
+.qcardsec {
+  width: 200px
+}
+
+.qCard {
+  width: 600px
+}
+.dCard {
+    width: 800px;
+}
+
+.dActions {
+    clear: left;
+}
+
 .search {
     margin-top: 15px;
     margin-bottom: 15px;
