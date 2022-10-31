@@ -1,13 +1,17 @@
 <template>
-    <div class="text-h4">
-        Username: {{loginData.username}}
-    </div>
     <div>
-        Name: {{loginData.fName}} {{loginData.lName}}
+        <div>
+                Username: {{loginData.username_SU}}
+            </div>
+            <div>
+                <!-- Name: {{loginData.fName}} {{loginData.lName}} -->
+                Name : {{loginData.name_SU}}
+            </div>
+            <div>
+                Email: {{loginData.email_SU}}
+            </div>
     </div>
-    <div>
-        Email: {{loginData.email}}
-    </div>
+    
 </template>
 
 <script>
@@ -21,9 +25,9 @@ export default {
         }
     },
     
-      methods: {
+    methods: {
         getPost() {
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/user1.json')
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/adminadmin.json')
                 .then(response => {
                     console.log(response.data)
                     this.loginData = response.data
@@ -31,7 +35,7 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
-        },
+    },
     }
     ,
     created() {
