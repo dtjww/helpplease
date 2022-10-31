@@ -1,7 +1,7 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-none">
-        <q-toolbar class="text-black q-my-none shadow-2 bg-positive" >
+        <q-toolbar class="text-black q-my-none shadow-2 bg-positive">
             <q-toolbar-title shrink>
                 <router-link to="/" style="color: white; text-decoration: none">
                     <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
