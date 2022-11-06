@@ -62,15 +62,15 @@
                 <tr>
                     <td align="left">
                         <div v-if="posts.accepted == null">
-                        <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true" flat
-                            @click=like></q-btn>
-                        <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false" flat
-                            @click=like></q-btn>
+                            <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true"
+                                flat @click=like></q-btn>
+                            <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false"
+                                flat @click=like></q-btn>
                         </div>
                     </td>
                     <td align="right">
                         <div v-if="posts.accepted == null">
-                            <q-btn color='info' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                            <q-btn color='dark' class="btn" @click=offerPopup>Make an Offer</q-btn>
                             <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
                         </div>
 
@@ -255,7 +255,7 @@ export default {
                 'Woodlands South', 'Woodleigh', 'Yew Tee', 'Yio Chu Kang', 'Yishun',],
             Offer: ref(false),
             offer_price: ref(0),
-            ownPosts:[]
+            ownPosts: []
 
         }
     },
@@ -290,13 +290,12 @@ export default {
                 .then(response => {
                     this.ownPosts = response.data
                     console.log(this.ownPosts)
-                    for(var task in this.ownPosts){
-                        if(task == this.id){
+                    for (var task in this.ownPosts) {
+                        if (task == this.id) {
                             this.heart = true
+                            return this.heart = true
                         }
-                        else{
-                            this.heart = false
-                        }
+
                     }
                 })
 
@@ -331,9 +330,7 @@ export default {
             uploadBytes(stRef(storage, 'TaskData/' + this.id + '.' + ext), this.image)
             getDownloadURL(stRef(storage, 'TaskData/' + this.id + '.' + ext))
                 .then(url => {
-
                     this.posts.file = url
-
                 })
 
         },
@@ -375,13 +372,13 @@ export default {
             this.offer_price = this.posts.price
             this.Offer = true
         },
-        makeAnOffer(){
-            set(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id ), {
+        makeAnOffer() {
+            set(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 status: 'offer',
                 taskid: this.id,
                 offer: this.offer_price
             })
-            set(dbRef(db, 'TaskData/' + this.id + "/offer/" + storeName.username ), {
+            set(dbRef(db, 'TaskData/' + this.id + "/offer/" + storeName.username), {
                 status: 'offer',
                 taskid: this.id,
                 offer: this.offer_price,
@@ -392,19 +389,6 @@ export default {
             }, 1500);
         }
     },
-    // computed:{
-    //     getSaved(){
-    //         var own = Object.values(this.ownPosts)
-    //         if(this.ownPosts == null){
-    //             return []
-    //         }else{
-    //             var result = own.filter(post => (post.taskid == post.id && post.status == 'saved').length > 0)
-    //             console.log(result)
-    //             return result
-    //         }
-    //     }
-    // }
-    // ,
     created() {
 
         this.getPost();

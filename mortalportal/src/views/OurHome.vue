@@ -38,57 +38,128 @@
         <!-- Angel -->
         <table align="center">
             <tr>
-                <td>
+                <td align='center'>
                     <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
                         @click="FindBtn">Find</q-btn>
                     <q-btn v-else v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
                 </td>
-                <td>
+                <td align='center'>
                     <q-btn v-if="activeBtn == 'Saved'" color='dark' v-model="activeBtn" class="actionbtns"
                         @click="SavedBtn">Saved</q-btn>
                     <q-btn v-else v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
                 </td>
-                <td>
+                <td align='center'>
                     <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='dark' class="actionbtns"
                         @click="ActiveBtn">Active</q-btn>
                     <q-btn v-else v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
                 </td>
 
             </tr>
-            <tr>
-                <td colspan="3">
-                    <q-input rounded outlined label="Search" class="search" v-model="search" v-if="activeBtn == 'Find'">
+            <tr  v-if="activeBtn == 'Find'">
+                <td colspan="3" align='center'>
+                    <q-input rounded outlined label="Search" class="search" v-model="search"
+                        color="dark" text-color="white">
                     </q-input>
-                </td>
-                <td>
-                    <q-btn flat icon="filter_alt" size="xl" @click="filter = true"></q-btn>
                 </td>
             </tr>
         </table>
+        <div>
 
-        <div class="container box">
-            <div v-if="activeBtn == 'Find'">
-                <figure v-for="post in searchForTask " v-bind:key="post.id">
-                    <div v-if="post.username != currUser && post.accepted == null">
-                        <q-card class="my-card grid-item" style="background: #f2cbb6">
-                            <img :src="post.file">
-                            <q-card-section class="fontAlign">
-                                Mortal: {{ post.username }} <br>
-                                Task: {{ post.name }}<br>
-                                Date: {{ post.date }}<br>
-                                Time: {{ post.time }}<br>
-                                Amount: ${{ post.price }}<br>
-                                <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                    <b>Details</b>
-                                </q-btn>
-                            </q-card-section>
-                        </q-card>
-                    </div>
+            <q-card class="dCard" v-if="activeBtn == 'Find'">
+                <q-card-section>
+                    <div class="text-h6">Filter</div>
+                </q-card-section>
+                <q-card-section class="q-pt-none">
+                    <q-list>
+                        <q-expansion-item expand-separator icon='location_on' label="Location" class="location">
+
+                            <q-expansion-item label="Central" class="Expand2">
+                                <q-scroll-area style="height: 200px">
+                                    <q-card class="qCard">
+                                        <div v-for="station in stationCentral" :key="station" class="qcardsec">
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                        </div>
+                                    </q-card>
+                                </q-scroll-area>
+                            </q-expansion-item>
+
+
+                            <q-expansion-item label="East" class="Expand2">
+                                <q-scroll-area style="height: 200px">
+                                    <q-card class="qCard">
+                                        <div v-for="station in stationEast" :key="station" class="qcardsec">
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                        </div>
+                                    </q-card>
+                                </q-scroll-area>
+                            </q-expansion-item>
+
+                            <q-expansion-item label="North" class="Expand2">
+                                <q-scroll-area style="height: 200px">
+                                    <q-card class="qCard">
+                                        <div v-for="station in stationNorth" :key="station" class="qcardsec">
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                        </div>
+                                    </q-card>
+                                </q-scroll-area>
+                            </q-expansion-item>
+
+                            <q-expansion-item label="North-East" class="Expand2">
+                                <q-scroll-area style="height: 200px">
+                                    <q-card class="qCard">
+                                        <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                        </div>
+                                    </q-card>
+                                </q-scroll-area>
+                            </q-expansion-item>
+
+                            <q-expansion-item label="West" class="Expand2">
+                                <q-scroll-area style="height: 200px">
+                                    <q-card class="qCard">
+                                        <div v-for="station in stationWest" :key="station" class="qcardsec">
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                        </div>
+                                    </q-card>
+                                </q-scroll-area>
+                            </q-expansion-item>
+
+                        </q-expansion-item>
+                    </q-list>
+
+                    <q-list>
+                        <q-expansion-item expand-separator icon='category' label="Category" class="location">
+                            <q-card class="qCard">
+                                <div v-for="task in tasks" :key="task">
+                                    <q-checkbox v-model=category :val=task :label=task />
+                                </div>
+                            </q-card>
+
+                        </q-expansion-item>
+                    </q-list>
+                </q-card-section>
+            </q-card>
+        </div>
+        <div class="containerAngel boxAngel" v-if="activeBtn == 'Find'">
+                <figure v-for="post in searchForTask" v-bind:key="post.id">
+                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
+                        </q-card-section>
+                    </q-card>
                 </figure>
             </div>
-            <div v-else-if="activeBtn == 'Saved'">
+            <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
                 <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Mortal: {{ post.username }} <br>
@@ -104,9 +175,9 @@
                     </q-card>
                 </figure>
             </div>
-            <div v-else-if="activeBtn == 'Active'">
+            <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
                 <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Mortal: {{ post.username }} <br>
@@ -118,25 +189,25 @@
                             <div v-if="post.accepted != null">
                                 Status: In Progress
                             </div>
-                            <div v-else-if="activeCheck(post.offer)">
+                            <div v-else-if="activeCheck(post)">
                                 Status: Offered
                             </div>
                             <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
-
+                            <q-btn v-if="post.accepted != null">
+                                <b>Complete Task</b>
+                            </q-btn>
                         </q-card-section>
                     </q-card>
                 </figure>
             </div>
-
         </div>
-    </div>
 
     <div v-else>
         <!-- Mortal -->
         <q-btn color='dark' @click=goToTask>New Post</q-btn>
-        <div class="container box">
+        <div class="containerMortal boxMortal">
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
                 <div v-if="post.username == currUser">
                     <q-card class="my-card grid-item" style="background: #f2cbb6">
@@ -164,22 +235,6 @@
 
     </div>
 
-    <div>
-        <q-dialog v-model="filter">
-            <q-card class="dCard">
-                <q-card-section>
-                    <div class="text-h6">Filter</div>
-                </q-card-section>
-
-                <q-card-section class="q-pt-none">
-                    <Filter/>
-                </q-card-section>
-                <q-card-actions align="center" class="dActions">
-                    <q-btn flat label="Filter" color="dark" v-close-popup @click="taskFilter" />
-                </q-card-actions>
-            </q-card>
-        </q-dialog>
-    </div>
 </template>
 
 <script>
@@ -187,7 +242,7 @@ import axios from 'axios';
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
 import { useCounterStore } from "@/store/store";
-import  Filter, { default as fData } from '@/components/FilterTable.vue'
+// import Filter, { default as fData } from '@/components/FilterTable.vue'
 const storeName = useCounterStore()
 
 export default {
@@ -215,12 +270,40 @@ export default {
             currUser: storeName.username,
             targetP: 'angel',
             statusCount: ref(0),
-            filter: false, 
+            filter: false,
+            filterLoc: [],
+            filterCat: [],
+            stationCentral: [{ name: 'Bartley' }, { name: 'Bayfront' }, { name: 'Beauty World' }, { name: 'Bencoolen' }, { name: 'Bendemeer' },
+            { name: 'Bishan' }, { name: 'Boon Keng' }, { name: 'Botanic Gardens' }, { name: 'Braddell' }, { name: 'Bras Basah' },
+            { name: 'Bugis' }, { name: 'Caldecott' }, { name: 'City Hall' }, { name: 'Clarke Quay' }, { name: 'Dakota' }, { name: 'Dhoby Ghaut' },
+            { name: 'Downtown' }, { name: 'Esplanade' }, { name: 'Farrer Park' }, { name: 'Farrer Road' }, { name: 'Fort Canning' }
+                , { name: 'Geylang Bahru' }, { name: 'HarbourFront' }, { name: 'Haw Par Villa' }, { name: 'Holland Village' }, { name: 'Jalan Besar' },
+            { name: 'Kallang' }, { name: 'Kembangan' }, { name: 'Kent Ridge' }, { name: 'Labrador Park' }, { name: 'Lavender' }, { name: 'Little India' },
+            { name: 'Lorong Chuan' }, { name: 'MacPherson' }, { name: 'Marina Bay' }, { name: 'Marina South Pier' }, { name: 'Marymount' }, { name: 'Mattar' },
+            { name: 'Mountbatten' }, { name: 'Newton' }, { name: 'Nicoll Highway' }, { name: 'Novena' }, { name: 'one-north' }, { name: 'Orchard' }, { name: 'Outram Park' },
+            { name: 'Pasir Panjang' }, { name: 'Paya Lebar' }, { name: 'Potong Pasir' }, { name: 'Promenade' }, { name: 'Queenstown' }, { name: 'Raffles Place' },
+            { name: 'Redhill' }, { name: 'Rochor' }, { name: 'Sixth Avenue' }, { name: 'Somerset' }, { name: 'Stadium' }, { name: 'Stevens' }, { name: 'Tai Seng' },
+            { name: 'Tan Kah Kee' }, { name: 'Tanjong Pagar' }, { name: 'Telok Ayer' }, { name: 'Telok Blangah' }, { name: 'Tiong Bahru' }, { name: 'Toa Payoh' },
+            { name: 'Ubi' }, { name: 'Woodleigh' },],
+            stationEast: [{ name: 'Aljunied' }, { name: 'Bedok' }, { name: 'Bedok North' }, { name: 'Bedok Reservoir' }, { name: 'Changi Airport' }, { name: 'Eunos' }, { name: 'Expo' }, { name: 'Kaki Bukit' },
+            { name: 'Pasir Ris' }, { name: 'Simei' }, { name: 'Tampines' }, { name: 'Tampines East' }, { name: 'Tampines West' }, { name: 'Tanah Merah' }, { name: 'Upper Changi' },],
+            stationNorth: [{ name: 'Admiralty' }, { name: 'Canberra' }, { name: 'Khatib' }, { name: 'Kranji' }, { name: 'Marsiling' }, { name: 'Sembawang' }, { name: 'Woodlands' }, { name: 'Woodlands North' },
+            { name: 'Woodlands South' }, { name: 'Yio Chu Kang' }, { name: 'Yishun' },],
+            stationNorthEast: [{ name: 'Ang Mo Kio' }, { name: 'Buangkok' }, { name: 'Hougang' }, { name: 'Kovan' }, { name: 'Punggol' }, { name: 'Sengkang' }, { name: 'Serangoon' },],
+            stationWest: [{ name: 'Boon Lay' }, { name: 'Bukit Batok' }, { name: 'Bukit Gombak' }, { name: 'Bukit Panjang' }, { name: 'Buona Vista' }, { name: 'Cashew' },
+            { name: 'Chinatown' }, { name: 'Chinese Garden' }, { name: 'Choa Chu Kang' }, { name: 'Clementi' }, { name: 'Commonwealth' }, { name: 'Dover' }, { name: 'Gul Circle' },
+            { name: 'Hillview' }, { name: 'Joo Koon' }, { name: 'Jurong East' }, { name: 'King Albert Park' }, { name: 'Lakeside' }, { name: 'Pioneer' }, { name: 'Tuas Crescent' },
+            { name: 'Tuas Link' }, { name: 'Tuas West Road' }, { name: 'Yew Tee' },],
+            selectedLoc: ref([]),
+            category: ref([]),
+            tasks: [
+                'Shopping', 'Physical', 'Assignment/Project', 'Hardware/Software'
+            ],
         }
     },
     components: {
         NavBar,
-        Filter
+
     }
 
     ,
@@ -228,7 +311,6 @@ export default {
         getPost() {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData.json')
                 .then(response => {
-                    console.log(response.data)
                     this.posts = response.data
                 })
                 .catch(error => {
@@ -295,14 +377,18 @@ export default {
             // var values = Object.values(currPost.active)
             // var result = values.filter(user => user.status == 'accepted' && currPost.username == this.currUser)
             // console.log(result)
+            console.log(currPost)
             var values = Object.values(currPost)
+
             var result = values.filter(post => post.angel == this.currUser)
             console.log(result)
 
             return result
         },
         taskFilter() {
-            console.log(fData.data().selectedLoc)
+
+            console.log(this.selectedLoc)
+            console.log(this.category)
         }
     },
 
@@ -310,10 +396,27 @@ export default {
 
         searchForTask() {
             var values = Object.values(this.posts)
-            var result = values.filter(post =>
-                post.name.toLowerCase().includes(this.search.toLowerCase())
-            )
-            return result
+            if (this.selectedLoc.length == 0 && this.category.length == 0) {
+                var unFiltered = values.filter(post =>
+                    post.name.toLowerCase().includes(this.search.toLowerCase()) &&
+                    post.username != this.currUser &&
+                    post.accepted == null
+                )
+                console.log(unFiltered)
+                return unFiltered
+            } else {
+                var loc = Object.values(this.selectedLoc)
+                var cat = Object.values(this.category)
+                var filtered = values.filter(post =>
+                    post.name.toLowerCase().includes(this.search.toLowerCase()) &&
+                    (cat.filter(eCat => post.category == eCat).length > 0 ||
+                        loc.filter(eLoc => post.loc == eLoc).length > 0) &&
+                    post.username != this.currUser &&
+                    post.accepted == null
+                )
+                console.log(filtered)
+                return filtered
+            }
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
@@ -330,7 +433,7 @@ export default {
         searchForActiveTask() {
             var allTask = Object.values(this.posts)
             console.log(this.interactedTasks)
-            if (this.interactedTasks == null) {
+            if (this.interactedTasks.active == null) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.active)
@@ -348,16 +451,6 @@ export default {
             var result = values.filter(post => post.username == this.currUser)
             return result
         },
-        // activeCheck(currPost) {
-
-        //     // var values = Object.values(currPost.active)
-        //     // var result = values.filter(user => user.status == 'accepted' && currPost.username == this.currUser)
-        //     // console.log(result)
-        //     var values = currPost
-        //     console.log(values)
-
-        //     return console.log(currPost)
-        // }
 
     },
 
@@ -377,15 +470,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.Expand2 {
+    margin-left: 5vw;
+}
+
+.location {
+    text-align: left
+}
+
 .qcardsec {
-  width: 200px
+    /* float: left; */
+    column-span: 1;
+    text-align: left;
+
+
 }
 
 .qCard {
-  width: 600px
+    column-count: 1;
+    text-align: left;
 }
+
+.filter {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.qcardsec {
+    width: 200px;
+}
+
 .dCard {
-    width: 800px;
+    width: 20vw;
+    float: left;
+    margin-left: 10vw;
 }
 
 .dActions {
@@ -395,6 +513,8 @@ export default {
 .search {
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 36vw;
+    float: left
 }
 
 .actionbtns {
@@ -413,7 +533,11 @@ export default {
     border: 1px solid black;
 }
 
-.box {
+.boxAngel {
+    padding: 0px 10% 50px 5%;
+}
+
+.boxMortal {
     padding: 50px 10%;
 }
 
@@ -452,45 +576,30 @@ figure>q-card {
     grid-column: 1;
 }
 
-//figure a {
-//color: black;
-//text-decoration: none;
-//}
-
-//figcaption {
-//grid-row: 2;
-//grid-column: 1;
-//background-color: rgba(255,255,255,.5);
-//padding: .2em .5em;
-//justify-self: start;
-//}
-
-.container {
-    column-count: 4;
+.containerAngel {
+    column-count: 3;
     column-gap: 10px;
-    //display: grid;
     grid-template-columns: repeat(5, 1fr);
-    //grid-template-rows: masonry;
 }
 
-// @media (max-width: 1850px) {
-//     .container {
-//         grid-template-columns: repeat(4, 1fr);
-//         column-count: 4;
-//         column-gap: 10px;
-//     }
+.containerMortal {
+    column-count: 4;
+    column-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+}
 
-//     .q-card {
-//         max-width: 100%;
-//     }
-
-// }
 
 @media (max-width: 1080px) {
-    .container {
+    .containerAngel {
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;
         column-gap: 10px;
+    }
+
+    .containerMortal {
+        column-count: 3;
+        column-gap: 10px;
+        grid-template-columns: repeat(5, 1fr);
     }
 
     .q-card {
@@ -500,10 +609,16 @@ figure>q-card {
 }
 
 @media (max-width: 800px) {
-    .container {
+    .containerAngel {
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
         column-gap: 10px;
+    }
+
+    .containerMortal {
+        column-count: 2;
+        column-gap: 10px;
+        grid-template-columns: repeat(5, 1fr);
     }
 
     .q-card {
@@ -513,10 +628,16 @@ figure>q-card {
 }
 
 @media (max-width: 600px) {
-    .container {
+    .containerAngel {
         grid-template-columns: repeat(2, 1fr);
         column-count: 2;
         column-gap: 10px;
+    }
+
+    .containerMortal {
+        column-count: 2;
+        column-gap: 10px;
+        grid-template-columns: repeat(5, 1fr);
     }
 
     .q-card {
@@ -525,7 +646,7 @@ figure>q-card {
 }
 
 @media (max-width: 500px) {
-    .container {
+    .containerAngel {
         grid-template-columns: repeat(1, 1fr);
         column-count: 1;
         column-gap: 10px;

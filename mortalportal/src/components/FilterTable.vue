@@ -5,6 +5,7 @@
           <div v-for="station in stations" :key="station" class="qcardsec">
           <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
           </div>
+          {{ selectedLoc }}
       </q-card>
     </q-expansion-item>
   </q-list>
