@@ -114,56 +114,10 @@ const storeName = useCounterStore()
 export default {
   setup() {
 
-    // google login start
-    const user = ref(null);
-    const isSignedIn = ref(false);
-    const uiConfig = {
-      signInFlow: 'popup',
-      signinSuccessUrl: 'http://localhost:8080/',
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
-      callbacks: {
-        signInSuccessWithAuthResult: function (authResult) {
-          user.value = authResult.user.displayName;
-          console.log(authResult)
-          isSignedIn.value = true;
-          console.log('Signed in by user ' + user.value);
-          // so it doesn't refresh the page
-          return false;
-        },
-        uiShown: function () {
-          // The widget is rendered.
-          // Hide the loader.
-          document.getElementById('loader').style.display = 'none';
-        }
-      }
-    }
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseui-auth-container', uiConfig);
-    const handleSignOut = () => {
-      signOut(auth).then(() => {
-        // Sign-out successful.
-        user.value = null;
-        isSignedIn.value = false;
-        console.log('Signed out');
-        ui.start('#firebaseui-auth-container', uiConfig);
-      }).catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
-    }
-    // google login end
+    
 
     return {
-      tab: ref('Sign Up'),
-
-      // google login start
-      user,
-      isSignedIn,
-      handleSignOut,
-      // google login end
+      tab: ref('Sign Up')
 
     }
   },
@@ -227,6 +181,58 @@ export default {
       storeName.username = this.signupData.username;
       storeName.email = this.signupData.email
       this.$router.push('/home/angel');
+    },
+
+    getGoogleAuth ()    {
+      // google login start
+    const user = ref(null);
+    const isSignedIn = ref(false);
+    const uiConfig = {
+      signInFlow: 'popup',
+      signinSuccessUrl: 'http://localhost:8080/',
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      ],
+      callbacks: {
+        signInSuccessWithAuthResult: function (authResult) {
+          user.value = authResult.user.displayName;
+          console.log(authResult)
+          isSignedIn.value = true;
+          console.log('Signed in by user ' + user.value);
+          // so it doesn't refresh the page
+          return false;
+        },
+        uiShown: function () {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none';
+        }
+      }
+    }
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+    const handleSignOut = () => {
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        user.value = null;
+        isSignedIn.value = false;
+        console.log('Signed out');
+        ui.start('#firebaseui-auth-container', uiConfig);
+      }).catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+    }
+    // google login end
+    return {
+      // google login start
+      user,
+      isSignedIn,
+      handleSignOut,
+      // google login end
+    }
+
     }
     // valLogin(){
     //   console.log(this.users)
@@ -239,7 +245,12 @@ export default {
     //     }
     //   }
     // }
-  }
+    
+  },
+  mounted:
+    function () {
+      this.getGoogleAuth()
+    }
 }
 
 </script>

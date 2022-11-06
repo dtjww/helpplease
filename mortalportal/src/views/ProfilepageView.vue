@@ -5,7 +5,7 @@
     <q-layout view="lHh Lpr lff" container style="height: 600px" class="shadow-2 rounded-borders">
 
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
-        <q-list v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
+        <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
           padding>
 
           <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" >
@@ -54,14 +54,36 @@
 
       <q-page-container>
         <q-card-section>
-          <q-tab-panels v-model="tab" animated>
+          <q-tab-panels v-model="tab">
+            
             <q-tab-panel name="MyAccount">
-              <MyAccount />
+              <div class="q-pa-md">
+                <q-header elevated>
+                    <q-toolbar>
+                      <q-icon name="face 6" size="4rem" />
+                      <q-toolbar-title> My Account </q-toolbar-title>                    
+                    </q-toolbar>                    
+                </q-header>                
+                <MyAccount />
+                <!-- should include an edit profile button to change their details -->
+
+
+              </div>        
             </q-tab-panel>
+
             <q-tab-panel name="MyTasks">
-              <div class="text-h6">billing</div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              <div class="q-pa-md">
+                <q-header elevated>
+                    <q-toolbar>
+                      <q-icon name="assignment" size="4rem"/>
+                      <q-toolbar-title> My Tasks </q-toolbar-title>                    
+                    </q-toolbar>                    
+                </q-header>                
+                <MyTask />
+              </div>              
             </q-tab-panel>
+
+
           </q-tab-panels>
         </q-card-section>
         <!-- need to add the account and task components in here -->
@@ -76,6 +98,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import MyAccount from '@/components/MyAccount.vue';
+import MyTask from '@/components/MyTask.vue';
 import { ref } from 'vue';
 
 export default {
@@ -85,7 +108,8 @@ export default {
   },
   components: {
     NavBar,
-    MyAccount
+    MyAccount,
+    MyTask
   },
   data(){
     return{
@@ -111,4 +135,8 @@ export default {
 }
 
 </script>
-  
+
+<style lang="sass" scoped>
+.menu-list .q-item
+  border-radius: 0 32px 32px 0
+</style>
