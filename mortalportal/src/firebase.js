@@ -9,7 +9,8 @@ const firebaseConfig = {
     projectId: "dreemteem-829c5",
     storageBucket: "dreemteem-829c5.appspot.com",
     messagingSenderId: "766447710623",
-    appId: "1:766447710623:web:57a5ae1eab670733ac8daa"
+    appId: "1:766447710623:web:57a5ae1eab670733ac8daa",
+    measurementId: "G-6D4L7KKB3W"
   };
 
   const app = initializeApp(firebaseConfig);

@@ -16,7 +16,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/home', // OurHome
+    path: '/home/:targetP', // OurHome
     name: 'Home',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -80,12 +80,28 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
   },
   {
-    path: '/detailedTask/:id', // Task Page
+    path: '/detailedTask/:id/:poster', // Task Page
     name: 'Task Details',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/TaskDetailView.vue')
+  },
+  {
+    path: '/offer/:id', // Task Page
+    name: 'Offers',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ViewOffers.vue')
+  },
+  {
+    path: '/carousel', // Carousel testing
+    name: 'Testing Carousel Page',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/TestCarousel.vue')
   }
 ]
 

@@ -84,7 +84,7 @@ import { ref } from 'vue'
 import {useCounterStore } from "@/store/store";
 import axios from "axios";
 import { db } from '../firebase.js';
-import { push, ref as dbRef } from "firebase/database";
+import { set, ref as dbRef } from "firebase/database";
 const storeName = useCounterStore()
 export default {
   setup () {
@@ -106,7 +106,8 @@ export default {
         email_SU: '',
         password_SU: '',
         username_SU: '',
-        name_SU: ''
+        name_SU: '',
+        interactedTasks: [],
       }}
     },
 
@@ -122,7 +123,7 @@ export default {
                         if(this.users[key].email == this.email_login && this.users[key].password == this.password_login){
                             storeName.email = this.email_login
                             storeName.username = this.users[key].username
-                            this.$router.push('/home')
+                            this.$router.push({name:'Home',params:{targetP: 'angel'}})
                             valid = true;
                           } 
                         }
@@ -141,12 +142,14 @@ export default {
         this.signupData.password_SU = this.password_SU
         this.signupData.username_SU = this.username_SU
         this.signupData.name_SU = this.name_SU
+        storeName.username = this.username_SU
+        storeName.emial = this.email_SU
       }
       else{
         alert("Passwords do not match")
       }
-      push(dbRef(db, 'Login'), this.signupData);
-      this.$router.push('/home');    
+      set(dbRef(db, 'Login/' + storeName.username), this.signupData);
+      this.$router.push({name:'Home',params:{targetP: 'angel'}});    
     }
     // valLogin(){
     //   console.log(this.users)
