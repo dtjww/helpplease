@@ -24,7 +24,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/OurHome.vue')
   },
   {
-    path: '/chat', // ChatPage
+    path: '/chat/:id', // ChatPage
     name: 'Chat',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -38,6 +38,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ChatpageFake.vue')
+  },
+  {
+    path: '/chatitem', // ChatPage
+    name: 'Chat Item',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChatFunction.vue')
   },
   {
     path: '/profile', // Profile
