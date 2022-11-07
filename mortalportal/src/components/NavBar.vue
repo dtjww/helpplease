@@ -9,7 +9,7 @@
             </router-link> -->
 
             <q-toolbar-title shrink>
-                <router-link to="/" style="color: white; text-decoration: none">
+                <router-link to="/home/angel" style="color: white; text-decoration: none">
                     <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
                 </router-link>
             </q-toolbar-title>
@@ -70,12 +70,31 @@
 
             <q-btn-dropdown flat icon ="person_outline" split @click="handleClick" auto-close>
                 <q-list>
-                    <q-item clickable v-for="item in menuItems" :key="item.label" :to="item.to" style="color: black">
+
+                    <q-item clickable style="color:black" @click="handleClick()">
                         <q-item-section avatar>
-                            <q-icon :name="item.icon" />
+                            <q-icon name="person"/>
                         </q-item-section>
                         <q-item-section>
-                            {{item.label}}
+                            My Account
+                        </q-item-section>
+                    </q-item>
+
+                    <q-item clickable style="color:black" @click="handleClick()">
+                        <q-item-section avatar>
+                            <q-icon name="assignment"/>
+                        </q-item-section>
+                        <q-item-section>
+                            My Tasks
+                        </q-item-section>
+                    </q-item>
+
+                    <q-item clickable style="color:black" @click="exit()">
+                        <q-item-section avatar>
+                            <q-icon name="exit_to_app"/>
+                        </q-item-section>
+                        <q-item-section>
+                            Logout
                         </q-item-section>
                     </q-item>
                 </q-list>
@@ -181,8 +200,12 @@
 </style>
 
 <script>
-    export default {
 
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
+
+    export default {
+    
         data() {
             return {
                 menuItems: [
@@ -198,7 +221,7 @@
                     },
                     {
                         label: "Logout",
-                        to: "/home",
+                        to: "/",
                         icon: "exit_to_app"
                     }
                 ]
@@ -208,6 +231,11 @@
         methods: {
             handleClick () {
                 this.$router.push('/profile')
+            },
+            exit(){
+                storeName.username = ''
+                storeName.email = ''
+                this.$router.push({name:'Landing'})
             }
         }
     }
