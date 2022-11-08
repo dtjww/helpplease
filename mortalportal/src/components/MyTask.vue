@@ -3,45 +3,25 @@
     <table align="center">
         <tr>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click='activeBtn'>
-                    <h7>Active</h7>
-                </q-btn>
+                <q-btn flat rounded v-model="Selection" @click='activeBtn' label ='Active'/>
             </td>
-
             <!-- Separation between Active and Completed -->
             <td width:10px>
                 |
             </td>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click="completedBtn">
-                    <h7>Completed</h7>
-
-                    <!-- <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                        <q-card class="my-card grid-item" style="background: #f2cbb6">
-                            <img :src="post.file">
-                            <q-card-section class="fontAlign">
-                                Mortal: {{ post.username }} <br>
-                                Task: {{ post.name }}<br>
-                                Date: {{ post.date }}<br>
-                                Time: {{ post.time }}<br>
-                                Amount: ${{ post.price }}<br>
-
-                                <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                    <b>Details</b>
-                                </q-btn>
-                            </q-card-section>
-                        </q-card>
-                    </figure> -->
-                </q-btn>
+                <q-btn flat rounded v-model="Selection" @click="completedBtn" label="Completed" />
             </td>
         </tr>
+
     </table>
-    <div class="container box">
-    <div v-if="Selection == 'Active'">
-        <h1> wassup</h1>
-            <figure v-for="post in searchForTask " v-bind:key="post.id">
-                <div v-if="post.username != currUser && post.accepted == null">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                
+    <!-- need to include parameters for completed vs active tasks -->
+    <div class="myBox myContainer">
+        <div v-if="Selection == 'Active'">
+            <figure v-for="post in MortalTasks" v-bind:key="post.id">
+                <div v-if="post.accepted == null">
+                    <q-card class="my-card grid-item" style="background: #efcebe">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Mortal: {{ post.username }} <br>
@@ -56,35 +36,31 @@
                     </q-card>
                 </div>
             </figure>
-     </div>       
-        
-    <div v-else>
-            <h1> nth much hbu</h1>
-            <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                        <q-card class="my-card grid-item" style="background: #f2cbb6">
-                            <img :src="post.file">
-                            <q-card-section class="fontAlign">
-                                Mortal: {{ post.username }} <br>
-                                Task: {{ post.name }}<br>
-                                Date: {{ post.date }}<br>
-                                Time: {{ post.time }}<br>
-                                Amount: ${{ ownOffer(post) }}<br>
+        </div>
 
-                                <div v-if="post.accepted != null">
-                                    Status: In Progress
-                                </div>
-                                <div v-else-if="activeCheck(post.offer)">
-                                    Status: Offered
-                                </div>
-                                <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                    <b>Details</b>
-                                </q-btn>
-                            </q-card-section>
-                        </q-card>
-                    </figure>
+        <div v-else>
+            <figure v-for="post in MortalTasks" v-bind:key="post.id">
+                <!-- need to include parameters for completed vs active tasks -->
+                <div v-if="post.accepted != null">
+                    <q-card class="my-card grid-item" style="background: #699dd1">
+                        <img :src="post.file">
+                        <q-card-section class="fontAlign">
+                            Mortal: {{ post.username }} <br>
+                            Task: {{ post.name }}<br>
+                            Date: {{ post.date }}<br>
+                            Time: {{ post.time }}<br>
+                            Amount: ${{ post.price }}<br>
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
+                        </q-card-section>
+                    </q-card>
+                </div>
+            </figure>
+
+        </div>
+
     </div>
-
-            </div>
 
 
 
@@ -102,6 +78,10 @@ export default {
     data() {
         return {
             Selection: 'Active',
+            currUser: storeName.username,
+            posts: [],
+            status: 'active',
+
         }
     },
 
@@ -139,11 +119,17 @@ export default {
 
             return result
         },
+        iTask(id, username) {
+            console.log(username)
+            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
+        },
+        
     },
     computed: {
         MortalTasks() {
             var values = Object.values(this.posts)
             var result = values.filter(post => post.username == this.currUser)
+            console.log(result)
             return result
         }
     },
@@ -176,8 +162,13 @@ export default {
     transition-duration: 0.4s;
 }
 
-.box {
+.myBox {
     padding: 50px 10%;
+}
+
+.fontAlign {
+    text-align: left;
+    padding-left: 30px;
 }
 
 figure {
@@ -193,4 +184,21 @@ figure>q-card {
     grid-column: 1;
 }
 
+.my-card {
+    max-width: 250px;
+    width: 100%;
+
+}
+
+.grid-item {
+    max-width: 300px;
+    display: block;
+    border: 1px solid black;
+}
+
+.myContainer {
+    column-count: 3;
+    column-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
 </style>
