@@ -56,6 +56,8 @@ import NavBar from '@/components/NavBar.vue'
 import { ref } from 'vue'
 import {update, ref as dbRef, remove, set } from "firebase/database";
 import {db} from '../firebase.js'
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
 
 const columns = [
 
@@ -88,6 +90,7 @@ export default {
             reject: false,
             currRow: [],
             currPost:'',
+            currUser: storeName.username,
 
         }
     },
@@ -143,9 +146,14 @@ export default {
                     });
                 }
             }
+            update(dbRef(db, this.currRow.Angel + '/tasksInteracted/active/' + this.id), {
+                status: 'accepted'
+            })
             setTimeout(() => {
                 this.$router.push({name: 'Home', params:{targetP:'mortal'}})
             }, 1500)
+
+
             
         },
         updateReject(){

@@ -34,8 +34,8 @@
         </tr>
     </table>
 
+    <!-- Angel -->
     <div v-if="Selection == 'Angel' && targetP == 'angel'">
-        <!-- Angel -->
         <table align="center">
             <tr>
                 <td align='center'>
@@ -55,10 +55,10 @@
                 </td>
 
             </tr>
-            <tr  v-if="activeBtn == 'Find'">
+            <tr v-if="activeBtn == 'Find'">
                 <td colspan="3" align='center'>
-                    <q-input rounded outlined label="Search" class="search" v-model="search"
-                        color="dark" text-color="white">
+                    <q-input rounded outlined label="Search" class="search" v-model="search" color="dark"
+                        text-color="white">
                     </q-input>
                 </td>
             </tr>
@@ -141,75 +141,78 @@
             </q-card>
         </div>
         <div class="containerAngel boxAngel" v-if="activeBtn == 'Find'">
-                <figure v-for="post in searchForTask" v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                <b>Details</b>
-                            </q-btn>
-                        </q-card-section>
-                    </q-card>
-                </figure>
-            </div>
-            <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
-                <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
-
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                <b>Details</b>
-                            </q-btn>
-                        </q-card-section>
-                    </q-card>
-                </figure>
-            </div>
-            <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
-                <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ ownOffer(post) }}<br>
-
-                            <div v-if="post.accepted != null">
-                                Status: In Progress
-                            </div>
-                            <div v-else-if="activeCheck(post)">
-                                Status: Offered
-                            </div>
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                                <b>Details</b>
-                            </q-btn>
-                            <q-btn v-if="post.accepted != null">
-                                <b>Complete Task</b>
-                            </q-btn>
-                        </q-card-section>
-                    </q-card>
-                </figure>
-            </div>
+            <figure v-for="post in searchForTask" v-bind:key="post.id">
+                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
+                        <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
+            </figure>
         </div>
+        <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
+            <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
+                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
 
+                        <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
+            </figure>
+        </div>
+        <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
+            <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
+                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ ownOffer(post) }}<br>
+
+                        <div v-if="completedCheck(post) == 'pending'">
+                            Status: Pending
+                        </div>
+                        <div v-else-if="post.accepted != null">
+                            Status: In Progress
+                        </div>
+                        <div v-else-if="activeCheck(post)">
+                            Status: Offered
+                        </div>
+
+                        <div v-if="completedCheck(post) != 'pending'">
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
+                        </div>
+                    </q-card-section>
+                </q-card>
+            </figure>
+        </div>
+    </div>
+
+    <!-- Mortal -->
     <div v-else>
-        <!-- Mortal -->
         <q-btn color='dark' @click=goToTask>New Post</q-btn>
         <div class="containerMortal boxMortal">
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
-                <div v-if="post.username == currUser">
+                <div v-if="post.username == currUser ">
                     <q-card class="my-card grid-item" style="background: #f2cbb6">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
@@ -223,6 +226,13 @@
                                     @click="iTask(post.id, post.username)"><b>Edit</b></q-btn>
                                 <q-btn v-if="post.offer != null" color="white" text-color="red"
                                     @click="viewOffer(post.id)">View Offers</q-btn>
+
+                            </div>
+
+                            <div v-else-if="completedCheck(post) == 'pending'">
+                                Status: Pending<br>
+                                <q-btn @click="confirmCompletion(post.id, post.username)"> Confirm
+                                </q-btn>
                             </div>
                             <div v-else>
                                 Status: In Progress
@@ -232,8 +242,8 @@
                 </div>
             </figure>
         </div>
-
     </div>
+
 
 </template>
 
@@ -242,8 +252,9 @@ import axios from 'axios';
 import { ref } from 'vue'
 import NavBar from '@/components/NavBar.vue';
 import { useCounterStore } from "@/store/store";
-// import Filter, { default as fData } from '@/components/FilterTable.vue'
 const storeName = useCounterStore()
+// import Filter, { default as fData } from '@/components/FilterTable.vue'
+
 
 export default {
     setup() {
@@ -299,6 +310,8 @@ export default {
             tasks: [
                 'Shopping', 'Physical', 'Assignment/Project', 'Hardware/Software'
             ],
+            completeTaskDialog: false,
+            focus_id: '',
         }
     },
     components: {
@@ -372,11 +385,8 @@ export default {
                     }
                 }
             }
-        }, activeCheck(currPost) {
-
-            // var values = Object.values(currPost.active)
-            // var result = values.filter(user => user.status == 'accepted' && currPost.username == this.currUser)
-            // console.log(result)
+        },
+        activeCheck(currPost) {
             console.log(currPost)
             var values = Object.values(currPost)
 
@@ -385,10 +395,40 @@ export default {
 
             return result
         },
-        taskFilter() {
+        completedCheck(currPost) {
 
-            console.log(this.selectedLoc)
-            console.log(this.category)
+            if (currPost.accepted == null) {
+                return null
+            }
+            else {
+                var values = Object.values(currPost.accepted)
+                var result = values.filter(post => post.status == 'pending')
+                if (result.length > 0) {
+                    return 'pending'
+                }
+                else {
+                    return null
+                }
+            }
+
+        },
+        confirmCompletion(id, username) {
+            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
+        },
+        completeCheck(post) {
+            if (post.accepted == null) {
+                return null
+            }
+            else {
+                var values = Object.values(post.accepted)
+                var result = values.filter(accept => accept.status == 'completed')
+                if (result.length == 0) {
+                    return null
+                }
+                else {
+                    return 'completed'
+                }
+            }
         }
     },
 
@@ -441,16 +481,18 @@ export default {
                 console.log(values)
                 var result = allTask.filter(post =>
                     (values.filter(task =>
-                        task.taskid == post.id && (task.status == 'accepted' || task.status == 'offer'))).length > 0)
+                        task.taskid == post.id && (task.status == 'accepted' || task.status == 'offer' || task.status == 'pending'))).length > 0)
                 console.log(result)
                 return result
             }
         },
         MortalTasks() {
             var values = Object.values(this.posts)
-            var result = values.filter(post => post.username == this.currUser)
+            var result = values.filter(post => post.username == this.currUser  && this.completeCheck(post) != 'completed')
             return result
         },
+
+
 
     },
 
@@ -458,6 +500,7 @@ export default {
     created() {
         this.getPost();
         this.getOwnTask();
+        console.log(this.interactedTasks)
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
         }

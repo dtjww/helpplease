@@ -74,13 +74,20 @@
                             <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
                         </div>
 
-                        <div v-else>
-                            <q-btn color="red" class="btn" @click="finishTask">Task Completed</q-btn>
-                        </div>
 
                     </td>
                 </tr>
             </table>
+
+
+            <div v-if="completedCheck(posts) == 'accepted'">
+                <q-btn color="red" class="btn" @click="taskComplete = true">Task Completed</q-btn>
+            </div>
+
+            <div v-else-if="completedCheck(posts) == 'pending'">
+                <q-btn color="red" class="btn" @click="confirmComplete = true">Confirm Completed Task
+                </q-btn>
+            </div>
         </q-card>
     </div>
 
@@ -201,6 +208,38 @@
         </q-card>
     </q-dialog>
 
+    <q-dialog v-model="taskComplete">
+        <q-card>
+            <q-card-section>
+                <div class="text-h6">Confirm</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+                Do you confirm you have completed the task?
+            </q-card-section>
+            <q-card-actions align="right">
+                <q-btn flat label="Yes" color="dark" v-close-popup @click=updateCompleted />
+                <q-btn flat label="No" color="black" v-close-popup />
+            </q-card-actions>
+        </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="confirmComplete">
+        <q-card>
+            <q-card-section>
+                <div class="text-h6">Confirm</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+                Do you confirm you have Angel had completed the task?
+            </q-card-section>
+            <q-card-actions align="right">
+                <q-btn flat label="Yes" color="dark" v-close-popup @click=updateConfirmCompleted />
+                <q-btn flat label="No" color="black" v-close-popup />
+            </q-card-actions>
+        </q-card>
+    </q-dialog>
+
 </template>
 
 <script>
@@ -212,12 +251,10 @@ import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-// import { location } from '@/components/MrtData.js';
 
 export default {
-
-
     data() {
+
         return {
             model: '',
             task: [
@@ -232,8 +269,6 @@ export default {
             id: '',
             taskid: '',
             status: '',
-            currUser: '',
-            poster: '',
             format: '',
             locations: ['Admiralty', 'Aljunied', 'Ang Mo Kio', 'Bartley', 'Bayfront', 'Beauty World',
                 'Bedok', 'Bedok North', 'Bedok Reservoir', 'Bencoolen', 'Bendemeer', 'Bishan',
@@ -255,7 +290,12 @@ export default {
                 'Woodlands South', 'Woodleigh', 'Yew Tee', 'Yio Chu Kang', 'Yishun',],
             Offer: ref(false),
             offer_price: ref(0),
-            ownPosts: []
+            ownPosts: [],
+            taskComplete: false,
+            confirmComplete: false,
+            angel: '',
+            currUser: storeName.username,
+            poster: this.$route.params.poster,
 
         }
     },
@@ -280,6 +320,32 @@ export default {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
                 .then(response => {
                     this.posts = response.data
+                    console.log(this.posts)
+                    this.currUser = storeName.username
+                    this.poster = this.$route.params.poster
+                    if (this.posts.accepted != null) {
+                        var values = this.posts.accepted
+                        for (var post in values) {
+
+                            if (values[post].status == 'pending') {
+                                this.angel = values[post].angel
+                            }
+                        }
+                        this.format = 'View'
+                            return "View"
+                    }
+                    else {
+                        if (this.poster == this.currUser) {
+                            this.format = "Edit"
+                            console.log('yes1')
+                            return 'Edit'
+                        }
+                        else {
+                            this.format = "View"
+
+                            return 'View'
+                        }
+                    }
                 })
                 .catch(error => {
                     console.log(error)
@@ -387,23 +453,65 @@ export default {
             setTimeout(() => {
                 this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
             }, 1500);
-        }
+        },
+        updateCompleted() {
+            update(dbRef(db, 'Login/' + storeName.username + '/tasksInteracted/active/' + this.id), {
+                status: 'pending'
+            })
+            update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + storeName.username), {
+                status: 'pending',
+            });
+            setTimeout(() => {
+                this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'pending' } })
+            }, 1500);
+
+        },
+        completedCheck(currPost) {
+            console.log(currPost)
+            if (currPost.accepted == null) {
+                return null
+            }
+            else {
+                var values = Object.values(currPost.accepted)
+                var resultP = values.filter(post => post.status == 'pending')
+                var resultA = values.filter(post => post.status == 'accepted')
+                console.log(resultP)
+                console.log(resultA)
+                if (resultP.length > 0) {
+                    return 'pending'
+                }
+                else if (resultA.length > 0) {
+                    return 'accepted'
+                }
+                else {
+                    return null
+                }
+            }
+        },
+
+        updateConfirmCompleted() {
+            update(dbRef(db, 'Login/' + this.angel + '/tasksInteracted/active/' + this.id), {
+                status: 'completed'
+            })
+            console.log(this.angel)
+            update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.angel), {
+                status: 'completed',
+            });
+            setTimeout(() => {
+                this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
+            }, 1500);
+        },
+
     },
     created() {
-
+        this.poster = this.$route.params.poster
+        this.currUser = storeName.username
         this.getPost();
         this.checkTask();
         this.id = this.$route.params.id
-        this.poster = this.$route.params.poster
-        this.currUser = storeName.username
-        console.log(this.poster)
-        console.log(this.currUser)
-        if (this.poster == this.currUser) {
-            this.format = "Edit"
-        }
-        else {
-            this.format = "View"
-        }
+
+
+
     }
 
 }
