@@ -30,7 +30,7 @@
                 <q-carousel-slide :name="7" img-src="https://images.unsplash.com/photo-1620140036708-455ed5c0426a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
                 <q-carousel-slide :name="8" img-src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2938&q=80" />
                 <q-carousel-slide :name="9" img-src="https://images.unsplash.com/photo-1516386408840-d718a820a05c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
-                <q-carousel-slide :name="10" img-src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="10" img-src="https://images.unsplash.com/photo-1613068687893-5e85b4638b56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" />
                 
                 
             </q-carousel>
@@ -86,7 +86,7 @@
           @mouseenter="autoplay = false"
           @mouseleave="autoplay = true"
           class = "rounded-borders"
-          control-color="accent"
+          control-text-color="accent"
           control-active-color="accent"
           control-type="flat"
           >
@@ -167,26 +167,6 @@
               </q-img>
             </div>
           </q-carousel-slide>
-          
-          <!-- <q-carousel-slide :name="3" class="column no-wrap">
-            <div class="row fit justify-center items-center q-gutter-xl q-col-gutter no-wrap">
-              <q-img class="rounded-borders col-2 full-height" src="https://cdn.quasar.dev/img/mountains.jpg" />
-              <q-img class="rounded-borders col-2 full-height" src="https://picsum.photos/id/1010/367/267" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/people?t=1666261665705" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/tech" />
-              <q-img class="rounded-borders col-2 full-height" src="https://picsum.photos/id/1011/367/267" />
-            </div>
-          </q-carousel-slide> -->
-
-          <!-- <q-carousel-slide :name="4" class="column no-wrap">
-            <div class="row fit justify-center items-center q-gutter-xl q-col-gutter no-wrap">
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/tech?t=1666261817930" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/nature?t=1666261852008" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/nature?t=1666261861717" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/arch" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/people?t=1666261665705" />
-            </div>
-          </q-carousel-slide> -->
         </q-carousel>
         </div>  
         
@@ -239,18 +219,6 @@
             </div>
         </div>
 
-
-        <!-- <div class="container box">
-            <figure v-for="post in posts " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #f2cbb6">
-                    <img :src="post.file">
-                    <q-card-section class="fontAlign">
-                        Task: {{ post.name }}<br>
-                        <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
-                    </q-card-section>
-                </q-card>
-            </figure>
-        </div> -->
         <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
           <q-btn fab icon="keyboard_arrow_up" color="accent" />
         </q-page-scroller>
@@ -386,6 +354,6 @@ export default {
     display: flex;
   }
   .font {
-    font-family: s;
+    font-family: radley;
   }
 </style>
