@@ -1,4 +1,6 @@
 <template>
+
+    <div class="bg-bg-deep-purple-1 back">
     <template v-for="msg in textList" :key="msg">
         <template v-if="getMyUsername(msg.username)">
             <!-- <div> MEMEME: {{msg.text}}</div> -->
@@ -19,7 +21,7 @@
                 />
         </template>
     </template>
-
+</div>
 </template>
 
 

@@ -28,19 +28,19 @@
             :active="tab === 'chat1'"
             @click="tab = 'chat1'"
             >
+            <!-- ^^ this has to be looped -->
+            <!-- VV this has to be looped too -->
                     <q-item-section side>
                       <q-avatar rounded size="48px">
+                        <!-- Other persons  -->
                         <img src="https://cdn.quasar.dev/img/avatar.png" />
-                        <q-badge floating color="teal">new</q-badge>
                       </q-avatar>
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label>Mary</q-item-label>
-                      <q-item-label caption>2 new messages</q-item-label>
+                      <q-item-label>Chat username here</q-item-label>
+                      <q-item-label caption>Task Title here</q-item-label>
                     </q-item-section>
-                    <q-item-section side>
-                      3 min ago
-                    </q-item-section>
+
             </q-item>
 
             <!-- second chat -->
@@ -51,15 +51,11 @@
                 <q-item-section side>
                   <q-avatar rounded size="48px">
                     <img src="https://cdn.quasar.dev/img/avatar.png" />
-                    <q-badge floating color="teal">new</q-badge>
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>Chicken</q-item-label>
-                  <q-item-label caption>1 new message</q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  3 min ago
+                  <q-item-label>Chat username here</q-item-label>
+                  <q-item-label caption>Task Title here</q-item-label>
                 </q-item-section>
             </q-item>
 
@@ -101,11 +97,9 @@
 
                       <div class="q-ma-sm bg-grey-1" style="padding:5px; border-radius:3%">
                         <!-- for scroll area -->
-                        <q-scroll-area style="height: 320px; max-width: auto; text-align:left">
-                            <!-- for chat -->
-                            <div class="bg-bg-deep-purple-1 back">
+                        <q-scroll-area id="thisScroll" ref="chatArea" @scroll="scrollinfo" style="height: 320px; max-width: auto; text-align:left">
+                          <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
-                            </div>
                         </q-scroll-area>
                     </div>
               
@@ -116,7 +110,6 @@
                         <q-btn round dense flat icon="send" @click="sendMessage()"/>
                       </template>
                     </q-input>
-                  <div> {{myUsername}}: {{myMsg}}</div>
 
                     </q-tab-panel>
             
