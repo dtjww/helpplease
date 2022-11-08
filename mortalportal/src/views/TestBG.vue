@@ -87,17 +87,17 @@
 
     /* Responsive layout - makes a two column-layout instead of four columns */
     @media (max-width: 800px) {
-    .column {
-        flex: 50%;
-        max-width: 50%;
-    }
+        .column {
+            flex: 50%;
+            max-width: 50%;
+        }
     }
 
     /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
     @media (max-width: 600px) {
-    .column {
-        flex: 100%;
-        max-width: 100%;
-    }
+        .column {
+            flex: 100%;
+            max-width: 100%;
+        }
     }
 </style>
