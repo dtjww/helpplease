@@ -10,10 +10,9 @@
                 style="height: 140px; max-width: 150px" />
 
             <q-btn class="align-center" color="secondary" style="height: 50px">
-                <q-icon name="cloud_upload" />
+                <q-icon class="q-mr-sm" name="add_a_photo" />
                 <input type="file" accept="image/*" @change="uploadImage" />
             </q-btn>
-
         </div>
 
         <div class="q-pa-md">
@@ -28,38 +27,32 @@
                     </template>
                 </q-field>
 
-                <q-field outlined :model-value="name" prefix="First Name:">
+                <q-field filled :model-value="name" prefix="First Name:">
+                    <template v-slot:before>
+                        <q-icon name="camera_front" />
+                    </template>
+
                     <template v-slot:control>
-                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }}
-                        </div>
+                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }} </div>
                         <!-- {{loginData.fName}} -->
                     </template>
-
-                    <template v-slot:append>
-                        <q-avatar>
-                            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
-                        </q-avatar>
-                    </template>
-
                 </q-field>
 
-                <q-field outlined :model-value="name" prefix="Last Name:">
+                <q-field filled :model-value="name" prefix="Last Name:">
+                    <template v-slot:before>
+                        <q-icon name="camera_front" />
+                    </template>
+
                     <template v-slot:control>
-                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }}
-                        </div>
+                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }} </div>
                         <!-- {{loginData.lName}} -->
                     </template>
 
-                    <template v-slot:append>
-                        <q-avatar>
-                            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg">
-                        </q-avatar>
-                    </template>
                 </q-field>
 
                 <q-field standout :model-value="email" prefix="Email:" suffix="@gmail.com">
                     <!-- the suffix should change according to the email address given -->
-                    <template v-slot:prepend>
+                    <template v-slot:before>
                         <q-icon name="mail" />
                     </template>
 
@@ -141,6 +134,7 @@ export default {
                     console.log(error)
                 })
         },
+        
     },
 
     created() {

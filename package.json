@@ -18,6 +18,7 @@
   "homepage": "https://github.com/dtjww/helpplease#readme",
   "dependencies": {
     "firebase": "^9.12.1",
+    "masonry-layout": "^4.2.2",
     "pinia": "^2.0.23"
   }
 }
