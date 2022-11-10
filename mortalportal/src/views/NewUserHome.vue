@@ -19,26 +19,28 @@
                 @mouseleave="autoplay = true"
                 height="100vh"
                 width=""
-            >
-                <q-carousel-slide :name="1" img-src="https://i.picsum.photos/id/319/5445/2768.jpg?hmac=oZV0pFhNqKHhhKnqoPwpG3MS68TynWZVdMhaqHZ68x4" />
-                <q-carousel-slide :name="2" img-src="https://i.picsum.photos/id/1060/5598/3732.jpg?hmac=31kU0jp5ejnPTdEt-8tAXU5sE-buU-y1W1qk_BsiUC8" />
-                <q-carousel-slide :name="3" img-src="https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk" />
-                <q-carousel-slide :name="4" img-src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" />
-                <q-carousel-slide :name="5" img-src="https://i.picsum.photos/id/4/5616/3744.jpg?hmac=8wIoVTScZoSiagRtRYlNfcd7dYHEf9tGyyEF44ihYFI" />
-                <q-carousel-slide :name="6" img-src="https://i.picsum.photos/id/250/4928/3264.jpg?hmac=4oIwzXlpK4KU3wySTnATICCa4H6xwbSGifrxv7GafWU" />
-                <q-carousel-slide :name="7" img-src="https://i.picsum.photos/id/1082/5416/3611.jpg?hmac=GrASx5oGYbTwT4xyJDYkurgXFFfgj37WHvaJNe8Sr1E" />
-                <q-carousel-slide :name="8" img-src="https://i.picsum.photos/id/1076/4835/3223.jpg?hmac=sw_W2oBUV1Pp_QwMbkODYHgWlX-SOkVRatS_UErh64Q" />
-                <q-carousel-slide :name="9" img-src="https://i.picsum.photos/id/1073/5472/3648.jpg?hmac=xCDetU9pLnLGZopbvHOQOkQRhTiYwyrzWc0YyHPzp5Y" />
-                <q-carousel-slide :name="10" img-src="https://i.picsum.photos/id/304/6016/4000.jpg?hmac=ULWayz92dKMWLEZviIJkgLRd6J5FClakkDq_3VmXbw0" />
-                <q-carousel-slide :name="11" img-src="https://i.picsum.photos/id/1047/3264/2448.jpg?hmac=ksy0K4uGgm79hAV7-KvsfHY2ZuPA0Oq1Kii9hqkOCfU" />
+            >   
+                
+                <q-carousel-slide :name="1" img-src="https://i.picsum.photos/id/304/6016/4000.jpg?hmac=ULWayz92dKMWLEZviIJkgLRd6J5FClakkDq_3VmXbw0" />
+                <q-carousel-slide :name="2" img-src="https://images.unsplash.com/photo-1611784728558-6c7d9b409cdf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80" />
+                <q-carousel-slide :name="3" img-src="https://images.unsplash.com/photo-1605826832916-d0ea9d6fe71e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" />
+                <q-carousel-slide :name="4" img-src="https://images.unsplash.com/photo-1521999693742-4717d76f97cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2938&q=80" />
+                <q-carousel-slide :name="5" img-src="https://images.unsplash.com/photo-1580256081112-e49377338b7f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="6" img-src="https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="7" img-src="https://images.unsplash.com/photo-1620140036708-455ed5c0426a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="8" img-src="https://images.unsplash.com/photo-1577977799980-cd7053d89661?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="9" img-src="https://images.unsplash.com/photo-1516386408840-d718a820a05c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+                <q-carousel-slide :name="10" img-src="https://images.unsplash.com/photo-1613068687893-5e85b4638b56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" />
+                
+                
             </q-carousel>
-            <div class="container-2 absolute-top">
+            <div class="container-2 absolute-top font">
                 <div class="text-h1" :class="textColor">Lend a hand today!</div>
                 <div class="text-h5" :class="subtextColor">Complete tasks as an Angel and earn</div>
             </div>
-        </div>
-      <div class="">
-        <div class="row bg-primary center q-mb-xl" style="height: 700px;">
+      </div>
+      <div class="font">
+        <div class="row bg-primary center q-mb-xl" style="height: 100vh;">
           <div class="col q-pl-xl">
             <div style="max-width: 550px; text-align: center; margin-left:auto; margin-right: auto">
               <div class="text-h2 text-bold text-white q-pb-md"> Find an angel on Mortal Portal </div>
@@ -68,14 +70,14 @@
             <q-img src="../assets/MainLogo2.png"></q-img>
           </div>
         </div>  
+
         <div class='top-bottom'> 
           <div>
-            <div class="text-h2 text-bold text-left q-ml-md"> Services provided </div>
+            <div class="text-h3 text-bold text-left q-ml-md q-mb-lg font"> Services provided </div>
           </div>
           <q-carousel
           animated
           v-model="slide"
-          navigation
           infinite
           :autoplay="autoplay"
           arrows
@@ -83,10 +85,14 @@
           transition-next="slide-left"
           @mouseenter="autoplay = false"
           @mouseleave="autoplay = true"
-        >
-        <q-carousel-slide :name="1" class="column no-wrap" >
-        <!-- <q-carousel-slide :name="1" class="column no-wrap" v-for="post in posts" v-bind:key="post.id"> -->
-            <div class="row fit justify-start items-center q-gutter-xl q-col-gutter no-wrap">
+          class = "rounded-borders"
+          control-text-color="accent"
+          control-active-color="accent"
+          control-type="flat"
+          >
+          <q-carousel-slide :name="1" class="column no-wrap font" >
+          <!-- <q-carousel-slide :name="1" class="column no-wrap" v-for="post in posts" v-bind:key="post.id"> -->
+            <div class="row center items-center q-gutter-xl q-col-gutter no-wrap" style="height:100%;">
               <!-- <div v-for="post in firstFour" v-bind:key="post.id">
               <q-img class="rounded-borders col-3 full-height" :src="post.file">
                 <div class="absolute-bottom text-subtitle1 text-center caption">
@@ -94,48 +100,78 @@
                 </div>
                 </q-img>
               </div> -->
-              <q-img class="rounded-borders col-2 full-height" src="https://cdn.quasar.dev/img/mountains.jpg" >
-                <div class="absolute-top text-left">
-                    <div class="text-h7" :class="subtextColor">Get help with your site</div>
-                    <div class="text-h4" :class="textColor">Logo Design</div>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1519222970733-f546218fa6d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Build your site</div>
+                    <div class="text-h5" :class="textColor"><strong>Website Design</strong></div>
                 </div>
               </q-img>
-              <q-img class="rounded-borders col-2 full-height" src="https://cdn.quasar.dev/img/parallax1.jpg" />
-              <q-img class="rounded-borders col-2 full-height" src="https://cdn.quasar.dev/img/cat.jpg" />
-              <q-img class="rounded-borders col-2 full-height" src="https://cdn.quasar.dev/img/donuts.png" />
-              <q-img class="rounded-borders col-2 full-height" src="https://placeimg.com/640/480/arch" />
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1628435600697-6a954dea5055?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Enhance your photos</div>
+                    <div class="text-h5" :class="textColor"><strong>Photo Editing</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1558975285-193b2c315c2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Go Viral</div>
+                    <div class="text-h5" :class="textColor"><strong>Content Creation</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">All Languages</div>
+                    <div class="text-h5" :class="textColor"><strong>Coding</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1565689876697-e467b6c54da2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Make some quick bucks</div>
+                    <div class="text-h5" :class="textColor"><strong>Wash a Car</strong></div>
+                </div>
+              </q-img>
             </div>
+          </q-carousel-slide>
 
-          </q-carousel-slide>
           <q-carousel-slide :name="2" class="column no-wrap">
-            <div class="row fit justify-start items-center q-gutter-xl q-col-gutter no-wrap">
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/500/300/nature" />
-              <q-img class="rounded-borders col-3 full-height" src="https://i.picsum.photos/id/201/5184/3456.jpg?hmac=3SX-1t9hHlAmc653Ox-EmJonZBCaCSK5b9FayvY4sbI" />
-              <q-img class="rounded-borders col-3 full-height" src="https://i.picsum.photos/id/1066/2144/1424.jpg?hmac=J3AeMzlHPnXjRZdkB3pj5QrRPY8kPPqGjfRjgGyP4NI" />
-              <q-img class="rounded-borders col-3 full-height" src="https://picsum.photos/id/1011/367/267" />
-            </div>
-          </q-carousel-slide>
-          <q-carousel-slide :name="3" class="column no-wrap">
-            <div class="row fit justify-start items-center q-gutter-xl q-col-gutter no-wrap">
-              <q-img class="rounded-borders col-3 full-height" src="https://cdn.quasar.dev/img/mountains.jpg" />
-              <q-img class="rounded-borders col-3 full-height" src="https://picsum.photos/id/1010/367/267" />
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/people?t=1666261665705" />
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/tech" />
-            </div>
-          </q-carousel-slide>
-          <q-carousel-slide :name="4" class="column no-wrap">
-            <div class="row fit justify-start items-center q-gutter-xl q-col-gutter no-wrap">
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/tech?t=1666261817930" />
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/nature?t=1666261852008" />
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/nature?t=1666261861717" />
-              <q-img class="rounded-borders col-3 full-height" src="https://placeimg.com/640/480/arch" />
+            <div class="row center items-center q-gutter-xl q-col-gutter no-wrap " style="height:100%;">
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">On the go</div>
+                    <div class="text-h5" :class="textColor"><strong>Food Delivery</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1627905646269-7f034dcc5738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                  <div class="text-h7" :class="subtextColor">Tidy up your workspace</div>
+                    <div class="text-h5" :class="textColor"><strong>Cleaning</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1601758125997-67e236238ab0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Walk a furry friend</div>
+                    <div class="text-h5" :class="textColor"><strong>Dog Walking</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1621356986575-05811227a42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Deepen your learning</div>
+                    <div class="text-h5" :class="textColor"><strong>Private Tuition</strong></div>
+                </div>
+              </q-img>
+              <q-img class="rounded-borders col-2 full-height" src="https://images.unsplash.com/photo-1621992906830-b3f3aabac38b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" >
+                <div class="absolute-bottom text-right transparent">
+                    <div class="text-h7" :class="subtextColor">Get professional shots</div>
+                    <div class="text-h5" :class="textColor"><strong>Photography</strong></div>
+                </div>
+              </q-img>
             </div>
           </q-carousel-slide>
         </q-carousel>
         </div>  
         
 
-        <div class="row bg-primary center q-mt-xl" style="height: 550px;">
+        <div class="row bg-primary center q-mt-xl font" style="height: 550px;">
           <div class="col">
             <q-img style="height: auto; max-height:400px" src="../assets/Angels.png"></q-img>
           </div>
@@ -151,7 +187,7 @@
           </div>
         </div>
         
-        <div class="row bg-primary justify-center q-pb-md">
+        <div class="row bg-primary justify-center q-pb-md font">
           <div class="row text-h6 text-dark q-pr-xs"> Interested? </div>
             <div class="q-pl-xs">
               <q-btn color="dark" label="Become an Angel" @click=gotoSignup />
@@ -159,7 +195,7 @@
           </div>
         </div>
 
-        <div class="q-gutter-md row justify-end items-start q-pr-md q-pb-sm">
+        <div class="q-gutter-md row justify-end items-start q-pr-md q-pb-sm font">
           <div class="col-3">
             <div class="text-h4 text-primary"> Find an angel for </div>
           </div>
@@ -175,7 +211,7 @@
               />
             </div>
 
-            <div class="row">
+            <div class="row font">
             <div class="text-h4 text-primary">
               Explore active missions
               <q-btn color="primary" label="Post a Mission Now!" push @click=gotoTask />
@@ -183,18 +219,6 @@
             </div>
         </div>
 
-
-        <!-- <div class="container box">
-            <figure v-for="post in posts " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #f2cbb6">
-                    <img :src="post.file">
-                    <q-card-section class="fontAlign">
-                        Task: {{ post.name }}<br>
-                        <q-btn color='white' text-color="black" @click=iTask(post.id)><b>Details</b></q-btn>
-                    </q-card-section>
-                </q-card>
-            </figure>
-        </div> -->
         <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
           <q-btn fab icon="keyboard_arrow_up" color="accent" />
         </q-page-scroller>
@@ -323,10 +347,13 @@ export default {
     align-items: center;
   }
   .top-bottom {
-    margin-top: 100px;
-    margin-bottom: 100px
+    margin-top: 150px;
+    margin-bottom: 150px
   }
   .overlap {
     display: flex;
+  }
+  .font {
+    font-family: radley;
   }
 </style>

@@ -20,6 +20,8 @@
     "echarts": "^5.4.0",
     "firebase": "^9.12.1",
     "pinia": "^2.0.23",
-    "vue3-echarts-v3": "^1.0.2"
+    "vue3-echarts-v3": "^1.0.2",
+    "masonry-layout": "^4.2.2",
+    "pinia": "^2.0.23"
   }
 }

@@ -4,7 +4,7 @@ export const useCounterStore = defineStore({
     id: 'username',
     state: () => ({
         username: '',
-        currentTask: '',
+        name: '',
         email: ''
 })
     ,persist: true,
