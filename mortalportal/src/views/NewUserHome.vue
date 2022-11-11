@@ -236,6 +236,7 @@
   </q-page>
   </q-page-container>
   </q-layout>
+  </div>
 
 
 </template>
