@@ -460,7 +460,7 @@ export default {
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            if (this.interactedTasks.saved == null) {
+            if (this.interactedTasks == null) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.saved)
@@ -473,7 +473,7 @@ export default {
         searchForActiveTask() {
             var allTask = Object.values(this.posts)
             console.log(this.interactedTasks)
-            if (this.interactedTasks.active == null) {
+            if (this.interactedTasks == null) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.active)
