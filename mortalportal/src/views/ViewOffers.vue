@@ -133,7 +133,8 @@ export default {
             set(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.currRow.Angel), {
                 status: 'accepted',
                 angel: this.currRow.Angel,
-                offer: this.currRow.Offer
+                offer: this.currRow.Offer,
+                date: ''
             });
             update(dbRef(db,'TaskData/' + this.id), {
                 price: this.currRow.Offer
@@ -146,8 +147,12 @@ export default {
                     });
                 }
             }
-            update(dbRef(db, this.currRow.Angel + '/tasksInteracted/active/' + this.id), {
-                status: 'accepted'
+            update(dbRef(db, 'Login/' + this.currRow.Angel + '/tasksInteracted/active/' + this.id), {
+                status: 'accepted',
+            })
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
+            update(dbRef(db, 'Login/' + this.currRow.Angel + "/tasksInteracted/active/" + this.id), {
+                dateAccepted: date
             })
             setTimeout(() => {
                 this.$router.push({name: 'Home', params:{targetP:'mortal'}})

@@ -89,9 +89,24 @@
         <!-- need to add the account and task components in here -->
         
       </q-page-container>
+      <q-page class="q-pa-md bg-grey-2 ">
+        <q-card class="bg-white q-ml-sm shadow-11">
+          <q-card-section>
+            <div class="text-h6 text-grey-8 text-weight-bold">
+              Summarised Earnings
+              <q-select outlined v-model="selected_product"
+                        class="bg-white float-right q-mb-sm " style="width:300px;"
+                        :options="product_options" label="Select Product"/>
+            </div>
+          </q-card-section>
+          <q-card-section class="q-pa-none map_height">
+            <IEcharts :option="getBarChartOptions" :resizable="true"/>
+          </q-card-section>
+        </q-card>
+      </q-page>
     </q-layout>
+    
   </div>
-
 
 </template>
   
@@ -100,6 +115,10 @@ import NavBar from '@/components/NavBar.vue';
 import MyAccount from '@/components/MyAccount.vue';
 import MyTask from '@/components/MyTask.vue';
 import { ref } from 'vue';
+import IEcharts from 'vue3-echarts-v3/src/full.js';
+import axios from 'axios';
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore();
 
 export default {
   name: 'ProfileView',
@@ -109,11 +128,20 @@ export default {
   components: {
     NavBar,
     MyAccount,
-    MyTask
+    MyTask,
+    IEcharts,
   },
   data(){
     return{
-      tab: 'MyAccount'
+      tab: 'MyAccount',
+      selected_product: 'Past Month',
+      data: [
+          // {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+          // {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+          // {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+          // {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1},
+      ],
+      product_options: ['Past Month', 'Past 3 Months', 'Past 6 Months', 'Past Year', ],
     }
   },
   setup() {
@@ -131,12 +159,89 @@ export default {
     gotoMyTasks() {
       this.$router.push('/home')
     },
-  }
+
+    getOffer() {
+      var offer = 0;
+      var earningsByMonth = {};
+      var allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', "August", 'September', 'October', 'November', 'December'];
+      axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '/tasksInteracted/active.json')
+      .then(response => {
+        console.log(response.data)
+        this.tasks = response.data
+        for (var task in this.tasks) {
+          console.log(this.tasks[task].offer)
+          offer = 0;
+          var date = this.tasks[task].dateCompleted.split("/");
+          var month = date[1];
+          for (var i in Range(1, 13)){
+            if (month == i && this.tasks[task].status == 'completed'){
+              if (allMonths[i] in earningsByMonth){
+                earningsByMonth[allMonths[i]] += Number(this.tasks[task].offer);
+              }
+              else{
+                earningsByMonth[allMonths[i]] = Number(this.tasks[task].offer);
+              }
+            }
+          }
+        }
+        console.log(offer);
+        this.data = [{product: 'Past Month', '2015': offer},
+        {product: 'Past 3 Months', '2015': offer},
+        {product: 'Past 6 Months', '2015': offer},
+        {product: 'Past Year', '2015': offer}];
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      console.log(offer);
+      return offer;
+    }
+  },
+  computed: {
+  getBarChartOptions() {
+        let self = this;
+
+        let filtered_data = this.data.filter(function (item) {
+            return item['product'] == self.selected_product;
+        });
+        return {
+            grid: {
+                bottom: '25%'
+            },
+            xAxis: {
+                type: 'category',
+                axisLabel: {},
+                nameLocation: "middle",
+                nameGap: 78,
+            },
+            tooltip: {},
+            dataset: {
+                dimensions: ['product', '2015'],
+                source: filtered_data
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    show: false
+                }
+            }, series: [
+                {type: 'bar'},
+            ]
+        }
+    },
+  },
+  created() {
+    this.getOffer();
+  },
 }
 
 </script>
 
 <style lang="sass" scoped>
+.echarts 
+  width: 400px
+  height: 400px
+
 .menu-list .q-item
   border-radius: 0 32px 32px 0
 </style>

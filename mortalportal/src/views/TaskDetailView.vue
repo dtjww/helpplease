@@ -511,24 +511,32 @@ export default {
             this.Offer = true
         },
         makeAnOffer() {
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
             set(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 status: 'offer',
                 taskid: this.id,
-                offer: this.offer_price
+                offer: this.offer_price,
+                dateOffer: date
             })
             set(dbRef(db, 'TaskData/' + this.id + "/offer/" + storeName.username), {
                 status: 'offer',
                 taskid: this.id,
                 offer: this.offer_price,
-                angel: storeName.username
+                angel: storeName.username,
+                dateOffer: date
             })
             setTimeout(() => {
                 this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
             }, 1500);
         },
         updateCompleted() {
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
+            update(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
+                datePending: date
+            })
             update(dbRef(db, 'Login/' + storeName.username + '/tasksInteracted/active/' + this.id), {
-                status: 'pending'
+                status: 'pending',
+                
             })
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + storeName.username), {
                 status: 'pending',
@@ -562,6 +570,10 @@ export default {
         },
 
         updateConfirmCompleted() {
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
+            update(dbRef(db, 'Login/' + this.angel + "/tasksInteracted/active/" + this.id), {
+                dateCompleted: date
+            })
             update(dbRef(db, 'Login/' + this.angel + '/tasksInteracted/active/' + this.id), {
                 status: 'completed'
             })
