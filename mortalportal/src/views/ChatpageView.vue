@@ -64,7 +64,6 @@
             <!-- first chat -->
             <q-item clickable v-ripple
             :active="tab === 'chat1'"
-            @click="tab = 'chat1'"
             >
             <!-- ^^ this has to be looped -->
             <!-- VV this has to be looped too -->
@@ -75,6 +74,7 @@
                       </q-avatar>
                     </q-item-section>
                     <q-item-section>
+                      <!-- not always postUsername -->
                       <q-item-label>{{postUsername}}</q-item-label>
                       <q-item-label caption>{{postTitle}}</q-item-label>
                     </q-item-section>
@@ -131,7 +131,7 @@
                         </q-item-section>
                         <q-item-section side>
                           <template v-if="postUsername == myUsername">
-                            <q-item-label><q-btn flat icon="money" color="red" label="Take Offer"/>Take Offer</q-item-label>
+                            <q-item-label><q-btn flat icon="money" color="red" label="Take Offer"/></q-item-label>
                           </template>
                           <template v-else>
                             <q-item-label><q-btn flat icon="money" color="red" label="Make Offer"/></q-item-label>

@@ -417,7 +417,7 @@ export default {
                 set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
                 var temp2 = {}
                 temp2[this.chatId] = this.currUser
-                set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp)
+                set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp2)
                     
                 })
             // 
