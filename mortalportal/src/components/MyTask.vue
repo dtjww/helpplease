@@ -5,9 +5,8 @@
             <td class="actionbtns">
                 <q-btn flat rounded v-model="Selection" @click='activeBtn' label ='Active'/>
             </td>
-            <!-- Separation between Active and Completed -->
             <td width:10px>
-                |
+                |  <!-- Separation between Active and Completed -->
             </td>
             <td class="actionbtns">
                 <q-btn flat rounded v-model="Selection" @click="completedBtn" label="Completed" />
@@ -16,11 +15,10 @@
 
     </table>
                 
-    <!-- need to include parameters for completed vs active tasks -->
     <div class="myBox myContainer">
         <div v-if="Selection == 'Active'">
-            <figure v-for="post in MortalTasks" v-bind:key="post.id">
-                <div v-if="post.accepted == null">
+            <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
+            <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
                     <q-card class="my-card grid-item" style="background: #efcebe">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
@@ -29,19 +27,28 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
+                            
+                            <div v-if="completedCheck(post) == 'pending'">
+                                Status: Pending
+                            </div>
+                            <div v-else-if="post.accepted != null">
+                                Status: In Progress
+                            </div>
+                            <div v-else-if="activeCheck(post)">
+                                Status: Offered
+                            </div>
+
                             <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
                     </q-card>
-                </div>
             </figure>
         </div>
 
         <div v-else>
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
-                <!-- need to include parameters for completed vs active tasks -->
-                <div v-if="post.accepted != null">
+                    <!-- returns all of user's mortal tasks, completed and otherwise -->
                     <q-card class="my-card grid-item" style="background: #699dd1">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
@@ -50,16 +57,14 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
+
                             <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
                     </q-card>
-                </div>
             </figure>
-
         </div>
-
     </div>
 
 
@@ -80,8 +85,7 @@ export default {
             Selection: 'Active',
             currUser: storeName.username,
             posts: [],
-            status: 'active',
-
+            interactedTasks: [],
         }
     },
 
@@ -89,7 +93,7 @@ export default {
         getPost() {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData.json')
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.posts = response.data
                 })
                 .catch(error => {
@@ -99,7 +103,7 @@ export default {
         getOwnTask() {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '/tasksInteracted.json')
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.interactedTasks = response.data
                 })
                 .catch(error => {
@@ -112,37 +116,116 @@ export default {
         completedBtn() {
             this.Selection = 'Completed'
         },
+        iTask(id, username) {
+            console.log(username)
+            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
+        },
         activeCheck(currPost) {
+            console.log(currPost)
             var values = Object.values(currPost)
+
             var result = values.filter(post => post.angel == this.currUser)
             console.log(result)
 
             return result
         },
-        iTask(id, username) {
-            console.log(username)
-            this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
+        completedCheck(currPost) {
+
+            if (currPost.accepted == null) {
+                return null
+            }
+            else {
+                var values = Object.values(currPost.accepted)
+                var result = values.filter(post => post.status == 'pending')
+                if (result.length > 0) {
+                    return 'pending'
+                }
+                else {
+                    return null
+                }
+            }
+
         },
-        
+                    
     },
     computed: {
+        // Retrieve all tasks posted by current user (as a mortal)
         MortalTasks() {
             var values = Object.values(this.posts)
-            var result = values.filter(post => post.username == this.currUser)
-            console.log(result)
+            var result = values.filter(post => post.username == this.currUser )
+            // var result = values.filter(post => post.username == 'caoyixin' )
+            // console.log(result)
             return result
-        }
+        },
+
+        activeAngelTasks() {
+            var allTask = Object.values(this.posts)
+            if (this.interactedTasks.active == null) {
+                return []
+            } else {
+                var values = Object.values(this.interactedTasks.active)
+                console.log(allTask)
+                console.log(values)
+                var result = allTask.filter(post =>
+                    (values.filter(task =>
+                        task.taskid == post.id && (task.status == 'accepted' || task.status == 'offer' || task.status == 'pending'))).length > 0)
+                console.log(result)
+                return result
+            }
+        },
+
+        activeMortalTasks() {
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.username == this.currUser )
+            if(this.post.offer == null){
+                return []
+            } else {
+                values = Object.values(this.post.offer)
+                result = values.filter(task => task.username == this.currUser )
+                return result
+            }
+        },
+        
+
+        // allCompletedTasks(){
+        //     var allTask = Object.values(this.posts)
+        //     if (this.interactedTasks.active == null) {
+        //         return []
+        //     } else {
+        //         var values = Object.values(this.interactedTasks.active)
+        //         // console.log(allTask)
+        //         // console.log(values)
+        //         var result = allTask.filter(post =>
+        //             values.filter(task =>
+        //                 task.taskid == post.id && task.status == 'completed' )) 
+        //                 // && post.offer == this.currUser
+        //         console.log(result)
+        //         return result
+        //     }
+
+        // },
+
+        // Retrieve all tasks that are active
+        // TaskStatus() {
+        //     var values = Object.values(this.post)
+        //     var result = values.filter(post => post.accepted == null)
+        //     // console.log(result)
+        //     return result
+        // },
+
+        // ActiveTaskIDs() {
+        //     var values = Object.values(this.posts)
+        //     var result = values.filter(post => post.username.status != null)
+        //     console.log(result)
+        //     return result
+        // },
+
     },
 
     created() {
         this.getPost();
         this.getOwnTask();
-        if (this.$route.params.targetP == 'angel') {
-            this.targetP = 'angel'
-        }
-        else {
-            this.targetP = 'mortal'
-        }
+        
     },
 
 }

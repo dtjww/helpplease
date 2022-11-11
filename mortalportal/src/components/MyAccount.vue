@@ -17,54 +17,63 @@
 
         <div class="q-pa-md">
             <div class="q-gutter-y-md column" style="max-width: 300px">
-                <q-field filled :model-value="email" prefix="Username: ">
+
+                <q-field borderless prefix="Username: "> 
                     <template v-slot:before>
                         <q-icon name="face 4" />
                     </template>
 
                     <template v-slot:control>
-                        <div class="self-center full-width no-outline text-center">{{ loginData.username_SU }}</div>
+                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.username" />
                     </template>
                 </q-field>
 
-                <q-field filled :model-value="name" prefix="First Name:">
+                <q-field borderless prefix="Full Name: "> 
                     <template v-slot:before>
                         <q-icon name="camera_front" />
                     </template>
 
                     <template v-slot:control>
-                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }} </div>
-                        <!-- {{loginData.fName}} -->
-                    </template>
-                </q-field>
-
-                <q-field filled :model-value="name" prefix="Last Name:">
-                    <template v-slot:before>
-                        <q-icon name="camera_front" />
-                    </template>
-
-                    <template v-slot:control>
-                        <div class="self-center full-width no-outline text-center" tabindex="0">{{ loginData.name_SU }} </div>
-                        <!-- {{loginData.lName}} -->
+                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.name" />
                     </template>
 
                 </q-field>
-
-                <q-field standout :model-value="email" prefix="Email:" suffix="@gmail.com">
-                    <!-- the suffix should change according to the email address given -->
+                    
+                <q-field borderless prefix="Email: "> 
                     <template v-slot:before>
                         <q-icon name="mail" />
                     </template>
 
                     <template v-slot:control>
-                        <div class="self-center full-width text-right" tabindex="0">{{ loginData.email_SU }}</div>
+                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.email" />
                     </template>
                 </q-field>
+
+                <q-field borderless prefix="Password: ">
+                    <template v-slot:before>
+                        <q-icon name="lock" />
+                    </template>
+                    <q-input v-model="this.loginData.password" filled :type="isPwd ? 'password' : 'text'" >
+                        <template v-slot:append>
+                        <q-icon
+                            :name="isPwd ? 'visibility_off' : 'visibility'"
+                            class="cursor-pointer"
+                            @click="isPwd = !isPwd"
+                        />
+                        </template>
+                        
+                    </q-input>
+                </q-field>
+                
+                
             </div>
         </div>
 
+        <!-- Save button needs to be connected to firebase and Cancel needs to refresh the page -->
         <div class="row justify-end">
-            <q-btn type="submit" :loading="submitting" label="Save" class="q-mt-md" color="teal">
+            <q-btn type="submit" :loading="submitting" label="Save" class="q-mt-md" color="teal" > 
+                <!-- @click=saveChanges -->
+
                 <template v-slot:loading>
                     <q-spinner-facebook />
                 </template>
@@ -76,7 +85,6 @@
     </form>
     <!--  -->
 
-    <!-- Change password -->
     <!-- Location -->
 
 
@@ -86,6 +94,11 @@
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore();
+// import { db  } from '../firebase.js';
+// import { ref as dbRef, update } from "firebase/database";
+
 export default {
     name: 'MyAccount',
 
@@ -108,24 +121,28 @@ export default {
 
         return {
             submitting,
-            simulateSubmit
+            simulateSubmit,
+            password: ref(''),
+            isPwd: ref(true),
         }
     },
 
 
     data() {
 
-
         return {
-            loginData: {}
+            loginData: {},
+            submit: ref(false),
+
         }
 
     },
 
 
     methods: {
-        getPost() {
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/adminadmin.json')
+
+        getUserData() {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '.json')
                 .then(response => {
                     console.log(response.data)
                     this.loginData = response.data
@@ -134,11 +151,15 @@ export default {
                     console.log(error)
                 })
         },
+        // saveChanges() {
+        //     update(dbRef(db, 'Login/' + this.id), this.posts)
+        //     this.submit = true;
+        // },
         
     },
 
     created() {
-        this.getPost();
+        this.getUserData();
     },
 
 }
