@@ -23,6 +23,44 @@
         class="bg-light-blue-1 adjust"
       >
           <q-list padding style="height: calc(100% - 150px); margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
+            
+            <template v-for="(value,key) in this.myChats" :key="key">
+              <!-- <p> {{getTitle(value)}}</p> -->
+              <template v-if="key == this.chatId">
+                <q-item clickable v-ripple
+                :active="tab === 'chat1'"
+                @click="paramTask(value, key)" >
+                      <q-item-section side>
+                        <q-avatar rounded size="48px">
+                          <img src="https://cdn.quasar.dev/img/avatar.png" />
+                        </q-avatar>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>{{value}}</q-item-label>
+                        <q-item-label caption>{{key}}</q-item-label>
+                      </q-item-section>
+              </q-item>
+              </template>
+              <template v-else>
+                <q-item clickable v-ripple @click="paramTask(value, key)">
+                  <q-item-section side>
+                    <q-avatar rounded size="48px">
+                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>{{value}}</q-item-label>
+                    <q-item-label caption>{{key}}</q-item-label>
+                  </q-item-section>
+          </q-item>
+              </template>
+                  
+                          
+            </template>
+            <!-- <template v-for="(value,key) in this.tempList" :key="key">
+              <p>{{value}}</p>
+              <p>{{key}}</p>
+            </template> -->
             <!-- first chat -->
             <q-item clickable v-ripple
             :active="tab === 'chat1'"
@@ -37,14 +75,14 @@
                       </q-avatar>
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label>Chat username here</q-item-label>
-                      <q-item-label caption>Task Title here</q-item-label>
+                      <q-item-label>{{postUsername}}</q-item-label>
+                      <q-item-label caption>{{postTitle}}</q-item-label>
                     </q-item-section>
 
             </q-item>
 
             <!-- second chat -->
-            <q-item clickable v-ripple
+            <!-- <q-item clickable v-ripple
             :active="tab === 'chat2'"
             @click="tab = 'chat2'"
             >
@@ -57,7 +95,7 @@
                   <q-item-label>Chat username here</q-item-label>
                   <q-item-label caption>Task Title here</q-item-label>
                 </q-item-section>
-            </q-item>
+            </q-item> -->
 
           </q-list>
 
@@ -75,12 +113,13 @@
 
       <q-page-container>
         <!-- <q-page padding> -->
-          <q-scroll-area style="height: 520px;">
+  
+          <q-scroll-area style="height: 520px;" >
                   <q-tab-panels v-model="tab" style="height: 520px;">
                     
                     
                     <q-tab-panel name="chat1">
-                      <div class="text-h6">chat1</div>
+                      <div class="text-h6 bg-pink-1">{{postUsername}}</div>
 
                       <q-item class="bg-pink-1" style="margin:0%; border:solid red 2px; border-radius:7px; text-align:left">
                         <q-item-section side class="displayhide">
@@ -88,18 +127,25 @@
                         </q-item-section>
                         <q-item-section>
                           <q-item-label>{{postDesc}}</q-item-label>
-                          <q-item-label caption>{{postUsername}}</q-item-label>
+                          <!-- <q-item-label caption>{{postUsername}}</q-item-label> -->
                         </q-item-section>
                         <q-item-section side>
-                          <q-item-label>Task button here</q-item-label>
+                          <template v-if="postUsername == myUsername">
+                            <q-item-label><q-btn flat icon="money" color="red" label="Take Offer"/>Take Offer</q-item-label>
+                          </template>
+                          <template v-else>
+                            <q-item-label><q-btn flat icon="money" color="red" label="Make Offer"/></q-item-label>
+                          </template>
+                          
                         </q-item-section>
                       </q-item>
 
                       <div class="q-ma-sm bg-grey-1" style="padding:5px; border-radius:3%">
                         <!-- for scroll area -->
-                        <q-scroll-area id="thisScroll" ref="chatArea" @scroll="scrollinfo" style="height: 320px; max-width: auto; text-align:left">
+                        <q-scroll-area id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: 320px; max-width: auto; text-align:left">
                           <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
+                              <q-scroll-observer @scroll="onScroll()" />
                         </q-scroll-area>
                     </div>
               
@@ -114,23 +160,22 @@
                     </q-tab-panel>
             
                     <q-tab-panel name="chat2">
-                      <div class="text-h6">chat2</div>
-                      <p v-for="n in 13" :key="n">
-                        , quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-                      </p>
+                      <!-- <div class="text-h6">chat2</div> -->
+                      <q-card> <h2> Oi please choose chat leh wtf</h2></q-card>
                     </q-tab-panel>
             
-                    <q-tab-panel name="chat3">
-                      <div class="text-h6">chat3</div>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </q-tab-panel>
+
                   </q-tab-panels>
           </q-scroll-area>
 
         <!-- </q-page> -->
       </q-page-container>
     </q-layout>
-   
+<!-- 
+    <template v-for="chatIndx in this.myChats" :key="chatIndx">
+      <p> {{chatIndx}}</p>
+    </template>
+    -->
     </div>
 </template>
 
@@ -142,6 +187,13 @@ import { db } from '../firebase.js';
 import { push, ref as dbRef} from "firebase/database";
 import { onValue } from "firebase/database";
 import ChatMsg from '@/components/ChatMsg.vue';
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
+
+const scrollAreaComponent = ref();
+
+// const chatId = this.randomload()
+// console.log(chatId)
 
 export default {
   name: 'ChatpageView',
@@ -151,17 +203,24 @@ export default {
 },
   data () {
         return {
-            tab: 'chat1',
+            tab: 'chat1', //should be the id passed in for which chat it is 
 
             username: '',
             messages: [],
             text: '',
+
+            id: '',
+            chatId: '',
 
             loginData: {},
             myEmail: "",
             myUsername: "",
             myPassword: "",
             myTasks: "",
+            myChats: [],
+            chatIndx: 0,
+
+            currUser: storeName.username,
 
             posts: [],
             postId: '',
@@ -176,19 +235,36 @@ export default {
             
             myMsg: "",
 
-            textList: [],
+            textList: {},
             count: 0,
-            newchat: []
+            newchat: [],
+
+            tempPost: {},
+            tempTitle: '',
+            tempList: [],
         }
     },
   setup () {
     return {
-      drawer: ref(false)
+      drawer: ref(false),
+      scrollAreaComponent: ref(),
+      position: ref(),
     }
   },
   methods: {
+    scrollBtm(){
+      console.log(scrollAreaComponent.value)
+      this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
+    },
+    onScroll(){
+      // console.log(this.$refs.scrollAreaComponent)
+    },
+    currentSession(){
+      console.log("currentSession")
+      console.log(storeName.username);
+    },
       getMyUserAxios() {
-          axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/@georgelee.json')
+          axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/'+ this.currUser +'.json')
               .then(response => {
                   console.log("called getMyUser")
                   console.log(response.data)
@@ -197,6 +273,7 @@ export default {
                   this.myEmail = response.data.email
                   this.myPassword = response.data.password
                   this.myTasks = response.data.tasksInteracted
+                  this.myChats = response.data.chats
                   console.log(response.data.tasksInteracted)
               })
               .catch(error => {
@@ -204,8 +281,8 @@ export default {
               })
       },
       getPostAxios() {
-            // this.id = this.$route.params.id
-            this.id = "-NF4gATFY3s-fUocXHLp"
+            this.id = this.$route.params.id
+            // this.id = "-NF4gATFY3s-fUocXHLp"
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
                 .then(response => {
                     this.posts = response.data
@@ -221,21 +298,14 @@ export default {
                     this.postPrice = this.posts.price,
                     this.postTitle = this.posts.name
                     console.log(this.postChat)
-                    for (let eachValue in this.postChat) {
-                        console.log(eachValue)
-                        console.log(this.postChat[eachValue])
-                        if(this.postChat[eachValue] == "@georgelee") {
-                            console.log("found my username")
-                            console.log(eachValue + " this is the chat to retrieve")
-                        }
-                    }
                 })
                 .catch(error => {
                     console.log(error)
                 })
               },
         getChat() {
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Message/chat1.json')
+          if (this.$route.params.chatid != null) {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Message/'+ this.$route.params.chatid + '.json')
                 .then(response => {
                     this.textList = response.data
                     console.log(this.textList)
@@ -244,6 +314,7 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+              }
         },
         toload(){
             this.getMyUserAxios()
@@ -253,8 +324,14 @@ export default {
 
         submitMSG(val) {
         // Parsing the data into firebase Realtime Database
+        if (this.$route.params.chatid != null) {
         let key;
-        push(dbRef(db, 'Message/chat1'), val)
+        key = new Date()
+        let key_string = key.toString().replace(/[:/^a-zA-Z ]/g, "")
+        key_string = key_string.slice(0,-7)
+        console.log(key_string)
+        // set(dbRef(db, 'Message/' + this.$route.params.chatid + '/' + key_string ), val)
+        push(dbRef(db, 'Message/' + this.$route.params.chatid), val)
             .then((data) => {
                 // to get the key of the file                
                 key = data.key;
@@ -265,6 +342,7 @@ export default {
                 console.log(error)
             })
             this.submit = true;
+          }
         },
         
         sendMessage() {
@@ -275,8 +353,10 @@ export default {
                 console.log(this.myMsg);
                 const message = {
                     username: this.myUsername,
-                    text: this.myMsg
+                    text: this.myMsg,
+                    date: new Date().toLocaleString()
                 };
+                console.log(new Date().toLocaleString());
                 // To-Do: Push message to firebase
                 this.submitMSG(message);
                 this.myMsg = "";
@@ -290,10 +370,12 @@ export default {
                 // this.textList[String(this.count)] = message;
                 // console.log(this.textList);
                 this.chatRefresh();
+                this.scrollBtm();
             }
         },
         chatRefresh() {
-            const chatRef = dbRef(db, "Message/chat1");
+          if (this.$route.params.chatid != null) {
+            const chatRef = dbRef(db, "Message/" + this.$route.params.chatid);
             onValue(chatRef, (snapshot) => {
                 const data = snapshot.val();
                 // const data2 = snapshot.data;
@@ -306,16 +388,72 @@ export default {
                 });
             // this.newchat = updateChat
             console.log("called chatRefresh");
+          }
         },
-      }, 
+        // getTitle(variable){
+        //   axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + variable + '.json')
+        //         .then(response => {
+        //             this.tempPost = response.data
+        //             this.tempTitle += this.tempPost.name
+        //         })
+        //     return this.tempTitle
+        // },
+        // tablist(){
+        //   for (var index in this.myChats){
+        //     var placeholder = {}
+        //     placeholder['index'] = index
+        //     placeholder['task'] = this.myChats[index]
+        //     console.log(placeholder)
+        //     placeholder["title"] = this.getTitle(this.myChats[index])
+        //     this.tempList += placeholder
+        //   }
+        //   console.log("tablist called")
+        //   console.log(this.tempList)
+        // },
+        paramTask(id, chatid){
+          this.$router.push({ name: 'Chat', params: { id: id, chatid: chatid} })
+          console.log(window.location.href)
+          window.location.href = "http://localhost:8080/Chat/" + id + '/' + chatid
+          // window.location.href = this.$route.fullPath
+        },
+        doTab(){
+          console.log("called doTab")
+          console.log(this.chatId)
+          if (this.chatId == ""){
+            this.tab = "chat2"
+          }
+          
+        }
+      },
+      computed:{
+      // randomload(){
+      //   for (let eachVal in this.myChats){
+      //           console.log(eachVal)
+      //           console.log(this.myChats[eachVal])
+      //           // if(this.myChats[eachVal] == this.id){
+      //           //     console.log("found my chat")
+      //           //     console.log(eachVal + " this is the chat to retrieve")
+      //           //     return eachVal
+      //           // }
+      //       }
+      //     return 'none'
+      // }
+      },
     mounted() {
-
+      this.toload();
+      // console.log(this.$route)
+      console.log(this.$route.params.id)
+      this.id = this.$route.params.id;
+      this.chatId = this.$route.params.chatid;
+      console.log(this.id);
+      console.log(this.$route.params.chatid)
+      this.currentSession();
+      this.getChat();
+      this.doTab();
+      // this.tablist();
     },
     created() {
-      this.toload();
-      this.id = this.$route.params.id;
-      console.log(this.id);
-      this.getChat();
+
     },
 
 }

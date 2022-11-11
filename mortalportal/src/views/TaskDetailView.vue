@@ -246,7 +246,7 @@
 import { ref } from 'vue';
 import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
-import { ref as dbRef, update, set, remove } from "firebase/database";
+import { ref as dbRef, update, set, push, remove } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
@@ -296,6 +296,10 @@ export default {
             angel: '',
             currUser: storeName.username,
             poster: this.$route.params.poster,
+
+            myUserDetails: [],
+            existingChat: false,
+            chatId: '',
 
         }
     },
@@ -366,9 +370,77 @@ export default {
                 })
 
         },
-
+        checkUserChats(){
+            console.log("checkUserChats")
+            // console.log(storeName.username)
+            // var existingChat = false
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + this.currUser + '.json')
+            .then(response => {
+                    this.myUserDetails = response.data
+                    console.log("checkUserChats")
+                    console.log(this.myUserDetails.chats)
+                    this.checkExistingChat()
+                    })
+        },
+        checkExistingChat(){
+            console.log("checkUserChats")
+            console.log(this.myUserDetails.chats)
+            for (var chatid in this.myUserDetails.chats){
+                if (this.myUserDetails.chats[chatid] == this.id){
+                    // this.existingChat = true
+                    console.log("existingChat")
+                    console.log(this.existingChat)
+                    console.log(chatid)
+                    this.chatId = chatid
+                    return chatid
+                    // return existingChat
+                }
+            }
+            return null
+        },
+        noExistingChat(){
+            console.log("noExistingChat")
+            //create chat id in Message
+            let newChatId;
+            let temp = "";
+            push(dbRef(db, 'Message'), temp)
+                .then((data) => {
+                    // to get the key of the file                
+                    newChatId = data.key;
+                    console.log(newChatId)
+                    this.chatId = newChatId
+                })
+                .then(() => {
+                var temp = {}
+                temp[this.chatId] = this.id
+                set(dbRef(db, 'Login/' + this.currUser + '/chats'), temp)
+                set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
+                var temp2 = {}
+                temp2[this.chatId] = this.currUser
+                set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp)
+                    
+                })
+            // 
+            //push to my user chats ( chat id : task id)
+            //push to poster user chats ( chat id : task id)
+            //push to post data (chat id : my username)
+            //
+        },
         gotoChat() {
-            this.$router.push({ name: 'Chat', params: { id: this.id } })
+            if(this.chatId != null && this.chatId != ''){
+                this.checkExistingChat();
+                this.paramTask(this.id, this.chatId);
+            }
+            else{
+                this.noExistingChat()
+                // this.checkExistingChat();
+                setTimeout(() => {
+                    this.paramTask(this.id, this.chatId)
+                }, 3200);
+            }
+        },
+        paramTask(id, chatid){
+          this.$router.push({ name: 'Chat', params: { id: id, chatid: chatid} })
         },
         like() {
             if (this.heart == false) {
@@ -503,12 +575,14 @@ export default {
         },
 
     },
+    
     created() {
         this.poster = this.$route.params.poster
         this.currUser = storeName.username
         this.getPost();
         this.checkTask();
         this.id = this.$route.params.id
+        this.checkUserChats();
 
 
 
