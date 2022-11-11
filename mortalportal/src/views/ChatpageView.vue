@@ -24,63 +24,68 @@
       >
           <q-list padding style="height: calc(100% - 150px); margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
             
-            <template v-for="(value,key) in this.myChats" :key="key">
-              <!-- <p> {{getTitle(value)}}</p> -->
-              <template v-if="key == this.chatId">
+            <template v-for="(value,key) in this.tempList" :key="key">
+              <!-- <p> {{value}}</p> -->
+              <!-- value is task id & key is chat id -->
+              <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
-                @click="paramTask(value, key)" >
+                @click="paramTask(value.task, value.index)" >
                       <q-item-section side>
                         <q-avatar rounded size="48px">
                           <img src="https://cdn.quasar.dev/img/avatar.png" />
                         </q-avatar>
                       </q-item-section>
                       <q-item-section>
-                        <q-item-label>{{value}}</q-item-label>
-                        <q-item-label caption>{{key}}</q-item-label>
+                        <template v-if="value.userA == this.currUser">
+                        <q-item-label>{{value.userB}}</q-item-label>
+                      </template>
+                      <template v-else>
+                        <q-item-label>{{value.userA}}</q-item-label>
+                      </template>
+                        <q-item-label caption>{{value.title}}</q-item-label>
                       </q-item-section>
               </q-item>
               </template>
               <template v-else>
-                <q-item clickable v-ripple @click="paramTask(value, key)">
+                <q-item clickable v-ripple @click="paramTask(value.task, value.index)">
                   <q-item-section side>
                     <q-avatar rounded size="48px">
                       <img src="https://cdn.quasar.dev/img/avatar.png" />
                     </q-avatar>
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label>{{value}}</q-item-label>
-                    <q-item-label caption>{{key}}</q-item-label>
+                    <template v-if="value.userA == this.currUser">
+                      <q-item-label>{{value.userB}}</q-item-label>
+                    </template>
+                    <template v-else>
+                      <q-item-label>{{value.userA}}</q-item-label>
+                    </template>
+                        <q-item-label caption>{{value.title}}</q-item-label>
                   </q-item-section>
           </q-item>
               </template>
-                  
-                          
             </template>
             <!-- <template v-for="(value,key) in this.tempList" :key="key">
               <p>{{value}}</p>
               <p>{{key}}</p>
             </template> -->
             <!-- first chat -->
-            <q-item clickable v-ripple
+            <!-- <q-item clickable v-ripple
             :active="tab === 'chat1'"
             >
-            <!-- ^^ this has to be looped -->
-            <!-- VV this has to be looped too -->
                     <q-item-section side>
                       <q-avatar rounded size="48px">
-                        <!-- Other persons  -->
                         <img src="https://cdn.quasar.dev/img/avatar.png" />
                       </q-avatar>
                     </q-item-section>
                     <q-item-section>
-                      <!-- not always postUsername -->
                       <q-item-label>{{postUsername}}</q-item-label>
                       <q-item-label caption>{{postTitle}}</q-item-label>
                     </q-item-section>
 
-            </q-item>
-
+            </q-item> -->
+            
             <!-- second chat -->
             <!-- <q-item clickable v-ripple
             :active="tab === 'chat2'"
@@ -171,6 +176,7 @@
         <!-- </q-page> -->
       </q-page-container>
     </q-layout>
+    <q-btn class="fixed-bottom-right" round color="red" icon="add" @click="tablist()" />
 <!-- 
     <template v-for="chatIndx in this.myChats" :key="chatIndx">
       <p> {{chatIndx}}</p>
@@ -236,12 +242,13 @@ export default {
             myMsg: "",
 
             textList: {},
-            count: 0,
+            // count: 0,
             newchat: [],
 
             tempPost: {},
             tempTitle: '',
             tempList: [],
+            finalLoop: [],
         }
     },
   setup () {
@@ -390,26 +397,6 @@ export default {
             console.log("called chatRefresh");
           }
         },
-        // getTitle(variable){
-        //   axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + variable + '.json')
-        //         .then(response => {
-        //             this.tempPost = response.data
-        //             this.tempTitle += this.tempPost.name
-        //         })
-        //     return this.tempTitle
-        // },
-        // tablist(){
-        //   for (var index in this.myChats){
-        //     var placeholder = {}
-        //     placeholder['index'] = index
-        //     placeholder['task'] = this.myChats[index]
-        //     console.log(placeholder)
-        //     placeholder["title"] = this.getTitle(this.myChats[index])
-        //     this.tempList += placeholder
-        //   }
-        //   console.log("tablist called")
-        //   console.log(this.tempList)
-        // },
         paramTask(id, chatid){
           this.$router.push({ name: 'Chat', params: { id: id, chatid: chatid} })
           console.log(window.location.href)
@@ -422,8 +409,47 @@ export default {
           if (this.chatId == ""){
             this.tab = "chat2"
           }
-          
-        }
+        },
+        getTitle(variable , variable2, count){
+          axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + variable + '.json')
+                .then(response => {
+                    let tempPost = response.data
+                    console.log(tempPost)
+                    // let tempTitle = tempPost.name
+                    this.tempList[count]['title'] = tempPost.name
+                    this.tempList[count]['userA'] = tempPost.username
+                    this.tempList[count]['userB'] = tempPost.chats[variable2]
+                    // let tempUserA = tempPost.username
+                    // let tempUserB = tempPost.chats[variable2]
+                    // console.log(tempTitle + " " + tempUserA + " " + tempUserB)
+                    // return tempTitle, tempUserA, tempUserB
+                })
+                
+        },
+        tablist(){
+          var count = 0;
+          for (var index in this.myChats){
+            this.tempList[count] = {}
+            this.tempList[count]['index'] = index
+            this.tempList[count]['task'] = this.myChats[index]
+            console.log(this.myChats[index])
+            // var placeholder = {}
+            // placeholder['userA'] = 
+            // placeholder['index'] = index
+            // placeholder['task'] = this.myChats[index]
+            // console.log(this.getTitle(this.myChats[index], index ))
+            // placeholder['title'] = this.getTitle(this.myChats[index])
+            this.getTitle(this.myChats[index], index, count )
+            // console.log(placeholder)
+            // this.tempList.push(placeholder)
+            count = count + 1
+          }
+          console.log("tablist called")
+          console.log(this.tempList)
+          // for (let each in this.tempList){
+          //   console.log(this.tempList[each])
+          // }
+        },
       },
       computed:{
       // randomload(){
@@ -450,7 +476,10 @@ export default {
       this.currentSession();
       this.getChat();
       this.doTab();
-      // this.tablist();
+      
+      setTimeout(() => {
+        this.tablist();
+      }, 1000);
     },
     created() {
 
