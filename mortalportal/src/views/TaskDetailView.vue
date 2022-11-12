@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col">
                         <h6>Price</h6>
-                        <q-field readonly prefix="$" style="width:15vw;">
+                        <q-field readonly prefix="$" >
                             <template v-slot:control>
                                 <div>{{ posts.price }}</div>
                             </template>
@@ -63,9 +63,9 @@
                     <div class="col-2">
                         <div v-if="posts.accepted == null">
                             <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true"
-                                flat @click=like></q-btn>
+                                flat @click=like style="margin:0"></q-btn>
                             <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false"
-                                flat @click=like></q-btn>
+                                flat @click=like style="margin:0"></q-btn>
                         </div>
                     </div>
                     <div class="col-5" align="right">
@@ -288,7 +288,7 @@ export default {
                     $q.loading.hide()
                     this.submit = true
                     timer = void 0
-                }, 1500)
+                }, 2500)
 
             }
         }
@@ -565,7 +565,7 @@ export default {
                 angel: storeName.username,
                 dateOffer: date
             })
-            this.showloading()
+            this.showLoading()
             this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
         },
         updateCompleted() {

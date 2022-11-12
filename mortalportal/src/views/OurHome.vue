@@ -12,7 +12,6 @@
             </q-toolbar-title>
             <q-space />
             <div class="lt-xs mainMenu">
-                <q-btn stretch flat label="Saved" @click="SavedBtn()" />
 
                 <q-btn stretch flat label="My Account" @click="handleClick()"/>
 
@@ -239,7 +238,7 @@
 
         <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
             <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item bg-dark text-white">
+                <q-card class="my-card grid-item bg-white text-black">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -285,9 +284,9 @@
 
                             <div v-if="post.accepted == null">
                                 <q-btn class="q-mr-lg" v-if="post.username == currUser" color='positive' text-color="white"
-                                    @click="iTask(post.id, post.username)"><b>Edit</b></q-btn>
-                                <q-btn v-if="post.offer != null" color="positive" text-color="white"
-                                    @click="viewOffer(post.id)">View Offers</q-btn>
+                                    @click="iTask(post.id, post.username)" size="sm" ><b>Edit</b></q-btn>
+                                <q-btn v-if="offerCheck(post) != null" color="positive" text-color="white"
+                                    @click="viewOffer(post.id)" size="sm" ><b>View Offers</b></q-btn>
 
                             </div>
 
@@ -314,36 +313,10 @@ import axios from 'axios';
 import { ref } from 'vue'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-import { useQuasar } from 'quasar'
-import { onBeforeUnmount } from 'vue'
 
 
 export default {
-    setup() {
-        const $q = useQuasar()
-        let timer
 
-        onBeforeUnmount(() => {
-            if (timer !== void 0) {
-                clearTimeout(timer)
-                $q.loading.hide()
-            }
-        })
-        return {
-            tab: ref('mails'),
-            showLoading() {
-                $q.loading.show()
-
-                // hiding in 2s
-                timer = setTimeout(() => {
-                    $q.loading.hide()
-                    this.submit = true
-                    timer = void 0
-                }, 3000)
-
-            }
-        }
-    },
 
     name: 'PageIndex',
     data() {
@@ -410,7 +383,8 @@ export default {
                     icon: "exit_to_app"
                 }
             ],
-            style: ''
+            style: '',
+            Active: false,
         }
     }
 
@@ -441,7 +415,6 @@ export default {
             this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
         },
         FindBtn() {
-            this.showLoading()
             this.activeBtn = 'Find'
             console.log(this.activeBtn)
         },
@@ -454,15 +427,15 @@ export default {
             console.log(this.activeBtn)
         },
         angelBtn() {
-            this.showLoading()
             this.Selection = 'Angel'
             this.targetP = 'angel'
-            document.getElementById('navbar').style.backgroundColor = '#3760b8'
+            this.style = 'background-color: #3760b8'
         },
         mortalBtn() {
             this.Selection = 'Mortal'
             this.targetP = 'mortal'
-            document.getElementById('navbar').style.backgroundColor = '#efa2a4'
+            this.style = 'background-color: #efa2a4'
+
         },
         viewOffer(id) {
 
@@ -524,6 +497,21 @@ export default {
                 }
                 else {
                     return 'completed'
+                }
+            }
+        },
+        offerCheck(post) {
+            if (post.offer == null) {
+                return null
+            }
+            else {
+                var values = Object.values(post.offer)
+                var result = values.filter(offer => offer.status == 'offer')
+                if (result.length == 0) {
+                    return null
+                }
+                else {
+                    return 'offer'
                 }
             }
         },
@@ -598,7 +586,11 @@ export default {
             var result = values.filter(post => post.username == this.currUser && this.completeCheck(post) != 'completed')
             return result
         },
-
+        searchOffer(){
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.username == this.currUser && this.offerCheck(post) == 'offer')
+            return result
+        }
 
 
     },
@@ -611,10 +603,12 @@ export default {
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
             this.style = 'background-color: #3760b8'
+
         }
         else {
             this.targetP = 'mortal'
             this.style='background-color: #efa2a4'
+
             
         }
         if (storeName.username == '') {
@@ -624,6 +618,10 @@ export default {
             this.currUser = storeName.username
         }
 
+        if(this.$route.params.saved != ''){
+
+            this.activeBtn = 'Saved'
+        }
     },
 
 }
@@ -762,7 +760,7 @@ figure>q-card {
 }
 
 
-@media (max-width: 1080px) {
+@media (max-width: 1190px) {
     .containerAngel {
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;

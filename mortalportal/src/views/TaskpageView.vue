@@ -123,7 +123,7 @@ import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-import { useQuasar, QSpinnerFacebook } from 'quasar'
+import { useQuasar, QSpinnerOval } from 'quasar'
 import { onBeforeUnmount } from 'vue'
 
 export default {
@@ -140,13 +140,14 @@ export default {
         return {
             showLoading() {
                 $q.loading.show({
-                    spinner: QSpinnerFacebook,
+                    spinner: QSpinnerOval,
                     message: 'Posting Task...'
                 })
 
                 // hiding in 2s
                 timer = setTimeout(() => {
                     $q.loading.show({
+                        spinner: QSpinnerOval,
                         message: 'Task Posted ! Redirecting to Home Page...'
                     })
                     timer = setTimeout(() => {

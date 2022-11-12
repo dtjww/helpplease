@@ -28,7 +28,7 @@
                     <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
                     <q-btn flat label="No" color="negative" v-close-popup />
                 </div>
-                
+
             </q-card-section>
 
             <!-- <q-card-actions align="right">
@@ -60,8 +60,8 @@
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 import { ref } from 'vue'
-import {update, ref as dbRef, remove, set } from "firebase/database";
-import {db} from '../firebase.js'
+import { update, ref as dbRef, remove, set } from "firebase/database";
+import { db } from '../firebase.js'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
 
@@ -95,7 +95,7 @@ export default {
             accepted: false,
             reject: false,
             currRow: [],
-            currPost:'',
+            currPost: '',
             currUser: storeName.username,
 
         }
@@ -113,41 +113,42 @@ export default {
                     this.offers = response.data
                     for (var offer in this.offers) {
                         var row = this.offers[offer]
-                        this.rows.push({ Angel: row.angel, Offer: row.offer })
+                        if (row.status == 'offer') {
+                            this.rows.push({ Angel: row.angel, Offer: row.offer })
+                        }
                     }
                 })
                 .catch(error => {
                     console.log(error)
                 })
         },
-        getcurrPost(){
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id +'.json')
+        getcurrPost() {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
                 .then(response => {
                     this.currPost = response.data
-                    })
+                })
                 .catch(error => {
                     console.log(error)
                 })
         },
-        acceptOffer(row){
+        acceptOffer(row) {
             this.currRow = row
             console.log(this.currRow)
-            this.getcurrPost()
-            this.confirm = true 
+            this.confirm = true
         },
-        updateDB(){
+        updateDB() {
             set(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.currRow.Angel), {
                 status: 'accepted',
                 angel: this.currRow.Angel,
                 offer: this.currRow.Offer,
                 date: ''
             });
-            update(dbRef(db,'TaskData/' + this.id), {
+            update(dbRef(db, 'TaskData/' + this.id), {
                 price: this.currRow.Offer
             })
             remove(dbRef(db, 'TaskData/' + this.id + '/offer'))
-            for(var offer in this.offers){
-                if(this.offers[offer].angel != this.currRow.Angel){
+            for (var offer in this.offers) {
+                if (this.offers[offer].angel != this.currRow.Angel) {
                     update(dbRef(db, 'Login/' + this.offers[offer].angel + '/tasksInteracted/active/' + this.id), {
                         status: 'rejected'
                     });
@@ -161,14 +162,21 @@ export default {
                 dateAccepted: date
             })
             setTimeout(() => {
-                this.$router.push({name: 'Home', params:{targetP:'mortal'}})
+                this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
             }, 1500)
 
 
-            
+
         },
-        updateReject(){
-            
+        rejectOffer(row) {
+            this.currRow = row
+            this.reject = true
+        },
+        updateReject() {
+            update(dbRef(db, 'TaskData/' + this.id + "/offer/" + this.currRow.Angel), {
+                status: 'rejected'
+            })
+            window.reload()
         }
     },
     created() {
@@ -189,7 +197,7 @@ export default {
 
 }
 
-.qTableClass{
+.qTableClass {
     width: 700px;
     margin-left: auto;
     margin-right: auto;
