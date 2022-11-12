@@ -103,7 +103,7 @@
                             valid = true;
                           } 
                         }
-                        if(!valid){
+                        if(!valid){ 
                             alert("Invalid Credentials")
                         }
                     }
