@@ -19,7 +19,7 @@
         <div v-if="Selection == 'Active'">
             <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
             <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
-                    <q-card class="my-card grid-item" style="background: #efcebe">
+                    <q-card class="my-card grid-item bg-white text-black">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Mortal: {{ post.username }} <br>
@@ -38,7 +38,7 @@
                                 Status: Offered
                             </div>
 
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md" color='positive' text-color="white" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
@@ -49,7 +49,7 @@
         <div v-else>
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
                     <!-- returns all of user's mortal tasks, completed and otherwise -->
-                    <q-card class="my-card grid-item" style="background: #699dd1">
+                    <q-card class="my-card grid-item bg-white text-black">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Mortal: {{ post.username }} <br>
@@ -58,7 +58,7 @@
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
 
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
@@ -276,7 +276,6 @@ figure>q-card {
 .grid-item {
     max-width: 300px;
     display: block;
-    border: 1px solid black;
 }
 
 .myContainer {

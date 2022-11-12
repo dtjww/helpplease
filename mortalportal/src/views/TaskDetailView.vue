@@ -11,8 +11,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <h6>Description</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Description</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.desc }}</div>
                             </template>
@@ -21,8 +21,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Category</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Category</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.category }}</div>
                             </template>
@@ -31,8 +31,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Location</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Location</h6>
+                        <q-field disbale dense>
                             <template v-slot:control>
                                 <div>{{ posts.loc }}</div>
                             </template>
@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col">
                         <h6>Price</h6>
-                        <q-field readonly prefix="$" style="width:15vw;">
+                        <q-field readonly prefix="$" >
                             <template v-slot:control>
                                 <div>{{ posts.price }}</div>
                             </template>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Date & Time</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Date & Time</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.date }} {{ posts.time }}</div>
                             </template>
@@ -63,9 +63,9 @@
                     <div class="col-2">
                         <div v-if="posts.accepted == null">
                             <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true"
-                                flat @click=like></q-btn>
+                                flat @click=like style="margin:0"></q-btn>
                             <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false"
-                                flat @click=like></q-btn>
+                                flat @click=like style="margin:0"></q-btn>
                         </div>
                     </div>
                     <div class="col-5" align="right">
@@ -97,68 +97,80 @@
         <q-card class="card">
             <h3>{{ posts.name }}</h3><br>
             <img :src="posts.file">
-            <table>
-                <tr>
-                    <td>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
                         <h6>Task</h6>
                         <q-input dense type="text" class="inputBoxes" v-model="this.posts.name"
                             :rules="[val => val && val.length > 0 || 'Please Enter a Task Name']"></q-input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Description</h6>
                         <q-input dense type="text" class="inputBoxes" v-model="this.posts.desc"
                             :rules="[val => val && val.length > 0 || 'Please Enter a Description']"></q-input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=col>
                         <h6>Category</h6>
                         <q-select dense v-model="this.posts.category" :options="task" lazy-rules
                             :rules="[val => val && val.length > 0 || 'Please Choose a Category']" class="inputBoxes" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class=row>
+                    <div class="col">
                         <h6>Location</h6>
                         <q-select dense v-model="this.posts.loc" :options="this.locations" lazy-rules
                             :rules="[val => val && val.length > 0 || 'Please Choose a Location']" class="inputBoxes" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Price</h6>
-                        <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price" style="width:15vw;">
+                        <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price"
+                            style="width:15vw;">
                         </q-input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Date & Time</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <q-input dense type='date' v-model="this.posts.date" class="date">
                         </q-input>
+                    </div>
+                    <div class="col-6" >
                         <q-input dense type='time' v-model="this.posts.time" class="date">
                         </q-input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <q-btn color="dark" label="upload image" @click="uploadImage" class="date" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <q-btn color="dark" label="upload new image" @click="uploadImage" class="date" />
                         <input type="file" style="display: none" ref="fileInput" accept='image/*'
                             @change=onFilePicked /><br>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="margin-bottom:5vh;margin-top:2vh">
                         <img v-if='imageUrl != ""' :src="imageUrl" width="400" class="date">
-                    </td>
-                </tr>
-            </table>
-            <q-btn color='info' class="btn" @click=saveChanges>Save Changes</q-btn>
-            <q-btn color="black" class="btn" @click=delPost>Delete Task</q-btn>
-            <q-btn class="btn" @click=gotoHomeInstant>Cancel</q-btn>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <q-btn color='info' class="btn" @click=saveChanges>Save Changes</q-btn>
+                </div>
+                <div class="col-6">
+                    <q-btn color="black" class="btn" @click=delPost>Delete Task</q-btn>
+                </div>
+            </div>
         </q-card>
     </div>
 
@@ -195,9 +207,9 @@
     </q-dialog>
 
     <q-dialog v-model="Offer">
-        <q-card>
+        <q-card class="q-pa-lg">
             <q-card-section>
-                <div class="text-h6">Make an Offer</div>
+                <div class="text-h6"><strong>Make an offer</strong></div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
@@ -253,8 +265,34 @@ import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
+import { useQuasar } from 'quasar'
+import { onBeforeUnmount } from 'vue'
 
 export default {
+    setup() {
+        const $q = useQuasar()
+        let timer
+
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
+        return {
+            showLoading() {
+                $q.loading.show()
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.submit = true
+                    timer = void 0
+                }, 2500)
+
+            }
+        }
+    },
     data() {
 
         return {
@@ -338,7 +376,7 @@ export default {
                             }
                         }
                         this.format = 'View'
-                            return "View"
+                        return "View"
                     }
                     else {
                         if (this.poster == this.currUser) {
@@ -372,23 +410,23 @@ export default {
                 })
 
         },
-        checkUserChats(){
+        checkUserChats() {
             console.log("checkUserChats")
             // console.log(storeName.username)
             // var existingChat = false
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + this.currUser + '.json')
-            .then(response => {
+                .then(response => {
                     this.myUserDetails = response.data
                     console.log("checkUserChats")
                     console.log(this.myUserDetails.chats)
                     this.checkExistingChat()
-                    })
+                })
         },
-        checkExistingChat(){
+        checkExistingChat() {
             console.log("checkUserChats")
             console.log(this.myUserDetails.chats)
-            for (var chatid in this.myUserDetails.chats){
-                if (this.myUserDetails.chats[chatid] == this.id){
+            for (var chatid in this.myUserDetails.chats) {
+                if (this.myUserDetails.chats[chatid] == this.id) {
                     // this.existingChat = true
                     console.log("existingChat")
                     console.log(this.existingChat)
@@ -400,7 +438,7 @@ export default {
             }
             return null
         },
-        noExistingChat(){
+        noExistingChat() {
             console.log("noExistingChat")
             //create chat id in Message
             let newChatId;
@@ -413,14 +451,14 @@ export default {
                     this.chatId = newChatId
                 })
                 .then(() => {
-                var temp = {}
-                temp[this.chatId] = this.id
-                set(dbRef(db, 'Login/' + this.currUser + '/chats'), temp)
-                set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
-                var temp2 = {}
-                temp2[this.chatId] = this.currUser
-                set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp2)
-                    
+                    var temp = {}
+                    temp[this.chatId] = this.id
+                    set(dbRef(db, 'Login/' + this.currUser + '/chats'), temp)
+                    set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
+                    var temp2 = {}
+                    temp2[this.chatId] = this.currUser
+                    set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp2)
+
                 })
             // 
             //push to my user chats ( chat id : task id)
@@ -429,11 +467,11 @@ export default {
             //
         },
         gotoChat() {
-            if(this.chatId != null && this.chatId != ''){
+            if (this.chatId != null && this.chatId != '') {
                 this.checkExistingChat();
                 this.paramTask(this.id, this.chatId);
             }
-            else{
+            else {
                 this.noExistingChat()
                 // this.checkExistingChat();
                 setTimeout(() => {
@@ -441,8 +479,8 @@ export default {
                 }, 3200);
             }
         },
-        paramTask(id, chatid){
-          this.$router.push({ name: 'Chat', params: { id: id, chatid: chatid} })
+        paramTask(id, chatid) {
+            this.$router.push({ name: 'Chat', params: { id: id, chatid: chatid } })
         },
         like() {
             if (this.heart == false) {
@@ -476,7 +514,7 @@ export default {
         },
         saveChanges() {
             update(dbRef(db, 'TaskData/' + this.id), this.posts)
-            this.submit = true;
+            this.showloading()
         },
         uploadImage() {
             this.$refs.fileInput.click()
@@ -513,7 +551,7 @@ export default {
             this.Offer = true
         },
         makeAnOffer() {
-            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             set(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 status: 'offer',
                 taskid: this.id,
@@ -527,25 +565,23 @@ export default {
                 angel: storeName.username,
                 dateOffer: date
             })
-            setTimeout(() => {
-                this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
-            }, 1500);
+            this.showLoading()
+            this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
         },
         updateCompleted() {
-            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             update(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 datePending: date
             })
             update(dbRef(db, 'Login/' + storeName.username + '/tasksInteracted/active/' + this.id), {
                 status: 'pending',
-                
+
             })
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + storeName.username), {
                 status: 'pending',
             });
-            setTimeout(() => {
-                this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'pending' } })
-            }, 1500);
+            this.showloading()
+            this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'pending' } })
 
         },
         completedCheck(currPost) {
@@ -572,7 +608,7 @@ export default {
         },
 
         updateConfirmCompleted() {
-            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear() 
+            const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             update(dbRef(db, 'Login/' + this.angel + "/tasksInteracted/active/" + this.id), {
                 dateCompleted: date
             })
@@ -583,13 +619,12 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.angel), {
                 status: 'completed',
             });
-            setTimeout(() => {
-                this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
-            }, 1500);
+            this.showloading()
+            this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
         },
 
     },
-    
+
     created() {
         this.poster = this.$route.params.poster
         this.currUser = storeName.username
@@ -706,5 +741,9 @@ h3 {
         float: left;
         margin-right: 0px;
     }
+}
+
+q-input{
+    padding:0
 }
 </style>

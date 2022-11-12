@@ -59,7 +59,9 @@
             <q-page class="page-height page-width row justify-center items-center ">
                 <q-card square bordered class="q-pa-lg shadow-1">
                     <q-card-section>
-                        <div class="text-h6">Mortal Portal</div>
+                        <router-link to="/" style="width:170px;padding:0%">
+                            <img src="@/assets/MainLogo2.png" style="width:75%;padding:0%;margin:0" />
+                        </router-link>
                     </q-card-section>
                     <q-tabs v-model="tab" class="text-teal">
                         <q-tab label="Login" name="Login" />
@@ -67,19 +69,10 @@
                     </q-tabs>
 
                     <q-separator />
+
                     <q-tab-panels v-model="tab" animated>
                         <q-tab-panel name="Login">
-                            <q-card-section class="text-center q-pa-none">
-                                <div class="googleLogin">
 
-                                    <h6 v-if="lUser != null" class="text-black">{{ lUser }}</h6>
-                                    <div id="firebaseui-auth-container"></div>
-                                    <div id="loader">Loading...</div>
-                                    <div v-if="isSignedIn">
-                                        <button @click="getGoogleAuth().handleSignOut">Sign Out</button>
-                                    </div>
-                                </div>
-                            </q-card-section>
                             <q-card-section>
                                 <q-form class="q-gutter-md">
                                     <q-input square filled clearable v-model="email_login" type="text" label="Email" />
@@ -88,9 +81,24 @@
                                 </q-form>
                             </q-card-section>
                             <q-card-actions class="q-px-md">
-                                <q-btn unelevated color="primary" size="lg" class="full-width " label="Login"
+                                <q-btn unelevated color="primary" size="md"
+                                    style="width:17vw;margin-left:auto;margin-right:auto;" label="Login"
                                     @click=getUser />
                             </q-card-actions>
+
+                            <br>
+                            OR
+
+                            <q-card-section class="text-center q-pa-none">
+                                <div class="googleLogin">
+                                    <h6 v-if="lUser != null" class="text-black">{{ lUser }}</h6>
+                                    <div id="firebaseui-auth-container"></div>
+                                    <div id="loader">Loading...</div>
+                                    <div v-if="isSignedIn">
+                                        <button @click="getGoogleAuth().handleSignOut">Sign Out</button>
+                                    </div>
+                                </div>
+                            </q-card-section>
                         </q-tab-panel>
 
 

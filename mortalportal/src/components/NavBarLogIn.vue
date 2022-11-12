@@ -13,7 +13,7 @@
                 <q-btn stretch flat label="Log In" style="color: black;font-size: large" />
             </router-link>
 
-            <q-separator dark vertical />
+            <q-separator black vertical />
 
             <router-link to="/signup" style="color: black; text-decoration: none">
                 <q-btn stretch flat label="Sign Up" style="color: black;font-size: large;" />

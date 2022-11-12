@@ -1,8 +1,8 @@
 <!-- Ban -->
 <template>
   <NavBar />
-  <div class="q-pa-md">
-    <q-layout view="lHh Lpr lff" container style="height: 600px" class="shadow-2 rounded-borders">
+  <div class="q-pa-none">
+    <q-layout view="lHh Lpr lff" container style="height: 90.5vh" class="shadow-2 rounded-borders">
 
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
         <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
@@ -10,7 +10,7 @@
 
           <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" >
             <q-item-section avatar>
-              <q-icon name="face 6" />
+              <q-icon name="person" />
             </q-item-section>
 
             <q-item-section>
@@ -29,10 +29,21 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'"
+            >
+            <q-item-section avatar>
+              <q-icon name="account_balance_wallet" />
+            </q-item-section>
+
+            <q-item-section>
+              My Earnings
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
             >
             <q-item-section avatar>
-              <q-icon name="chat" />
+              <q-icon name="question_answer" />
             </q-item-section>
 
             <q-item-section>
@@ -53,11 +64,10 @@
         </q-list>
         <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
           <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            <q-avatar size="66px" class="q-mb-sm" color="accent"> {{getUsername().slice(0,1)}}
             </q-avatar>
             <div class="text-weight-bold"> {{loginData.name}} </div>
-            <div>@ {{loginData.username}}</div>
+            <div>@{{loginData.username}}</div>
           </div>
         </q-img>
 
@@ -70,10 +80,6 @@
             <q-tab-panel name="MyAccount">
               <div class="q-pa-md">
                 <q-header elevated>
-                    <q-toolbar>
-                      <q-icon name="face 6" size="4rem" />
-                      <q-toolbar-title> My Account </q-toolbar-title>                    
-                    </q-toolbar>                    
                 </q-header>                
                 <MyAccount />
                 
@@ -92,29 +98,29 @@
                     </q-card-section>
                   </q-card>
               
-                <!-- should include an edit profile button to change their details -->
-
-
               </div>        
             </q-tab-panel>
 
             <q-tab-panel name="MyTasks">
               <div class="q-pa-md">
-                <q-header elevated>
-                    <q-toolbar>
-                      <q-icon name="assignment" size="4rem"/>
-                      <q-toolbar-title> My Tasks </q-toolbar-title>                    
-                    </q-toolbar>                    
+                <q-header elevated>              
                 </q-header>                
                 <MyTask />
               </div>              
             </q-tab-panel>
 
+            <q-tab-panel name="MyEarnings">
+              <div class="q-pa-md">
+                <q-header elevated>              
+                </q-header>     
+                <!-- add earnings component here -->
+                <!--  <MyEarnings /> -->
+              </div>              
+            </q-tab-panel>
+
 
           </q-tab-panels>
-        </q-card-section>
-        <!-- need to add the account and task components in here -->
-        
+        </q-card-section>        
       </q-page-container>
     </q-layout>
     
@@ -198,6 +204,11 @@ export default {
                     console.log(error)
                 })
     },
+    getUsername(){
+      this.myUsername = storeName.username
+      return this.myUsername
+    },
+    
 
     getOffer() {
       var offer = 0;

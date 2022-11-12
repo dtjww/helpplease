@@ -2,33 +2,39 @@
     <NavBar />
     <div>
         <div class="q-pa-md qTableClass">
-            <q-table dense  title="Offers" :rows="rows" :columns="columns" row-key="index" v-model:selected="selected">
+            <q-table dense title="Offers" :rows="rows" :columns="columns" row-key="index" v-model:selected="selected">
 
                 <template v-slot:body-cell-actions="props">
                     <q-td :props="props">
-                        <q-btn icon="check" @click="acceptOffer(props.row)"></q-btn>
-                        <q-btn icon="clear" @click="rejectOffer(props.row)"></q-btn>
+                        <q-btn flat icon="check" color="dark" @click="acceptOffer(props.row)"></q-btn>
+                        <q-btn flat icon="clear" color="dark" @click="rejectOffer(props.row)"></q-btn>
                     </q-td>
                 </template>
             </q-table>
-            Selected: {{ selected }}
         </div>
     </div>
     <q-dialog v-model="confirm">
-        <q-card>
-            <q-card-section>
-                <div class="text-h6">Confirm Offer</div>
+        <q-card class="q-px-lg q-py-md">
+
+            <q-card-section class="q-pt-lg">
+                <h7 class="q-mb-sm"><strong>Task:</strong> {{ currPost.name }}</h7><br>
+                <h7 class="q-mb-sm"><strong>Angel:</strong> {{ currRow.Angel }}</h7><br>
+                <h7><strong>Offered Price:</strong> ${{ currRow.Offer }}</h7>
             </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <div>{{ currPost.name }}</div>
-                <div>{{ currRow.Angel }}</div>
-                <div>{{ currRow.Offer }}</div>
+            <q-card-section>
+                <div class="text-h7"><strong>Would you like to accept this Angel?</strong></div>
+                <div align="center" class="q-mt-sm">
+                    <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
+                    <q-btn flat label="No" color="negative" v-close-popup />
+                </div>
+
             </q-card-section>
-            <q-card-actions align="right">
-                <q-btn label="Yes" color="green" v-close-popup @click="updateDB()" />
-                <q-btn label="No" color="red" v-close-popup />
-            </q-card-actions>
+
+            <!-- <q-card-actions align="right">
+                <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
+                <q-btn flat label="No" color="negative" v-close-popup />
+            </q-card-actions> -->
         </q-card>
     </q-dialog>
 
@@ -54,8 +60,8 @@
 import axios from 'axios'
 import NavBar from '@/components/NavBar.vue'
 import { ref } from 'vue'
-import {update, ref as dbRef, remove, set } from "firebase/database";
-import {db} from '../firebase.js'
+import { update, ref as dbRef, remove, set } from "firebase/database";
+import { db } from '../firebase.js'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
 
@@ -89,7 +95,7 @@ export default {
             accepted: false,
             reject: false,
             currRow: [],
-            currPost:'',
+            currPost: '',
             currUser: storeName.username,
 
         }
@@ -107,41 +113,42 @@ export default {
                     this.offers = response.data
                     for (var offer in this.offers) {
                         var row = this.offers[offer]
-                        this.rows.push({ Angel: row.angel, Offer: row.offer })
+                        if (row.status == 'offer') {
+                            this.rows.push({ Angel: row.angel, Offer: row.offer })
+                        }
                     }
                 })
                 .catch(error => {
                     console.log(error)
                 })
         },
-        getcurrPost(){
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id +'.json')
+        getcurrPost() {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
                 .then(response => {
                     this.currPost = response.data
-                    })
+                })
                 .catch(error => {
                     console.log(error)
                 })
         },
-        acceptOffer(row){
+        acceptOffer(row) {
             this.currRow = row
             console.log(this.currRow)
-            this.getcurrPost()
-            this.confirm = true 
+            this.confirm = true
         },
-        updateDB(){
+        updateDB() {
             set(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.currRow.Angel), {
                 status: 'accepted',
                 angel: this.currRow.Angel,
                 offer: this.currRow.Offer,
                 date: ''
             });
-            update(dbRef(db,'TaskData/' + this.id), {
+            update(dbRef(db, 'TaskData/' + this.id), {
                 price: this.currRow.Offer
             })
             remove(dbRef(db, 'TaskData/' + this.id + '/offer'))
-            for(var offer in this.offers){
-                if(this.offers[offer].angel != this.currRow.Angel){
+            for (var offer in this.offers) {
+                if (this.offers[offer].angel != this.currRow.Angel) {
                     update(dbRef(db, 'Login/' + this.offers[offer].angel + '/tasksInteracted/active/' + this.id), {
                         status: 'rejected'
                     });
@@ -155,14 +162,21 @@ export default {
                 dateAccepted: date
             })
             setTimeout(() => {
-                this.$router.push({name: 'Home', params:{targetP:'mortal'}})
+                this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
             }, 1500)
 
 
-            
+
         },
-        updateReject(){
-            
+        rejectOffer(row) {
+            this.currRow = row
+            this.reject = true
+        },
+        updateReject() {
+            update(dbRef(db, 'TaskData/' + this.id + "/offer/" + this.currRow.Angel), {
+                status: 'rejected'
+            })
+            window.reload()
         }
     },
     created() {
@@ -183,7 +197,7 @@ export default {
 
 }
 
-.qTableClass{
+.qTableClass {
     width: 700px;
     margin-left: auto;
     margin-right: auto;

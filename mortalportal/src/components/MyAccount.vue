@@ -73,14 +73,14 @@
         </div>
 
         <div class="row justify-end">
-            <q-btn type="submit" label="Save" class="q-mt-md" color="info" @click="saveChanges()"> 
+            <q-btn type="submit" label="Save" class="q-mt-md" color="accent" @click="saveChanges()"> 
 
                 <template v-slot:loading>
                     <q-spinner-facebook />
                 </template>
             </q-btn>
 
-            <q-btn type="submit" label="Cancel" class="q-mt-md q-ml-md" color="black" @click="refreshAccount()"/>
+            <q-btn type="submit" label="Cancel" class="q-mt-md q-ml-md" color="info" @click="refreshAccount()"/>
         </div>
 
     </form>
