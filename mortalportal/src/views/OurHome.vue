@@ -3,7 +3,7 @@
 <template>
     <!-- Navigation Bar -->
     <div class="q-pa-none">
-        <q-toolbar class="text-white q-my-none shadow-2" style="background-color:#82a3ea" id="navbar">
+        <q-toolbar class="text-white q-my-none shadow-2" style="background-color:#2a4d98" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -264,10 +264,10 @@
                         <q-expansion-item expand-separator icon='location_on' label="Location" class="location">
 
                             <q-expansion-item label="Central" class="Expand2">
-                                <q-scroll-area style="height: 200px">
+                                <q-scroll-area style="height: 200px;width:auto">
                                     <q-card class="qCard">
                                         <div v-for="station in stationCentral" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -275,40 +275,40 @@
 
 
                             <q-expansion-item label="East" class="Expand2">
-                                <q-scroll-area style="height: 200px">
+                                <q-scroll-area style="height: 200px;width:100%">
                                     <q-card class="qCard">
                                         <div v-for="station in stationEast" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
                             </q-expansion-item>
 
                             <q-expansion-item label="North" class="Expand2">
-                                <q-scroll-area style="height: 200px">
+                                <q-scroll-area style="height: 200px;width:100%">
                                     <q-card class="qCard">
                                         <div v-for="station in stationNorth" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
                             </q-expansion-item>
 
                             <q-expansion-item label="North-East" class="Expand2">
-                                <q-scroll-area style="height: 200px">
+                                <q-scroll-area style="height: 200px;width:100%">
                                     <q-card class="qCard">
                                         <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
                             </q-expansion-item>
 
                             <q-expansion-item label="West" class="Expand2">
-                                <q-scroll-area style="height: 200px">
+                                <q-scroll-area style="height: 200px;width:100%">
                                     <q-card class="qCard">
                                         <div v-for="station in stationWest" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name />
+                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name  color="dark"/>
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -321,7 +321,7 @@
                         <q-expansion-item expand-separator icon='category' label="Category" class="location">
                             <q-card class="qCard">
                                 <div v-for="task in tasks" :key="task">
-                                    <q-checkbox v-model=category :val=task :label=task />
+                                    <q-checkbox v-model=category :val=task :label=task color="dark"/>
                                 </div>
                             </q-card>
 
@@ -329,10 +329,12 @@
                     </q-list>
                 </q-card-section>
             </q-card>
+
         </div>
+
         <div class="containerAngel boxAngel" v-if="activeBtn == 'Find'">
             <figure v-for="post in searchForTask" v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item bg-dark text-white">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -349,7 +351,7 @@
         </div>
         <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
             <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item bg-dark text-white">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -367,7 +369,7 @@
         </div>
         <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
             <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item bg-dark text-white" >
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -501,6 +503,23 @@ export default {
             ],
             completeTaskDialog: false,
             focus_id: '',
+            menuItems: [
+                {
+                    label: "My Account",
+                    to: "/profile",
+                    icon: "person"
+                },
+                {
+                    label: "My Tasks",
+                    to: "/profile",
+                    icon: "assignment"
+                },
+                {
+                    label: "Logout",
+                    to: "/",
+                    icon: "exit_to_app"
+                }
+            ]
         }
     }
 
@@ -614,6 +633,22 @@ export default {
                     return 'completed'
                 }
             }
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
+        gotoSaved() {
+            this.$router.push('/home/angel')
+            // need to include a way to select the saved tasks filter
+        },
+        gotoChat() {
+            this.$router.push('/chat')
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
         }
     },
 
@@ -686,6 +721,12 @@ export default {
         else {
             this.targetP = 'mortal'
         }
+        if (storeName.username == '') {
+            this.$router.push('/login')
+        }
+        else {
+            this.currUser = storeName.username
+        }
     },
 
 }
@@ -697,13 +738,15 @@ export default {
 }
 
 .location {
-    text-align: left
+    text-align: left;
+    width:100%;
 }
 
 .qcardsec {
     /* float: left; */
     column-span: 1;
     text-align: left;
+    font-size: x-small;
 
 
 }
@@ -711,6 +754,7 @@ export default {
 .qCard {
     column-count: 1;
     text-align: left;
+    width:auto;
 }
 
 .filter {
@@ -719,7 +763,7 @@ export default {
 }
 
 .qcardsec {
-    width: 200px;
+    width: auto;
 }
 
 .dCard {
