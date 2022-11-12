@@ -358,24 +358,6 @@
                         Task: {{ post.name }}<br>
                         Date: {{ post.date }}<br>
                         Time: {{ post.time }}<br>
-                        Amount: ${{ post.price }}<br>
-
-                        <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
-                            <b>Details</b>
-                        </q-btn>
-                    </q-card-section>
-                </q-card>
-            </figure>
-        </div>
-        <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
-            <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item bg-dark text-white" >
-                    <img :src="post.file">
-                    <q-card-section class="fontAlign">
-                        Mortal: {{ post.username }} <br>
-                        Task: {{ post.name }}<br>
-                        Date: {{ post.date }}<br>
-                        Time: {{ post.time }}<br>
                         Amount: ${{ ownOffer(post) }}<br>
 
                         <div v-if="completedCheck(post) == 'pending'">

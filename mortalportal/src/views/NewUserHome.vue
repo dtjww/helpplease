@@ -56,20 +56,16 @@
                     <div class="col q-pl-xl bg-transparent" style="padding:0px;">
                       <div class="bg-transparent"
                         style="max-width: 80vw; text-align: center; margin-left:auto; margin-right: auto">
-                        <div class="text-h5 text-italic text-bold text-white bg-transparent"
-                          style="text-shadow: #000 5px 2px 5px;">
-                          <div class="text-h2 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal
-                            Portal</div>
-                          <div class="text-h6 text-italic text-primary bg-transparent">
-                            As a mortal, leverage on local residents to complete tasks you don't have time or knowledge
-                            to
+                        <div class="text-h5 text-italic text-bold text-white bg-transparent" style="text-shadow: #000 5px 2px 5px;">
+                          <div class="text-h1 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal Portal</div>
+                          <div class="text-h4 text-italic text-white bg-transparent">
+                            As a mortal, leverage on local residents to complete tasks you don't have time or knowledge to
                             carry
                             out.
                             <br>
                             Ask for more, with angels at your door!
                           </div>
-                          <div class="text-h4 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent"
-                            style="text-shadow: #000 5px 2px 5px;"> What do you
+                          <div class="text-h3 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent" style="text-shadow: #000 5px 2px 5px;"> What do you
                             need
                             help with today?
                           </div>
