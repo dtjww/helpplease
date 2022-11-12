@@ -22,7 +22,7 @@
 
                 <div class="gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
+                    <q-btn-dropdown flat dense dropdown-icon="menu">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
                             <q-item clickable v-ripple>
@@ -300,9 +300,9 @@
     </q-dialog>
 
     <q-dialog v-model="Offer">
-        <q-card>
+        <q-card class="q-pa-lg">
             <q-card-section>
-                <div class="text-h6">Make an Offer</div>
+                <div class="text-h6"><strong>Make an offer</strong></div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
