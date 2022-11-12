@@ -77,8 +77,8 @@
 
                             <q-card-section>
                                 <q-form class="q-gutter-md">
-                                    <q-input square filled clearable v-model="email_login" type="text" label="Email" />
-                                    <q-input square filled clearable v-model="password_login" type="password"
+                                    <q-input square filled clearable v-model="email_login" type="text" label="Email" @keyup.enter="getUser"/>
+                                    <q-input square filled clearable v-model="password_login" type="password" @keyup.enter="getUser"
                                         label="Password" />
                                 </q-form>
                             </q-card-section>
@@ -235,9 +235,6 @@ export default {
                     console.log(error);
                 });
             }
-
-
-
             // google login end
             return {
                 // google login start

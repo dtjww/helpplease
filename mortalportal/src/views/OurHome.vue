@@ -120,7 +120,7 @@
                         <div class="text-h5">Filter</div>
                     </q-card-section>
                     <q-card-section class="q-pt-none">
-                        <q-list>
+                        <q-list >
                             <h6 class="location">Location</h6>
 
                             <q-expansion-item label="Central" class="Expand2">
@@ -221,7 +221,7 @@
                             Task: {{ post.name }}<br>
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
-                            Amount: ${{ ownOffer(post) }}<br>
+                            Amount: ${{ post.price }}<br>
 
                             <div v-if="completedCheck(post) == 'pending'">
                                 Status: Pending
@@ -230,7 +230,7 @@
                                 Status: In Progress
                             </div>
                             <div v-else-if="activeCheck(post)">
-                                Status: Offered
+                                Status: Saved
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
@@ -491,7 +491,7 @@ export default {
             console.log(currPost)
             var values = Object.values(currPost)
 
-            var result = values.filter(post => post.angel == this.currUser)
+            var result = values.filter(post => post.angel == this.currUser && post.status == 'saved') 
             console.log(result)
 
             return result
@@ -589,11 +589,11 @@ export default {
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            if (this.interactedTasks.saved == null) {
+            if (this.interactedTasks.saved.length == 0) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.saved)
-                var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved')).length > 0)
+                var result = allTask.filter(post => (values.filter(task => task.taskid == post.id && task.status == 'saved' && post.accepted == null)).length > 0)
                 console.log(result)
                 return result
             }
@@ -630,17 +630,13 @@ export default {
     created() {
         this.getPost();
         this.getOwnTask();
-        console.log(this.interactedTasks)
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
             this.style = 'background-color: #3760b8'
-
         }
         else {
             this.targetP = 'mortal'
             this.style = 'background-color: #efa2a4'
-
-
         }
         if (storeName.username == '') {
             this.$router.push('/login')
@@ -648,7 +644,6 @@ export default {
         else {
             this.currUser = storeName.username
         }
-
         if (this.$route.params.saved == 'saved') {
             this.activeBtn = 'Saved'
         }
@@ -662,6 +657,7 @@ export default {
     margin-left: 1.5vw;
     text-align: left;
     font-size: medium;
+    width:100%
 }
 
 .location {
@@ -682,12 +678,9 @@ export default {
     column-count: 1;
     text-align: left;
     width: auto;
+    display:block
 }
 
-.filter {
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
 
 .qcardsec {
     width: auto;
@@ -698,6 +691,7 @@ export default {
     float: left;
     margin-left: 5vw;
     border-radius: 0px;
+    display:block
 }
 
 .dActions {
@@ -825,9 +819,20 @@ figure>q-card {
     .q-card {
         max-width: 100%;
     }
+    .qcardsec {
+    /* float: left; */
+    column-span: 1;
+    text-align: left;
+    font-size: x-small;
+}
 
 }
 
+@media (max-width:700px){
+    .dCard{
+        display:none
+    }
+}
 
 @media (max-width: 600px) {
     .containerAngel {
