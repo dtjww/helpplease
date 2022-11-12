@@ -8,7 +8,7 @@
         <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
           padding>
 
-          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'">
+          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" active-class="text-blue">
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
@@ -18,7 +18,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyTasks'" @click="tab = 'MyTasks'"
+          <q-item clickable v-ripple :active="tab === 'MyTasks'" @click="tab = 'MyTasks'" active-class="text-blue"
             >
             <q-item-section avatar>
               <q-icon name="assignment" />
@@ -29,7 +29,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'"
+          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'" active-class="text-blue"
             >
             <q-item-section avatar>
               <q-icon name="account_balance_wallet" />
@@ -40,7 +40,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
+          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats 
             >
             <q-item-section avatar>
               <q-icon name="question_answer" />

@@ -233,7 +233,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <q-input dense type='date'  v-model="this.posts.date" class="date">
+                            <q-input dense type='date' v-model="this.posts.date" class="date">
                             </q-input>
                         </div>
                         <div class="col-6">
@@ -357,7 +357,7 @@ import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-import { useQuasar } from 'quasar'
+import { useQuasar, QSpinnerOval } from 'quasar'
 import { onBeforeUnmount } from 'vue'
 
 export default {
@@ -374,11 +374,47 @@ export default {
         return {
             showLoading() {
                 $q.loading.show()
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    timer = void 0
+                }, 2500)
+
+            },
+            showDeleting() {
+                $q.loading.show(
+                    {
+                        message: 'Deleting...',
+                        spinnerSize: 100,
+                        backgroundColor: 'black',
+                        spinner: QSpinnerOval
+                    }
+                )
+
 
                 // hiding in 2s
                 timer = setTimeout(() => {
                     $q.loading.hide()
-                    this.submit = true
+                    this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
+                    timer = void 0
+                }, 2500)
+
+            },
+            showUpdating() {
+                $q.loading.show(
+                    {
+                        message: 'Updating...',
+                        spinnerSize: 100,
+                        backgroundColor: 'black',
+                        spinner: QSpinnerOval
+                    }
+                )
+
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
                     timer = void 0
                 }, 2500)
 
@@ -619,7 +655,7 @@ export default {
         },
         saveChanges() {
             update(dbRef(db, 'TaskData/' + this.id), this.posts)
-            this.showloading()
+            this.showUpdating()
         },
         uploadImage() {
             this.$refs.fileInput.click()
@@ -642,11 +678,8 @@ export default {
             this.updateImage()
         },
         delPost() {
+            this.showDeleting()
             remove(dbRef(db, 'TaskData/' + this.id))
-            this.deletePost = true
-            setTimeout(() => {
-                this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
-            }, 3200);
         },
         gotoHomeInstant() {
             this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
@@ -670,10 +703,10 @@ export default {
                 angel: storeName.username,
                 dateOffer: date
             })
-            this.showLoading()
             this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
         },
         updateCompleted() {
+
             const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             update(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 datePending: date
@@ -685,7 +718,7 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + storeName.username), {
                 status: 'pending',
             });
-            this.showloading()
+            this.showLoading()
             this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'pending' } })
 
         },
@@ -724,7 +757,6 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.angel), {
                 status: 'completed',
             });
-            this.showloading()
             this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
         },
 
