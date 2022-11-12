@@ -35,6 +35,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
+                active-class="text-green"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">
@@ -75,12 +76,12 @@
           </q-list>
 
         <!-- my profile -->
-        <q-item class="absolute-top bg-blue-grey-2" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
+        <q-item class="absolute-top bg-blue-grey-2 justify-content-center" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
         <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh"> -->
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="80px" color="secondary" text-color="white">{{myUsername.slice(0,1)}}</q-avatar>
             <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
-            <h6 style="margin:0;padding:0;">{{myUsername}}</h6>
+            <h6 style="margin:0;padding:0; margin-bottom:40px;">{{myUsername}}</h6>
           </div>
         <!-- </q-img> -->
       </q-item>
@@ -129,7 +130,7 @@
                               <q-scroll-observer />
                               
                         </q-scroll-area>
-                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="accent" icon="arrow_downward" @click="scrollBtm()" />
+                        <q-btn push round class="absolute-bottom" style="margin: auto; width:20px; height:20px; margin-bottom:10px" color="accent" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
@@ -476,6 +477,11 @@ export default {
         },
       },
     mounted() {
+
+    },
+    created() {
+      
+      this.showLoading();
       this.toload();
       // console.log(this.$route)
       console.log(this.$route.params.id)
@@ -490,9 +496,6 @@ export default {
       setTimeout(() => {
         this.tablist();
       }, 1000);
-    },
-    created() {
-      this.showLoading();
     },
 
 }
@@ -518,13 +521,7 @@ html, body {
   justify-content: center;
 }
 
-@media (max-width: 600px) {
-  .container { 
-    margin: 0;
-    margin-top: 3%;
-    padding: 0;
-    height: 100%;
-  }
+@media (max-width: 690px) {
   .displayhide{
     display: none;
   }
