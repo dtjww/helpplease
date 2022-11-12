@@ -212,6 +212,9 @@ export default {
                 .then((data) => {
                     // to get the key of the file                
                     key = data.key;
+                    update(dbRef(db,'TaskData/' + key), {
+                        id: key
+                    })
                     return key
                 })
                 .then(key => {
@@ -225,8 +228,7 @@ export default {
                     getDownloadURL(stRef(storage, 'TaskData/' + key + '.' + ext))
                         .then((url) => {
                             const updates = {
-                                file: url,
-                                id: key
+                                file: url,  
                             }
                             return update(dbRef(db, 'TaskData/' + key), updates)
                         })

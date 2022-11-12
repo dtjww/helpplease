@@ -8,7 +8,7 @@
                 name="me"
                 avatar="https://cdn.quasar.dev/img/avatar1.jpg"
                 :text= Array(msg.text)
-                stamp="12:34" 
+                :stamp=reformatDate(msg.date)
                 sent
                 />
         </template>
@@ -17,7 +17,7 @@
                 :name= msg.username
                 avatar="https://cdn.quasar.dev/img/avatar1.jpg"
                 :text= Array(msg.text)
-                stamp="12:34" 
+                :stamp=reformatDate(msg.date)
                 />
         </template>
     </template>
@@ -26,12 +26,14 @@
 
 
 <script>
+// import { date } from 'quasar'
+
 
 
 export default {
   name: 'ChatMsg',
     props: {
-        textList: Array,
+        textList: Object,
         username: String,
         myUsername: String,
     },
@@ -47,6 +49,14 @@ export default {
                 return false
             }
         },
+    reformatDate(dateString){
+        var date = new Date(dateString)
+        var month = (date.getMonth() + 1).toLocaleString('en-US', {month: 'short'});
+        if ( dateString == null){
+            return " "
+        }
+        return date.getDate() + "/" + month + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
+    }
     },
 
 }

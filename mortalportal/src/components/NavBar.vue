@@ -19,7 +19,8 @@
             <q-space />
             
             <div class="lt-xs">
-            <q-btn stretch flat label="Saved" />
+            <q-btn stretch flat label="Saved" @click="gotoSaved()"/>
+
 
             <!-- <q-btn stretch flat label="Notifications" /> -->
             <q-btn-dropdown stretch flat label="Notifications"> 
@@ -86,6 +87,15 @@
                         </q-item-section>
                         <q-item-section>
                             My Tasks
+                        </q-item-section>
+                    </q-item>
+
+                    <q-item clickable style="color:black" @click="gotoChat()">
+                        <q-item-section avatar>
+                            <q-icon name="chat"/>
+                        </q-item-section>
+                        <q-item-section>
+                            My Chats
                         </q-item-section>
                     </q-item>
 
@@ -231,6 +241,13 @@ const storeName = useCounterStore()
         methods: {
             handleClick () {
                 this.$router.push('/profile')
+            },
+            gotoSaved() {
+                this.$router.push('/home/angel')
+                // need to include a way to select the saved tasks filter
+            },
+            gotoChat(){
+                this.$router.push('/chat')
             },
             exit(){
                 storeName.username = ''

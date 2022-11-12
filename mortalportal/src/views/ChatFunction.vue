@@ -41,11 +41,10 @@
         <br>
         <br>
         <br>
-        
+        <ChatMsg :textList="textList" :myUsername="myUsername"/>
+        <br>
         <h4>----------------------------------</h4>
         <br>
-
-        <ChatMsg :textList="textList" :myUsername="myUsername"/>
 
         <!-- <template v-for="msg in textList">
             <template v-if="getMyUsername(msg.username)">
@@ -66,6 +65,102 @@
                     />
             </template>
         </template> -->
+
+
+        <h4>Parsing session here</h4>
+        <div> insert here</div>
+        <br>
+        <P>{{myChats}}</P>
+        <p>{{tabInfo}}</p>
+        <p> chatid : task id</p>
+        <br>
+        <br>
+        <h4>----------------------------------</h4>
+        <br>
+        
+        <q-list padding style="height: calc(100% - 150px); margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
+            
+
+            <template v-for="index in this.tabInfo">
+                <p>{{index}}</p>
+                <q-item clickable>
+                    <q-item-section avatar>
+                        <q-avatar>
+                            <img src="https://cdn.quasar.dev/img/avatar.png"/>
+                        </q-avatar>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>{{index.name}}</q-item-label>
+                        <q-item-label caption>{{index.desc}}</q-item-label>
+                    </q-item-section>
+                </q-item>
+
+            </template>
+            <!-- first chat -->
+            <q-item clickable v-ripple
+            :active="tab === 'chat1'"
+            @click="tab = 'chat1'"
+            >
+            <!-- ^^ this has to be looped -->
+            <!-- VV this has to be looped too -->
+                    <q-item-section side>
+                      <q-avatar rounded size="48px">
+                        <!-- Other persons  -->
+                        <img src="https://cdn.quasar.dev/img/avatar.png" />
+                      </q-avatar>
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{postUsername}}</q-item-label>
+                      <q-item-label caption>{{postTitle}}</q-item-label>
+                    </q-item-section>
+
+            </q-item>
+
+            <!-- second chat -->
+            <q-item clickable v-ripple
+            :active="tab === 'chat2'"
+            @click="tab = 'chat2'"
+            >
+                <q-item-section side>
+                  <q-avatar rounded size="48px">
+                    <img src="https://cdn.quasar.dev/img/avatar.png" />
+                  </q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Chat username here</q-item-label>
+                  <q-item-label caption>Task Title here</q-item-label>
+                </q-item-section>
+            </q-item>
+
+          </q-list>
+          <div>
+          <q-tab-panels v-model="tab" style="height: 520px;">
+                    
+                    
+            <q-tab-panel name="chat1">
+                <div class="text-h6">chat1</div>
+                <p v-for="n in 13" :key="n">
+                 lectus commodi perferendis voluptate?
+                </p>
+            </q-tab-panel>
+    
+            <q-tab-panel name="chat2">
+              <div class="text-h6">chat2</div>
+              <p v-for="n in 13" :key="n">
+                , quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
+              </p>
+            </q-tab-panel>
+    
+            <q-tab-panel name="chat3">
+              <div class="text-h6">chat3</div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </q-tab-panel>
+          </q-tab-panels>
+        </div>
+
+
+
+
       </div>
 
 </template>
@@ -73,22 +168,36 @@
 <script>
 // import { ref } from 'vue'
 import axios from 'axios'
+// import { ref } from 'vue'
 import { db } from '../firebase.js';
 import { push, ref as dbRef} from "firebase/database";
 import { onValue } from "firebase/database";
 import ChatMsg from '@/components/ChatMsg.vue';
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
 
 
 
 export default {
     name: "ChatFunction",
+    setup () {
+    return {
+    //   tab: ref('chat1'),
+    //   splitterModel: ref(20)
+    }
+  },
     data() {
         return {
+            tab: 'chat1',
+
             loginData: {},
             myEmail: "",
             myUsername: "",
             myPassword: "",
             myTasks: "",
+            myChats: "",
+
+            currUser: storeName.username,
 
             posts: [],
             postId: "",
@@ -105,12 +214,16 @@ export default {
 
             textList: [],
             count: 0,
-            newchat: []
+            newchat: [],
+
+            tabThings:[],
+            tabInfo:[],
+
         };
     },
     methods: {
         getMyUserAxios() {
-            axios.get("https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/@georgelee.json")
+            axios.get("https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/"+ this.currUser +".json")
                 .then(response => {
                 console.log("called getMyUser");
                 console.log(response.data);
@@ -118,6 +231,7 @@ export default {
                 this.myUsername = response.data.username;
                 this.myEmail = response.data.email;
                 this.myPassword = response.data.password;
+                this.myChats = response.data.chats;
                 this.myTasks = response.data.tasksInteracted;
                 console.log(response.data.tasksInteracted);
             })
@@ -230,11 +344,28 @@ export default {
             // this.newchat = updateChat
             console.log("called chatRefresh");
         },
+        tabData(){
+            console.log("called tabData");
+            var chatchat = { "chat10": " -NF4gATFY3s-fUocXHLp", "chat11": "-NF4i_7WjUQJQiJm6O5w" }
+            for (var index in chatchat) {
+                let temptaskid = this.myChats[index];
+                axios.get("https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/" + temptaskid + ".json")
+                .then(response => {
+                this.tabThings = response.data;
+                console.log(this.tabThings);
+                let placeholder = {};
+                placeholder['user'] = this.tabThings.username
+                placeholder['title'] = this.tabThings.name
+                this.tabInfo.push(placeholder)}) 
+            }
+            console.log(this.tabInfo);
+        }
     },
     mounted() {
         this.toload();
         this.id = "-NF4gATFY3s-fUocXHLp";
         console.log(this.id);
+        this.tabData()
     },
     created() {
         this.getChat();
