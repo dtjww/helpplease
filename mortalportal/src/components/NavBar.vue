@@ -135,48 +135,6 @@
                         <q-item-section @click="exit()">Log Out</q-item-section>
                     </q-item>
                 </q-list>
-                <!-- <q-btn-dropdown stretch flat label="Notifications" clickable v-ripple >
-                        <q-list>
-                            <q-item-label header>Recently Received Notifications</q-item-label>
-                                <q-item clickable v-close-popup class="bg-secondary">
-                                    <q-item-section avatar>
-                                        <q-icon name="notifications" color="warning"/>
-                                    </q-item-section>
-                                    <q-item-section>
-                                        <q-item-label caption style="color:aliceblue">You have just received a message from User 329732</q-item-label>
-                                        <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item clickable v-close-popup class="bg-negative">
-                                    <q-item-section avatar>
-                                        <q-icon name="notifications" color="info"/>
-                                    </q-item-section>
-                                    <q-item-section>
-                                        <q-item-label style="color: aliceblue">Your mission was launched successfully!</q-item-label>
-                                        <q-item-label caption style="color: aliceblue">Your Mission "Shower my dog" has been launched successfully for angels to pick up!</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item clickable v-close-popup class="bg-negative">
-                                    <q-item-section avatar>
-                                        <q-icon name="notifications" color="info"/>
-                                    </q-item-section>
-                                    <q-item-section>
-                                        <q-item-label style="color: aliceblue">You received an offer of $100 from Poopoo123</q-item-label>
-                                        <q-item-label caption style="color: aliceblue">Hi! I would like to complete this task for you!</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item clickable v-close-popup class="bg-secondary">
-                                    <q-item-section avatar>
-                                        <q-icon name="notifications" color="warning"/>
-                                    </q-item-section>
-                                    <q-item-section>
-                                        <q-item-label caption style="color:aliceblue">You have just received a message from User 329732</q-item-label>
-                                        <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                            <q-separator inset spaced />
-                        </q-list>
-                </q-btn-dropdown> -->
             </q-btn-dropdown>
             </div>
 

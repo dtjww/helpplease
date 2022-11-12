@@ -2,12 +2,12 @@
     <NavBar />
     <div>
         <div class="q-pa-md qTableClass">
-            <q-table dense  title="Offers" :rows="rows" :columns="columns" row-key="index" v-model:selected="selected">
+            <q-table dense title="Offers" :rows="rows" :columns="columns" row-key="index" v-model:selected="selected">
 
                 <template v-slot:body-cell-actions="props">
                     <q-td :props="props">
-                        <q-btn icon="check" @click="acceptOffer(props.row)"></q-btn>
-                        <q-btn icon="clear" @click="rejectOffer(props.row)"></q-btn>
+                        <q-btn flat icon="check" color="dark" @click="acceptOffer(props.row)"></q-btn>
+                        <q-btn flat icon="clear" color="dark" @click="rejectOffer(props.row)"></q-btn>
                     </q-td>
                 </template>
             </q-table>
@@ -15,20 +15,27 @@
         </div>
     </div>
     <q-dialog v-model="confirm">
-        <q-card>
-            <q-card-section>
-                <div class="text-h6">Confirm Offer</div>
+        <q-card class="q-px-lg q-py-md">
+
+            <q-card-section class="q-pt-lg">
+                <h7 class="q-mb-sm"><strong>Task:</strong> {{ currPost.name }}</h7><br>
+                <h7 class="q-mb-sm"><strong>Angel:</strong> {{ currRow.Angel }}</h7><br>
+                <h7><strong>Offered Price:</strong> ${{ currRow.Offer }}</h7>
             </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <div>{{ currPost.name }}</div>
-                <div>{{ currRow.Angel }}</div>
-                <div>{{ currRow.Offer }}</div>
+            <q-card-section>
+                <div class="text-h7"><strong>Would you like to accept this Angel?</strong></div>
+                <div align="center" class="q-mt-sm">
+                    <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
+                    <q-btn flat label="No" color="negative" v-close-popup />
+                </div>
+                
             </q-card-section>
-            <q-card-actions align="right">
-                <q-btn label="Yes" color="green" v-close-popup @click="updateDB()" />
-                <q-btn label="No" color="red" v-close-popup />
-            </q-card-actions>
+
+            <!-- <q-card-actions align="right">
+                <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
+                <q-btn flat label="No" color="negative" v-close-popup />
+            </q-card-actions> -->
         </q-card>
     </q-dialog>
 
