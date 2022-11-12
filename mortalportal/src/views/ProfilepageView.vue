@@ -29,6 +29,17 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
+            >
+            <q-item-section avatar>
+              <q-icon name="chat" />
+            </q-item-section>
+
+            <q-item-section>
+              My Chats
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="logout" />
@@ -45,8 +56,8 @@
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
-            <div class="text-weight-bold">Chuck Norris</div>
-            <div>@chucknorris</div>
+            <div class="text-weight-bold"> {{loginData.name}} </div>
+            <div>@ {{loginData.username}}</div>
           </div>
         </q-img>
 
@@ -65,6 +76,22 @@
                     </q-toolbar>                    
                 </q-header>                
                 <MyAccount />
+                
+                <q-page class="q-pa-md bg-grey-2 ">
+                  <q-card class="bg-white q-ml-sm shadow-11">
+                    <q-card-section>
+                      <div class="text-h6 text-grey-8 text-weight-bold">
+                        Summarised Earnings
+                        <q-select outlined v-model="selected_product"
+                                  class="bg-white float-right q-mb-sm " style="width:300px;"
+                                  :options="product_options" label="Select Product"/>
+                      </div>
+                    </q-card-section>
+                    <q-card-section class="q-pa-none map_height">
+                      <IEcharts :option="getBarChartOptions" :resizable="true"/>
+                    </q-card-section>
+                  </q-card>
+                </q-page>
                 <!-- should include an edit profile button to change their details -->
 
 
@@ -89,21 +116,6 @@
         <!-- need to add the account and task components in here -->
         
       </q-page-container>
-      <q-page class="q-pa-md bg-grey-2 ">
-        <q-card class="bg-white q-ml-sm shadow-11">
-          <q-card-section>
-            <div class="text-h6 text-grey-8 text-weight-bold">
-              Summarised Earnings
-              <q-select outlined v-model="selected_product"
-                        class="bg-white float-right q-mb-sm " style="width:300px;"
-                        :options="product_options" label="Select Product"/>
-            </div>
-          </q-card-section>
-          <q-card-section class="q-pa-none map_height">
-            <IEcharts :option="getBarChartOptions" :resizable="true"/>
-          </q-card-section>
-        </q-card>
-      </q-page>
     </q-layout>
     
   </div>
@@ -142,6 +154,7 @@ export default {
           // {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1},
       ],
       product_options: ['Past Month', 'Past 3 Months', 'Past 6 Months', 'Past Year', ],
+      loginData: {},
     }
   },
   setup() {
@@ -153,11 +166,21 @@ export default {
   },
   methods: {
     gotoHome() {
-      this.$router.push('/home')
+      this.$router.push('/')
     },
 
-    gotoMyTasks() {
-      this.$router.push('/home')
+    gotoChats() {
+      this.$router.push('/chat')
+    },
+    getUserData() {
+            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '.json')
+                .then(response => {
+                    console.log(response.data)
+                    this.loginData = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })
     },
 
     getOffer() {
@@ -166,15 +189,17 @@ export default {
       var allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', "August", 'September', 'October', 'November', 'December'];
       axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '/tasksInteracted/active.json')
       .then(response => {
-        console.log(response.data)
         this.tasks = response.data
         for (var task in this.tasks) {
-          console.log(this.tasks[task].offer)
           offer = 0;
-          var date = this.tasks[task].dateCompleted.split("/");
-          var month = date[1];
+          console.log(this.tasks[task]);
+          if (this.tasks[task].status == 'completed'){
+            var date = this.tasks[task].dateCompleted.split("/"); 
+            console.log(date);
+          }
+          var month = Number(date[1]);
           for (var i in Range(1, 13)){
-            if (month == i && this.tasks[task].status == 'completed'){
+            if (month == i){
               if (allMonths[i] in earningsByMonth){
                 earningsByMonth[allMonths[i]] += Number(this.tasks[task].offer);
               }
@@ -184,7 +209,7 @@ export default {
             }
           }
         }
-        console.log(offer);
+        console.log(earningsByMonth);
         this.data = [{product: 'Past Month', '2015': offer},
         {product: 'Past 3 Months', '2015': offer},
         {product: 'Past 6 Months', '2015': offer},
@@ -193,7 +218,6 @@ export default {
       .catch(error => {
         console.log(error)
       })
-      console.log(offer);
       return offer;
     }
   },
@@ -232,6 +256,7 @@ export default {
   },
   created() {
     this.getOffer();
+    this.getUserData();
   },
 }
 

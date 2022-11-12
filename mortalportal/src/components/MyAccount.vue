@@ -3,8 +3,9 @@
         Edit Profile
     </div>
 
-    <!-- Profile photo change -->
     <form @submit.prevent="simulateSubmit" class="q-pa-md">
+
+        <!-- Profile photo change (should remove tbh) -->
         <div class="row q-pa-md q-gutter-sm justify-left">
             <q-img src="https://placeimg.com/500/300/nature" spinner-color="white"
                 style="height: 140px; max-width: 150px" />
@@ -69,24 +70,18 @@
             </div>
         </div>
 
-        <!-- Save button needs to be connected to firebase and Cancel needs to refresh the page -->
         <div class="row justify-end">
-            <q-btn type="submit" :loading="submitting" label="Save" class="q-mt-md" color="teal" > 
-                <!-- @click=saveChanges -->
+            <q-btn type="submit" label="Save" class="q-mt-md" color="info" @click="saveChanges()"> 
 
                 <template v-slot:loading>
                     <q-spinner-facebook />
                 </template>
             </q-btn>
 
-            <q-btn type="submit" label="Cancel" class="q-mt-md q-ml-md" color="red" />
+            <q-btn type="submit" label="Cancel" class="q-mt-md q-ml-md" color="black" @click="refreshAccount()"/>
         </div>
 
     </form>
-    <!--  -->
-
-    <!-- Location -->
-
 
 
 </template>
@@ -96,8 +91,8 @@ import { ref } from 'vue';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore();
-// import { db  } from '../firebase.js';
-// import { ref as dbRef, update } from "firebase/database";
+import { db  } from '../firebase.js';
+import { ref as dbRef, update } from "firebase/database";
 
 export default {
     name: 'MyAccount',
@@ -151,10 +146,14 @@ export default {
                     console.log(error)
                 })
         },
-        // saveChanges() {
-        //     update(dbRef(db, 'Login/' + this.id), this.posts)
-        //     this.submit = true;
-        // },
+        refreshAccount(){
+            this.$router.go(0)
+        },
+        
+        saveChanges() {
+            update(dbRef(db, 'Login/' + storeName.username), this.loginData)
+            this.submit = true;
+        },
         
     },
 

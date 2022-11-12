@@ -15,7 +15,7 @@
 
     </table>
                 
-    <div class="myBox myContainer">
+    <div class="myContainer myBox">
         <div v-if="Selection == 'Active'">
             <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
             <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
@@ -153,8 +153,6 @@ export default {
         MortalTasks() {
             var values = Object.values(this.posts)
             var result = values.filter(post => post.username == this.currUser )
-            // var result = values.filter(post => post.username == 'caoyixin' )
-            // console.log(result)
             return result
         },
 
@@ -185,6 +183,8 @@ export default {
                 return result
             }
         },
+        
+        
         
 
         // allCompletedTasks(){
@@ -246,7 +246,7 @@ export default {
 }
 
 .myBox {
-    padding: 50px 10%;
+    padding: 0px 10% 50px 5%;
 }
 
 .fontAlign {
@@ -284,4 +284,35 @@ figure>q-card {
     column-gap: 10px;
     grid-template-columns: repeat(3, 1fr);
 }
+
+@media (max-width: 1080px) {
+    .myContainer {
+        column-count: 3;
+        column-gap: 10px;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .my-card {
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width: 880px) {
+    .myContainer {
+        column-count: 2;
+        column-gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 710px) {
+    .myContainer {
+        column-count: 1;
+        column-gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
 </style>
