@@ -150,7 +150,7 @@
                     <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230); border-radius:5px">
                       <!-- <div class="text-h6">chat2</div> -->
                       <!-- <q-card class="justify-content-center text-center" style="height: 100%;">  -->
-                        <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:25%"> No Chats Selected</h3>
+                        <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:40vh"> No Chats Selected</h3>
                         <h6 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-top:0;">Please select a chat or look through some tasks!</h6>
                       <!-- </q-card> -->
                     </q-tab-panel>
