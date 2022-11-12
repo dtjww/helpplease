@@ -103,7 +103,7 @@
         </div> -->
 
         <div class="row justify-end q-mb-md">
-            <q-btn flat type="submit" label="Save" class="q-mt-md" color="accent" @click="saveChanges(); savePrompt()"> 
+            <q-btn flat type="submit" label="Save" class="q-mt-md" color="accent" @click="saveChanges()"> 
 
                 <template v-slot:loading>
                     <q-spinner-facebook />
