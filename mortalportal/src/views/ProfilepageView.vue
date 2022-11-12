@@ -70,11 +70,6 @@
             <div>@{{loginData.username}}</div>
           </div>
         </q-img>
-              <!-- <img src="https://cdn.quasar.dev/img/boy-avatar.png"> -->
-<!-- <q-avatar size="100px" color="primary" text-color="white">{{myUsername.slice(0,1)}}</q-avatar> -->
-
-
-
 
       </q-drawer>
 
@@ -107,9 +102,6 @@
                     </q-card-section>
                   </q-card>
                 </q-page>
-                <!-- should include an edit profile button to change their details -->
-
-
               </div>        
             </q-tab-panel>
 
@@ -125,11 +117,22 @@
               </div>              
             </q-tab-panel>
 
+            <q-tab-panel name="MyEarnings">
+              <div class="q-pa-md">
+                <q-header elevated>
+                    <q-toolbar>
+                      <q-icon name="money" size="4rem"/>
+                      <q-toolbar-title> My Earnings </q-toolbar-title>                    
+                    </q-toolbar>                    
+                </q-header>     
+                <!-- add earnings component here -->
+                <!--  <MyEarnings /> -->
+              </div>              
+            </q-tab-panel>
+
 
           </q-tab-panels>
-        </q-card-section>
-        <!-- need to add the account and task components in here -->
-        
+        </q-card-section>        
       </q-page-container>
     </q-layout>
     
