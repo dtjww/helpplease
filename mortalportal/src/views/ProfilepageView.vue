@@ -29,6 +29,17 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'"
+            >
+            <q-item-section avatar>
+              <q-icon name="money" />
+            </q-item-section>
+
+            <q-item-section>
+              My Earnings
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
             >
             <q-item-section avatar>
@@ -53,11 +64,10 @@
         </q-list>
         <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
           <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            <q-avatar size="66px" class="q-mb-sm" color="primary"> {{getUsername().slice(0,1)}}
             </q-avatar>
             <div class="text-weight-bold"> {{loginData.name}} </div>
-            <div>@ {{loginData.username}}</div>
+            <div>@{{loginData.username}}</div>
           </div>
         </q-img>
 
@@ -92,9 +102,6 @@
                     </q-card-section>
                   </q-card>
                 </q-page>
-                <!-- should include an edit profile button to change their details -->
-
-
               </div>        
             </q-tab-panel>
 
@@ -110,11 +117,22 @@
               </div>              
             </q-tab-panel>
 
+            <q-tab-panel name="MyEarnings">
+              <div class="q-pa-md">
+                <q-header elevated>
+                    <q-toolbar>
+                      <q-icon name="money" size="4rem"/>
+                      <q-toolbar-title> My Earnings </q-toolbar-title>                    
+                    </q-toolbar>                    
+                </q-header>     
+                <!-- add earnings component here -->
+                <!--  <MyEarnings /> -->
+              </div>              
+            </q-tab-panel>
+
 
           </q-tab-panels>
-        </q-card-section>
-        <!-- need to add the account and task components in here -->
-        
+        </q-card-section>        
       </q-page-container>
     </q-layout>
     
@@ -182,6 +200,11 @@ export default {
                     console.log(error)
                 })
     },
+    getUsername(){
+      this.myUsername = storeName.username
+      return this.myUsername
+    },
+    
 
     getOffer() {
       var offer = 0;
