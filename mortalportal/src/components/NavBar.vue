@@ -193,7 +193,7 @@ const storeName = useCounterStore()
                 this.$router.push('/profile')
             },
             gotoSaved() {
-                this.$router.push('/home/angel')
+                this.$router.push('/home/angel/saved')
                 // need to include a way to select the saved tasks filter
             },
             gotoChat(){
