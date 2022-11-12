@@ -236,14 +236,15 @@ export default {
         this.signupData.password = this.password
         this.signupData.username = this.username
         this.signupData.name = this.name
+        set(dbRef(db, 'Login/' + this.signupData.username), this.signupData);
+        storeName.username = this.signupData.username;
+        storeName.email = this.signupData.email
+        this.$router.push('/home/angel');
       }
       else {
         alert("Passwords do not match")
       }
-      set(dbRef(db, 'Login/' + this.signupData.username), this.signupData);
-      storeName.username = this.signupData.username;
-      storeName.email = this.signupData.email
-      this.$router.push('/home/angel');
+
     },
 
     getGoogleAuth() {
