@@ -54,7 +54,7 @@
                     <tr>
                         <td>
                             <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Price']"
-                                prefix='$' type="number" />
+                                prefix='$' type="number" style='width:15vw;' />
                         </td>
                     </tr>
 
@@ -134,9 +134,34 @@ import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
+import { useQuasar } from 'quasar'
+import { onBeforeUnmount } from 'vue'
 
 export default {
+    setup () {
+    const $q = useQuasar()
+    let timer
 
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer)
+        $q.loading.hide()
+      }
+    })
+    return {
+        showLoading () {
+        $q.loading.show()
+
+        // hiding in 2s
+        timer = setTimeout(() => {
+          $q.loading.hide()
+          this.submit = true
+          timer = void 0
+        }, 3000)
+
+      }
+    }
+},
     data() {
         return {
             model: '',
@@ -206,6 +231,7 @@ export default {
         },
         submitDB() {
             // Parsing the data into firebase Realtime Database
+            this.showLoading()
             let key;
             let ext;
             push(dbRef(db, 'TaskData'), this.inputData)
@@ -240,17 +266,12 @@ export default {
                 .catch((error) => {
                     console.log(error)
                 })
-            this.submit = true;
         },
         gotoHome() {
-            setTimeout(() => {
                 this.$router.push({name:'Home',params:{targetP: 'mortal'} })
-            }, 3200);
         },
         gotoTask() {
-            setTimeout(() => {
                 window.location.reload()
-            }, 3200);
                 
         }
     }
