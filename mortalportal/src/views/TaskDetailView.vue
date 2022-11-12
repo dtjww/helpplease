@@ -558,11 +558,11 @@ export default {
                 .then(() => {
                     var temp = {}
                     temp[this.chatId] = this.id
-                    set(dbRef(db, 'Login/' + this.currUser + '/chats'), temp)
-                    set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
+                    set(dbRef(db, 'Login/' + this.currUser + '/chats/' + this.chatId), this.id)
+                    set(dbRef(db, 'Login/' + this.poster + '/chats/' + this.chatId), this.id)
                     var temp2 = {}
                     temp2[this.chatId] = this.currUser
-                    set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp2)
+                    set(dbRef(db, 'TaskData/' + this.id + '/chats/' + this.chatId), this.currUser)
 
                 })
             // 

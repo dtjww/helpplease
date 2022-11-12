@@ -136,31 +136,30 @@
                                     :rules="[val => val && val.length > 0 || 'Please Input a Date']" />
                             </td>
 
-                        </tr>
-                        <tr>
-                            <td>
-                                <h6>Image (Optional)</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <q-btn color="dark" label="upload image" @click="uploadImage" class="date" />
-                                <input type="file" style="display: none" ref="fileInput" accept='image/*'
-                                    @change=onFilePicked />
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6>Image (Optional)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <q-btn color="white" text-color="positive" label="upload image" @click="uploadImage" class="date" />
+                            <input type="file" style="display: none" ref="fileInput" accept='image/*'
+                                @change=onFilePicked />
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
-                            </td>
-                        </tr>
-                    </table>
-                    <q-btn color="white" text-color="black" label="Post Task" class='button' type="submit" />
-                </q-form>
-            </q-card>
-        </div>
-    </q-scroll-area>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
+                        </td>
+                    </tr>
+                </table>
+                <q-btn color="positive" label="Post Task" class='button' type="submit" />
+            </q-form>
+        </q-card>
+    </div>
 
 </template>
 
@@ -263,7 +262,6 @@ export default {
             style: "background: #efa2a4",
         }
     },
-
     methods: {
         // Run when Button is clicked
         uploadImage() {
