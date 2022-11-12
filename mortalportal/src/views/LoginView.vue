@@ -55,6 +55,8 @@
     </div>
 
     <q-layout>
+        <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
+
         <q-page-container>
             <q-page class="page-height page-width row justify-center items-center ">
                 <q-card square bordered class="q-pa-lg shadow-1">
@@ -100,12 +102,11 @@
                                 </div>
                             </q-card-section>
                         </q-tab-panel>
-
-
                     </q-tab-panels>
                 </q-card>
             </q-page>
         </q-page-container>
+        </q-scroll-area>
     </q-layout>
 </template>
   
@@ -128,6 +129,20 @@ export default {
     setup() {
         return {
             tab: ref('Login'),
+            thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                width: '5px',
+                opacity: 0.75
+            },
+
+            barStyle: {
+                right: '2px',
+                borderRadius: '9px',
+                width: '9px',
+                opacity: 0.2
+            }
         }
     },
     data() {
@@ -180,7 +195,7 @@ export default {
             const isSignedIn = ref(false);
             const uiConfig = {
                 signInFlow: 'popup',
-                signinSuccessUrl: 'gSignin',
+                signinSuccessUrl: 'loading',
                 signInOptions: [
                     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 ],
