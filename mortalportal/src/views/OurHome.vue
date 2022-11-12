@@ -142,7 +142,7 @@
         </div>
         <div class="containerAngel boxAngel" v-if="activeBtn == 'Find'">
             <figure v-for="post in searchForTask" v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item" style="background: #3760b8; color:white">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -159,7 +159,7 @@
         </div>
         <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
             <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item" style="background: #3760b8; color:white">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -177,7 +177,7 @@
         </div>
         <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
             <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item" style="background: #82a3ea; color:white">
+                <q-card class="my-card grid-item" style="background: #3760b8; color:white">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
