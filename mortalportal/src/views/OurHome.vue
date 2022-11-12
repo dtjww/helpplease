@@ -11,194 +11,46 @@
                 </router-link>
             </q-toolbar-title>
             <q-space />
-            <div class="lt-xs">
-                <q-btn stretch flat label="Saved" @click="gotoSaved()" />
+            <div class="lt-xs mainMenu">
 
+                <q-btn stretch flat label="My Account" @click="handleClick()"/>
 
-                <!-- <q-btn stretch flat label="Notifications" /> -->
-                <q-btn-dropdown stretch flat label="Notifications">
-                    <q-list>
-                        <q-item-label header>Recently Received Notifications</q-item-label>
-                        <!-- <q-item v-for="n in 3" :key="`x.${n}`" clickable v-close-popup tabindex="0"> -->
-                        <q-item clickable v-close-popup class="bg-secondary">
-                            <q-item-section avatar>
-                                <q-icon name="notifications" color="warning" />
-                            </q-item-section>
-                            <q-item-section>
-                                <q-item-label caption style="color:aliceblue">You have just received a message from User
-                                    329732</q-item-label>
-                                <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?
-                                </q-item-label>
-                            </q-item-section>
-                        </q-item>
-                        <q-item clickable v-close-popup class="bg-negative">
-                            <q-item-section avatar>
-                                <q-icon name="notifications" color="info" />
-                            </q-item-section>
-                            <q-item-section>
-                                <q-item-label style="color: aliceblue">Your mission was launched successfully!
-                                </q-item-label>
-                                <q-item-label caption style="color: aliceblue">Your Mission "Shower my dog" has been
-                                    launched successfully for angels to pick up!</q-item-label>
-                            </q-item-section>
-                        </q-item>
-                        <q-item clickable v-close-popup class="bg-negative">
-                            <q-item-section avatar>
-                                <q-icon name="notifications" color="info" />
-                            </q-item-section>
-                            <q-item-section>
-                                <q-item-label style="color: aliceblue">You received an offer of $100 from Poopoo123
-                                </q-item-label>
-                                <q-item-label caption style="color: aliceblue">Hi! I would like to complete this task
-                                    for you!</q-item-label>
-                            </q-item-section>
-                        </q-item>
-                        <q-item clickable v-close-popup class="bg-secondary">
-                            <q-item-section avatar>
-                                <q-icon name="notifications" color="warning" />
-                            </q-item-section>
-                            <q-item-section>
-                                <q-item-label caption style="color:aliceblue">You have just received a message from User
-                                    329732</q-item-label>
-                                <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?
-                                </q-item-label>
-                            </q-item-section>
-                        </q-item>
-                        <q-separator inset spaced />
-                    </q-list>
-                </q-btn-dropdown>
-
-                <q-btn stretch flat label="Top Angels" />
-
-                <q-btn-dropdown flat icon="person_outline" split @click="handleClick" auto-close>
-                    <q-list>
-
-                        <q-item clickable style="color:black" @click="handleClick()">
-                            <q-item-section avatar>
-                                <q-icon name="person" />
-                            </q-item-section>
-                            <q-item-section>
-                                My Account
-                            </q-item-section>
-                        </q-item>
-
-                        <q-item clickable style="color:black" @click="handleClick()">
-                            <q-item-section avatar>
-                                <q-icon name="assignment" />
-                            </q-item-section>
-                            <q-item-section>
-                                My Tasks
-                            </q-item-section>
-                        </q-item>
-
-                        <q-item clickable style="color:black" @click="gotoChat()">
-                            <q-item-section avatar>
-                                <q-icon name="chat" />
-                            </q-item-section>
-                            <q-item-section>
-                                My Chats
-                            </q-item-section>
-                        </q-item>
-
-                        <q-item clickable style="color:black" @click="exit()">
-                            <q-item-section avatar>
-                                <q-icon name="exit_to_app" />
-                            </q-item-section>
-                            <q-item-section>
-                                Logout
-                            </q-item-section>
-                        </q-item>
-                    </q-list>
-                </q-btn-dropdown>
+                <q-btn stretch flat label="Log Out" @click="exit()"/>
 
             </div>
 
-            <div class="gt-s">
+            <div class="gt-s hamburgMenu">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
                 <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
                     <q-list>
                         <q-item-label header>Menu</q-item-label>
-                        <q-item clickable v-ripple>
+                        <q-item clickable v-ripple >
                             <q-item-section avatar>
                                 <q-icon name="favorite" />
                             </q-item-section>
-                            <q-item-section>Saved</q-item-section>
+                            <q-item-section @click="gotoSaved()">Saved</q-item-section>
                         </q-item>
-
-                        <q-item clickable v-ripple>
-                            <q-item-section avatar>
-                                <q-icon name="emoji_events" />
-                            </q-item-section>
-                            <q-item-section>Top Angels</q-item-section>
-                            <!-- <q-item-section side>
-                <q-badge floating color="teal">new</q-badge>
-            </q-item-section> -->
-                        </q-item>
+                        
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-icon name="person" />
                             </q-item-section>
-                            <q-item-section>Profile</q-item-section>
+                            <q-item-section @click="handleClick()">My Account</q-item-section>
+                        </q-item>
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="logout" />
+                            </q-item-section>
+                            <q-item-section @click="exit()">Log Out</q-item-section>
                         </q-item>
                     </q-list>
-                    <q-btn-dropdown stretch flat label="Notifications" clickable v-ripple>
-
-                        <!-- <q-btn-dropdown stretch flat label="Notifications">  -->
-                        <q-list>
-                            <q-item-label header>Recently Received Notifications</q-item-label>
-                            <!-- <q-item v-for="n in 3" :key="`x.${n}`" clickable v-close-popup tabindex="0"> -->
-                            <q-item clickable v-close-popup class="bg-secondary">
-                                <q-item-section avatar>
-                                    <q-icon name="notifications" color="warning" />
-                                </q-item-section>
-                                <q-item-section>
-                                    <q-item-label caption style="color:aliceblue">You have just received a message from
-                                        User 329732</q-item-label>
-                                    <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?
-                                    </q-item-label>
-                                </q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup class="bg-negative">
-                                <q-item-section avatar>
-                                    <q-icon name="notifications" color="info" />
-                                </q-item-section>
-                                <q-item-section>
-                                    <q-item-label style="color: aliceblue">Your mission was launched successfully!
-                                    </q-item-label>
-                                    <q-item-label caption style="color: aliceblue">Your Mission "Shower my dog" has been
-                                        launched successfully for angels to pick up!</q-item-label>
-                                </q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup class="bg-negative">
-                                <q-item-section avatar>
-                                    <q-icon name="notifications" color="info" />
-                                </q-item-section>
-                                <q-item-section>
-                                    <q-item-label style="color: aliceblue">You received an offer of $100 from Poopoo123
-                                    </q-item-label>
-                                    <q-item-label caption style="color: aliceblue">Hi! I would like to complete this
-                                        task for you!</q-item-label>
-                                </q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup class="bg-secondary">
-                                <q-item-section avatar>
-                                    <q-icon name="notifications" color="warning" />
-                                </q-item-section>
-                                <q-item-section>
-                                    <q-item-label caption style="color:aliceblue">You have just received a message from
-                                        User 329732</q-item-label>
-                                    <q-item-label caption style="color:aliceblue">Hi! Roughly how long will you be?
-                                    </q-item-label>
-                                </q-item-section>
-                            </q-item>
-                            <q-separator inset spaced />
-                        </q-list>
-                    </q-btn-dropdown>
                 </q-btn-dropdown>
             </div>
 
         </q-toolbar>
     </div>
+
+
 
     <table align="center">
         <tr>
@@ -214,7 +66,7 @@
                 |
             </td>
             <td class="actionbtns">
-                <q-btn v-if="targetP == 'mortal'" flat color="primary" rounded v-model="Selection" @click="mortalBtn">
+                <q-btn v-if="targetP == 'mortal'" flat color="positive" rounded v-model="Selection" @click="mortalBtn">
                     <h5>Mortal</h5>
                 </q-btn>
                 <q-btn v-else flat rounded v-model="Selection" @click="mortalBtn">
@@ -224,10 +76,12 @@
         </tr>
     </table>
 
+
     <!-- Angel -->
     <div v-if="Selection == 'Angel' && targetP == 'angel'">
+
         <table align="center">
-            <tr>
+            <tr style="width:36vw">
                 <td align='center'>
                     <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
                         @click="FindBtn">Find</q-btn>
@@ -246,7 +100,7 @@
 
             </tr>
             <tr v-if="activeBtn == 'Find'">
-                <td colspan="3" align='center'>
+                <td colspan="3" align='left'>
                     <q-input rounded outlined label="Search" class="search" v-model="search" color="dark"
                         text-color="white">
                     </q-input>
@@ -330,13 +184,13 @@
                     </q-list>
                 </q-card-section>
             </q-card>
-            
+
 
         </div>
 
         <div class="containerAngel boxAngel" v-if="activeBtn == 'Find'">
             <figure v-for="post in searchForTask" v-bind:key="post.id">
-                <q-card class="my-card grid-item bg-dark text-white">
+                <q-card class="my-card grid-item bg-white text-black">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -344,7 +198,7 @@
                         Date: {{ post.date }}<br>
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
-                        <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                        <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
@@ -353,7 +207,7 @@
         </div>
         <div v-else-if="activeBtn == 'Saved'" class="containerMortal boxMortal">
             <figure v-for="post in searchForSavedTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item bg-dark text-white">
+                <q-card class="my-card grid-item bg-white text-black">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -373,7 +227,7 @@
                         </div>
 
                         <div v-if="completedCheck(post) != 'pending'">
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md" color='white' text-color="black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </div>
@@ -384,7 +238,7 @@
 
         <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
             <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
-                <q-card class="my-card grid-item bg-dark text-white">
+                <q-card class="my-card grid-item bg-white text-black">
                     <img :src="post.file">
                     <q-card-section class="fontAlign">
                         Mortal: {{ post.username }} <br>
@@ -404,7 +258,7 @@
                         </div>
 
                         <div v-if="completedCheck(post) != 'pending'">
-                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-ma-md" color='white' text-color="black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </div>
@@ -416,11 +270,11 @@
 
     <!-- Mortal -->
     <div v-else>
-        <q-btn color='primary' @click=goToTask>New Post</q-btn>
+        <q-btn color='positive' @click=goToTask>New Post</q-btn>
         <div class="containerMortal boxMortal">
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
                 <div v-if="post.username == currUser">
-                    <q-card class="my-card grid-item" style="background: #f2cbb6">
+                    <q-card class="my-card grid-item" style="background: white">
                         <img :src="post.file">
                         <q-card-section class="fontAlign">
                             Task: {{ post.name }}<br>
@@ -429,10 +283,10 @@
                             Amount: ${{ post.price }}<br>
 
                             <div v-if="post.accepted == null">
-                                <q-btn v-if="post.username == currUser" color='white' text-color="black"
-                                    @click="iTask(post.id, post.username)"><b>Edit</b></q-btn>
-                                <q-btn v-if="post.offer != null" color="white" text-color="red"
-                                    @click="viewOffer(post.id)">View Offers</q-btn>
+                                <q-btn class="q-mr-lg" v-if="post.username == currUser" color='positive' text-color="white"
+                                    @click="iTask(post.id, post.username)" size="sm" ><b>Edit</b></q-btn>
+                                <q-btn v-if="offerCheck(post) != null" color="positive" text-color="white"
+                                    @click="viewOffer(post.id)" size="sm" ><b>View Offers</b></q-btn>
 
                             </div>
 
@@ -459,16 +313,10 @@ import axios from 'axios';
 import { ref } from 'vue'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-// import Filter, { default as fData } from '@/components/FilterTable.vue'
 
 
 export default {
-    setup() {
 
-        return {
-            tab: ref('mails')
-        }
-    },
 
     name: 'PageIndex',
     data() {
@@ -535,7 +383,8 @@ export default {
                     icon: "exit_to_app"
                 }
             ],
-            style:''
+            style: '',
+            Active: false,
         }
     }
 
@@ -580,12 +429,13 @@ export default {
         angelBtn() {
             this.Selection = 'Angel'
             this.targetP = 'angel'
-            document.getElementById('navbar').style.backgroundColor = '#3760b8'
+            this.style = 'background-color: #3760b8'
         },
         mortalBtn() {
             this.Selection = 'Mortal'
             this.targetP = 'mortal'
-            document.getElementById('navbar').style.backgroundColor = '#efcebe'
+            this.style = 'background-color: #efa2a4'
+
         },
         viewOffer(id) {
 
@@ -647,6 +497,21 @@ export default {
                 }
                 else {
                     return 'completed'
+                }
+            }
+        },
+        offerCheck(post) {
+            if (post.offer == null) {
+                return null
+            }
+            else {
+                var values = Object.values(post.offer)
+                var result = values.filter(offer => offer.status == 'offer')
+                if (result.length == 0) {
+                    return null
+                }
+                else {
+                    return 'offer'
                 }
             }
         },
@@ -721,7 +586,11 @@ export default {
             var result = values.filter(post => post.username == this.currUser && this.completeCheck(post) != 'completed')
             return result
         },
-
+        searchOffer(){
+            var values = Object.values(this.posts)
+            var result = values.filter(post => post.username == this.currUser && this.offerCheck(post) == 'offer')
+            return result
+        }
 
 
     },
@@ -734,10 +603,13 @@ export default {
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
             this.style = 'background-color: #3760b8'
+
         }
         else {
             this.targetP = 'mortal'
-            this.style='background-color: #efcebe'
+            this.style='background-color: #efa2a4'
+
+            
         }
         if (storeName.username == '') {
             this.$router.push('/login')
@@ -746,6 +618,10 @@ export default {
             this.currUser = storeName.username
         }
 
+        if(this.$route.params.saved != ''){
+
+            this.activeBtn = 'Saved'
+        }
     },
 
 }
@@ -770,8 +646,6 @@ export default {
     column-span: 1;
     text-align: left;
     font-size: small;
-
-
 }
 
 .qCard {
@@ -793,6 +667,7 @@ export default {
     width: 20vw;
     float: left;
     margin-left: 5vw;
+    border-radius: 0px;
 }
 
 .dActions {
@@ -802,12 +677,12 @@ export default {
 .search {
     margin-top: 15px;
     margin-bottom: 15px;
-    width: 36vw;
-    float: left
+    width: 37vw;
+
 }
 
 .actionbtns {
-    width: 150px;
+    width: 12vw;
 }
 
 .my-card {
@@ -819,7 +694,6 @@ export default {
 .grid-item {
     max-width: 300px;
     display: block;
-    border: 1px solid black;
 }
 
 .boxAngel {
@@ -833,6 +707,14 @@ export default {
 .fontAlign {
     text-align: left;
     padding-left: 30px;
+}
+
+.hamburgMenu {
+    display: none;
+}
+
+.mainMenu {
+    display: block
 }
 
 // ----------------------------------
@@ -878,7 +760,7 @@ figure>q-card {
 }
 
 
-@media (max-width: 1080px) {
+@media (max-width: 1190px) {
     .containerAngel {
         grid-template-columns: repeat(3, 1fr);
         column-count: 3;
@@ -916,6 +798,7 @@ figure>q-card {
 
 }
 
+
 @media (max-width: 600px) {
     .containerAngel {
         grid-template-columns: repeat(2, 1fr);
@@ -943,6 +826,16 @@ figure>q-card {
 
     .q-card {
         max-width: 100%;
+    }
+}
+
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
     }
 }
 </style>
