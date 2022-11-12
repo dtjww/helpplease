@@ -299,6 +299,7 @@ export default {
       this.$router.push({ name: 'Task Details', params: { id: id } })
     },
     onScroll(position) {
+      console.log(position)
       if (position > 800) {
         this.WhiteNavbar = false;
         this.transNavbar = true;
