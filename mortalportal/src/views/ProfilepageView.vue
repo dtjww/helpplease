@@ -29,6 +29,17 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
+            >
+            <q-item-section avatar>
+              <q-icon name="chat" />
+            </q-item-section>
+
+            <q-item-section>
+              My Chats
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="logout" />
@@ -155,11 +166,11 @@ export default {
   },
   methods: {
     gotoHome() {
-      this.$router.push('/home')
+      this.$router.push('/')
     },
 
-    gotoMyTasks() {
-      this.$router.push('/home')
+    gotoChats() {
+      this.$router.push('/chat')
     },
     getUserData() {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '.json')
