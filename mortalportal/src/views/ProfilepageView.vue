@@ -8,13 +8,13 @@
         <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
           padding>
 
-          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" >
+          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'">
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
 
             <q-item-section>
-              My Account
+              Account
             </q-item-section>
           </q-item>
 
@@ -25,7 +25,7 @@
             </q-item-section>
 
             <q-item-section>
-              My Tasks
+              Tasks
             </q-item-section>
           </q-item>
 
@@ -36,7 +36,7 @@
             </q-item-section>
 
             <q-item-section>
-              My Earnings
+              Earnings
             </q-item-section>
           </q-item>
 
@@ -47,7 +47,7 @@
             </q-item-section>
 
             <q-item-section>
-              My Chats
+              Chats
             </q-item-section>
           </q-item>
 
@@ -472,4 +472,5 @@ export default {
 
 .menu-list .q-item
   border-radius: 0 32px 32px 0
+
 </style>

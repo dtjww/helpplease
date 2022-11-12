@@ -61,58 +61,62 @@
 
         </div>
     </div>
-    <q-card class="qcard font">
-        <q-card-section>
-            <h2>Complete your profile!</h2>
-        </q-card-section>
-        <q-card-section>
+    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
-            <table align="center">
-                <tr>
-                    <td>
-                        <q-field square filled dense readonly class="gutter" prefix="Full Name: " style="width:350px">
-                            <template v-slot:control>
-                                <div>{{ fullname }}</div>
-                            </template>
-                        </q-field>
+        <q-card class="qcard font">
+            <q-card-section>
+                <h2>Complete your profile!</h2>
+            </q-card-section>
+            <q-card-section>
 
-                    </td>
-                </tr>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <q-field square filled dense readonly class="gutter" prefix="Full Name: "
+                                style="width:350px">
+                                <template v-slot:control>
+                                    <div>{{ fullname }}</div>
+                                </template>
+                            </q-field>
 
-                <tr>
-                    <td>
-                        <q-field square filled dense readonly class="gutter" prefix="Email: " style="width:350px">
-                            <template v-slot:control>
-                                <div>{{ email }}</div>
-                            </template>
-                        </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <q-input square filled clearable class="gutter" type="text" v-model="username"
-                            prefix="Username:" style="width:350px" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <q-input square filled clearable class="gutter" type="password" v-model="password"
-                            prefix="Password:" style="width:350px" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <q-input square filled clearable class="gutter" type="password" v-model="cpassword"
-                            prefix="Confirm Password:" style="width:350px" />
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-            </table>
+                    <tr>
+                        <td>
+                            <q-field square filled dense readonly class="gutter" prefix="Email: " style="width:350px">
+                                <template v-slot:control>
+                                    <div>{{ email }}</div>
+                                </template>
+                            </q-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <q-input square filled clearable class="gutter" type="text" v-model="username"
+                                prefix="Username:" style="width:350px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <q-input square filled clearable class="gutter" type="password" v-model="password"
+                                prefix="Password:" style="width:350px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <q-input square filled clearable class="gutter" type="password" v-model="cpassword"
+                                prefix="Confirm Password:" style="width:350px" />
+                        </td>
+                    </tr>
+
+                </table>
 
 
-        </q-card-section>
-        <q-btn class="bottom-padding" label="Complete" @click="validate()"> </q-btn>
-    </q-card>
+            </q-card-section>
+            <q-btn class="bottom-padding" label="Complete" @click="validate()"> </q-btn>
+        </q-card>
+    </q-scroll-area>
 
 </template>
 
@@ -124,9 +128,14 @@ import { db } from '../firebase'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 
+
+
 export default {
     setup() {
         const $q = useQuasar()
+
+
+
         return {
             UsernameTaken() {
                 $q.notify({
@@ -153,8 +162,24 @@ export default {
                     position: 'top',
                     icon: 'warning',
                 })
-            }
+            },
+            thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                width: '5px',
+                opacity: 0.75
+            },
+
+            barStyle: {
+                right: '2px',
+                borderRadius: '9px',
+                width: '9px',
+                opacity: 0.2
+            },
         }
+
+        
     },
 
     data() {
@@ -197,44 +222,9 @@ export default {
                         }
                     })
             }
-            // axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login.json')
-            //     .then(response => {
-            //         var truefalse = true
-            //         this.logins = response.data
-            //         for (var item in response.data) {
-            //             if (item == this.username) {
-            //                 alert('Username already exists')
-            //                 console.log('false')
-            //                 truefalse = false
-            //             }
-            //         }
-            //         console.log(truefalse)
-            //         if (truefalse == true) {
-            //             this.completeSignIn();
-            //         }
-            //     })
-        },
-        validateEmail() {
-            axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login.json')
-                .then(response => {
-                    this.logins = response.data
-                    for (var item in this.logins) {
-                        if (this.logins[item].email == this.email) {
-                            storeName.username = this.logins[item].username
-                        }
-                    }
-                })
-
-            if (storeName.username != '') {
-
-                this.$router.push('/home/angel')
-            }
         },
 
     },
-    created() {
-        this.validateEmail()
-    }
 
 }
 
