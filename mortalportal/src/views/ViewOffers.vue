@@ -11,7 +11,6 @@
                     </q-td>
                 </template>
             </q-table>
-            Selected: {{ selected }}
         </div>
     </div>
     <q-dialog v-model="confirm">
