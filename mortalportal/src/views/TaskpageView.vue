@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-btn color="positive" label="upload image" @click="uploadImage" class="date" />
+                            <q-btn color="white" text-color="positive" label="upload image" @click="uploadImage" class="date" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked />
 
@@ -109,7 +109,7 @@
                         </td>
                     </tr>
                 </table>
-                <q-btn flat color="white" text-color="positive" label="Post Task" class='button' type="submit" />
+                <q-btn color="positive" label="Post Task" class='button' type="submit" />
             </q-form>
         </q-card>
     </div>
