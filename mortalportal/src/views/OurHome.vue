@@ -234,7 +234,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md" color='white' text-color="black"
+                                <q-btn class="q-mt-md" color='dark' text-color="white"
                                     @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
@@ -266,7 +266,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-ma-md" color='white' text-color="black"
+                                <q-btn class="q-ma-md" color='dark' text-color="white"
                                     @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>

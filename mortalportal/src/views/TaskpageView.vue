@@ -1,7 +1,7 @@
 <!-- Mel -->
 
 <template>
-    <NavBar />
+    <NavBarMortal />
 
 
     <div>
@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-btn color="dark" label="upload image" @click="uploadImage" class="date" />
+                            <q-btn color="white" text-color="positive" label="upload image" @click="uploadImage" class="date" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked />
 
@@ -109,7 +109,7 @@
                         </td>
                     </tr>
                 </table>
-                <q-btn color="white" text-color="black" label="Post Task" class='button' type="submit" />
+                <q-btn color="positive" label="Post Task" class='button' type="submit" />
             </q-form>
         </q-card>
     </div>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavBarMortal from '@/components/NavBarMortal.vue';
 import { db, storage } from '../firebase.js';
 import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -202,7 +202,7 @@ export default {
         }
     },
     components: {
-        NavBar
+        NavBarMortal
     },
     methods: {
         // Run when Button is clicked

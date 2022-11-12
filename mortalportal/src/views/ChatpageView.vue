@@ -129,7 +129,7 @@
                               <q-scroll-observer />
                               
                         </q-scroll-area>
-                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="grey" icon="arrow_downward" @click="scrollBtm()" />
+                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="accent" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
