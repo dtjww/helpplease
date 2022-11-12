@@ -3,7 +3,7 @@
 <template>
 
   <div class="back">
-    <NavBar msg="This is my NavBar bro"/>
+    <NavBar/>
     <!-- <div class="about">
       <h1> hellooo </h1>
       <h2 class="format1"> {{message}} </h2>
@@ -12,17 +12,23 @@
 
 
 
-  <div class="q-ma-md container">
-    <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders" style="height: 520px">
+  <div class="container">
+    <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders" style="height: 75vh">
 
       <q-drawer
         v-model="drawer"
-        width="280"
+        behavior="desktop"
+        :width="280"
+        :mini="miniState"
+        @mouseover="miniState = false"
+        @mouseout="miniState = true"
+        :mini-width="160"
+        mini-to-overlay="500"
         show-if-above
         :breakpoint="400"
         class="bg-light-blue-1 adjust"
       >
-          <q-list padding style="height: calc(100% - 150px); margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list padding style="margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -33,7 +39,7 @@
                 @click="paramTask(value.task, value.index)" >
                       <q-item-section side>
                         <q-avatar rounded size="48px">
-                          <img src="https://cdn.quasar.dev/img/avatar.png" />
+                          <img :src="value.taskPic" />
                         </q-avatar>
                       </q-item-section>
                       <q-item-section>
@@ -51,7 +57,7 @@
                 <q-item clickable v-ripple @click="paramTask(value.task, value.index)">
                   <q-item-section side>
                     <q-avatar rounded size="48px">
-                      <img src="https://cdn.quasar.dev/img/avatar.png" />
+                      <img :src="value.taskPic" />
                     </q-avatar>
                   </q-item-section>
                   <q-item-section>
@@ -63,45 +69,9 @@
                     </template>
                         <q-item-label caption>{{value.title}}</q-item-label>
                   </q-item-section>
-          </q-item>
+              </q-item>
               </template>
             </template>
-            <!-- <template v-for="(value,key) in this.tempList" :key="key">
-              <p>{{value}}</p>
-              <p>{{key}}</p>
-            </template> -->
-            <!-- first chat -->
-            <!-- <q-item clickable v-ripple
-            :active="tab === 'chat1'"
-            >
-                    <q-item-section side>
-                      <q-avatar rounded size="48px">
-                        <img src="https://cdn.quasar.dev/img/avatar.png" />
-                      </q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-item-label>{{postUsername}}</q-item-label>
-                      <q-item-label caption>{{postTitle}}</q-item-label>
-                    </q-item-section>
-
-            </q-item> -->
-            
-            <!-- second chat -->
-            <!-- <q-item clickable v-ripple
-            :active="tab === 'chat2'"
-            @click="tab = 'chat2'"
-            >
-                <q-item-section side>
-                  <q-avatar rounded size="48px">
-                    <img src="https://cdn.quasar.dev/img/avatar.png" />
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>Chat username here</q-item-label>
-                  <q-item-label caption>Task Title here</q-item-label>
-                </q-item-section>
-            </q-item> -->
-
           </q-list>
 
         <!-- my profile -->
@@ -119,29 +89,29 @@
       <q-page-container>
         <!-- <q-page padding> -->
   
-          <q-scroll-area style="height: 520px;" >
-                  <q-tab-panels v-model="tab" style="height: 520px;">
+          <q-scroll-area style="height: 69vh;" >
+                  <q-tab-panels v-model="tab" >
                     
                     
                     <q-tab-panel name="chat1">
-                      <div class="text-h6 bg-pink-1">{{postUsername}}</div>
-
-                      <q-item class="bg-pink-1" style="margin:0%; border:solid red 2px; border-radius:7px; text-align:left">
-                        <q-item-section side class="displayhide">
-                          <img :src="posts.file" style="height:40px">
+                      
+                      
+                      <q-item class="bg-pink-1" style="margin:0%; border:solid 2px; border-color:#ddd; border-radius:8px; text-align:left; font-style:italic; height:13vh; text-align:left">
+                        <q-item-section side class="displayhide" style="height:max-content">
+                          <img :src="posts.file" style="height:10vh; display: block; margin: 5px; border-radius:2px">
                         </q-item-section>
                         <q-item-section>
-                          <q-item-label>{{postDesc}}</q-item-label>
-                          <!-- <q-item-label caption>{{postUsername}}</q-item-label> -->
+                          <q-item-label >{{postUsername}}</q-item-label>
+                          <q-item-label caption>{{postDesc}}</q-item-label>
                         </q-item-section>
                         <q-item-section side>
-                          <template v-if="postUsername == myUsername">
+                          <!-- <template v-if="postUsername == myUsername">
                             <q-item-label><q-btn flat icon="money" color="red" label="Take Offer"/></q-item-label>
                           </template>
                           <template v-else>
                             <q-item-label><q-btn flat icon="money" color="red" label="Make Offer"/></q-item-label>
-                          </template>
-                          
+                          </template> -->
+                          <q-item-label><q-btn flat color="red" label="Back To Task" @click="toTask()"/></q-item-label>
                         </q-item-section>
                       </q-item>
 
@@ -176,7 +146,7 @@
         <!-- </q-page> -->
       </q-page-container>
     </q-layout>
-    <q-btn class="fixed-bottom-right" round color="red" icon="add" @click="tablist()" />
+
 <!-- 
     <template v-for="chatIndx in this.myChats" :key="chatIndx">
       <p> {{chatIndx}}</p>
@@ -210,6 +180,7 @@ export default {
   data () {
         return {
             tab: 'chat1', //should be the id passed in for which chat it is 
+            miniState: false,
 
             username: '',
             messages: [],
@@ -419,6 +390,7 @@ export default {
                     this.tempList[count]['title'] = tempPost.name
                     this.tempList[count]['userA'] = tempPost.username
                     this.tempList[count]['userB'] = tempPost.chats[variable2]
+                    this.tempList[count]['taskPic'] = tempPost.file
                     // let tempUserA = tempPost.username
                     // let tempUserB = tempPost.chats[variable2]
                     // console.log(tempTitle + " " + tempUserA + " " + tempUserB)
@@ -450,20 +422,10 @@ export default {
           //   console.log(this.tempList[each])
           // }
         },
-      },
-      computed:{
-      // randomload(){
-      //   for (let eachVal in this.myChats){
-      //           console.log(eachVal)
-      //           console.log(this.myChats[eachVal])
-      //           // if(this.myChats[eachVal] == this.id){
-      //           //     console.log("found my chat")
-      //           //     console.log(eachVal + " this is the chat to retrieve")
-      //           //     return eachVal
-      //           // }
-      //       }
-      //     return 'none'
-      // }
+        toTask(){
+          this.$router.push({ name: 'Task Details', params: { id: this.$route.params.id, poster: this.postUsername} })
+          // window.location.href = "http://localhost:8080/Task/" + this.$route.params.id
+        },
       },
     mounted() {
       this.toload();
@@ -498,16 +460,23 @@ html, body {
   height: 100%;
   margin: 0;
 }
-.container { 
-  margin-left: 75px; margin-right: 75px; margin-top: 5%; margin-bottom: 5%;
+#app{
   height: 100%;
+}
+.container { 
+  /* margin-left: 75px; margin-right: 75px; ; margin-bottom: 5%;*/
+  margin-top: 3%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 75%;
   justify-content: center;
 }
 
 @media (max-width: 600px) {
   .container { 
     margin: 0;
-    margin-top: 17px;
+    margin-top: 3%;
     padding: 0;
     height: 100%;
   }
@@ -522,6 +491,7 @@ html, body {
 }
 .adjust{
   width:280px
+
 }
 
 
