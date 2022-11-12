@@ -378,9 +378,9 @@ export default {
                 const message = {
                     username: this.myUsername,
                     text: this.myMsg,
-                    date: new Date().toLocaleString('en-US', {month: 'short'})
+                    date: new Date().toLocaleString('en-US')
                 };
-                console.log(new Date().toLocaleString('en-US', {month: 'short'}));
+                console.log(new Date().toLocaleString('en-US'));
                 // To-Do: Push message to firebase
                 this.submitMSG(message);
                 this.myMsg = "";
