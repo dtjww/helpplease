@@ -71,17 +71,17 @@
     return {
       email_login: '',
       password_login: '',
-      username_SU: '',
-      name_SU: '',
-      password_SU: '',
-      cPassword_SU: '',
-      email_SU: '',
+      username: '',
+      name: '',
+      password: '',
+      cPassword: '',
+      email: '',
       users: [],
       signupData: {
-        email_SU: '',
-        password_SU: '',
-        username_SU: '',
-        name_SU: ''
+        email: '',
+        password: '',
+        username: '',
+        name: ''
       }}
     },
   
@@ -113,11 +113,11 @@
                 })
     },
     submitData(){
-      if(this.password_SU == this.cPassword_SU){
-        this.signupData.email_SU = this.email_SU
-        this.signupData.password_SU = this.password_SU
-        this.signupData.username_SU = this.username_SU
-        this.signupData.name_SU = this.name_SU
+      if(this.password == this.cPassword){
+        this.signupData.email = this.email
+        this.signupData.password = this.password
+        this.signupData.username = this.username
+        this.signupData.name = this.name
       }
       else{
         alert("Passwords do not match")
