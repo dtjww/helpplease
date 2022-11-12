@@ -8,46 +8,46 @@
         <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
           padding>
 
-          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" >
+          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" active-class="text-blue">
             <q-item-section avatar>
               <q-icon name="person" />
             </q-item-section>
 
             <q-item-section>
-              My Account
+              Account
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyTasks'" @click="tab = 'MyTasks'"
+          <q-item clickable v-ripple :active="tab === 'MyTasks'" @click="tab = 'MyTasks'" active-class="text-blue"
             >
             <q-item-section avatar>
               <q-icon name="assignment" />
             </q-item-section>
 
             <q-item-section>
-              My Tasks
+              Tasks
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'"
+          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'" active-class="text-blue"
             >
             <q-item-section avatar>
               <q-icon name="account_balance_wallet" />
             </q-item-section>
 
             <q-item-section>
-              My Earnings
+              Earnings
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
+          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats 
             >
             <q-item-section avatar>
               <q-icon name="question_answer" />
             </q-item-section>
 
             <q-item-section>
-              My Chats
+              Chats
             </q-item-section>
           </q-item>
 
@@ -114,7 +114,7 @@
                 <q-header elevated>              
                 </q-header>     
                 <!-- add earnings component here -->
-                <!--  <MyEarnings /> -->
+                 <MyEarnings />
               </div>              
             </q-tab-panel>
 
@@ -132,6 +132,7 @@
 import NavBar from '@/components/NavBar.vue';
 import MyAccount from '@/components/MyAccount.vue';
 import MyTask from '@/components/MyTask.vue';
+import MyEarnings from '@/components/MyEarnings.vue';
 import { ref } from 'vue';
 import IEcharts from 'vue3-echarts-v3/src/full.js';
 import axios from 'axios';
@@ -145,6 +146,7 @@ export default {
     NavBar,
     MyAccount,
     MyTask,
+    MyEarnings,
     IEcharts,
   },
   data(){
@@ -500,4 +502,5 @@ export default {
 
 .menu-list .q-item
   border-radius: 0 32px 32px 0
+
 </style>

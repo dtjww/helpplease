@@ -1,93 +1,140 @@
 <!-- Mel -->
 
 <template>
-    <NavBar />
+    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
+
+        <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+
+            <q-toolbar-title shrink>
+                <router-link to="/home/angel" style="color: white; text-decoration: none">
+                    <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                </router-link>
+            </q-toolbar-title>
+            <q-space />
+            <div class="lt-xs mainMenu">
+
+                <q-btn stretch flat label="My Account" @click="handleClick()" />
+
+                <q-btn stretch flat label="Log Out" @click="exit()" />
+
+            </div>
+
+            <div class="gt-s hamburgMenu">
+                <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+                <q-btn-dropdown flat dense dropdown-icon="menu">
+                    <q-list>
+                        <q-item-label header>Menu</q-item-label>
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="favorite" />
+                            </q-item-section>
+                            <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                        </q-item>
+
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="person" />
+                            </q-item-section>
+                            <q-item-section @click="handleClick()">My Account</q-item-section>
+                        </q-item>
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="logout" />
+                            </q-item-section>
+                            <q-item-section @click="exit()">Log Out</q-item-section>
+                        </q-item>
+                    </q-list>
+                </q-btn-dropdown>
+            </div>
+
+        </q-toolbar>
 
 
-    <div>
-        <q-card class="card">
-            <h3>Create a New Task</h3><br>
-            <q-form @submit="submitDB">
+        <div>
+            <q-card class="card">
+                <h3>Create a New Task</h3><br>
+                <q-form @submit="submitDB">
 
-                <table>
-                    <tr>
-                        <td>
-                            <h6>Category of Task</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task"
-                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Choose a Category']"
-                                class="inputboxes" />
-                        </td>
-                    </tr>
+                    <table>
+                        <tr>
+                            <td>
+                                <h6>Category of Task</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task"
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Please Choose a Category']"
+                                    class="inputboxes" />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <h6>Name of Task</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input outlined v-model="inputData.name" maxlength="50" lazy-rules label="Name of Task"
-                                :rules="[val => val && val.length > 0 || 'Please Enter a Name for the Task']"
-                                class="inputboxes" />
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <h6>Name of Task</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-input outlined v-model="inputData.name" maxlength="50" lazy-rules
+                                    label="Name of Task"
+                                    :rules="[val => val && val.length > 0 || 'Please Enter a Name for the Task']"
+                                    class="inputboxes" />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <h6>Description of Task</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1"
-                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Description']"
-                                maxlength="500" class="inputboxes" />
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <h6>Description of Task</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1"
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Description']"
+                                    maxlength="500" class="inputboxes" />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <h6>Price</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
-                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']" prefix='$'
-                                type="number" style='width:15vw;' />
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <h6>Price</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']"
+                                    prefix='$' type="number" style='width:15vw;' />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <h6>Location</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-select outlined v-model="inputData.loc" :options="this.locations" lazy-rules
-                                label="Choose a Location"
-                                :rules="[val => val && val.length > 0 || 'Please Choose a Location']"
-                                class="inputBoxes" />
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <h6>Location</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-select outlined v-model="inputData.loc" :options="this.locations" lazy-rules
+                                    label="Choose a Location"
+                                    :rules="[val => val && val.length > 0 || 'Please Choose a Location']"
+                                    class="inputBoxes" />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <h6>Date & Time</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules
-                                :rules="[val => val && val.length > 0 || 'Please Input a Time']" />
-                            <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules
-                                :rules="[val => val && val.length > 0 || 'Please Input a Date']" />
-                        </td>
+                        <tr>
+                            <td>
+                                <h6>Date & Time</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules
+                                    :rules="[val => val && val.length > 0 || 'Please Input a Time']" />
+                                <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules
+                                    :rules="[val => val && val.length > 0 || 'Please Input a Date']" />
+                            </td>
 
                     </tr>
                     <tr>
@@ -97,7 +144,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-btn color="dark" label="upload image" @click="uploadImage" class="date" />
+                            <q-btn color="white" text-color="positive" label="upload image" @click="uploadImage" class="date" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked />
 
@@ -109,15 +156,15 @@
                         </td>
                     </tr>
                 </table>
-                <q-btn color="white" text-color="black" label="Post Task" class='button' type="submit" />
+                <q-btn color="positive" label="Post Task" class='button' type="submit" />
             </q-form>
         </q-card>
     </div>
+    </q-scroll-area>
 
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
 import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -157,6 +204,20 @@ export default {
                     }, 1500)
                 }, 3000)
 
+            },
+            thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#efa2a4',
+                width: '5px',
+                opacity: 0.75
+            },
+
+            barStyle: {
+                right: '2px',
+                borderRadius: '9px',
+                width: '9px',
+                opacity: 0.2
             }
         }
     },
@@ -199,10 +260,8 @@ export default {
                 'Woodlands South', 'Woodleigh', 'Yew Tee', 'Yio Chu Kang', 'Yishun',],
             imageUrl: '',
             image: null,
+            style: "background: #efa2a4",
         }
-    },
-    components: {
-        NavBar
     },
     methods: {
         // Run when Button is clicked
@@ -361,6 +420,25 @@ h3 {
         width: 150px;
         float: left;
         margin-right: 0px;
+    }
+    
+}
+
+.hamburgMenu {
+        display: none;
+    }
+
+    .mainMenu {
+        display: block;
+    }
+
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
     }
 }
 </style>

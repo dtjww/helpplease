@@ -27,7 +27,7 @@
         class="bg-blue-1 adjust"
         style="border-radius: 4px"
       >
-          <q-list padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list active-color="white" indicator-color="transparent" padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -35,6 +35,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
+                active-class="text-green"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">
@@ -75,12 +76,12 @@
           </q-list>
 
         <!-- my profile -->
-        <q-item class="absolute-top bg-blue-grey-2" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
+        <q-item class="absolute-top bg-blue-grey-2 justify-content-center" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
         <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh"> -->
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="80px" color="secondary" text-color="white">{{myUsername.slice(0,1)}}</q-avatar>
             <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
-            <h6 style="margin:0;padding:0;">{{myUsername}}</h6>
+            <h6 style="margin:0;padding:0; margin-bottom:40px;">{{myUsername}}</h6>
           </div>
         <!-- </q-img> -->
       </q-item>
@@ -90,7 +91,7 @@
         <!-- <q-page padding> -->
   
           <!-- <q-scroll-area style="height: 80vh;" > -->
-                  <q-tab-panels v-model="tab" style=" height: calc(100vh - 78.17px)">
+                  <q-tab-panels v-model="tab"  style=" height: calc(100vh - 78.17px)">
                     
                     
                     <q-tab-panel name="chat1" style="padding: 0;">
@@ -121,13 +122,15 @@
                     <q-item style="height: calc(100vh - 78.17px - 100px - 80px); margin:0; margin-right:0; text-align:left">
                       <div class="q-ma-sm bg-grey-1" style="margin:0; border-radius:3%; width:100%; height:100% ">
                         <!-- for scroll area -->
-                        <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
+                        <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent"  style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
                           <div>
                           <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
                             </div>
-                              <!-- <q-scroll-observer @scroll="onScroll()" /> -->
+                              <q-scroll-observer />
+                              
                         </q-scroll-area>
+                        <q-btn push round class="absolute-bottom" style="margin: auto; width:20px; height:20px; margin-bottom:10px" color="accent" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
@@ -158,6 +161,7 @@
 
         <!-- </q-page> -->
       </q-page-container>
+      
     </q-layout>
 
 <!-- 
@@ -178,6 +182,9 @@ import { onValue } from "firebase/database";
 import ChatMsg from '@/components/ChatMsg.vue';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
+
+import { useQuasar } from 'quasar'
+import { onBeforeUnmount } from 'vue'
 
 const scrollAreaComponent = ref();
 
@@ -236,15 +243,40 @@ export default {
         }
     },
   setup () {
+
+        const $q = useQuasar()
+        let timer
+
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
+
+
     return {
       drawer: ref(false),
       scrollAreaComponent: ref(),
       position: ref(),
+
+      showLoading() {
+                $q.loading.show()
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.submit = true
+                    timer = void 0
+                }, 3000)
     }
-  },
+  }
+},
   methods: {
     scrollBtm(){
       console.log(scrollAreaComponent.value)
+      console.log(this.$refs.scrollAreaComponent.value)
+      
       this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
     },
     onScroll(){
@@ -318,7 +350,9 @@ export default {
         if (this.$route.params.chatid != null) {
         let key;
         key = new Date()
+        console.log(key)
         let key_string = key.toString().replace(/[:/^a-zA-Z ]/g, "")
+        console.log(key_string)
         key_string = key_string.slice(0,-7)
         console.log(key_string)
         // set(dbRef(db, 'Message/' + this.$route.params.chatid + '/' + key_string ), val)
@@ -345,9 +379,9 @@ export default {
                 const message = {
                     username: this.myUsername,
                     text: this.myMsg,
-                    date: new Date().toLocaleString()
+                    date: new Date().toLocaleString('en-US')
                 };
-                console.log(new Date().toLocaleString());
+                console.log(new Date().toLocaleString('en-US'));
                 // To-Do: Push message to firebase
                 this.submitMSG(message);
                 this.myMsg = "";
@@ -362,8 +396,8 @@ export default {
                 // console.log(this.textList);
                 this.chatRefresh();
                 setTimeout(() => {
-                  this.scrollBtm();
-                }, 1000);
+                  this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
+                }, 2000);
             }
         },
         chatRefresh() {
@@ -443,6 +477,11 @@ export default {
         },
       },
     mounted() {
+
+    },
+    created() {
+      
+      this.showLoading();
       this.toload();
       // console.log(this.$route)
       console.log(this.$route.params.id)
@@ -457,9 +496,6 @@ export default {
       setTimeout(() => {
         this.tablist();
       }, 1000);
-    },
-    created() {
-
     },
 
 }
@@ -485,13 +521,7 @@ html, body {
   justify-content: center;
 }
 
-@media (max-width: 600px) {
-  .container { 
-    margin: 0;
-    margin-top: 3%;
-    padding: 0;
-    height: 100%;
-  }
+@media (max-width: 690px) {
   .displayhide{
     display: none;
   }

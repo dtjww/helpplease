@@ -1,178 +1,271 @@
 <!-- Mel -->
 
 <template>
-    <NavBar />
+    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
-    <div v-if="this.format == 'View'">
+        <div v-if="this.format == 'View'">
+            <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
 
-        <q-card class="card">
-            <h3>{{ posts.name }}</h3><br>
-            <img :src="posts.file">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <h6 class="q-mb-none q-mt-md">Description</h6>
-                        <q-field disable dense>
-                            <template v-slot:control>
-                                <div>{{ posts.desc }}</div>
-                            </template>
-                        </q-field>
-                    </div>
+                <q-toolbar-title shrink>
+                    <router-link to="/home/angel" style="color: white; text-decoration: none">
+                        <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                    </router-link>
+                </q-toolbar-title>
+                <q-space />
+                <div class="lt-xs mainMenu">
+
+                    <q-btn stretch flat label="My Account" @click="handleClick()" />
+
+                    <q-btn stretch flat label="Log Out" @click="exit()" />
+
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <h6 class="q-mb-none q-mt-md">Category</h6>
-                        <q-field disable dense>
-                            <template v-slot:control>
-                                <div>{{ posts.category }}</div>
-                            </template>
-                        </q-field>
-                    </div>
+
+                <div class="gt-s hamburgMenu">
+                    <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+                    <q-btn-dropdown flat dense dropdown-icon="menu">
+                        <q-list>
+                            <q-item-label header>Menu</q-item-label>
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="favorite" />
+                                </q-item-section>
+                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                            </q-item>
+
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="person" />
+                                </q-item-section>
+                                <q-item-section @click="handleClick()">My Account</q-item-section>
+                            </q-item>
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="logout" />
+                                </q-item-section>
+                                <q-item-section @click="exit()">Log Out</q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <h6 class="q-mb-none q-mt-md">Location</h6>
-                        <q-field disbale dense>
-                            <template v-slot:control>
-                                <div>{{ posts.loc }}</div>
-                            </template>
-                        </q-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h6>Price</h6>
-                        <q-field readonly prefix="$" >
-                            <template v-slot:control>
-                                <div>{{ posts.price }}</div>
-                            </template>
-                        </q-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h6 class="q-mb-none q-mt-md">Date & Time</h6>
-                        <q-field disable dense>
-                            <template v-slot:control>
-                                <div>{{ posts.date }} {{ posts.time }}</div>
-                            </template>
-                        </q-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <div v-if="posts.accepted == null">
-                            <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true"
-                                flat @click=like style="margin:0"></q-btn>
-                            <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false"
-                                flat @click=like style="margin:0"></q-btn>
+
+            </q-toolbar>
+
+            <q-card class="card">
+                <h3>{{ posts.name }}</h3><br>
+                <img :src="posts.file">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <h6>Description</h6>
+                            <q-field readonly>
+                                <template v-slot:control>
+                                    <div>{{ posts.desc }}</div>
+                                </template>
+                            </q-field>
                         </div>
                     </div>
-                    <div class="col-5" align="right">
-                        <div v-if="posts.accepted == null">
-                            <q-btn color='dark' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Category</h6>
+                            <q-field readonly>
+                                <template v-slot:control>
+                                    <div>{{ posts.category }}</div>
+                                </template>
+                            </q-field>
                         </div>
                     </div>
-                    <div class="col-5" align="right">
-                        <div v-if="posts.accepted == null">
-                            <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Location</h6>
+                            <q-field readonly>
+                                <template v-slot:control>
+                                    <div>{{ posts.loc }}</div>
+                                </template>
+                            </q-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Price</h6>
+                            <q-field readonly prefix="$">
+                                <template v-slot:control>
+                                    <div>{{ posts.price }}</div>
+                                </template>
+                            </q-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Date & Time</h6>
+                            <q-field readonly>
+                                <template v-slot:control>
+                                    <div>{{ posts.date }} {{ posts.time }}</div>
+                                </template>
+                            </q-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div v-if="posts.accepted == null">
+                                <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart"
+                                    v-if="heart == true" flat @click=like style="margin:0"></q-btn>
+                                <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart"
+                                    v-if="heart == false" flat @click=like style="margin:0"></q-btn>
+                            </div>
+                        </div>
+                        <div class="col-5" align="right">
+                            <div v-if="posts.accepted == null">
+                                <q-btn color='dark' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                            </div>
+                        </div>
+                        <div class="col-5" align="right">
+                            <div v-if="posts.accepted == null">
+                                <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div v-if="completedCheck(posts) == 'accepted'">
-                <q-btn color="red" class="btn" @click="taskComplete = true">Task Completed</q-btn>
-            </div>
+                <div v-if="completedCheck(posts) == 'accepted'">
+                    <q-btn color="red" class="btn" @click="taskComplete = true">Task Completed</q-btn>
+                </div>
 
-            <div v-else-if="completedCheck(posts) == 'pending'">
-                <q-btn color="red" class="btn" @click="confirmComplete = true">Confirm Completed Task
-                </q-btn>
-            </div>
-        </q-card>
-    </div>
+                <div v-else-if="completedCheck(posts) == 'pending'">
+                    <q-btn color="red" class="btn" @click="confirmComplete = true">Confirm Completed Task
+                    </q-btn>
+                </div>
+            </q-card>
+        </div>
 
-    <div v-else>
-        <q-card class="card">
-            <h3>{{ posts.name }}</h3><br>
-            <img :src="posts.file">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <h6>Task</h6>
-                        <q-input dense type="text" class="inputBoxes" v-model="this.posts.name"
-                            :rules="[val => val && val.length > 0 || 'Please Enter a Task Name']"></q-input>
-                    </div>
+        <div v-else>
+            <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+
+                <q-toolbar-title shrink>
+                    <router-link to="/home/angel" style="color: white; text-decoration: none">
+                        <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                    </router-link>
+                </q-toolbar-title>
+                <q-space />
+                <div class="lt-xs mainMenu">
+
+                    <q-btn stretch flat label="My Account" @click="handleClick()" />
+
+                    <q-btn stretch flat label="Log Out" @click="exit()" />
+
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <h6>Description</h6>
-                        <q-input dense type="text" class="inputBoxes" v-model="this.posts.desc"
-                            :rules="[val => val && val.length > 0 || 'Please Enter a Description']"></q-input>
-                    </div>
+
+                <div class="gt-s hamburgMenu">
+                    <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
+                        <q-list>
+                            <q-item-label header>Menu</q-item-label>
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="favorite" />
+                                </q-item-section>
+                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                            </q-item>
+
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="person" />
+                                </q-item-section>
+                                <q-item-section @click="handleClick()">My Account</q-item-section>
+                            </q-item>
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="logout" />
+                                </q-item-section>
+                                <q-item-section @click="exit()">Log Out</q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
                 </div>
-                <div class="row">
-                    <div class=col>
-                        <h6>Category</h6>
-                        <q-select dense v-model="this.posts.category" :options="task" lazy-rules
-                            :rules="[val => val && val.length > 0 || 'Please Choose a Category']" class="inputBoxes" />
+
+            </q-toolbar>
+            <q-card class="card">
+                <h3>{{ posts.name }}</h3><br>
+                <img :src="posts.file">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <h6>Task</h6>
+                            <q-input dense type="text" class="inputBoxes" v-model="this.posts.name"
+                                :rules="[val => val && val.length > 0 || 'Please Enter a Task Name']"></q-input>
+                        </div>
                     </div>
-                </div>
-                <div class=row>
-                    <div class="col">
-                        <h6>Location</h6>
-                        <q-select dense v-model="this.posts.loc" :options="this.locations" lazy-rules
-                            :rules="[val => val && val.length > 0 || 'Please Choose a Location']" class="inputBoxes" />
+                    <div class="row">
+                        <div class="col">
+                            <h6>Description</h6>
+                            <q-input dense type="text" class="inputBoxes" v-model="this.posts.desc"
+                                :rules="[val => val && val.length > 0 || 'Please Enter a Description']"></q-input>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h6>Price</h6>
-                        <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price"
-                            style="width:15vw;">
-                        </q-input>
+                    <div class="row">
+                        <div class=col>
+                            <h6>Category</h6>
+                            <q-select dense v-model="this.posts.category" :options="task" lazy-rules
+                                :rules="[val => val && val.length > 0 || 'Please Choose a Category']"
+                                class="inputBoxes" />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h6>Date & Time</h6>
+                    <div class=row>
+                        <div class="col">
+                            <h6>Location</h6>
+                            <q-select dense v-model="this.posts.loc" :options="this.locations" lazy-rules
+                                :rules="[val => val && val.length > 0 || 'Please Choose a Location']"
+                                class="inputBoxes" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Price</h6>
+                            <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price"
+                                style="width:15vw;">
+                            </q-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Date & Time</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <q-input dense type='date' v-model="this.posts.date" class="date">
+                            </q-input>
+                        </div>
+                        <div class="col-6">
+                            <q-input dense type='time' v-model="this.posts.time" class="date">
+                            </q-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <q-btn color="dark" label="upload new image" @click="uploadImage" class="date" />
+                            <input type="file" style="display: none" ref="fileInput" accept='image/*'
+                                @change=onFilePicked /><br>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="margin-bottom:5vh;margin-top:2vh">
+                            <img v-if='imageUrl != ""' :src="imageUrl" width="400" class="date">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <q-input dense type='date' v-model="this.posts.date" class="date">
-                        </q-input>
+                        <q-btn color='info' class="btn" @click=saveChanges>Save Changes</q-btn>
                     </div>
-                    <div class="col-6" >
-                        <q-input dense type='time' v-model="this.posts.time" class="date">
-                        </q-input>
+                    <div class="col-6">
+                        <q-btn color="black" class="btn" @click=delPost>Delete Task</q-btn>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <q-btn color="dark" label="upload new image" @click="uploadImage" class="date" />
-                        <input type="file" style="display: none" ref="fileInput" accept='image/*'
-                            @change=onFilePicked /><br>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="margin-bottom:5vh;margin-top:2vh">
-                        <img v-if='imageUrl != ""' :src="imageUrl" width="400" class="date">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <q-btn color='info' class="btn" @click=saveChanges>Save Changes</q-btn>
-                </div>
-                <div class="col-6">
-                    <q-btn color="black" class="btn" @click=delPost>Delete Task</q-btn>
-                </div>
-            </div>
-        </q-card>
-    </div>
+            </q-card>
+        </div>
+    </q-scroll-area>
 
     <q-dialog v-model="submit">
         <q-card>
@@ -258,14 +351,13 @@
 
 <script>
 import { ref } from 'vue';
-import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
 import { ref as dbRef, update, set, push, remove } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from 'axios';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-import { useQuasar } from 'quasar'
+import { useQuasar, QSpinnerOval } from 'quasar'
 import { onBeforeUnmount } from 'vue'
 
 export default {
@@ -282,15 +374,65 @@ export default {
         return {
             showLoading() {
                 $q.loading.show()
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    timer = void 0
+                }, 2500)
+
+            },
+            showDeleting() {
+                $q.loading.show(
+                    {
+                        message: 'Deleting...',
+                        spinnerSize: 100,
+                        backgroundColor: 'black',
+                        spinner: QSpinnerOval
+                    }
+                )
+
 
                 // hiding in 2s
                 timer = setTimeout(() => {
                     $q.loading.hide()
-                    this.submit = true
+                    this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
                     timer = void 0
                 }, 2500)
 
-            }
+            },
+            showUpdating() {
+                $q.loading.show(
+                    {
+                        message: 'Updating...',
+                        spinnerSize: 100,
+                        backgroundColor: 'black',
+                        spinner: QSpinnerOval
+                    }
+                )
+
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
+                    timer = void 0
+                }, 2500)
+
+            },
+            thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#00000',
+                width: '5px',
+                opacity: 0.75
+            },
+
+            barStyle: {
+                right: '2px',
+                borderRadius: '9px',
+                width: '9px',
+                opacity: 0.2
+            },
         }
     },
     data() {
@@ -336,16 +478,13 @@ export default {
             angel: '',
             currUser: storeName.username,
             poster: this.$route.params.poster,
-
             myUserDetails: [],
             existingChat: false,
             chatId: '',
 
         }
     },
-    components: {
-        NavBar
-    },
+
     methods: {
         // Run when Button is clicked
         gotoHome() {
@@ -381,12 +520,14 @@ export default {
                     else {
                         if (this.poster == this.currUser) {
                             this.format = "Edit"
-                            console.log('yes1')
+                            this.style = "background-color: #efa2a4"
+                            this.thumbStyle.backgroundColor = '#efa2a4'
                             return 'Edit'
                         }
                         else {
                             this.format = "View"
-
+                            this.style = "background-color: #3760b8"
+                            this.thumbStyle.backgroundColor = '#3760b8'
                             return 'View'
                         }
                     }
@@ -453,11 +594,11 @@ export default {
                 .then(() => {
                     var temp = {}
                     temp[this.chatId] = this.id
-                    set(dbRef(db, 'Login/' + this.currUser + '/chats'), temp)
-                    set(dbRef(db, 'Login/' + this.poster + '/chats'), temp)
+                    set(dbRef(db, 'Login/' + this.currUser + '/chats/' + this.chatId), this.id)
+                    set(dbRef(db, 'Login/' + this.poster + '/chats/' + this.chatId), this.id)
                     var temp2 = {}
                     temp2[this.chatId] = this.currUser
-                    set(dbRef(db, 'TaskData/' + this.id + '/chats'), temp2)
+                    set(dbRef(db, 'TaskData/' + this.id + '/chats/' + this.chatId), this.currUser)
 
                 })
             // 
@@ -514,7 +655,7 @@ export default {
         },
         saveChanges() {
             update(dbRef(db, 'TaskData/' + this.id), this.posts)
-            this.showloading()
+            this.showUpdating()
         },
         uploadImage() {
             this.$refs.fileInput.click()
@@ -537,11 +678,8 @@ export default {
             this.updateImage()
         },
         delPost() {
+            this.showDeleting()
             remove(dbRef(db, 'TaskData/' + this.id))
-            this.deletePost = true
-            setTimeout(() => {
-                this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
-            }, 3200);
         },
         gotoHomeInstant() {
             this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
@@ -565,10 +703,10 @@ export default {
                 angel: storeName.username,
                 dateOffer: date
             })
-            this.showLoading()
             this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
         },
         updateCompleted() {
+
             const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             update(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 datePending: date
@@ -580,7 +718,7 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + storeName.username), {
                 status: 'pending',
             });
-            this.showloading()
+            this.showLoading()
             this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'pending' } })
 
         },
@@ -619,7 +757,6 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + '/accepted/' + this.angel), {
                 status: 'completed',
             });
-            this.showloading()
             this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
         },
 
@@ -743,7 +880,25 @@ h3 {
     }
 }
 
-q-input{
-    padding:0
+q-input {
+    padding: 0
+}
+
+.hamburgMenu {
+    display: none;
+}
+
+.mainMenu {
+    display: block
+}
+
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
+    }
 }
 </style>
