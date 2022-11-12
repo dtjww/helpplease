@@ -19,7 +19,7 @@
                 <q-btn-dropdown stretch flat label="Notifications">
                     <q-list>
                         <q-item-label header>Recently Received Notifications</q-item-label>
-                        <!-- <q-item v-for="n in 3" :key="`x.${n}`" clickable v-close-popup tabindex="0"> -->
+                
                         <q-item clickable v-close-popup class="bg-secondary">
                             <q-item-section avatar>
                                 <q-icon name="notifications" color="warning" />

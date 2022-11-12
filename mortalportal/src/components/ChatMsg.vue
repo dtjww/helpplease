@@ -1,12 +1,11 @@
 <template>
 
-    <div class="bg-bg-deep-purple-1 back">
+    <div class="back">
     <template v-for="msg in textList" :key="msg">
         <template v-if="getMyUsername(msg.username)">
             <!-- <div> MEMEME: {{msg.text}}</div> -->
             <q-chat-message
-                name="me"
-                avatar="https://cdn.quasar.dev/img/avatar1.jpg"
+                name="me"            
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
                 sent
@@ -15,7 +14,6 @@
         <template v-else>
             <q-chat-message
                 :name= msg.username
-                avatar="https://cdn.quasar.dev/img/avatar1.jpg"
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
                 />
