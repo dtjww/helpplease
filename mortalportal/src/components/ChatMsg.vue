@@ -1,6 +1,6 @@
 <template>
-
-    <div class="back">
+    <div class="q-pa-md row justify-center">
+        <div style="width: 100%; max-width: 1200px">
     <template v-for="msg in textList" :key="msg">
         <template v-if="getMyUsername(msg.username)">
             <!-- <div> MEMEME: {{msg.text}}</div> -->
@@ -20,8 +20,8 @@
         </template>
     </template>
 </div>
+</div>
 </template>
-
 
 <script>
 // import { date } from 'quasar'
