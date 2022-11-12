@@ -27,7 +27,7 @@
         class="bg-blue-1 adjust"
         style="border-radius: 4px"
       >
-          <q-list padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list active-color="white" indicator-color="transparent" padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -35,6 +35,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
+                active-color="dark"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">
@@ -90,7 +91,7 @@
         <!-- <q-page padding> -->
   
           <!-- <q-scroll-area style="height: 80vh;" > -->
-                  <q-tab-panels v-model="tab" style=" height: calc(100vh - 78.17px)">
+                  <q-tab-panels v-model="tab"  style=" height: calc(100vh - 78.17px)">
                     
                     
                     <q-tab-panel name="chat1" style="padding: 0;">
@@ -121,13 +122,15 @@
                     <q-item style="height: calc(100vh - 78.17px - 100px - 80px); margin:0; margin-right:0; text-align:left">
                       <div class="q-ma-sm bg-grey-1" style="margin:0; border-radius:3%; width:100%; height:100% ">
                         <!-- for scroll area -->
-                        <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
+                        <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent"  style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
                           <div>
                           <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
                             </div>
-                              <!-- <q-scroll-observer @scroll="onScroll()" /> -->
+                              <q-scroll-observer />
+                              
                         </q-scroll-area>
+                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="grey" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
@@ -158,6 +161,7 @@
 
         <!-- </q-page> -->
       </q-page-container>
+      
     </q-layout>
 
 <!-- 
@@ -245,6 +249,8 @@ export default {
   methods: {
     scrollBtm(){
       console.log(scrollAreaComponent.value)
+      console.log(this.$refs.scrollAreaComponent.value)
+      
       this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
     },
     onScroll(){
@@ -362,8 +368,8 @@ export default {
                 // console.log(this.textList);
                 this.chatRefresh();
                 setTimeout(() => {
-                  this.scrollBtm();
-                }, 1000);
+                  this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
+                }, 2000);
             }
         },
         chatRefresh() {
