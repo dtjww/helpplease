@@ -160,6 +160,7 @@
             </q-form>
         </q-card>
     </div>
+</q-scroll-area>
 
 </template>
 
