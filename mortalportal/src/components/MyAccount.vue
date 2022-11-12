@@ -114,21 +114,7 @@
         </div>
 
     </form>
-    <q-dialog v-model="submit">
-        <q-card>
-            <q-card-section>
-                <div class="text-h5">Success!</div>
-            </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                Your account details have been updated. 
-            </q-card-section>
-
-            <q-card-actions align="right">
-                <q-btn flat label="Close" color="dark" v-close-popup />
-            </q-card-actions>
-        </q-card>
-    </q-dialog>
 
 </template>
 
