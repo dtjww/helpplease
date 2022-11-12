@@ -35,7 +35,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
-                active-class="text-black"
+                active-class="text-green"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">
@@ -379,9 +379,9 @@ export default {
                 const message = {
                     username: this.myUsername,
                     text: this.myMsg,
-                    date: new Date().toLocaleString('en-US', {month: 'short'})
+                    date: new Date().toLocaleString('en-US')
                 };
-                console.log(new Date().toLocaleString('en-US', {month: 'short'}));
+                console.log(new Date().toLocaleString('en-US'));
                 // To-Do: Push message to firebase
                 this.submitMSG(message);
                 this.myMsg = "";
@@ -477,6 +477,11 @@ export default {
         },
       },
     mounted() {
+
+    },
+    created() {
+      
+      this.showLoading();
       this.toload();
       // console.log(this.$route)
       console.log(this.$route.params.id)
@@ -491,9 +496,6 @@ export default {
       setTimeout(() => {
         this.tablist();
       }, 1000);
-    },
-    created() {
-      this.showLoading();
     },
 
 }
