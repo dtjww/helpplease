@@ -129,7 +129,7 @@
                               <q-scroll-observer />
                               
                         </q-scroll-area>
-                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="grey" icon="arrow_downward" @click="scrollBtm()" />
+                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="accent" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
@@ -323,7 +323,9 @@ export default {
         if (this.$route.params.chatid != null) {
         let key;
         key = new Date()
+        console.log(key)
         let key_string = key.toString().replace(/[:/^a-zA-Z ]/g, "")
+        console.log(key_string)
         key_string = key_string.slice(0,-7)
         console.log(key_string)
         // set(dbRef(db, 'Message/' + this.$route.params.chatid + '/' + key_string ), val)
