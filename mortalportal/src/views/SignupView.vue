@@ -62,28 +62,13 @@
             <div class="text-h6">Mortal Portal</div>
           </q-card-section>
           <q-tabs v-model="tab" class="text-teal">
-            <q-tab label="Login" name="Login" />
+            <q-tab label="Login" name="Login" @click=gotoLogin() />
             <q-tab label="Sign Up" name="Sign Up" />
           </q-tabs>
 
           <q-separator />
           <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="Login">
-              <q-card-section class="text-center q-pa-none">
-                <p class="text-grey-6">Not registered? Sign up for an account!</p>
-              </q-card-section>
 
-
-              <q-card-section>
-                <q-form class="q-gutter-md">
-                  <q-input square filled clearable v-model="email_login" type="text" label="Email" />
-                  <q-input square filled clearable v-model="password_login" type="password" label="Password" />
-                </q-form>
-              </q-card-section>
-              <q-card-actions class="q-px-md">
-                <q-btn unelevated color="primary" size="lg" class="full-width " label="Login" @click=getUser />
-              </q-card-actions>
-            </q-tab-panel>
 
             <q-tab-panel name="Sign Up">
               <q-card-section class="text-center q-pa-none">
@@ -100,7 +85,7 @@
                 </div> -->
 
                 <div class="googleLogin">
-                  
+
                   <h6 v-if="lUser != null" class="text-black">{{ lUser }}</h6>
                   <div id="firebaseui-auth-container"></div>
                   <div id="loader">Loading...</div>
@@ -280,7 +265,6 @@ export default {
             console.log('Signed in by user ' + user.value);
             storeName.name = user.value
             storeName.email = email.value
-
             // so it doesn't refresh the page
             return true;
           },
@@ -309,7 +293,7 @@ export default {
           console.log(error);
         });
       }
-      
+
 
 
       // google login end
@@ -320,9 +304,11 @@ export default {
         handleSignOut,
 
         // google login end
-      }}
-      ,
-
+      }
+    },
+    gotoLogin() {
+      this.$router.push('/login')
+    }
   },
   mounted:
     function () {
