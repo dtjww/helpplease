@@ -182,6 +182,9 @@ import ChatMsg from '@/components/ChatMsg.vue';
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
 
+import { useQuasar } from 'quasar'
+import { onBeforeUnmount } from 'vue'
+
 const scrollAreaComponent = ref();
 
 // const chatId = this.randomload()
@@ -239,12 +242,35 @@ export default {
         }
     },
   setup () {
+
+        const $q = useQuasar()
+        let timer
+
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
+
+
     return {
       drawer: ref(false),
       scrollAreaComponent: ref(),
       position: ref(),
+
+      showLoading() {
+                $q.loading.show()
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.submit = true
+                    timer = void 0
+                }, 3000)
     }
-  },
+  }
+},
   methods: {
     scrollBtm(){
       console.log(scrollAreaComponent.value)
@@ -323,7 +349,9 @@ export default {
         if (this.$route.params.chatid != null) {
         let key;
         key = new Date()
+        console.log(key)
         let key_string = key.toString().replace(/[:/^a-zA-Z ]/g, "")
+        console.log(key_string)
         key_string = key_string.slice(0,-7)
         console.log(key_string)
         // set(dbRef(db, 'Message/' + this.$route.params.chatid + '/' + key_string ), val)
@@ -350,9 +378,9 @@ export default {
                 const message = {
                     username: this.myUsername,
                     text: this.myMsg,
-                    date: new Date().toLocaleString()
+                    date: new Date().toLocaleString('en-US', {month: 'short'})
                 };
-                console.log(new Date().toLocaleString());
+                console.log(new Date().toLocaleString('en-US', {month: 'short'}));
                 // To-Do: Push message to firebase
                 this.submitMSG(message);
                 this.myMsg = "";
@@ -464,7 +492,7 @@ export default {
       }, 1000);
     },
     created() {
-
+      this.showLoading();
     },
 
 }
