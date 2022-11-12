@@ -18,17 +18,15 @@
       <q-drawer
         v-model="drawer"
         behavior="desktop"
-        :width="280"
+        :width="290"
         :mini="miniState"
-        @mouseover="miniState = false"
-        @mouseout="miniState = true"
         :mini-width="160"
         mini-to-overlay="500"
         show-if-above
         :breakpoint="400"
         class="bg-light-blue-1 adjust"
       >
-          <q-list padding style="margin-top: 120px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list padding style="margin-top: 24vh; border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -36,7 +34,8 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
-                @click="paramTask(value.task, value.index)" >
+                @click="paramTask(value.task, value.index)" 
+                style="padding:3%">
                       <q-item-section side>
                         <q-avatar rounded size="48px">
                           <img :src="value.taskPic" />
@@ -54,7 +53,7 @@
               </q-item>
               </template>
               <template v-else>
-                <q-item clickable v-ripple @click="paramTask(value.task, value.index)">
+                <q-item clickable v-ripple @click="paramTask(value.task, value.index)" style="padding:3%">
                   <q-item-section side>
                     <q-avatar rounded size="48px">
                       <img :src="value.taskPic" />
@@ -75,7 +74,7 @@
           </q-list>
 
         <!-- my profile -->
-        <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 130px">
+        <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh">
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
@@ -89,14 +88,14 @@
       <q-page-container>
         <!-- <q-page padding> -->
   
-          <q-scroll-area style="height: 69vh;" >
-                  <q-tab-panels v-model="tab" >
+          <q-scroll-area style="height: 75vh;" >
+                  <q-tab-panels v-model="tab" style="height: 75vh;">
                     
                     
                     <q-tab-panel name="chat1">
                       
                       
-                      <q-item class="bg-pink-1" style="margin:0%; border:solid 2px; border-color:#ddd; border-radius:8px; text-align:left; font-style:italic; height:13vh; text-align:left">
+                      <q-item class="bg-grey-3" style="margin:0%; border: 2px solid; border-color:rgb(215, 215, 215); border-radius:8px; text-align:left; font-style:italic; height:13vh; text-align:left">
                         <q-item-section side class="displayhide" style="height:max-content">
                           <img :src="posts.file" style="height:10vh; display: block; margin: 5px; border-radius:2px">
                         </q-item-section>
@@ -114,17 +113,17 @@
                           <q-item-label><q-btn flat color="red" label="Back To Task" @click="toTask()"/></q-item-label>
                         </q-item-section>
                       </q-item>
-
-                      <div class="q-ma-sm bg-grey-1" style="padding:5px; border-radius:3%">
+                      
+                      <div class="q-ma-sm bg-grey-1" style="padding:5px; border-radius:3%;">
                         <!-- for scroll area -->
-                        <q-scroll-area id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: 320px; max-width: auto; text-align:left">
+                        <q-scroll-area id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: 40vh; margin:2% ; text-align:left">
                           <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
                               <q-scroll-observer @scroll="onScroll()" />
                         </q-scroll-area>
                     </div>
               
-          
+
                     <!-- FOR INPUT OF TEXT -->
                     <q-input class="textinput" rounded outlined v-model="myMsg" placeholder="Send a Text Here" @keyup.enter="sendMessage()">
                       <template v-slot:after>
@@ -132,11 +131,16 @@
                       </template>
                     </q-input>
 
+
+
                     </q-tab-panel>
             
-                    <q-tab-panel name="chat2">
+                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 4px solid; border-color:rgb(215, 215, 215); border-radius:5px">
                       <!-- <div class="text-h6">chat2</div> -->
-                      <q-card> <h2> Oi please choose chat leh wtf</h2></q-card>
+                      <!-- <q-card class="justify-content-center text-center" style="height: 100%;">  -->
+                        <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:25%"> No Chats Selected</h3>
+                        <h6 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-top:0;">Please select a chat or look through some tasks!</h6>
+                      <!-- </q-card> -->
                     </q-tab-panel>
             
 
