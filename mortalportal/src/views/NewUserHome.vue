@@ -14,7 +14,7 @@
         <q-page>
           <div style="margin:0%;padding:0px">
             <div>
-              <div class="container-3" style="position:absolute;width:100%;height:100vh;z-index:3">
+              <div class="container-3 font" style="position:absolute;width:100%;height:100vh;z-index:3">
                 <div class="text-h1 bg-transparent" :class="textColor" style="position:absolute;top:70;z-index:3">Lend a
                   hand today!
                 </div>
@@ -54,41 +54,33 @@
 
             <div class="font" style="margin:0;padding:0;width:100%">
               <div v-motion-fade-visible >
-                <q-parallax src="@/assets/masonry.jpg" :speed="1">
+                <q-parallax src="@/assets/testing2.jpg" :speed="1" style="opacity: 0.9; height: 100vh;">
                   <div class="row bg-transparent center" style="height: 100vh;">
-                    <div class="col q-pl-xl bg-transparent" style="padding:0px">
+                    <div class="col q-pl-xl bg-transparent" style="padding:0px;">
                       <div class="bg-transparent"
-                        style="max-width: 550px; text-align: center; margin-left:auto; margin-right: auto">
-                        <div class="text-h2 text-bold text-primary q-pb-md bg-transparent"> Find an angel on Mortal Portal
+                        style="max-width: 80vw; text-align: center; margin-left:auto; margin-right: auto">
+                        <div class="text-h5 text-italic text-bold text-white bg-transparent" style="text-shadow: #000 5px 2px 5px;">
+                          <div class="text-h2 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal Portal</div>
+                          <div class="text-h6 text-italic text-primary bg-transparent">
+                            As a mortal, leverage on local residents to complete tasks you don't have time or knowledge to
+                            carry
+                            out.
+                            <br>
+                            Ask for more, with angels at your door!
+                          </div>
+                          <div class="text-h4 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent" style="text-shadow: #000 5px 2px 5px;"> What do you
+                            need
+                            help with today?
+                          </div>
                         </div>
-                        <div class="text-h6 text-italic text-primary bg-transparent">
-                          As a mortal, leverage on local residents to complete tasks you don't have time or knowledge to
-                          carry
-                          out.
-                          <br>
-                          Ask for more, with angels at your door!
-                        </div>
-                        <div class="text-h5 text-bold text-primary q-pl-lg q-pr-lg q-pb-sm bg-transparent"> What do you
-                          need
-                          help with today?
-                        </div>
-                        <!-- <q-input class="rounded-pill bg-transparent" color="black" rounded outlined
-                      placeholder="Try searching for a task (e.g. 'help me buy groceries')">
-                      <template v-slot:prepend>
-                        <q-icon name="search" />
-                      </template>
-                      <template v-slot:append>
-                        <q-btn unelevated rounded color="primary" label="Search" class="bg-transparent" />
-                      </template>
-                    </q-input> -->
                       </div>
                     </div>
                   </div>
                 </q-parallax>
               </div>
 
-              <div style="padding-top:5vw" v-motion-fade-visible>
-                <div class="text-h3 text-bold text-left font" style="margin-left:10vw"> Services provided
+              <div style="padding-top:7vw" v-motion-fade-visible>
+                <div class="text-h3 text-bold text-left font" style="margin-left:10vw;"> Services provided
                 </div>
                 <q-carousel animated v-model="slide2" arrows transition-prev="slide-right" transition-next="slide-left"
                   class="rounded-borders animate__animated animate__fadeIn animated__slower" control-text-color="accent"
@@ -99,6 +91,8 @@
                       style="height:100%; width:98vw;margin-left:auto;margin-right:auto;">
 
                       <q-img class="col-2 full-height" style="width:15vw;display:flex">
+                        <img class=" rounded-top rounded-bottom col-2 full-height" style="width:15vw;height:60vh"
+                          src="https://images.unsplash.com/photo-1526572195979-0f8a7ea44489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <img class=" rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1628435600697-6a954dea5055?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -150,6 +144,8 @@
                       style="height:100%; width:98vw;margin-left:auto;margin-right:auto;">
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
+                        <img class="rounded-borders col-2 full-height"
+                          src="https://images.unsplash.com/photo-1618007625018-51cbd56c0520?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fGRlbGl2ZXJ5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
                         <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -158,6 +154,8 @@
                         </div>
                       </q-img>
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
+                        <img class="rounded-borders col-2 full-height"
+                          src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1627905646269-7f034dcc5738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -166,6 +164,8 @@
                         </div>
                       </q-img>
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
+                        <img class="rounded-borders col-2 full-height"
+                          src="https://images.unsplash.com/photo-1580236244963-a380f57499e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1601758125997-67e236238ab0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -174,6 +174,8 @@
                         </div>
                       </q-img>
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
+                        <img class="rounded-borders col-2 full-height"
+                          src="https://images.unsplash.com/photo-1599453052061-5c377643e4fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1621356986575-05811227a42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -182,6 +184,8 @@
                         </div>
                       </q-img>
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
+                        <img class="rounded-borders col-2 full-height"
+                          src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1621992906830-b3f3aabac38b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
@@ -194,13 +198,13 @@
                 </q-carousel>
               </div>
 
-              <div class="row bg-transparent center font" v-motion-fade-visible
-                style="position:absolute;width:100%;height:100vh;text-align: center; margin-left:auto; margin-right: auto">
+              <div class="row bg-transparent font" v-motion-fade-visible
+                style="position:absolute;width:100%;height:100vh;text-align: center; margin-left:auto; margin-right: auto;">
                 <div class="text-h2 bg-transparent text-bold text-white"
-                  style="position:absolute;z-index:2;text-align: center;width:100%">
+                  style="position:absolute;z-index:2;text-align: center;width:100%; padding-top: 40%; text-shadow: #000 5px 2px 5px;">
                   Lend your hand in everyday tasks
                   <div class="text-h6 bg-transparent text-italic text-white"
-                    style="position:absolute;z-index:2;text-align: center;width:100%">
+                    style="position:absolute;z-index:2;text-align: center;width:100%; text-shadow: #000 5px 2px 5px;">
                     As an Angel, you can start earning money by helping out your neighbours with everyday tasks.
                     <br>
                     <strong>Get started today!</strong>
@@ -295,7 +299,7 @@ export default {
       this.$router.push({ name: 'Task Details', params: { id: id } })
     },
     onScroll(position) {
-      if (position > 475) {
+      if (position > 800) {
         this.WhiteNavbar = false;
         this.transNavbar = true;
         console.log(this.WhiteNavbar)
