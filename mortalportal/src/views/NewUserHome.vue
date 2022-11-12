@@ -17,9 +17,15 @@
               <div class="container-2 font" style="position:absolute;width:100%;height:100vh;z-index:2">
                 <div class="text-h1 bg-transparent" :class="textColor" style="position:absolute;top:70;z-index:3">Lend a
                   hand today!</div>
+              <div class="container-3" style="position:absolute;width:100%;height:100vh;z-index:3">
+                <div class="text-h1 bg-transparent" :class="textColor" style="position:absolute;top:70;z-index:3">Lend a
+                  hand today!
+                </div>
                 <div class="text-h5 bg-transparent" :class="subtextColor" style="position:absolute;top:90%;z-index:3">
                   Complete tasks
                   as an Angel and earn</div>
+              </div>
+              <div class="container-2" style="position:absolute;width:100%;height:100vh;z-index:2">
               </div>
               <q-carousel class="animate__animated animate__fadeIn" animated v-model="slide" infinite
                 :autoplay="autoplay1" transition-prev="slide-right" transition-next="slide-left"
@@ -59,6 +65,10 @@
                         <div class="text-h1 text-bold text-white q-pb-md bg-transparent" style="text-shadow: #000 5px 2px 5px;"> Find an angel on Mortal Portal
                         </div>
                         <div class="text-h5 text-italic text-bold text-white bg-transparent" style="text-shadow: #000 5px 2px 5px;">
+                        style="max-width: 550px; text-align: center; margin-left:auto; margin-right: auto">
+                        <div class="text-h2 text-bold text-primary q-pb-md bg-transparent"> Find an angel on Mortal Portal
+                        </div>
+                        <div class="text-h6 text-italic text-primary bg-transparent">
                           As a mortal, leverage on local residents to complete tasks you don't have time or knowledge to
                           carry
                           out.
@@ -66,6 +76,7 @@
                           Ask for more, with angels at your door!
                         </div>
                         <div class="text-h4 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent" style="text-shadow: #000 5px 2px 5px;"> What do you
+                        <div class="text-h5 text-bold text-primary q-pl-lg q-pr-lg q-pb-sm bg-transparent"> What do you
                           need
                           help with today?
                         </div>
@@ -98,6 +109,8 @@
                       <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class=" rounded-top rounded-bottom col-2 full-height" style="width:15vw;height:60vh"
                           src="https://images.unsplash.com/photo-1526572195979-0f8a7ea44489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                        <img class=" rounded-borders col-2 full-height" style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1628435600697-6a954dea5055?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Build your site</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Website Design</strong></div>
@@ -105,8 +118,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class=" rounded-borders rounded-2 col-2 full-height bg-transparent"
-                          style="width:15vw;height:50vh"
+                        <img class=" rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1628435600697-6a954dea5055?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Enhance your photos</div>
@@ -115,7 +127,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height" style="width:15vw;height:65vh;border-radius: 2%;"
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1558975285-193b2c315c2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Go Viral</div>
@@ -124,7 +136,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height" style="width:15vw;height:75vh"
+                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80">
                         <div class="absolute-bottom text-right bg-transparent">
                           <div class="text-h7 bg-transparent" :class="subtextColor">All Languages</div>
@@ -133,7 +145,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded col-2 full-height" style="width:15vw"
+                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1565689876697-e467b6c54da2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Make some quick bucks</div>
@@ -146,9 +158,12 @@
                   <q-carousel-slide :name="2" class="column font items-center" style="width:98vw">
                     <div class="row fit justify-center items-center q-gutter-md q-col-gutter"
                       style="height:100%; width:98vw;margin-left:auto;margin-right:auto;">
+
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1618007625018-51cbd56c0520?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fGRlbGl2ZXJ5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
+                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">On the go</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Food Delivery</strong></div>
@@ -157,6 +172,8 @@
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80">
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1627905646269-7f034dcc5738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Tidy up your workspace</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Cleaning</strong></div>
@@ -165,6 +182,8 @@
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1580236244963-a380f57499e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1601758125997-67e236238ab0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Walk a furry friend</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Dog Walking</strong></div>
@@ -173,6 +192,8 @@
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1599453052061-5c377643e4fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80">
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1621356986575-05811227a42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Deepen your learning</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Private Tuition</strong></div>
@@ -181,6 +202,8 @@
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
+                          src="https://images.unsplash.com/photo-1621992906830-b3f3aabac38b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Get professional shots</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Photography</strong></div>
@@ -342,6 +365,16 @@ export default {
   width: 100%;
   background-color: #000000;
   opacity: 0.5;
+  text-align: left;
+  padding-top: 400px;
+  padding-left: 100px;
+  /* margin-top: 78.17px; */
+}
+
+.container-3 {
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
   text-align: left;
   padding-top: 400px;
   padding-left: 100px;

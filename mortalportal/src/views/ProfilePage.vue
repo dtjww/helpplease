@@ -1,4 +1,4 @@
-<!-- Ban QAjaxBar -->
+<!-- Ban QAjaxBar
 <template>
     <div>
       <h2>Vue.js and D3 Line Chart</h2>
@@ -87,4 +87,4 @@
         .attr("d", line);
     },
   };
-  </script>
+  </script> -->
