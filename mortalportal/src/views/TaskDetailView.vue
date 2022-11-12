@@ -11,8 +11,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <h6>Description</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Description</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.desc }}</div>
                             </template>
@@ -21,8 +21,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Category</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Category</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.category }}</div>
                             </template>
@@ -31,8 +31,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Location</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Location</h6>
+                        <q-field disbale dense>
                             <template v-slot:control>
                                 <div>{{ posts.loc }}</div>
                             </template>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h6>Date & Time</h6>
-                        <q-field readonly>
+                        <h6 class="q-mb-none q-mt-md">Date & Time</h6>
+                        <q-field disable dense>
                             <template v-slot:control>
                                 <div>{{ posts.date }} {{ posts.time }}</div>
                             </template>
@@ -207,9 +207,9 @@
     </q-dialog>
 
     <q-dialog v-model="Offer">
-        <q-card>
+        <q-card class="q-pa-lg">
             <q-card-section>
-                <div class="text-h6">Make an Offer</div>
+                <div class="text-h6"><strong>Make an offer</strong></div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
