@@ -11,8 +11,8 @@
                 </router-link>
             </q-toolbar-title>
             <q-space />
-            <div class="lt-xs">
-                <q-btn stretch flat label="Saved" @click="gotoSaved()" />
+            <div class="lt-xs mainMenu">
+                <q-btn stretch flat label="Saved" @click="SavedBtn()" />
 
 
                 <!-- <q-btn stretch flat label="Notifications" /> -->
@@ -113,7 +113,7 @@
 
             </div>
 
-            <div class="gt-s">
+            <div class="gt-s hamburgMenu">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
                 <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
                     <q-list>
@@ -200,6 +200,8 @@
         </q-toolbar>
     </div>
 
+
+
     <table align="center">
         <tr>
             <td class="actionbtns">
@@ -224,10 +226,12 @@
         </tr>
     </table>
 
+
     <!-- Angel -->
     <div v-if="Selection == 'Angel' && targetP == 'angel'">
+
         <table align="center">
-            <tr>
+            <tr style="width:36vw">
                 <td align='center'>
                     <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
                         @click="FindBtn">Find</q-btn>
@@ -246,7 +250,7 @@
 
             </tr>
             <tr v-if="activeBtn == 'Find'">
-                <td colspan="3" align='center'>
+                <td colspan="3" align='left'>
                     <q-input rounded outlined label="Search" class="search" v-model="search" color="dark"
                         text-color="white">
                     </q-input>
@@ -330,7 +334,7 @@
                     </q-list>
                 </q-card-section>
             </q-card>
-            
+
 
         </div>
 
@@ -459,14 +463,34 @@ import axios from 'axios';
 import { ref } from 'vue'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-// import Filter, { default as fData } from '@/components/FilterTable.vue'
+import { useQuasar } from 'quasar'
+import { onBeforeUnmount } from 'vue'
 
 
 export default {
     setup() {
+        const $q = useQuasar()
+        let timer
 
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
         return {
-            tab: ref('mails')
+            tab: ref('mails'),
+            showLoading() {
+                $q.loading.show()
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.submit = true
+                    timer = void 0
+                }, 3000)
+
+            }
         }
     },
 
@@ -535,7 +559,7 @@ export default {
                     icon: "exit_to_app"
                 }
             ],
-            style:''
+            style: ''
         }
     }
 
@@ -566,6 +590,7 @@ export default {
             this.$router.push({ name: 'Task Details', params: { id: id, poster: username } })
         },
         FindBtn() {
+            this.showLoading()
             this.activeBtn = 'Find'
             console.log(this.activeBtn)
         },
@@ -578,6 +603,7 @@ export default {
             console.log(this.activeBtn)
         },
         angelBtn() {
+            this.showLoading()
             this.Selection = 'Angel'
             this.targetP = 'angel'
             document.getElementById('navbar').style.backgroundColor = '#3760b8'
@@ -737,7 +763,7 @@ export default {
         }
         else {
             this.targetP = 'mortal'
-            this.style='background-color: #efcebe'
+            this.style = 'background-color: #efcebe'
         }
         if (storeName.username == '') {
             this.$router.push('/login')
@@ -802,12 +828,12 @@ export default {
 .search {
     margin-top: 15px;
     margin-bottom: 15px;
-    width: 36vw;
-    float: left
+    width: 37vw;
+
 }
 
 .actionbtns {
-    width: 150px;
+    width: 12vw;
 }
 
 .my-card {
@@ -833,6 +859,14 @@ export default {
 .fontAlign {
     text-align: left;
     padding-left: 30px;
+}
+
+.hamburgMenu {
+    display: none;
+}
+
+.mainMenu {
+    display: block
 }
 
 // ----------------------------------
@@ -916,6 +950,7 @@ figure>q-card {
 
 }
 
+
 @media (max-width: 600px) {
     .containerAngel {
         grid-template-columns: repeat(2, 1fr);
@@ -943,6 +978,16 @@ figure>q-card {
 
     .q-card {
         max-width: 100%;
+    }
+}
+
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
     }
 }
 </style>

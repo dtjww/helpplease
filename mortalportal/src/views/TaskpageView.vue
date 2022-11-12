@@ -17,7 +17,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Choose a Category']"
+                            <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task"
+                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Choose a Category']"
                                 class="inputboxes" />
                         </td>
                     </tr>
@@ -30,7 +31,8 @@
                     <tr>
                         <td>
                             <q-input outlined v-model="inputData.name" maxlength="50" lazy-rules label="Name of Task"
-                            :rules="[ val => val && val.length > 0 || 'Please Enter a Name for the Task']" class="inputboxes" />
+                                :rules="[val => val && val.length > 0 || 'Please Enter a Name for the Task']"
+                                class="inputboxes" />
                         </td>
                     </tr>
 
@@ -41,7 +43,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Description']"
+                            <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1"
+                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Description']"
                                 maxlength="500" class="inputboxes" />
                         </td>
                     </tr>
@@ -53,8 +56,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Enter a Price']"
-                                prefix='$' type="number" style='width:15vw;' />
+                            <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
+                                lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']" prefix='$'
+                                type="number" style='width:15vw;' />
                         </td>
                     </tr>
 
@@ -65,8 +69,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-select outlined v-model="inputData.loc" :options="this.locations" lazy-rules label="Choose a Location"
-                            :rules="[val => val && val.length > 0 || 'Please Choose a Location']" class="inputBoxes" />
+                            <q-select outlined v-model="inputData.loc" :options="this.locations" lazy-rules
+                                label="Choose a Location"
+                                :rules="[val => val && val.length > 0 || 'Please Choose a Location']"
+                                class="inputBoxes" />
                         </td>
                     </tr>
 
@@ -77,8 +83,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules :rules="[ val => val && val.length > 0 || 'Please Input a Time']" />
-                            <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules :rules="[ val => val && val.length > 0 || 'Please Input a Date']" />
+                            <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules
+                                :rules="[val => val && val.length > 0 || 'Please Input a Time']" />
+                            <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules
+                                :rules="[val => val && val.length > 0 || 'Please Input a Date']" />
                         </td>
 
                     </tr>
@@ -104,71 +112,60 @@
                 <q-btn color="white" text-color="black" label="Post Task" class='button' type="submit" />
             </q-form>
         </q-card>
-
-        <q-dialog v-model="submit">
-            <q-card>
-                <q-card-section>
-                    <div class="text-h6">Success!</div>
-                </q-card-section>
-
-                <q-card-section class="q-pt-none">
-                    Your task has been successfully published for our Angels to pick up ! 
-                </q-card-section>
-
-                <q-card-actions align="right">
-                    <q-btn flat label="Home" color="dark" v-close-popup @click=gotoHome />
-                    <q-btn flat label="Post Another Task" color="dark" v-close-popup @click=gotoTask />
-                </q-card-actions>
-            </q-card>
-        </q-dialog>
-
     </div>
 
 </template>
 
 <script>
-import { ref } from 'vue';
 import NavBar from '@/components/NavBar.vue';
 import { db, storage } from '../firebase.js';
 import { push, ref as dbRef, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import {useCounterStore } from "@/store/store";
+import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
-import { useQuasar } from 'quasar'
+import { useQuasar, QSpinnerFacebook } from 'quasar'
 import { onBeforeUnmount } from 'vue'
 
 export default {
-    setup () {
-    const $q = useQuasar()
-    let timer
+    setup() {
+        const $q = useQuasar()
+        let timer
 
-    onBeforeUnmount(() => {
-      if (timer !== void 0) {
-        clearTimeout(timer)
-        $q.loading.hide()
-      }
-    })
-    return {
-        showLoading () {
-        $q.loading.show()
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
+        return {
+            showLoading() {
+                $q.loading.show({
+                    spinner: QSpinnerFacebook,
+                    message: 'Posting Task...'
+                })
 
-        // hiding in 2s
-        timer = setTimeout(() => {
-          $q.loading.hide()
-          this.submit = true
-          timer = void 0
-        }, 3000)
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.show({
+                        message: 'Task Posted ! Redirecting to Home Page...'
+                    })
+                    timer = setTimeout(() => {
+                        $q.loading.hide()
+                        this.$router.push('/home/mortal')
+                        timer = void 0
+                    }, 1500)
+                }, 3000)
 
-      }
-    }
-},
+            }
+        }
+    },
     data() {
         return {
             model: '',
             task: [
                 'Shopping', 'Physical', 'Assignment/Project', 'Hardware/Software'
             ],
-            
+
             inputData: {
                 time: '',
                 date: '',
@@ -178,7 +175,7 @@ export default {
                 category: '',
                 file: '',
                 price: '',
-                id:'',
+                id: '',
                 username: storeName.username,
             },
             locations: ['Admiralty', 'Aljunied', 'Ang Mo Kio', 'Bartley', 'Bayfront', 'Beauty World',
@@ -201,7 +198,6 @@ export default {
                 'Woodlands South', 'Woodleigh', 'Yew Tee', 'Yio Chu Kang', 'Yishun',],
             imageUrl: '',
             image: null,
-            submit: ref(false),
         }
     },
     components: {
@@ -238,7 +234,7 @@ export default {
                 .then((data) => {
                     // to get the key of the file                
                     key = data.key;
-                    update(dbRef(db,'TaskData/' + key), {
+                    update(dbRef(db, 'TaskData/' + key), {
                         id: key
                     })
                     return key
@@ -254,7 +250,7 @@ export default {
                     getDownloadURL(stRef(storage, 'TaskData/' + key + '.' + ext))
                         .then((url) => {
                             const updates = {
-                                file: url,  
+                                file: url,
                             }
                             return update(dbRef(db, 'TaskData/' + key), updates)
                         })
@@ -267,13 +263,6 @@ export default {
                     console.log(error)
                 })
         },
-        gotoHome() {
-                this.$router.push({name:'Home',params:{targetP: 'mortal'} })
-        },
-        gotoTask() {
-                window.location.reload()
-                
-        }
     }
 
 }
