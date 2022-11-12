@@ -92,10 +92,9 @@
                       style="height:100%; width:98vw;margin-left:auto;margin-right:auto;">
 
                       <q-img class="col-2 full-height" style="width:15vw;display:flex">
-                        <img class=" rounded-top rounded-bottom col-2 full-height" style="width:15vw;height:60vh"
-                          src="https://images.unsplash.com/photo-1526572195979-0f8a7ea44489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <img class=" rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1628435600697-6a954dea5055?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                          src="https://images.unsplash.com/photo-1526572195979-0f8a7ea44489?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                      
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Build your site</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Website Design</strong></div>
@@ -140,55 +139,50 @@
                     </div>
                   </q-carousel-slide>
 
-                  <q-carousel-slide :name="2" class="column font items-center" style="width:98vw">
+                  <q-carousel-slide :name="2" class="column font items-center" style="width:98vw;height:100%">
                     <div class="row fit justify-center items-center q-gutter-md q-col-gutter"
                       style="height:100%; width:98vw;margin-left:auto;margin-right:auto;">
 
-                      <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"
-                          src="https://images.unsplash.com/photo-1618007625018-51cbd56c0520?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fGRlbGl2ZXJ5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
+                      <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80">
+                          src="https://images.unsplash.com/photo-1618007625018-51cbd56c0520?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fGRlbGl2ZXJ5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
+                       
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">On the go</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Food Delivery</strong></div>
                         </div>
                       </q-img>
-                      <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"
-                          src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80">
+                      <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1627905646269-7f034dcc5738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
+                          src="https://images.unsplash.com/photo-1575318634028-6a0cfcb60c59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80">
+                       
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Tidy up your workspace</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Cleaning</strong></div>
                         </div>
                       </q-img>
-                      <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"
-                          src="https://images.unsplash.com/photo-1580236244963-a380f57499e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                      <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1601758125997-67e236238ab0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
+                          src="https://images.unsplash.com/photo-1580236244963-a380f57499e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                       
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Walk a furry friend</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Dog Walking</strong></div>
                         </div>
                       </q-img>
-                      <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"
-                          src="https://images.unsplash.com/photo-1599453052061-5c377643e4fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80">
+                      <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1621356986575-05811227a42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
+                          src="https://images.unsplash.com/photo-1599453052061-5c377643e4fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80">
+                       
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Deepen your learning</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Private Tuition</strong></div>
                         </div>
                       </q-img>
-                      <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"
-                          src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                      <q-img class="col-2 full-height" style="width:15vw;display:flex">
                         <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
-                          src="https://images.unsplash.com/photo-1621992906830-b3f3aabac38b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80">
+                          src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
+                       
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Get professional shots</div>
                           <div class="text-h5 bg-transparent" :class="textColor"><strong>Photography</strong></div>
