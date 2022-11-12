@@ -3,7 +3,7 @@
 <template>
     <!-- Navigation Bar -->
     <div class="q-pa-none">
-        <q-toolbar class="text-white q-my-none shadow-2" style="background-color:#2a4d98" id="navbar">
+        <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -255,80 +255,82 @@
         </table>
         <div>
 
-            <q-card class="dCard" v-if="activeBtn == 'Find'">
+            <q-card flat class="dCard" v-if="activeBtn == 'Find'">
                 <q-card-section>
-                    <div class="text-h6">Filter</div>
+                    <div class="text-h5">Filter</div>
                 </q-card-section>
                 <q-card-section class="q-pt-none">
                     <q-list>
-                        <q-expansion-item expand-separator icon='location_on' label="Location" class="location">
+                        <h6 class="location">Location</h6>
 
-                            <q-expansion-item label="Central" class="Expand2">
-                                <q-scroll-area style="height: 200px;width:auto">
-                                    <q-card class="qCard">
-                                        <div v-for="station in stationCentral" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
-                                        </div>
-                                    </q-card>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
-
-                            <q-expansion-item label="East" class="Expand2">
-                                <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
-                                        <div v-for="station in stationEast" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
-                                        </div>
-                                    </q-card>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
-                            <q-expansion-item label="North" class="Expand2">
-                                <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
-                                        <div v-for="station in stationNorth" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
-                                        </div>
-                                    </q-card>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
-                            <q-expansion-item label="North-East" class="Expand2">
-                                <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
-                                        <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name color="dark" />
-                                        </div>
-                                    </q-card>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
-                            <q-expansion-item label="West" class="Expand2">
-                                <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
-                                        <div v-for="station in stationWest" :key="station" class="qcardsec">
-                                            <q-checkbox v-model=selectedLoc :val=station.name :label=station.name  color="dark"/>
-                                        </div>
-                                    </q-card>
-                                </q-scroll-area>
-                            </q-expansion-item>
-
+                        <q-expansion-item label="Central" class="Expand2">
+                            <q-scroll-area style="height: 200px;width:auto">
+                                <q-card class="qCard">
+                                    <div v-for="station in stationCentral" :key="station" class="qcardsec">
+                                        <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
+                                            color="dark" />
+                                    </div>
+                                </q-card>
+                            </q-scroll-area>
                         </q-expansion-item>
+
+
+                        <q-expansion-item label="East" class="Expand2">
+                            <q-scroll-area style="height: 200px;width:100%">
+                                <q-card class="qCard">
+                                    <div v-for="station in stationEast" :key="station" class="qcardsec">
+                                        <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
+                                            color="dark" />
+                                    </div>
+                                </q-card>
+                            </q-scroll-area>
+                        </q-expansion-item>
+
+                        <q-expansion-item label="North" class="Expand2">
+                            <q-scroll-area style="height: 200px;width:100%">
+                                <q-card class="qCard">
+                                    <div v-for="station in stationNorth" :key="station" class="qcardsec">
+                                        <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
+                                            color="dark" />
+                                    </div>
+                                </q-card>
+                            </q-scroll-area>
+                        </q-expansion-item>
+
+                        <q-expansion-item label="North-East" class="Expand2">
+                            <q-scroll-area style="height: 200px;width:100%">
+                                <q-card class="qCard">
+                                    <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
+                                        <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
+                                            color="dark" />
+                                    </div>
+                                </q-card>
+                            </q-scroll-area>
+                        </q-expansion-item>
+
+                        <q-expansion-item label="West" class="Expand2">
+                            <q-scroll-area style="height: 200px;width:100%">
+                                <q-card class="qCard">
+                                    <div v-for="station in stationWest" :key="station" class="qcardsec">
+                                        <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
+                                            color="dark" />
+                                    </div>
+                                </q-card>
+                            </q-scroll-area>
+                        </q-expansion-item>
+
                     </q-list>
 
                     <q-list>
-                        <q-expansion-item expand-separator icon='category' label="Category" class="location">
-                            <q-card class="qCard">
-                                <div v-for="task in tasks" :key="task">
-                                    <q-checkbox v-model=category :val=task :label=task color="dark"/>
-                                </div>
-                            </q-card>
+                        <h6 class="location">Category</h6>
+                        <div v-for="task in tasks" :key="task" class='Expand2'>
+                            <q-checkbox v-model=category :val=task :label=task color="dark" />
+                        </div>
 
-                        </q-expansion-item>
                     </q-list>
                 </q-card-section>
             </q-card>
+            
 
         </div>
 
@@ -379,11 +381,42 @@
                 </q-card>
             </figure>
         </div>
+
+        <div v-else-if="activeBtn == 'Active'" class="containerMortal boxMortal">
+            <figure v-for="post in searchForActiveTask " v-bind:key="post.id">
+                <q-card class="my-card grid-item bg-dark text-white">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ ownOffer(post) }}<br>
+
+                        <div v-if="completedCheck(post) == 'pending'">
+                            Status: Pending
+                        </div>
+                        <div v-else-if="post.accepted != null">
+                            Status: In Progress
+                        </div>
+                        <div v-else-if="activeCheck(post)">
+                            Status: Offered
+                        </div>
+
+                        <div v-if="completedCheck(post) != 'pending'">
+                            <q-btn color='white' text-color="black" @click="iTask(post.id, post.username)">
+                                <b>Details</b>
+                            </q-btn>
+                        </div>
+                    </q-card-section>
+                </q-card>
+            </figure>
+        </div>
     </div>
 
     <!-- Mortal -->
     <div v-else>
-        <q-btn color='dark' @click=goToTask>New Post</q-btn>
+        <q-btn color='primary' @click=goToTask>New Post</q-btn>
         <div class="containerMortal boxMortal">
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
                 <div v-if="post.username == currUser">
@@ -501,7 +534,8 @@ export default {
                     to: "/",
                     icon: "exit_to_app"
                 }
-            ]
+            ],
+            style:''
         }
     }
 
@@ -546,7 +580,7 @@ export default {
         angelBtn() {
             this.Selection = 'Angel'
             this.targetP = 'angel'
-            document.getElementById('navbar').style.backgroundColor = '#82a3ea'
+            document.getElementById('navbar').style.backgroundColor = '#3760b8'
         },
         mortalBtn() {
             this.Selection = 'Mortal'
@@ -659,7 +693,7 @@ export default {
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            if (this.interactedTasks == null) {
+            if (this.interactedTasks.saved == null) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.saved)
@@ -699,9 +733,11 @@ export default {
         console.log(this.interactedTasks)
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
+            this.style = 'background-color: #3760b8'
         }
         else {
             this.targetP = 'mortal'
+            this.style='background-color: #efcebe'
         }
         if (storeName.username == '') {
             this.$router.push('/login')
@@ -709,6 +745,7 @@ export default {
         else {
             this.currUser = storeName.username
         }
+
     },
 
 }
@@ -716,19 +753,23 @@ export default {
 
 <style lang="scss" scoped>
 .Expand2 {
-    margin-left: 5vw;
+    margin-left: 1.5vw;
+    text-align: left;
+    font-size: medium;
 }
 
 .location {
     text-align: left;
-    width:100%;
+    margin-left: 1vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .qcardsec {
     /* float: left; */
     column-span: 1;
     text-align: left;
-    font-size: x-small;
+    font-size: small;
 
 
 }
@@ -736,7 +777,7 @@ export default {
 .qCard {
     column-count: 1;
     text-align: left;
-    width:auto;
+    width: auto;
 }
 
 .filter {
@@ -751,7 +792,7 @@ export default {
 .dCard {
     width: 20vw;
     float: left;
-    margin-left: 10vw;
+    margin-left: 5vw;
 }
 
 .dActions {
