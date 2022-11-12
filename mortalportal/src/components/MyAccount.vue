@@ -5,7 +5,7 @@
 
     <form @submit.prevent="simulateSubmit" class="q-pa-md">
 
-        <!-- Profile photo change (should remove tbh) -->
+        <!-- Profile photo change (should remove tbh)
         <div class="row q-pa-md q-gutter-sm justify-left">
             <q-img src="https://placeimg.com/500/300/nature" spinner-color="white"
                 style="height: 140px; max-width: 150px" />
@@ -14,10 +14,11 @@
                 <q-icon class="q-mr-sm" name="add_a_photo" />
                 <input type="file" accept="image/*" @change="uploadImage" />
             </q-btn>
-        </div>
+        </div> -->
 
         <div class="q-pa-md">
-            <div class="q-gutter-y-md column" style="max-width: 300px">
+            <div class="q-gutter-y-md column" style="max-width: 600px;"> 
+                <!-- the max-width here decides the width of the grey boxes in the fields below -->
 
                 <q-field borderless prefix="Username: "> 
                     <template v-slot:before>
@@ -25,7 +26,7 @@
                     </template>
 
                     <template v-slot:control>
-                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.username" />
+                        <q-input borderless readonly input-class="text-center" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.username" />
                     </template>
                 </q-field>
 
@@ -35,7 +36,7 @@
                     </template>
 
                     <template v-slot:control>
-                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.name" />
+                        <q-input filled input-class="text-center" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.name" />
                     </template>
 
                 </q-field>
@@ -46,7 +47,7 @@
                     </template>
 
                     <template v-slot:control>
-                        <q-input filled class="self-center full-width no-outline text-center" tabindex="0" v-model="this.loginData.email" />
+                        <q-input filled input-class="text-center" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.email" />
                     </template>
                 </q-field>
 
@@ -54,7 +55,8 @@
                     <template v-slot:before>
                         <q-icon name="lock" />
                     </template>
-                    <q-input v-model="this.loginData.password" filled :type="isPwd ? 'password' : 'text'" >
+                   
+                    <q-input input-class="text-center" class="self-center full-width no-outline" v-model="this.loginData.password" filled :type="isPwd ? 'password' : 'text'" >
                         <template v-slot:append>
                         <q-icon
                             :name="isPwd ? 'visibility_off' : 'visibility'"
