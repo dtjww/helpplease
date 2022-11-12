@@ -14,13 +14,10 @@
         <q-page>
           <div style="margin:0%;padding:0px">
             <div>
-              <div class="container-3 font" style="position:absolute;width:100%;height:100vh;z-index:3">
-                <div class="text-h1 bg-transparent" :class="textColor" style="position:absolute;top:70;z-index:3">Lend a
-                  hand today!
-                </div>
-                <div class="text-h5 bg-transparent" :class="subtextColor" style="position:absolute;top:90%;z-index:3">
-                  Complete tasks
-                  as an Angel and earn</div>
+              <div class="container-3 font bg-transparent text-white"
+                style="position:absolute;width:100%;height:100vh;z-index:3">
+                <h1>Lend a hand today!</h1>
+                <h5>Complete tasks as an Angel and earn</h5>
               </div>
               <div class="container-2" style="position:absolute;width:100%;height:100vh;z-index:2">
               </div>
@@ -53,22 +50,22 @@
             </div>
 
             <div class="font" style="margin:0;padding:0;width:100%">
-              <div v-motion-fade-visible >
+              <div v-motion-fade-visible>
                 <q-parallax src="@/assets/testing2.jpg" :speed="1" style="opacity: 0.9; height: 100vh;">
                   <div class="row bg-transparent center" style="height: 100vh;">
                     <div class="col q-pl-xl bg-transparent" style="padding:0px;">
                       <div class="bg-transparent"
                         style="max-width: 80vw; text-align: center; margin-left:auto; margin-right: auto">
                         <div class="text-h5 text-italic text-bold text-white bg-transparent" style="text-shadow: #000 5px 2px 5px;">
-                          <div class="text-h2 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal Portal</div>
-                          <div class="text-h6 text-italic text-primary bg-transparent">
+                          <div class="text-h1 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal Portal</div>
+                          <div class="text-h4 text-italic text-white bg-transparent">
                             As a mortal, leverage on local residents to complete tasks you don't have time or knowledge to
                             carry
                             out.
                             <br>
                             Ask for more, with angels at your door!
                           </div>
-                          <div class="text-h4 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent" style="text-shadow: #000 5px 2px 5px;"> What do you
+                          <div class="text-h3 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent" style="text-shadow: #000 5px 2px 5px;"> What do you
                             need
                             help with today?
                           </div>
@@ -120,7 +117,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80">
                         <div class="absolute-bottom text-right bg-transparent">
                           <div class="text-h7 bg-transparent" :class="subtextColor">All Languages</div>
@@ -129,7 +126,7 @@
                       </q-img>
 
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
-                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1565689876697-e467b6c54da2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80">
                         <div class="absolute-bottom text-right bg-transparent">
                           <div class="text-h7 bg-transparent" :class="subtextColor">Make some quick bucks</div>
@@ -146,7 +143,7 @@
                       <q-img class="col-2 full-height" style="width:15vw;height:100%;display:flex">
                         <img class="rounded-borders col-2 full-height"
                           src="https://images.unsplash.com/photo-1618007625018-51cbd56c0520?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDF8fGRlbGl2ZXJ5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
-                        <img class="rounded-borders col-2 full-height"  style="width:100%;height:100%"
+                        <img class="rounded-borders col-2 full-height" style="width:100%;height:100%"
                           src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80">
                         <div class="absolute-bottom text-right bg-transparent" style="position:absolute;z-index:2">
                           <div class="text-h7 bg-transparent" :class="subtextColor">On the go</div>
@@ -270,6 +267,7 @@ export default {
       subtextColor: 'text-white',
       WhiteNavbar: true,
       transNavbar: false,
+      windowHeight: window.innerHeight
     }
   },
   components: {
@@ -299,7 +297,8 @@ export default {
       this.$router.push({ name: 'Task Details', params: { id: id } })
     },
     onScroll(position) {
-      if (position > 800) {
+
+      if (position > this.windowHeight) {
         this.WhiteNavbar = false;
         this.transNavbar = true;
         console.log(this.WhiteNavbar)
@@ -309,7 +308,11 @@ export default {
         this.WhiteNavbar = true;
         this.transNavbar = false;
       }
+    },
+    onResize() {
+      this.windowHeight = window.innerHeight
     }
+
   },
   computed: {
     searchForTask() {
@@ -320,6 +323,17 @@ export default {
   },
   created() {
     this.getPost();
+    window.addEventListener("scroll", function () {
+      this.amountscrolled()
+    }, false)
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    })
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
   },
 
 }
@@ -342,6 +356,8 @@ export default {
 
 .container {
   height: 100%;
+
+
 }
 
 .container-2 {
@@ -363,6 +379,11 @@ export default {
   padding-top: 400px;
   padding-left: 100px;
   /* margin-top: 78.17px; */
+
+}
+
+h1 {
+  margin: 0px;
 }
 
 .content {

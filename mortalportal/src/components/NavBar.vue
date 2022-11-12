@@ -2,11 +2,6 @@
 <template>
     <div class="q-pa-none">
         <q-toolbar class="text-white q-my-none shadow-2 bg-dark" >
-            <!-- <router-link to="/" style="color: white; text-decoration: none">
-                <q-item clickable v-ripple>
-                    <q-img src="../assets/MainLogo3.png" style="width:170px"></q-img>
-                </q-item>
-            </router-link> -->
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">

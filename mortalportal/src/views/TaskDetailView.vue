@@ -8,76 +8,78 @@
         <q-card class="card">
             <h3>{{ posts.name }}</h3><br>
             <img :src="posts.file">
-            <table>
-                <tr>
-                    <td>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
                         <h6>Description</h6>
                         <q-field readonly>
                             <template v-slot:control>
                                 <div>{{ posts.desc }}</div>
                             </template>
                         </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Category</h6>
                         <q-field readonly>
                             <template v-slot:control>
                                 <div>{{ posts.category }}</div>
                             </template>
                         </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Location</h6>
                         <q-field readonly>
                             <template v-slot:control>
                                 <div>{{ posts.loc }}</div>
                             </template>
                         </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Price</h6>
-                        <q-field readonly prefix="$">
+                        <q-field readonly prefix="$" style="width:15vw;">
                             <template v-slot:control>
                                 <div>{{ posts.price }}</div>
                             </template>
                         </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <h6>Date & Time</h6>
                         <q-field readonly>
                             <template v-slot:control>
                                 <div>{{ posts.date }} {{ posts.time }}</div>
                             </template>
                         </q-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
                         <div v-if="posts.accepted == null">
                             <q-btn size="lg" class="btn iconbtn" icon="favorite" v-model="heart" v-if="heart == true"
                                 flat @click=like></q-btn>
                             <q-btn size="lg" class="btn" icon="favorite outlined" v-model="heart" v-if="heart == false"
                                 flat @click=like></q-btn>
                         </div>
-                    </td>
-                    <td align="right">
+                    </div>
+                    <div class="col-5" align="right">
                         <div v-if="posts.accepted == null">
                             <q-btn color='dark' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                        </div>
+                    </div>
+                    <div class="col-5" align="right">
+                        <div v-if="posts.accepted == null">
                             <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
                         </div>
-
-
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
 
 
             <div v-if="completedCheck(posts) == 'accepted'">
@@ -127,7 +129,7 @@
                 <tr>
                     <td>
                         <h6>Price</h6>
-                        <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price">
+                        <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price" style="width:15vw;">
                         </q-input>
                     </td>
                 </tr>
