@@ -201,7 +201,7 @@
                     src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGNvbGxhYm9yYXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
                     style="height: 100vh;">
                     <div class="row bg-transparent"
-                      style="width:100%;height: 100vh;margin-left:auto;margin-right:auto;margin-top:65vh">
+                      style="width:100%;height: 100vh;margin-left:auto;margin-right:auto;margin-top:60vh">
                       <div class="col q-pl-xl bg-transparent" style="padding:0px;">
                         <div class="bg-transparent"
                           style="max-width: 80vw; text-align: center; margin-left:auto; margin-right: auto">

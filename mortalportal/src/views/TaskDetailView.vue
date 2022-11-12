@@ -334,11 +334,11 @@
     <q-dialog v-model="confirmComplete">
         <q-card>
             <q-card-section>
-                <div class="text-h6">Confirm</div>
+                <div class="text-h6">Confirm Task Completion</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                Do you confirm you have Angel had completed the task?
+                Do you confirm your Angel had completed the task?
             </q-card-section>
             <q-card-actions align="right">
                 <q-btn flat label="Yes" color="dark" v-close-popup @click=updateConfirmCompleted />

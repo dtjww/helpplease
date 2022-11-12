@@ -240,7 +240,7 @@ export default {
         })
     },
     submitData() {
-      if (this.password == this.cPassword) {
+      if (this.password == this.cPassword && this.signupData.email != '' && this.signupData.password != '' && this.signupData.username != '' && this.signupData.name != '') {
         this.signupData.email = this.email
         this.signupData.password = this.password
         this.signupData.username = this.username
@@ -263,7 +263,7 @@ export default {
       const isSignedIn = ref(false);
       const uiConfig = {
         signInFlow: 'popup',
-        signinSuccessUrl: 'gSignin',
+        signinSuccessUrl: 'loading',
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ],

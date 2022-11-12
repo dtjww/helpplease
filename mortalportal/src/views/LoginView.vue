@@ -235,9 +235,6 @@ export default {
                     console.log(error);
                 });
             }
-
-
-
             // google login end
             return {
                 // google login start
