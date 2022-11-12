@@ -1,90 +1,6 @@
-<!-- Ban -->
 <template>
-  <NavBar />
-  <div class="q-pa-none">
-    <q-layout view="lHh Lpr lff" container style="height: 90.5vh" class="shadow-2 rounded-borders">
-
-      <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
-        <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
-          padding>
-
-          <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'">
-            <q-item-section avatar>
-              <q-icon name="person" />
-            </q-item-section>
-
-            <q-item-section>
-              Account
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple :active="tab === 'MyTasks'" @click="tab = 'MyTasks'"
-            >
-            <q-item-section avatar>
-              <q-icon name="assignment" />
-            </q-item-section>
-
-            <q-item-section>
-              Tasks
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple :active="tab === 'MyEarnings'" @click="tab = 'MyEarnings'"
-            >
-            <q-item-section avatar>
-              <q-icon name="account_balance_wallet" />
-            </q-item-section>
-
-            <q-item-section>
-              Earnings
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats
-            >
-            <q-item-section avatar>
-              <q-icon name="question_answer" />
-            </q-item-section>
-
-            <q-item-section>
-              Chats
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="logout" />
-            </q-item-section>
-
-            <q-item-section @click=gotoHome>
-              Logout
-            </q-item-section>
-          </q-item>
-
-        </q-list>
-        <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
-          <div class="absolute-bottom bg-transparent">
-            <q-avatar size="66px" class="q-mb-sm" color="accent"> {{getUsername().slice(0,1)}}
-            </q-avatar>
-            <div class="text-weight-bold"> {{loginData.name}} </div>
-            <div>@{{loginData.username}}</div>
-          </div>
-        </q-img>
-
-      </q-drawer>
-
-      <q-page-container>
-        <q-card-section>
-          <q-tab-panels v-model="tab">
-            
-            <q-tab-panel name="MyAccount">
-              <div class="q-pa-md">
-                <q-header elevated>
-                </q-header>                
-                <MyAccount />
-                
-                
-                  <q-card class="bg-white q-ml-sm shadow-11">
+    <q-page-container>
+    <q-card class="bg-white q-ml-sm shadow-11">
                     <q-card-section>
                       <div class="text-h5 text-black-8 text-weight-bold">
                         Summarised Earnings
@@ -97,42 +13,11 @@
                       <IEcharts :option="getBarChartOptions" :resizable="true"/>
                     </q-card-section>
                   </q-card>
-              
-              </div>        
-            </q-tab-panel>
-
-            <q-tab-panel name="MyTasks">
-              <div class="q-pa-md">
-                <q-header elevated>              
-                </q-header>                
-                <MyTask />
-              </div>              
-            </q-tab-panel>
-
-            <q-tab-panel name="MyEarnings">
-              <div class="q-pa-md">
-                <q-header elevated>              
-                </q-header>     
-                <!-- add earnings component here -->
-                 <MyEarnings />
-              </div>              
-            </q-tab-panel>
-
-
-          </q-tab-panels>
-        </q-card-section>        
-      </q-page-container>
-    </q-layout>
-    
-  </div>
+                </q-page-container>
 
 </template>
-  
+
 <script>
-import NavBar from '@/components/NavBar.vue';
-import MyAccount from '@/components/MyAccount.vue';
-import MyTask from '@/components/MyTask.vue';
-import MyEarnings from '@/components/MyEarnings.vue';
 import { ref } from 'vue';
 import IEcharts from 'vue3-echarts-v3/src/full.js';
 import axios from 'axios';
@@ -143,10 +28,6 @@ export default {
   name: 'ProfileView',
   props: {},
   components: {
-    NavBar,
-    MyAccount,
-    MyTask,
-    MyEarnings,
     IEcharts,
   },
   data(){
@@ -184,7 +65,6 @@ export default {
   setup() {
 
     return {
-      NavBar,
       drawer: ref(false),
     }
   },
@@ -474,5 +354,4 @@ export default {
 
 .menu-list .q-item
   border-radius: 0 32px 32px 0
-
 </style>
