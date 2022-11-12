@@ -35,7 +35,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
-                active-color="dark"
+                active-class="text-black"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">

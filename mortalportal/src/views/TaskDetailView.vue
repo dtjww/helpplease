@@ -233,7 +233,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <q-input dense type='date' v-model="this.posts.date" class="date">
+                            <q-input dense type='date'  v-model="this.posts.date" class="date">
                             </q-input>
                         </div>
                         <div class="col-6">
