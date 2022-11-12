@@ -13,7 +13,7 @@
 
 
   <div class="container">
-    <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders" style="height: 75vh">
+    <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders" style="height: 100%">
 
       <q-drawer
         v-model="drawer"
@@ -24,9 +24,10 @@
         mini-to-overlay="500"
         show-if-above
         :breakpoint="400"
-        class="bg-light-blue-1 adjust"
+        class="bg-blue-1 adjust"
+        style="border-radius: 4px"
       >
-          <q-list padding style="margin-top: 24vh; border-right: 1px solid #ddd; text-align:left;">
+          <q-list active-color="white" indicator-color="transparent" padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -34,11 +35,12 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
+                active-color="dark"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
-                      <q-item-section side>
-                        <q-avatar rounded size="48px">
-                          <img :src="value.taskPic" />
+                      <q-item-section side style="width: 5rem;">
+                        <q-avatar rounded size="4rem">
+                          <img :src="value.taskPic" style="width:max-content"/>
                         </q-avatar>
                       </q-item-section>
                       <q-item-section>
@@ -54,9 +56,9 @@
               </template>
               <template v-else>
                 <q-item clickable v-ripple @click="paramTask(value.task, value.index)" style="padding:3%">
-                  <q-item-section side>
-                    <q-avatar rounded size="48px">
-                      <img :src="value.taskPic" />
+                  <q-item-section side style="width: 5rem;">
+                    <q-avatar rounded size="4rem">
+                      <img :src="value.taskPic" style="width:max-content" />
                     </q-avatar>
                   </q-item-section>
                   <q-item-section>
@@ -74,30 +76,31 @@
           </q-list>
 
         <!-- my profile -->
-        <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh">
+        <q-item class="absolute-top bg-blue-grey-2" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
+        <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh"> -->
           <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-            </q-avatar>
+            <q-avatar size="80px" color="secondary" text-color="white">{{myUsername.slice(0,1)}}</q-avatar>
             <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
-            <div>{{myUsername}}</div>
+            <h6 style="margin:0;padding:0;">{{myUsername}}</h6>
           </div>
-        </q-img>
+        <!-- </q-img> -->
+      </q-item>
       </q-drawer>
 
-      <q-page-container>
+      <q-page-container style="display:inherit;">
         <!-- <q-page padding> -->
   
-          <q-scroll-area style="height: 75vh;" >
-                  <q-tab-panels v-model="tab" style="height: 75vh;">
+          <!-- <q-scroll-area style="height: 80vh;" > -->
+                  <q-tab-panels v-model="tab"  style=" height: calc(100vh - 78.17px)">
                     
                     
-                    <q-tab-panel name="chat1">
+                    <q-tab-panel name="chat1" style="padding: 0;">
                       
-                      
-                      <q-item class="bg-grey-3" style="margin:0%; border: 2px solid; border-color:rgb(215, 215, 215); border-radius:8px; text-align:left; font-style:italic; height:13vh; text-align:left">
+                      <q-card>
+                      <q-item class="bg-grey-3" style="margin:0%; border-radius:8px; text-align:left; font-style:italic; height:100px; text-align:left">
+                        
                         <q-item-section side class="displayhide" style="height:max-content">
-                          <img :src="posts.file" style="height:10vh; display: block; margin: 5px; border-radius:2px">
+                          <img :src="posts.file" style="height:80px; display: block; margin: 5px; border-radius:2px">
                         </q-item-section>
                         <q-item-section>
                           <q-item-label >{{postUsername}}</q-item-label>
@@ -112,30 +115,39 @@
                           </template> -->
                           <q-item-label><q-btn flat color="red" label="Back To Task" @click="toTask()"/></q-item-label>
                         </q-item-section>
-                      </q-item>
                       
-                      <div class="q-ma-sm bg-grey-1" style="padding:5px; border-radius:3%;">
+                      </q-item>
+                    </q-card>
+                      
+                    <q-item style="height: calc(100vh - 78.17px - 100px - 80px); margin:0; margin-right:0; text-align:left">
+                      <div class="q-ma-sm bg-grey-1" style="margin:0; border-radius:3%; width:100%; height:100% ">
                         <!-- for scroll area -->
-                        <q-scroll-area id="thisScroll" ref="scrollAreaComponent" @onload="scrollBtm()" style="height: 40vh; margin:2% ; text-align:left">
+                        <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent"  style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
+                          <div>
                           <!-- for chat -->
                               <ChatMsg :textList="textList" :myUsername="myUsername"/>
-                              <q-scroll-observer @scroll="onScroll()" />
+                            </div>
+                              <q-scroll-observer />
+                              
                         </q-scroll-area>
+                        <q-btn push round class="absolute-bottom-left" style="margin: 30px;" color="grey" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
+                  </q-item>
               
-
+                    <q-item class="absolute-bottom" style="max-width: 2000px;">
                     <!-- FOR INPUT OF TEXT -->
-                    <q-input class="textinput" rounded outlined v-model="myMsg" placeholder="Send a Text Here" @keyup.enter="sendMessage()">
+                    <q-input class="textinput" rounded outlined v-model="myMsg" placeholder="Send a Text Here" @keyup.enter="sendMessage()" style="margin: 10px; width:100%">
                       <template v-slot:after>
                         <q-btn round dense flat icon="send" @click="sendMessage()"/>
                       </template>
                     </q-input>
+                  </q-item>
 
 
 
                     </q-tab-panel>
             
-                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 4px solid; border-color:rgb(215, 215, 215); border-radius:5px">
+                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230); border-radius:5px">
                       <!-- <div class="text-h6">chat2</div> -->
                       <!-- <q-card class="justify-content-center text-center" style="height: 100%;">  -->
                         <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:25%"> No Chats Selected</h3>
@@ -145,10 +157,11 @@
             
 
                   </q-tab-panels>
-          </q-scroll-area>
+          <!-- </q-scroll-area> -->
 
         <!-- </q-page> -->
       </q-page-container>
+      
     </q-layout>
 
 <!-- 
@@ -236,6 +249,8 @@ export default {
   methods: {
     scrollBtm(){
       console.log(scrollAreaComponent.value)
+      console.log(this.$refs.scrollAreaComponent.value)
+      
       this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
     },
     onScroll(){
@@ -352,7 +367,9 @@ export default {
                 // this.textList[String(this.count)] = message;
                 // console.log(this.textList);
                 this.chatRefresh();
-                this.scrollBtm();
+                setTimeout(() => {
+                  this.$refs.scrollAreaComponent.setScrollPercentage('vertical',100);
+                }, 2000);
             }
         },
         chatRefresh() {
@@ -469,11 +486,8 @@ html, body {
 }
 .container { 
   /* margin-left: 75px; margin-right: 75px; ; margin-bottom: 5%;*/
-  margin-top: 3%;
-  margin-bottom: 1%;
-  margin-left: 5%;
-  margin-right: 5%;
-  height: 75%;
+  margin: 0;
+  height: calc(100vh - 78.17px);
   justify-content: center;
 }
 

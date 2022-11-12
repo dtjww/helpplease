@@ -1,5 +1,6 @@
 <!-- daryl-->
 <template>
+
   <div class="row img-overlay img-wrapper">
     <div class="column">
       <img class="image"
@@ -55,60 +56,62 @@
   </div>
 
   <q-layout>
-    <q-page-container>
-      <q-page class="page-height page-width row justify-center items-center ">
-        <q-card square bordered class="q-pa-lg shadow-1">
-          <q-card-section>
-            <router-link to="/" style="width:170px;padding:0%">
-              <img src="@/assets/MainLogo2.png" style="width:75%;padding:0%;margin:0" />
-            </router-link>
-          </q-card-section>
-          <q-tabs v-model="tab" class="text-teal">
-            <q-tab label="Login" name="Login" @click=gotoLogin() />
-            <q-tab label="Sign Up" name="Sign Up" />
-          </q-tabs>
+    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
+      <q-page-container>
+        <q-page class="page-height page-width row justify-center items-center ">
+          <q-card square bordered class="q-pa-lg shadow-1">
+            <q-card-section>
+              <router-link to="/" style="width:170px;padding:0%">
+                <img src="@/assets/MainLogo2.png" style="width:75%;padding:0%;margin:0" />
+              </router-link>
+            </q-card-section>
+            <q-tabs v-model="tab" class="text-teal">
+              <q-tab label="Login" name="Login" @click=gotoLogin() />
+              <q-tab label="Sign Up" name="Sign Up" />
+            </q-tabs>
 
-          <q-separator />
-          <q-tab-panels v-model="tab" animated>
+            <q-separator />
+            <q-tab-panels v-model="tab" animated>
 
 
-            <q-tab-panel name="Sign Up">
+              <q-tab-panel name="Sign Up">
 
-              <q-card-section>
-                <q-form class="q-gutter-md">
-                  <q-input square filled clearable v-model="username" type="text" label="Username" />
-                  <q-input square filled clearable v-model="name" type="text" label="Full Name" />
-                  <q-input square filled clearable v-model="password" type="password" label="Password" />
-                  <q-input square filled clearable v-model="cPassword" type="password" label="Confirm Password" />
-                  <q-input square filled clearable v-model="email" type="email" label="Email" />
-                </q-form>
-              </q-card-section>
-              <q-card-actions class="q-px-md">
-                <q-btn unelevated color="primary" size="md" style="width:17vw;margin-left:auto;margin-right:auto;"
-                  label="Sign up" @click=submitData />
-              </q-card-actions>
-              <br>
-              OR
-              <q-card-section class="text-center q-pa-none">
+                <q-card-section>
+                  <q-form class="q-gutter-md">
+                    <q-input square filled clearable v-model="username" type="text" label="Username" />
+                    <q-input square filled clearable v-model="name" type="text" label="Full Name" />
+                    <q-input square filled clearable v-model="password" type="password" label="Password" />
+                    <q-input square filled clearable v-model="cPassword" type="password" label="Confirm Password" />
+                    <q-input square filled clearable v-model="email" type="email" label="Email" />
+                  </q-form>
+                </q-card-section>
+                <q-card-actions class="q-px-md">
+                  <q-btn unelevated color="primary" size="md" style="width:17vw;margin-left:auto;margin-right:auto;"
+                    label="Sign up" @click=submitData />
+                </q-card-actions>
+                <br>
+                OR
+                <q-card-section class="text-center q-pa-none">
 
-                <div class="googleLogin">
+                  <div class="googleLogin">
 
-                  <h6 v-if="lUser != null" class="text-black">{{ lUser }}</h6>
-                  <div id="firebaseui-auth-container"></div>
-                  <div id="loader">Loading...</div>
-                  <div v-if="isSignedIn">
-                    <button @click="getGoogleAuth().handleSignOut">Sign Out</button>
+                    <h6 v-if="lUser != null" class="text-black">{{ lUser }}</h6>
+                    <div id="firebaseui-auth-container"></div>
+                    <div id="loader">Loading...</div>
+                    <div v-if="isSignedIn">
+                      <button @click="getGoogleAuth().handleSignOut">Sign Out</button>
+                    </div>
                   </div>
-                </div>
 
-              </q-card-section>
-            </q-tab-panel>
+                </q-card-section>
+              </q-tab-panel>
 
-          </q-tab-panels>
-        </q-card>
+            </q-tab-panels>
+          </q-card>
 
-      </q-page>
-    </q-page-container>
+        </q-page>
+      </q-page-container>
+    </q-scroll-area>
   </q-layout>
 
 
@@ -171,7 +174,21 @@ const storeName = useCounterStore()
 export default {
   setup() {
     return {
-      tab: ref('Sign Up')
+      tab: ref('Sign Up'),
+      thumbStyle: {
+                right: '4px',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                width: '5px',
+                opacity: 0.75
+            },
+
+            barStyle: {
+                right: '2px',
+                borderRadius: '9px',
+                width: '9px',
+                opacity: 0.2
+            }
     }
   },
   data() {
