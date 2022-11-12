@@ -266,7 +266,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-ma-md" color='dark' text-color="white"
+                                <q-btn class="q-mt-md" color='dark' text-color="white"
                                     @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
@@ -649,8 +649,7 @@ export default {
             this.currUser = storeName.username
         }
 
-        if (this.$route.params.saved != '') {
-
+        if (this.$route.params.saved == 'saved') {
             this.activeBtn = 'Saved'
         }
     },
