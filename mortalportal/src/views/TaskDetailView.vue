@@ -4,7 +4,7 @@
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
         <div v-if="this.format == 'View'">
-            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
+            <q-toolbar class="text-white q-my-none shadow-2 bg-white karla" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -80,8 +80,8 @@
 
             </q-toolbar>
 
-            <q-card class="card">
-                <h3 style="font-family:radley ;">{{ posts.name }}</h3><br>
+            <q-card class="card karla">
+                <h3>{{ posts.name }}</h3><br>
                 <img :src="posts.file">
                 <div class="container-fluid">
                     <div class="row">
@@ -156,18 +156,18 @@
                     </div>
                 </div>
                 <div v-if="completedCheck(posts) == 'accepted' && currUser != poster">
-                    <q-btn color="teal-5" class="btn text-white" @click="taskComplete = true">Task Completed</q-btn>
+                    <q-btn color="teal-5" class="karla btn text-white" @click="taskComplete = true">Task Completed</q-btn>
                 </div>
 
                 <div v-else-if="completedCheck(posts) == 'pending' && currUser == poster">
-                    <q-btn color="indigo-6" class="btn text-white" @click="confirmComplete = true">Confirm Completed Task
+                    <q-btn color="indigo-6" class="karla btn text-white" @click="confirmComplete = true">Confirm Completed Task
                     </q-btn>
                 </div>
             </q-card>
         </div>
 
         <div v-else>
-            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
+            <q-toolbar class="karla text-white q-my-none shadow-2 bg-white" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -198,7 +198,7 @@
 
                 </div>
 
-                <div class="gt-s hamburgMenu">
+                <div class="karla gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
                     <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
                         <q-list>
@@ -227,7 +227,7 @@
                 </div>
 
             </q-toolbar>
-            <q-card class="card">
+            <q-card class="card karla">
                 <h3>{{ posts.name }}</h3><br>
                 <img :src="posts.file">
                 <div class="container-fluid">
@@ -312,7 +312,7 @@
     </q-scroll-area>
 
     <q-dialog v-model="submit">
-        <q-card>
+        <q-card class="karla">
             <q-card-section>
                 <div class="text-h6">Success!</div>
             </q-card-section>
@@ -328,7 +328,7 @@
     </q-dialog>
 
     <q-dialog v-model="deletePost">
-        <q-card>
+        <q-card class="karla">
             <q-card-section>
                 <div class="text-h6">Deleted!</div>
             </q-card-section>
@@ -344,7 +344,7 @@
     </q-dialog>
 
     <q-dialog v-model="Offer">
-        <q-card class="q-pa-lg">
+        <q-card class="q-pa-lg karla">
             <q-card-section>
                 <div class="text-h6"><strong>Make an offer</strong></div>
             </q-card-section>
@@ -360,7 +360,7 @@
     </q-dialog>
 
     <q-dialog v-model="taskComplete">
-        <q-card class="q-pa-md">
+        <q-card class="q-pa-md karla">
             <q-card-section>
                 <div class="text-h6 text-center text-secondary">Confirm Mission Success</div>
             </q-card-section>
@@ -376,7 +376,7 @@
     </q-dialog>
 
     <q-dialog v-model="confirmComplete">
-        <q-card class="q-pa-md">
+        <q-card class="q-pa-md karla">
             <q-card-section>
                 <div class="text-h6 text-center text-secondary">Confirm Mission Success</div>
             </q-card-section>
@@ -967,4 +967,8 @@ q-input {
         display: none;
     }
 }
+@import url("https://fonts.googleapis.com/css?family=Karla");
+.karla {
+    font-family: karla;
+};
 </style>

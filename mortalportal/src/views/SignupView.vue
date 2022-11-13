@@ -245,7 +245,7 @@ export default {
         })
     },
     submitData() {
-      if (this.email != '' && this.password != '' && this.username != '' && this.name != '' && this.cPassword != '') {
+      if (this.email != '' && this.email.includes('@') && this.email.includes('.') && this.password.length > 5 && this.password.length < 21 && this.password != '' && this.username != '' && this.name != '' && this.cPassword != '') {
         if (this.password == this.cPassword) {
           this.signupData.email = this.email
           this.signupData.password = this.password
@@ -261,7 +261,7 @@ export default {
         }
       }
       else {
-        alert("Please fill up all the fields")
+        alert("Please fill up the fields accordingly")
       }
 
     },
