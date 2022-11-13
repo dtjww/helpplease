@@ -1,5 +1,49 @@
 <template>
-    <NavBar />
+    <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+
+        <q-toolbar-title shrink>
+            <router-link to="/home/angel" style="color: white; text-decoration: none">
+                <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+            </router-link>
+        </q-toolbar-title>
+        <q-space />
+        <div class="lt-xs mainMenu">
+
+            <q-btn stretch flat label="My Account" @click="handleClick()" />
+
+            <q-btn stretch flat label="Log Out" @click="exit()" />
+
+        </div>
+
+        <div class="gt-s hamburgMenu">
+            <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+            <q-btn-dropdown flat dense dropdown-icon="menu">
+                <q-list>
+                    <q-item-label header>Menu</q-item-label>
+                    <q-item clickable v-ripple>
+                        <q-item-section avatar>
+                            <q-icon name="favorite" />
+                        </q-item-section>
+                        <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                    </q-item>
+
+                    <q-item clickable v-ripple>
+                        <q-item-section avatar>
+                            <q-icon name="person" />
+                        </q-item-section>
+                        <q-item-section @click="handleClick()">My Account</q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple>
+                        <q-item-section avatar>
+                            <q-icon name="logout" />
+                        </q-item-section>
+                        <q-item-section @click="exit()">Log Out</q-item-section>
+                    </q-item>
+                </q-list>
+            </q-btn-dropdown>
+        </div>
+
+    </q-toolbar>
     <div>
         <div v-if="this.status == 'completed'">
             <h2>
@@ -81,8 +125,6 @@
 </template>
 
 <script>
-
-import NavBar from '@/components/NavBar.vue'
 import axios from 'axios'
 
 export default {
@@ -91,13 +133,11 @@ export default {
         return {
             id: '',
             posts: [],
-            status: ''
-
+            status: '',
+            style: '',
         }
     },
-    components: {
-        NavBar
-    },
+
 
     methods: {
         getPost() {
@@ -115,8 +155,19 @@ export default {
         }
     },
     created() {
-        this.getPost()
         this.status = this.$route.params.status
+        this.getPost()
+
+    }
+    ,
+    mounted() {
+        if (this.status == 'completed') {
+            this.style = "background-color: #efa2a4";
+        }
+        else {
+            this.style = "background-color: #3760b8";
+
+        }
     }
 }
 </script>
@@ -139,5 +190,23 @@ h6 {
 
 h3 {
     margin: auto
+}
+
+.hamburgMenu {
+    display: none;
+}
+
+.mainMenu {
+    display: block
+}
+
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
+    }
 }
 </style>

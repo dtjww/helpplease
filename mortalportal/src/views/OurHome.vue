@@ -29,12 +29,6 @@
                     <q-btn-dropdown flat dense dropdown-icon="menu">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="favorite" />
-                                </q-item-section>
-                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
-                            </q-item>
 
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
@@ -589,7 +583,11 @@ export default {
         },
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
-            if (this.interactedTasks.saved.length == 0) {
+            console.log(this.interactedTasks)
+            if(this.interactedTasks == null || this.interactedTasks == undefined){
+                return []
+            }
+            if (this.interactedTasks.saved == null || this.interactedTasks.saved == undefined) {
                 return []
             } else {
                 var values = Object.values(this.interactedTasks.saved)
@@ -601,7 +599,6 @@ export default {
         },
         searchForActiveTask() {
             var allTask = Object.values(this.posts)
-            console.log(this.interactedTasks)
             if (this.interactedTasks == null) {
                 return []
             } else {
