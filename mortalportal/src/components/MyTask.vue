@@ -28,17 +28,17 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <div v-if="completedCheck(post) == 'pending'" class="text-dark text-bold">
+                        <div v-if="completedCheck(post) == 'pending'" class="text-secondary text-bold">
                             Status: Pending
                         </div>
-                        <div v-else-if="post.accepted != null" class="text-dark text-bold">
+                        <div v-else-if="post.accepted != null" class="text-secondary text-bold">
                             Status: In Progress
                         </div>
-                        <div v-else-if="activeCheck(post)" class="text-dark text-bold">
+                        <div v-else-if="activeCheck(post)" class="text-secondary text-bold">
                             Status: Offered
                         </div>
 
-                        <q-btn class="q-mt-md" color='dark' text-color="white"
+                        <q-btn class="q-mt-md" color='secondary' text-color="white"
                             @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
@@ -56,17 +56,17 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <div v-if="completedCheck(post) == 'pending'" class="text-secondary text-bold">
+                        <div v-if="completedCheck(post) == 'pending'" class="text-dark text-bold">
                             Status: Pending
                         </div>
-                        <div v-else-if="post.accepted != null" class="text-secondary text-bold">
+                        <div v-else-if="post.accepted != null" class="text-dark text-bold">
                             Status: In Progress
                         </div>
-                        <div v-else-if="activeCheck(post)" class="text-secondary text-bold">
+                        <div v-else-if="activeCheck(post)" class="text-dark text-bold">
                             Status: Offered
                         </div>
 
-                        <q-btn class="q-mt-md" color='secondary' text-color="white"
+                        <q-btn class="q-mt-md" color='dark' text-color="white"
                             @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
@@ -87,7 +87,7 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <q-btn class="q-mt-md" color='secondary' text-color="white" @click="iTask(post.id, post.username)">
+                        <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
@@ -104,7 +104,7 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
+                        <q-btn class="q-mt-md" color='secondary' text-color="white" @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
