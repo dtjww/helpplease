@@ -40,7 +40,7 @@
                       
                         <template v-if="value.userA == this.currUser">
                           <q-item-section side style="width: 5rem;">
-                          <q-avatar size="50px" class="q-ml-sm" color="white">{{value.bSlice}}</q-avatar>
+                          <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.bSlice}}</q-avatar>
                           </q-item-section>
                           <q-item-section>
                           <q-item-label>{{value.userB}}</q-item-label>
@@ -49,7 +49,7 @@
                         </template>
                         <template v-else>
                           <q-item-section side style="width: 5rem;">
-                            <q-avatar size="50px" class="q-ml-sm" color="white">{{value.aSlice}}</q-avatar>
+                            <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.aSlice}}</q-avatar>
                             </q-item-section>
                             <q-item-section>
                             <q-item-label>{{value.userA}}</q-item-label>
@@ -62,7 +62,7 @@
                 <q-item clickable v-ripple @click="paramTask(value.task, value.index)" style="padding:3%">
                   <template v-if="value.userA == this.currUser">
                     <q-item-section side style="width: 5rem;">
-                    <q-avatar size="50px" class="q-ml-sm" color="white">{{value.bSlice}}</q-avatar>
+                    <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.bSlice}}</q-avatar>
                     </q-item-section>
                     <q-item-section>
                     <q-item-label>{{value.userB}}</q-item-label>
@@ -71,7 +71,7 @@
                   </template>
                   <template v-else>
                     <q-item-section side style="width: 5rem;">
-                      <q-avatar size="50px" class="q-ml-sm" color="white">{{value.aSlice}}</q-avatar>
+                      <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.aSlice}}</q-avatar>
                       </q-item-section>
                       <q-item-section>
                       <q-item-label>{{value.userA}}</q-item-label>
@@ -550,7 +550,10 @@ html, body {
   background-color: #669c9c;
   color: #fff;
 }
-
+.font {
+  font-family: radley;
+  font-weight: bold;
+}
 
 
 </style>
