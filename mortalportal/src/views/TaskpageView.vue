@@ -13,25 +13,21 @@
             <q-space />
             <div class="lt-xs mainMenu">
 
-                
-                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black "
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == false"  />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == true" />
+
+                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    @mouseleave="hover3 = false" v-if="hover3 == false" />
+                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6" @mouseover="hover3 = true"
+                    @mouseleave="hover3 = false" v-if="hover3 == true" />
 
                 <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
-                        @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == false"  />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
-                        @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == true" />
+                    @mouseover="hover = true" @mouseleave="hover = false" v-if="hover == false" />
+                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                    @mouseover="hover = true" @mouseleave="hover = false" v-if="hover == true" />
 
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == false" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true" />
+                <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                    @mouseleave="hover2 = false" v-if="hover2 == false" />
+                <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                    @mouseleave="hover2 = false" v-if="hover2 == true" />
 
             </div>
 
@@ -115,7 +111,7 @@
                             <td>
                                 <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']"
-                                    prefix='$' type="number" style='width:15vw;' color="indigo-6" />
+                                    type="number" style='width:15vw;' color="indigo-6" />
                             </td>
                         </tr>
 
@@ -146,30 +142,31 @@
                                     :rules="[val => val && val.length > 0 || 'Please Input a Date']" color="indigo-6" />
                             </td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Image (Optional)</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-btn class="date" color="white" text-color="dark" label="upload image" @click="uploadImage" />
-                            <input type="file" style="display: none" ref="fileInput" accept='image/*'
-                                @change=onFilePicked />
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Image (Optional)</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-btn class="date" color="white" text-color="dark" label="upload image"
+                                    @click="uploadImage" />
+                                <input type="file" style="display: none" ref="fileInput" accept='image/*'
+                                    @change=onFilePicked />
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
-                        </td>
-                    </tr>
-                </table>
-                <q-btn color="dark"  label="Post Task" class='button text-white' type="submit" />
-            </q-form>
-        </q-card>
-    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
+                            </td>
+                        </tr>
+                    </table>
+                    <q-btn color="dark" label="Post Task" class='button text-white' type="submit" />
+                </q-form>
+            </q-card>
+        </div>
     </q-scroll-area>
 
 </template>
@@ -335,9 +332,18 @@ export default {
                     console.log(error)
                 })
         },
-        gotoChat(){
+        gotoChat() {
             this.$router.push('/chat')
-        }
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
     }
 
 }
@@ -370,7 +376,7 @@ h6 {
 }
 
 .price {
-    width: 100px;
+
     text-align: center;
 
 }
@@ -436,16 +442,16 @@ h3 {
         float: left;
         margin-right: 0px;
     }
-    
+
 }
 
 .hamburgMenu {
-        display: none;
-    }
+    display: none;
+}
 
-    .mainMenu {
-        display: block;
-    }
+.mainMenu {
+    display: block;
+}
 
 @media (max-width:700px) {
     .hamburgMenu {

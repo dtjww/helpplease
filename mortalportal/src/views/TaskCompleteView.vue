@@ -222,6 +222,9 @@
 
 <script>
 import axios from 'axios'
+import { useCounterStore } from "@/store/store";
+const storeName = useCounterStore()
+
 
 export default {
     setup() {
@@ -273,7 +276,16 @@ export default {
         },
         gotoChat(){
             this.$router.push('/chat')
-        }
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
     },
     created() {
         this.status = this.$route.params.status

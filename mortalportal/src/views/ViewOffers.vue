@@ -17,7 +17,7 @@
         <q-card class="q-px-lg q-py-md">
 
             <q-card-section class="q-pt-lg">
-                <h7 class="q-mb-sm"><strong>Task:</strong> {{ currPost.name }}</h7><br>
+                <h7 class="q-mb-sm "><strong>Task:</strong> {{ currPost.name }}</h7><br>
                 <h7 class="q-mb-sm"><strong>Angel:</strong> {{ currRow.Angel }}</h7><br>
                 <h7><strong>Offered Price:</strong> ${{ currRow.Offer }}</h7>
             </q-card-section>
@@ -25,8 +25,8 @@
             <q-card-section>
                 <div class="text-h7"><strong>Would you like to accept this Angel?</strong></div>
                 <div align="center" class="q-mt-sm">
-                    <q-btn flat label="Yes" color="accent" v-close-popup @click="updateDB()" />
-                    <q-btn flat label="No" color="negative" v-close-popup />
+                    <q-btn flat label="Yes" color="secondary" v-close-popup @click="updateDB()" />
+                    <q-btn flat label="No" color="positive" v-close-popup />
                 </div>
 
             </q-card-section>
@@ -200,11 +200,24 @@ export default {
             update(dbRef(db, 'TaskData/' + this.id + "/offer/" + this.currRow.Angel), {
                 status: 'rejected'
             })
-            window.reload()
+            this.$route.go()
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
+        gotoChat(){
+            this.$router.push({ name: 'Chat', params: { id: this.id } })
         }
     },
     created() {
         this.getPost()
+        this.getcurrPost()
     }
 }
 
