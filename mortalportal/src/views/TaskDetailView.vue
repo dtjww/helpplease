@@ -125,13 +125,11 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div v-if="completedCheck(posts) == 'accepted'">
+                <div v-if="completedCheck(posts) == 'accepted' && currUser != posts.poster">
                     <q-btn color="red" class="btn" @click="taskComplete = true">Task Completed</q-btn>
                 </div>
 
-                <div v-else-if="completedCheck(posts) == 'pending'">
+                <div v-else-if="completedCheck(posts) == 'pending' && currUser == posts.poster">
                     <q-btn color="red" class="btn" @click="confirmComplete = true">Confirm Completed Task
                     </q-btn>
                 </div>
@@ -522,7 +520,6 @@ export default {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/TaskData/' + this.id + '.json')
                 .then(response => {
                     this.posts = response.data
-                    console.log(this.posts)
                     this.currUser = storeName.username
                     this.poster = this.$route.params.poster
                     if (this.posts.accepted != null) {
@@ -533,26 +530,30 @@ export default {
                                 this.angel = values[post].angel
                             }
                         }
-                        this.format = 'View'
-                        this.style = "background-color: #3760b8"
-                        this.thumbStyle.backgroundColor = '#3760b8'
-                        return "View"
+                        console.log(this.currUser,this.poster)
+                        if (this.currUser != this.poster) {
+
+                            this.format = 'View'
+                            this.style = "background-color: #3760b8"
+                            this.thumbStyle.backgroundColor = '#3760b8'
+                        }else{
+                            this.format = "View"
+                            this.style = "background-color: #efa2a4"
+                            this.thumbStyle.backgroundColor = '#efa2a4'
+                        }
+                        console.log(this.style)
                     }
                     else {
                         if (this.poster == this.currUser) {
-                            console.log('view')
                             this.format = "Edit"
                             this.style = "background-color: #efa2a4"
                             this.thumbStyle.backgroundColor = '#efa2a4'
 
-                            return 'Edit'
                         }
                         else {
                             this.format = "View"
-                            console.log('edit')
                             this.style = "background-color: #3760b8"
                             this.thumbStyle.backgroundColor = '#3760b8'
-                            return 'View'
                         }
                     }
                 })
@@ -564,7 +565,6 @@ export default {
             axios.get('https://dreemteem-829c5-default-rtdb.firebaseio.com/Login/' + storeName.username + '/tasksInteracted/saved.json')
                 .then(response => {
                     this.ownPosts = response.data
-                    console.log(this.ownPosts)
                     for (var task in this.ownPosts) {
                         if (task == this.id) {
                             this.heart = true
@@ -685,7 +685,6 @@ export default {
             this.$refs.fileInput.click()
         },
         onFilePicked(event) {
-            console.log(event.target);
             const file = event.target.files;
 
             let filename = file[0].name;
@@ -747,7 +746,6 @@ export default {
 
         },
         completedCheck(currPost) {
-            console.log(currPost)
             if (currPost.accepted == null) {
                 return null
             }
@@ -755,8 +753,6 @@ export default {
                 var values = Object.values(currPost.accepted)
                 var resultP = values.filter(post => post.status == 'pending')
                 var resultA = values.filter(post => post.status == 'accepted')
-                console.log(resultP)
-                console.log(resultA)
                 if (resultP.length > 0) {
                     return 'pending'
                 }
@@ -796,7 +792,7 @@ export default {
 
 
 
-    }
+    },
 
 }
 
