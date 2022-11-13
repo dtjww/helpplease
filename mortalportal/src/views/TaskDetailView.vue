@@ -118,12 +118,12 @@
                         </div>
                         <div class="col-5" align="right">
                             <div v-if="posts.accepted == null">
-                                <q-btn color='teal-1' class="btn text-black" @click=offerPopup>Make an Offer</q-btn>
+                                <q-btn color='secondary' class="btn text-white" @click=offerPopup>Make an Offer</q-btn>
                             </div>
                         </div>
                         <div class="col-5" align="right">
                             <div v-if="posts.accepted == null">
-                                <q-btn color="teal-1" class="btn text-black" @click=gotoChat>Chat Now</q-btn>
+                                <q-btn color="secondary" class="btn text-white" @click=gotoChat>Chat Now</q-btn>
                             </div>
                         </div>
                     </div>

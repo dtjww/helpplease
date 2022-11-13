@@ -9,7 +9,7 @@
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
                 sent
-                bg-color="info"
+                bg-color="#296f81"
                 text-color="white"
                 />
         </template>
@@ -18,7 +18,7 @@
                 :name= msg.username
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
-                bg-color="warning"
+                bg-color="#154e5c;"
                 text-color="white"
                 />
         </template>

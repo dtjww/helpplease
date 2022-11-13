@@ -250,18 +250,18 @@
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
 
-                            <div v-if="completedCheck(post) == 'pending'">
+                            <div v-if="completedCheck(post) == 'pending'" class="text-secondary text-bold">
                                 Status: Pending
                             </div>
-                            <div v-else-if="post.accepted != null">
+                            <div v-else-if="post.accepted != null" class="text-secondary text-bold">
                                 Status: In Progress
                             </div>
-                            <div v-else-if="activeCheck(post)">
+                            <div v-else-if="activeCheck(post)" class="text-secondary text-bold">
                                 Status: Saved
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-accent text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -292,7 +292,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-accent text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
