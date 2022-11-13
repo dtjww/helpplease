@@ -27,7 +27,7 @@
         class="bg-blue-1 adjust"
         style="border-radius: 4px"
       >
-          <q-list active-color="white" indicator-color="transparent" padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list padding style=" border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -76,15 +76,12 @@
           </q-list>
 
         <!-- my profile -->
-        <q-item class="absolute-top bg-blue-grey-2 justify-content-center" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
-        <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh"> -->
+        <!-- <q-item class="absolute-top bg-blue-grey-2 justify-content-center" style="height: 200px; border: 1px solid; border-color:rgb(215, 215, 215); border-radius:5px; border-right: 1px solid #ddd;">
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="80px" color="secondary" text-color="white">{{myUsername.slice(0,1)}}</q-avatar>
-            <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
             <h6 style="margin:0;padding:0; margin-bottom:40px;">{{myUsername}}</h6>
           </div>
-        <!-- </q-img> -->
-      </q-item>
+      </q-item> -->
       </q-drawer>
 
       <q-page-container style="display:inherit;">
