@@ -2,7 +2,7 @@
     
 
     <form @submit.prevent="simulateSubmit" class="q-px-md" style=" height: calc(100vh - 200px)">
-        <div class="row text-h4 text-bold justify-left">
+        <div class="row text-h4 text-bold justify-left karla">
         Edit Profile
     </div>
         <!-- Profile photo change (should remove tbh)
@@ -18,37 +18,37 @@
         <div class="q-pa-md">
             <div class="row border q-mb-none">
                 <div class="col-md-2 text-right border self-center">
-                    <h7 class="q-pr-md">Username: </h7>
+                    <h7 class="q-pr-md karla">Username: </h7>
                 </div>
                 <div class="col-md-10 border">
-                    <q-input borderless readonly input-class="text-left" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.username" />
+                    <q-input borderless readonly input-class="text-left karla" class="self-center full-width no-outline karla" tabindex="0" v-model="this.loginData.username" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
                 <div class="col-md-2 text-right border self-center">
-                    <h7 class="q-pr-md">Full Name: </h7>
+                    <h7 class="q-pr-md karla">Full Name: </h7>
                 </div>
                 <div class="col-md-10 border">
-                    <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.name" />
+                    <q-input rounded outlined input-class="text-left karla" class="self-center no-outline karla" tabindex="0" v-model="this.loginData.name" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
                 <div class="col-md-2 text-right border self-center">
-                    <h7 class="q-pr-md">Email: </h7>
+                    <h7 class="q-pr-md karla">Email: </h7>
                 </div>
                 <div class="col-md-10 border">
-                    <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.email" />
+                    <q-input rounded outlined input-class="text-left karla" class="self-center no-outline karla" tabindex="0" v-model="this.loginData.email" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
                 <div class="col-md-2 text-right border self-center">
-                    <h7 class="q-pr-md">Password: </h7>
+                    <h7 class="q-pr-md karla">Password: </h7>
                 </div>
                 <div class="col-md-10 border">
-                    <q-input input-class="text-left" class="self-center no-outline" v-model="this.loginData.password" rounded outlined :type="isPwd ? 'password' : 'text'" >
+                    <q-input input-class="text-left karla" class="self-center no-outline karla" v-model="this.loginData.password" rounded outlined :type="isPwd ? 'password' : 'text'" >
                         <template v-slot:append>
                         <q-icon
                             :name="isPwd ? 'visibility_off' : 'visibility'"
@@ -220,4 +220,9 @@ export default {
     margin-right: auto;
     width: 50%;
 }
+.karla {
+    font-family: karla;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Karla")
 </style>

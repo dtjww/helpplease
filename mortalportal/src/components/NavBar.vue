@@ -1,10 +1,13 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-none">
-        <q-toolbar class="text-black q-my-none bg-white" style="padding-left:50px;">
-            <router-link to="/home/angel" style="width:170px; padding: 0%">
-                <q-img src="@/assets/MainLogoBlack.png"  style="width:170px;"></q-img>
+        <q-toolbar class="text-black q-my-none shadow-2 bg-white">
+
+            <q-toolbar-title shrink>
+            <router-link to="/home/angel" style="color: white; text-decoration: none">
+                <q-img src="@/assets/MainLogo2.png"  style="width:170px;"></q-img>
             </router-link>      
+            </q-toolbar-title>
     
             <q-space />
             
@@ -13,7 +16,7 @@
                 @mouseover="chatColor = true"
                 @mouseleave="chatColor = false"
                 :class="{ onHover: chatColor }">
-                <q-btn stretch flat label="Chats" style="font-size: medium"  />
+                <q-btn rounded flat label="Chats" style="font-size: medium"  />
                 </div>
             </router-link>
 
@@ -24,7 +27,7 @@
                 @mouseover="profileColor = true"
                 @mouseleave="profileColor = false"
                 :class="{ onHover: profileColor }">
-                    <q-btn stretch flat label="Profile" style="font-size: medium;" />
+                    <q-btn rounded flat label="Profile" style="font-size: medium;" />
                 </div>
                 </router-link>
 
@@ -34,8 +37,39 @@
                 @mouseover="logColor = true"
                 @mouseleave="logColor = false"
                 :class="{ onHover: logColor }">
-            <q-btn stretch flat label="Log Out" style="font-size: medium;" @click="exit()"/>
+            <q-btn rounded flat label="Log Out" style="font-size: medium;" @click="exit()"/>
             </div>
+            <div class="gt-s hamburgMenu">
+                    <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+                    <q-btn-dropdown flat dense dropdown-icon="menu" class="text-black">
+                        <q-list>
+                            <q-item-label header>Menu</q-item-label>
+
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="person" />
+                                </q-item-section>
+                                <q-item-section @click="handleClick()">My Account</q-item-section>
+                            </q-item>
+
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="person" />
+                                </q-item-section>
+                                <q-item-section @click="handleClick()">My Account</q-item-section>
+                            </q-item>
+
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="logout" />
+                                </q-item-section>
+                                <q-item-section @click="exit()">Log Out</q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-btn-dropdown>
+                </div>
+
+            
 
              <!--    </div> 
             <q-btn stretch flat label="Chats" @click="gotoChat()"/>
@@ -180,6 +214,9 @@
     }
     .onHover {
         color: #27A69A;
+    }
+    .hamburgMenu {
+    display: none;
     }
 
 </style>
