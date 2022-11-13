@@ -1,6 +1,6 @@
 <!-- Renee -->
 <template>
-    <div class="q-pa-none">
+    <div class="q-pa-none karla" >
         <q-toolbar class="text-black q-my-none shadow-2 bg-white">
 
             <q-toolbar-title shrink>
@@ -217,6 +217,9 @@
     }
     .hamburgMenu {
     display: none;
+    }
+    .karla {
+    font-family: karla;
     }
 
 </style>
