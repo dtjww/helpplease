@@ -32,15 +32,14 @@
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'angel'" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-secondary " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true && targetP == 'angel'" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-secondary "
+                        @mouseover="hover2 = true" @mouseleave="hover2 = false"
+                        v-if="hover2 == true && targetP == 'angel'" />
 
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black "
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == false && targetP == 'mortal'" />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-dark"
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == true && targetP == 'mortal'" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == false && targetP == 'mortal'" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-dark" @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == true && targetP == 'mortal'" />
 
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
@@ -51,9 +50,8 @@
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'mortal'" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-dark "
-                        @mouseover="hover2 = true" @mouseleave="hover2 = false"
-                        v-if="hover2 == true && targetP == 'mortal'" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-dark " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && targetP == 'mortal'" />
                 </div>
 
                 <div class="gt-s hamburgMenu">
@@ -61,7 +59,12 @@
                     <q-btn-dropdown flat dense dropdown-icon="menu" class="text-black">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="chat" />
+                                </q-item-section>
+                                <q-item-section @click=gotoChat()>Chats</q-item-section>
+                            </q-item>
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
                                     <q-icon name="person" />
@@ -98,8 +101,7 @@
                     |
                 </td>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'mortal'" flat color="dark" rounded v-model="Selection"
-                        @click="mortalBtn">
+                    <q-btn v-if="targetP == 'mortal'" flat color="dark" rounded v-model="Selection" @click="mortalBtn">
                         <h5>Mortal</h5>
                     </q-btn>
                     <q-btn v-else flat rounded v-model="Selection" @click="mortalBtn">
@@ -121,13 +123,13 @@
                         <q-btn v-else v-model="activeBtn" class="actionbtns  text-black" @click="FindBtn">Find</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Saved'" v-model="activeBtn" class="actionbtns bg-secondary text-white"
-                            @click="SavedBtn">Saved</q-btn>
+                        <q-btn v-if="activeBtn == 'Saved'" v-model="activeBtn"
+                            class="actionbtns bg-secondary text-white" @click="SavedBtn">Saved</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="SavedBtn">Saved</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" class="actionbtns bg-secondary text-white"
-                            @click="ActiveBtn">Active</q-btn>
+                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn"
+                            class="actionbtns bg-secondary text-white" @click="ActiveBtn">Active</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="ActiveBtn">Active
                         </q-btn>
                     </td>

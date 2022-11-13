@@ -15,9 +15,9 @@
                 <div class="lt-xs mainMenu">
 
 
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == false && currUser != poster" />
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == true && currUser != poster" />
 
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
@@ -56,10 +56,15 @@
 
                 <div class="gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu">
+                    <q-btn-dropdown flat dense color='black' dropdown-icon="menu">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="chat" />
+                                </q-item-section>
+                                <q-item-section @click=gotoChat2()>Chats</q-item-section>
+                            </q-item>
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
                                     <q-icon name="person" />
@@ -154,11 +159,13 @@
                     </div>
                 </div>
                 <div v-if="completedCheck(posts) == 'accepted' && currUser != poster">
-                    <q-btn color="secondary" class="karla btn text-white" @click="taskComplete = true">Task Completed</q-btn>
+                    <q-btn color="secondary" class="karla btn text-white" @click="taskComplete = true">Task Completed
+                    </q-btn>
                 </div>
 
                 <div v-else-if="completedCheck(posts) == 'pending' && currUser == poster">
-                    <q-btn color="dark" class="karla btn text-white" @click="confirmComplete = true">Confirm Completed Task
+                    <q-btn color="dark" class="karla btn text-white" @click="confirmComplete = true">Confirm Completed
+                        Task
                     </q-btn>
                 </div>
             </q-card>
@@ -175,9 +182,9 @@
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == false && currUser == poster" />
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && currUser == poster" />
 
@@ -198,14 +205,14 @@
 
                 <div class="karla gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
+                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True color=black>
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
-                                    <q-icon name="favorite" />
+                                    <q-icon name="chat" />
                                 </q-item-section>
-                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                                <q-item-section @click=gotoChat2()>Chats</q-item-section>
                             </q-item>
 
                             <q-item clickable v-ripple>
@@ -830,10 +837,15 @@ export default {
             storeName.email = ''
             storeName.name = ''
             this.$router.push({ name: 'Landing' })
-        },    
+        },
+        gotoChat2(){
+            this.$router.push({ name: 'Chat' })
+        },
+        
 
+    }
 
-    },
+    ,
 
     created() {
         this.poster = this.$route.params.poster
@@ -974,8 +986,12 @@ q-input {
         display: none;
     }
 }
+
 @import url("https://fonts.googleapis.com/css?family=Karla");
+
 .karla {
     font-family: karla;
-};
+}
+
+;
 </style>

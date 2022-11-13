@@ -112,6 +112,23 @@ export default {
                     timer = void 0
                 }, 2500)
             },
+            showDeleting() {
+                $q.loading.show(
+                    {
+                        spinner: QSpinnerOval,
+                        spinnerSize: 100,
+                        message: 'Rejecting...',
+                        messageColor: 'white',
+                        backgroundColor: 'black'
+                    }
+                )
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.go()
+                    timer = void 0
+                }, 2500)
+            },
 
         }
     },
@@ -197,10 +214,14 @@ export default {
             this.reject = true
         },
         updateReject() {
+            console.log(this.currRow.Angel)
             update(dbRef(db, 'TaskData/' + this.id + "/offer/" + this.currRow.Angel), {
                 status: 'rejected'
             })
-            this.$route.go()
+            update(dbRef(db, 'Login/' + this.currRow.Angel + '/tasksInteracted/active/' + this.id), {
+                status: 'rejected'
+            })
+            this.showDeleting()
         },
         exit() {
             storeName.username = ''
@@ -211,7 +232,7 @@ export default {
         handleClick() {
             this.$router.push('/profile')
         },
-        gotoChat(){
+        gotoChat() {
             this.$router.push({ name: 'Chat', params: { id: this.id } })
         }
     },
@@ -242,4 +263,6 @@ export default {
     margin-top: 20px;
     padding: 20px;
 }
+
+
 </style>

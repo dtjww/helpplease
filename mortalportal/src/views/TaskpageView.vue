@@ -37,10 +37,15 @@
 
             <div class="gt-s hamburgMenu karla">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                <q-btn-dropdown flat dense dropdown-icon="menu">
+                <q-btn-dropdown flat dense dropdown-icon="menu" color="black">
                     <q-list>
                         <q-item-label header>Menu</q-item-label>
-
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="chat" />
+                            </q-item-section>
+                            <q-item-section @click=gotoChat()>Chats</q-item-section>
+                        </q-item>
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-icon name="person" />
@@ -108,7 +113,7 @@
 
                         <tr>
                             <td>
-                                <h6>Price</h6>
+                                <h6>Price ($)</h6>
                             </td>
                         </tr>
                         <tr>

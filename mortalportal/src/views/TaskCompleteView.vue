@@ -50,11 +50,11 @@
                 <q-btn-dropdown flat dense dropdown-icon="menu">
                     <q-list>
                         <q-item-label header>Menu</q-item-label>
-                        <q-item clickable @click="gotoChat()">
+                        <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-icon name="chat" />
                             </q-item-section>
-                            <q-item-section>Chats</q-item-section>
+                            <q-item-section @click=gotoChat()>Chats</q-item-section>
                         </q-item>
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
