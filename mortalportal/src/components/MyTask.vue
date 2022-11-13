@@ -3,10 +3,11 @@
     <table align="center">
         <tr>
             <td class="actionbtns">
-                <q-btn flat rounded v-model="Selection" @click='activeBtn' label ='Active'/>
+                <q-btn flat rounded v-model="Selection" @click='activeBtn' label='Active' />
             </td>
             <td width:10px>
-                |  <!-- Separation between Active and Completed -->
+                |
+                <!-- Separation between Active and Completed -->
             </td>
             <td class="actionbtns">
                 <q-btn flat rounded v-model="Selection" @click="completedBtn" label="Completed" />
@@ -14,55 +15,101 @@
         </tr>
 
     </table>
-                
+
     <div class="myContainer myBox">
         <div v-if="Selection == 'Active'">
             <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
             <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
-                    <q-card class="my-card grid-item bg-white text-black">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
-                            
-                            <div v-if="completedCheck(post) == 'pending'">
-                                Status: Pending
-                            </div>
-                            <div v-else-if="post.accepted != null">
-                                Status: In Progress
-                            </div>
-                            <div v-else-if="activeCheck(post)">
-                                Status: Offered
-                            </div>
+                <q-card class="my-card grid-item bg-white text-black">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
 
-                            <q-btn class="q-mt-md" color='positive' text-color="white" @click="iTask(post.id, post.username)">
-                                <b>Details</b>
-                            </q-btn>
-                        </q-card-section>
-                    </q-card>
+                        <div v-if="completedCheck(post) == 'pending'">
+                            Status: Pending
+                        </div>
+                        <div v-else-if="post.accepted != null">
+                            Status: In Progress
+                        </div>
+                        <div v-else-if="activeCheck(post)">
+                            Status: Offered
+                        </div>
+
+                        <q-btn class="q-mt-md" color='dark' text-color="white"
+                            @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
+            </figure>
+
+            <figure v-for="post in activeMortalTasks" v-bind:key="post.id">
+                <q-card class="my-card grid-item bg-white text-black">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
+
+                        <div v-if="completedCheck(post) == 'pending'">
+                            Status: Pending
+                        </div>
+                        <div v-else-if="post.accepted != null">
+                            Status: In Progress
+                        </div>
+                        <div v-else-if="activeCheck(post)">
+                            Status: Offered
+                        </div>
+
+                        <q-btn class="q-mt-md" color='positive' text-color="white"
+                            @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
             </figure>
         </div>
 
         <div v-else>
             <figure v-for="post in MortalTasks" v-bind:key="post.id">
-                    <!-- returns all of user's mortal tasks, completed and otherwise -->
-                    <q-card class="my-card grid-item bg-white text-black">
-                        <img :src="post.file">
-                        <q-card-section class="fontAlign">
-                            Mortal: {{ post.username }} <br>
-                            Task: {{ post.name }}<br>
-                            Date: {{ post.date }}<br>
-                            Time: {{ post.time }}<br>
-                            Amount: ${{ post.price }}<br>
+                <!-- returns all of user's mortal tasks, completed and otherwise -->
+                <q-card class="my-card grid-item bg-white text-black">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
 
-                            <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
-                                <b>Details</b>
-                            </q-btn>
-                        </q-card-section>
-                    </q-card>
+                        <q-btn class="q-mt-md" color='positive' text-color="white" @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
+            </figure>
+            <figure v-for="post in AngelTasks" v-bind:key="post.id">
+                <!-- returns all of user's mortal tasks, completed and otherwise -->
+                <q-card class="my-card grid-item bg-white text-black">
+                    <img :src="post.file">
+                    <q-card-section class="fontAlign">
+                        Mortal: {{ post.username }} <br>
+                        Task: {{ post.name }}<br>
+                        Date: {{ post.date }}<br>
+                        Time: {{ post.time }}<br>
+                        Amount: ${{ post.price }}<br>
+
+                        <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
+                            <b>Details</b>
+                        </q-btn>
+                    </q-card-section>
+                </q-card>
             </figure>
         </div>
     </div>
@@ -146,14 +193,44 @@ export default {
             }
 
         },
-                    
+
+
+
     },
     computed: {
         // Retrieve all tasks posted by current user (as a mortal)
         MortalTasks() {
             var values = Object.values(this.posts)
-            var result = values.filter(post => post.username == this.currUser )
-            return result
+            var result = values.filter(post => post.username == this.currUser && post.accepted != null)
+            console.log(result)
+            var fResult = []
+            for (var i in result) {
+                var values2 = Object.values(result[i].accepted)
+                var result2 = values2.filter(post => post.status == 'completed')
+                if (result2.length > 0) {
+                    fResult.push(result[i])
+                }
+
+            }
+            return fResult
+        },
+
+        AngelTasks() {
+            var fResult = []
+            var values = Object.values(this.posts)
+            var aResult = values.filter(post => post.accepted != null)
+            for (var v in aResult) {
+                console.log(aResult[v].accepted[this.currUser])
+                if (aResult[v].accepted[this.currUser] != null &&
+                    aResult[v].accepted[this.currUser].angel == this.currUser) {
+                    console.log('yes')
+                    if (aResult[v].accepted[this.currUser] != null && aResult[v].accepted[this.currUser].status == 'completed') {
+                        fResult.push(aResult[v])
+                    }
+                }
+            }
+            console.log(fResult)
+            return fResult
         },
 
         activeAngelTasks() {
@@ -173,19 +250,15 @@ export default {
         },
 
         activeMortalTasks() {
-            var values = Object.values(this.posts)
-            var result = values.filter(post => post.username == this.currUser )
-            if(this.post.offer == null){
-                return []
-            } else {
-                values = Object.values(this.post.offer)
-                result = values.filter(task => task.username == this.currUser )
+            var allTask = Object.values(this.posts)
+            var result = allTask.filter(post => post.username == this.currUser)
+           
                 return result
-            }
+            
         },
-        
-        
-        
+
+
+
 
         // allCompletedTasks(){
         //     var allTask = Object.values(this.posts)
@@ -225,7 +298,7 @@ export default {
     created() {
         this.getPost();
         this.getOwnTask();
-        
+
     },
 
 }
@@ -312,6 +385,4 @@ figure>q-card {
         grid-template-columns: repeat(1, 1fr);
     }
 }
-
-
 </style>

@@ -8,7 +8,7 @@
     </q-card-section>
 
     <q-card-section class="q-pa-none map_height" style="height: 500px;">
-        <IEcharts :option="getBarChartOptions" :resizable="true" />
+        <IEcharts :option="getBarChartOptions" :resizable="true" notMerge/>
     </q-card-section>
 </template>
 
@@ -212,10 +212,12 @@ export default {
             return item['product'] == self.selected_product;
         });
         // let filtered_data = this.abc;
+        console.log(this.selected_product);
         console.log(filtered_data);
-
+        console.log(this.abc);
+        var option = {};
         if (this.selected_product == 'Past Month'){
-          return {
+          option =  {
             grid: {
               bottom: '25%'
             },
@@ -241,7 +243,7 @@ export default {
           }
         }
         else if (this.selected_product == 'Past 3 Months'){
-          return {
+          option =  {
             grid: {
               bottom: '25%'
             },
@@ -272,7 +274,7 @@ export default {
         }
         else if (this.selected_product == 'Past 6 Months'){
 
-          return {
+          option = {
             grid: {
               bottom: '25%'
             },
@@ -305,7 +307,7 @@ export default {
           }
         }
         else {
-          return {
+          option = {
             grid: {
               bottom: '25%'
             },
@@ -343,6 +345,7 @@ export default {
             {type: 'bar'}]
           }
         }
+        return option;
     },
   },
 

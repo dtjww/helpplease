@@ -3,7 +3,7 @@
 <template>
 
   <div class="back">
-    <NavBar/>
+    <NavBarWhite/>
     <!-- <div class="about">
       <h1> hellooo </h1>
       <h2 class="format1"> {{message}} </h2>
@@ -24,8 +24,7 @@
         mini-to-overlay="500"
         show-if-above
         :breakpoint="400"
-        class="bg-blue-1 adjust"
-        style="border-radius: 4px"
+        class="bg-teal-1 adjust"
       >
           <q-list padding style=" border-right: 1px solid #ddd; text-align:left;">
             
@@ -35,7 +34,7 @@
               <template v-if="value.index == this.chatId">
                 <q-item clickable v-ripple
                 :active="tab === 'chat1'"
-                active-class="text-accent"
+                active-class="active"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
                       <q-item-section side style="width: 5rem;">
@@ -76,14 +75,14 @@
           </q-list>
 
         <!-- my profile -->
-        <q-item class="absolute-top bg-warning justify-content-center" style="height: 200px;  border-right: 1px solid #ddd;">
-        <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 25vh"> -->
+        <!-- <q-item class="absolute-top bg-warning justify-content-center" style="height: 200px;  border-right: 1px solid #ddd;">
+        
           <div class="absolute-bottom bg-transparent">
             <q-avatar size="80px" color="info" text-color="white">{{myUsername.slice(0,1)}}</q-avatar>
-            <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
+            
             <h6 style="margin:0;padding:0; margin-bottom:40px;">{{myUsername}}</h6>
           </div>
-      </q-item> -->
+        </q-item> -->
       </q-drawer>
 
       <q-page-container style="display:inherit;">
@@ -96,10 +95,10 @@
                     <q-tab-panel name="chat1" style="padding: 0;">
                       
                       <q-card>
-                      <q-item class="bg-grey-3" style="margin:0%; border-radius:8px; text-align:left; font-style:italic; height:100px; text-align:left">
+                      <q-item class="bg-grey-3" style="margin:0%; border-radius:0px; text-align:left; font-style:italic; height:100px; text-align:left">
                         
                         <q-item-section side class="displayhide" style="height:max-content">
-                          <img :src="posts.file" style="height:80px; display: block; margin: 5px; border-radius:2px">
+                          <img :src="posts.file" style="height:80px; display: block; margin: 5px; border-radius:0px">
                         </q-item-section>
                         <q-item-section>
                           <q-item-label >{{postUsername}}</q-item-label>
@@ -119,7 +118,7 @@
                     </q-card>
                       
                     <q-item style="height: calc(100vh - 78.17px - 100px - 80px); margin:0; margin-right:0; text-align:left">
-                      <div class="q-ma-sm bg-grey-1" style="margin:0; border-radius:3%; width:100%; height:100% ">
+                      <div class="q-ma-sm bg-grey-1" style="margin:0; width:100%; height:100% ">
                         <!-- for scroll area -->
                         <q-scroll-area class="fill-window" id="thisScroll" ref="scrollAreaComponent"  style="height: calc(100vh - 78.17px - 100px - 100px); text-align:left">
                           <div>
@@ -146,7 +145,7 @@
 
                     </q-tab-panel>
             
-                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230); border-radius:5px">
+                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230);">
                       <!-- <div class="text-h6">chat2</div> -->
                       <!-- <q-card class="justify-content-center text-center" style="height: 100%;">  -->
                         <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:40vh"> No Chats Selected</h3>
@@ -172,7 +171,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBarWhite from '@/components/NavBarWhite.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { db } from '../firebase.js';
@@ -193,7 +192,7 @@ const scrollAreaComponent = ref();
 export default {
   name: 'ChatpageView',
       components: {
-    NavBar,
+    NavBarWhite,
     ChatMsg
 },
   data () {
@@ -533,6 +532,11 @@ html, body {
 .adjust{
   width:280px
 
+}
+
+.active {
+  background-color: #669c9c;
+  color: #fff;
 }
 
 
