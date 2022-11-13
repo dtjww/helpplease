@@ -58,7 +58,7 @@
   <q-layout>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
       <q-page-container>
-        <q-page class="page-height page-width row justify-center items-center ">
+        <q-page class="page-height page-width row justify-center items-center">
           <q-card square bordered class="q-pa-lg shadow-1">
             <q-card-section>
               <router-link to="/" style="width:170px;padding:0%">
@@ -78,16 +78,16 @@
 
                 <q-card-section>
                   <q-form class="q-gutter-md">
-                    <q-input square filled clearable v-model="username" type="text" label="Username" />
-                    <q-input square filled clearable v-model="name" type="text" label="Full Name" />
-                    <q-input square filled clearable v-model="password" type="password" label="Password" />
-                    <q-input square filled clearable v-model="cPassword" type="password" label="Confirm Password" />
-                    <q-input square filled clearable v-model="email" type="email" label="Email" />
+                    <q-input square filled clearable v-model="username" type="text" label="Username" @keyup.enter="submitData"/>
+                    <q-input square filled clearable v-model="name" type="text" label="Full Name" @keyup.enter="submitData"/>
+                    <q-input square filled clearable v-model="password" type="password" label="Password" @keyup.enter="submitData"/>
+                    <q-input square filled clearable v-model="cPassword" type="password" label="Confirm Password" @keyup.enter="submitData"/>
+                    <q-input square filled clearable v-model="email" type="email" label="Email" @keyup.enter="submitData"/>
                   </q-form>
                 </q-card-section>
                 <q-card-actions class="q-px-md">
                   <q-btn unelevated color="primary" size="md" style="width:17vw;margin-left:auto;margin-right:auto;"
-                    label="Sign up" @click=submitData />
+                    label="Sign up" @click=submitData  />
                 </q-card-actions>
                 <br>
                 OR
@@ -176,19 +176,19 @@ export default {
     return {
       tab: ref('Sign Up'),
       thumbStyle: {
-                right: '4px',
-                borderRadius: '5px',
-                backgroundColor: '#FFFFFF',
-                width: '5px',
-                opacity: 0.75
-            },
+        right: '4px',
+        borderRadius: '5px',
+        backgroundColor: '#FFFFFF',
+        width: '5px',
+        opacity: 0.75
+      },
 
-            barStyle: {
-                right: '2px',
-                borderRadius: '9px',
-                width: '9px',
-                opacity: 0.2
-            }
+      barStyle: {
+        right: '2px',
+        borderRadius: '9px',
+        width: '9px',
+        opacity: 0.2
+      }
     }
   },
   data() {
@@ -240,18 +240,23 @@ export default {
         })
     },
     submitData() {
-      if (this.password == this.cPassword) {
-        this.signupData.email = this.email
-        this.signupData.password = this.password
-        this.signupData.username = this.username
-        this.signupData.name = this.name
-        set(dbRef(db, 'Login/' + this.signupData.username), this.signupData);
-        storeName.username = this.signupData.username;
-        storeName.email = this.signupData.email
-        this.$router.push('/home/angel');
+      if (this.email != '' && this.password != '' && this.username != '' && this.name != '' && this.cPassword != '') {
+        if (this.password == this.cPassword) {
+          this.signupData.email = this.email
+          this.signupData.password = this.password
+          this.signupData.username = this.username
+          this.signupData.name = this.name
+          set(dbRef(db, 'Login/' + this.signupData.username), this.signupData);
+          storeName.username = this.signupData.username;
+          storeName.email = this.signupData.email
+          this.$router.push('/home/angel');
+        }
+        else {
+          alert("Password and Confirm Password do not match")
+        }
       }
       else {
-        alert("Passwords do not match")
+        alert("Please fill up all the fields")
       }
 
     },
@@ -263,7 +268,7 @@ export default {
       const isSignedIn = ref(false);
       const uiConfig = {
         signInFlow: 'popup',
-        signinSuccessUrl: 'gSignin',
+        signinSuccessUrl: 'loading',
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ],
@@ -342,11 +347,6 @@ export default {
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
 }
 
 .header {

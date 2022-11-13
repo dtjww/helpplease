@@ -140,7 +140,7 @@ export default {
             UsernameTaken() {
                 $q.notify({
                     message: 'Username already taken',
-                    color: 'negative',
+                    color: 'red',
                     position: 'top',
                     timeout: 2000
                 })
@@ -203,7 +203,7 @@ export default {
             this.$router.push('/home/angel')
         },
         validate() {
-            if (this.username == '' || this.password == '' || this.cpassword == '') {
+            if (this.username.trim() == '' || this.password.trim() == '' || this.cpassword.trim() == '') {
                 this.FillsNotFilled()
                 return null
             } else if (this.password != this.cpassword) {
