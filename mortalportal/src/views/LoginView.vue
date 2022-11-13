@@ -79,9 +79,9 @@
                                 <q-form class="q-gutter-md">
                                     <q-input rounded outlined color="accent" clearable v-model="email_login" type="text" label="Email"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Enter your email',
-                                     val => val.includes('@') && val.includes('.') || 'Enter a valid email']" />
+                                     val => val.includes('@') && val.includes('.') || 'Enter a valid email']" @keyup.enter="getUser"/>
                                     <q-input rounded outlined color="accent" clearable v-model="password_login" type="password" label="Password"
-                                    lazy-rules :rules="[val => val && val.length > 0 || 'Enter your password']" />
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Enter your password']" @keyup.enter="getUser"/>
                                 </q-form>
                             </q-card-section>
                             <q-card-actions class="q-px-md">

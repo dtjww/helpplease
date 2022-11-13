@@ -58,7 +58,7 @@
   <q-layout>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
       <q-page-container>
-        <q-page class="page-height page-width row justify-center items-center ">
+        <q-page class="page-height page-width row justify-center items-center">
           <q-card square bordered class="q-pa-lg shadow-1">
             <q-card-section>
               <router-link to="/" style="width:170px;padding:0%">
@@ -160,7 +160,6 @@
 
 <script>
 import { ref } from 'vue'
-import { useQuasar } from 'quasar';
 // google login start
 import { firebaseConfig } from '../firebase.js';
 import firebase from 'firebase/compat/app';
@@ -170,7 +169,6 @@ import 'firebaseui/dist/firebaseui.css';
 import { getAuth, signOut } from "firebase/auth";
 // import { getAuth, GoogleAuthProvider, signInWithPopup,signOut } from "firebase/auth";
 const auth = getAuth();
-const $q = useQuasar();
 // google login end
 
 
@@ -248,15 +246,7 @@ export default {
         })
     },
     submitData() {
-      if (this.signupData.email == ''){
-        $q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      }
-      if (this.signupData.email != '' && this.signupData.password != '' && this.signupData.username != '' && this.signupData.name != '' && this.cPassword != '') {
+      if (this.email != '' && this.password != '' && this.username != '' && this.name != '' && this.cPassword != '') {
         if (this.password == this.cPassword) {
           this.signupData.email = this.email
           this.signupData.password = this.password
@@ -363,11 +353,6 @@ export default {
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
 }
 
 .header {
