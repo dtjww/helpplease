@@ -26,32 +26,32 @@
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == false && targetP == 'angel'" />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-secondary"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == true && targetP == 'angel'" />
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'angel'" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-secondary " @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == true && targetP == 'angel'" />
 
                     <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black "
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == false && targetP == 'mortal'" />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-dark"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && targetP == 'mortal'" />
 
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == false && targetP == 'mortal'" />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-dark"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == true && targetP == 'mortal'" />
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'mortal'" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 "
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-dark "
                         @mouseover="hover2 = true" @mouseleave="hover2 = false"
                         v-if="hover2 == true && targetP == 'mortal'" />
                 </div>
@@ -86,7 +86,7 @@
         <table align="center">
             <tr>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'angel'" class="text-teal-5" flat rounded v-model="Selection"
+                    <q-btn v-if="targetP == 'angel'" class="text-secondary" flat rounded v-model="Selection"
                         @click='angelBtn'>
                         <h5>Angel</h5>
                     </q-btn>
@@ -98,7 +98,7 @@
                     |
                 </td>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'mortal'" flat color="indigo-6" rounded v-model="Selection"
+                    <q-btn v-if="targetP == 'mortal'" flat color="dark" rounded v-model="Selection"
                         @click="mortalBtn">
                         <h5>Mortal</h5>
                     </q-btn>
@@ -116,17 +116,17 @@
             <table align="center">
                 <tr style="width:36vw">
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Find'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
+                        <q-btn v-if="activeBtn == 'Find'" v-model="activeBtn" class="actionbtns bg-secondary text-white"
                             @click="FindBtn">Find</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns  text-black" @click="FindBtn">Find</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Saved'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
+                        <q-btn v-if="activeBtn == 'Saved'" v-model="activeBtn" class="actionbtns bg-secondary text-white"
                             @click="SavedBtn">Saved</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="SavedBtn">Saved</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
+                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" class="actionbtns bg-secondary text-white"
                             @click="ActiveBtn">Active</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="ActiveBtn">Active
                         </q-btn>
@@ -136,14 +136,14 @@
                 <tr v-if="activeBtn == 'Find'">
                     <td colspan="3" align='left'>
                         <q-input rounded outlined label="Search" class="search text-black" v-model="search"
-                            color="teal-1" text-color="white">
+                            color="secondary" text-color="white">
                         </q-input>
                     </td>
                 </tr>
             </table>
             <div>
 
-                <q-card class="dCard bg-teal-1 rounded-borders" v-if="activeBtn == 'Find'">
+                <q-card class="dCard bg-accent rounded-borders" v-if="activeBtn == 'Find'">
                     <q-card-section>
                         <div class="text-h5">Filter</div>
                     </q-card-section>
@@ -153,7 +153,7 @@
 
                             <q-expansion-item label="Central" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:auto">
-                                    <q-card class="qCard bg-teal-1">
+                                    <q-card class="qCard bg-accent">
                                         <div v-for="station in stationCentral" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
                                                 color="black" />
@@ -165,7 +165,7 @@
 
                             <q-expansion-item label="East" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard bg-teal-1">
+                                    <q-card class="qCard bg-accent">
                                         <div v-for="station in stationEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
                                                 color="black" />
@@ -176,7 +176,7 @@
 
                             <q-expansion-item label="North" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard bg-teal-1">
+                                    <q-card class="qCard bg-accent">
                                         <div v-for="station in stationNorth" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
                                                 color="black" />
@@ -187,7 +187,7 @@
 
                             <q-expansion-item label="North-East" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard bg-teal-1">
+                                    <q-card class="qCard bg-accent">
                                         <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
                                                 color="black" />
@@ -198,7 +198,7 @@
 
                             <q-expansion-item label="West" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard bg-teal-1">
+                                    <q-card class="qCard bg-accent">
                                         <div v-for="station in stationWest" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
                                                 color="black" />
@@ -232,7 +232,7 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
-                            <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
@@ -261,7 +261,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-accent text-black" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -292,7 +292,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-accent text-black" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -304,7 +304,7 @@
 
         <!-- Mortal -->
         <div v-else>
-            <q-btn class="bg-indigo-2 text-black" @click=goToTask>New Post</q-btn>
+            <q-btn class="bg-dark text-white" @click=goToTask>New Post</q-btn>
             <div class="containerMortal boxMortal">
                 <figure v-for="post in MortalTasks" v-bind:key="post.id">
                     <div v-if="post.username == currUser">
@@ -317,10 +317,10 @@
                                 Amount: ${{ post.price }}<br>
 
                                 <div v-if="post.accepted == null">
-                                    <q-btn class="q-mr-lg bg-indigo-2 text-black" v-if="post.username == currUser"
+                                    <q-btn class="q-mr-lg bg-dark text-white" v-if="post.username == currUser"
                                         @click="iTask(post.id, post.username)" size="sm"><b>Edit</b>
                                     </q-btn>
-                                    <q-btn v-if="offerCheck(post) != null" class="bg-indigo-2 text-black"
+                                    <q-btn v-if="offerCheck(post) != null" class="bg-dark text-white"
                                         @click="viewOffer(post.id)" size="sm"><b>View Offers</b></q-btn>
 
                                 </div>
@@ -328,7 +328,7 @@
                                 <div v-else-if="completedCheck(post) == 'pending'">
                                     Status: Pending<br>
                                     <q-btn @click="confirmCompletion(post.id, post.username)"
-                                        class="bg-indigo-2 text-black"> Confirm
+                                        class="bg-dark text-white"> Confirm
                                     </q-btn>
                                 </div>
                                 <div v-else>
