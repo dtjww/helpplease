@@ -278,6 +278,7 @@ export default {
             image: null,
             hover: false,
             hover2: false,
+            hover3: false,
         }
     },
     methods: {
