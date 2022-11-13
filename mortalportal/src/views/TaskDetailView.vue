@@ -15,9 +15,9 @@
                 <div class="lt-xs mainMenu">
 
 
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat2()" class="text-black " @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == false && currUser != poster" />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat2()" class="text-teal-5" @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == true && currUser != poster" />
 
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
@@ -33,9 +33,9 @@
                         @mouseleave="hover2 = false" v-if="hover2 == true && currUser != poster" />
 
 
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chat" @click="gotoChat2()" class="text-black " @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == false && currUser == poster" />
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chat" @click="gotoChat2()" class="text-indigo-6"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && currUser == poster" />
 
@@ -182,9 +182,9 @@
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                    <q-btn rounded flat label="Chats" @click="gotoChat2()" class="text-black " @mouseover="hover3 = true"
                         @mouseleave="hover3 = false" v-if="hover3 == false && currUser == poster" />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chats" @click="gotoChat2()" class="text-indigo-6"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && currUser == poster" />
 
