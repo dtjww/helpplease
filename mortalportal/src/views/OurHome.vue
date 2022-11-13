@@ -8,7 +8,7 @@
         <div class="q-pa-none">
 
 
-            <q-toolbar class="text-dark q-my-none shadow-2" :style="style" id="navbar">
+            <q-toolbar class="text-secondary q-my-none shadow-2" :style="style" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="text-decoration: none">
@@ -54,7 +54,7 @@
         <table align="center">
             <tr>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'angel'" color="dark" flat rounded v-model="Selection" @click='angelBtn'>
+                    <q-btn v-if="targetP == 'angel'" color="secondary" flat rounded v-model="Selection" @click='angelBtn'>
                         <h5>Angel</h5>
                     </q-btn>
                     <q-btn v-else flat rounded v-model="Selection" @click='angelBtn'>
@@ -83,17 +83,17 @@
             <table align="center">
                 <tr style="width:36vw">
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Find'" color="dark" v-model="activeBtn" class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Find'" color="secondary" v-model="activeBtn" class="actionbtns"
                             @click="FindBtn">Find</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Saved'" color='dark' v-model="activeBtn" class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Saved'" color='secondary' v-model="activeBtn" class="actionbtns"
                             @click="SavedBtn">Saved</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='dark' class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='secondary' class="actionbtns"
                             @click="ActiveBtn">Active</q-btn>
                         <q-btn v-else v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
                     </td>
@@ -101,7 +101,7 @@
                 </tr>
                 <tr v-if="activeBtn == 'Find'">
                     <td colspan="3" align='left'>
-                        <q-input rounded outlined label="Search" class="search" v-model="search" color="dark"
+                        <q-input rounded outlined label="Search" class="search" v-model="search" color="secondary"
                             text-color="white">
                         </q-input>
                     </td>
@@ -122,7 +122,7 @@
                                     <q-card class="qCard">
                                         <div v-for="station in stationCentral" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="dark" />
+                                                color="secondary" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -134,7 +134,7 @@
                                     <q-card class="qCard">
                                         <div v-for="station in stationEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="dark" />
+                                                color="secondary" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -145,7 +145,7 @@
                                     <q-card class="qCard">
                                         <div v-for="station in stationNorth" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="dark" />
+                                                color="secondary" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -156,7 +156,7 @@
                                     <q-card class="qCard">
                                         <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="dark" />
+                                                color="secondary" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -167,7 +167,7 @@
                                     <q-card class="qCard">
                                         <div v-for="station in stationWest" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="dark" />
+                                                color="secondary" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -178,7 +178,7 @@
                         <q-list>
                             <h6 class="location">Category</h6>
                             <div v-for="task in tasks" :key="task" class='Expand2'>
-                                <q-checkbox v-model=category :val=task :label=task color="dark" />
+                                <q-checkbox v-model=category :val=task :label=task color="secondary" />
                             </div>
 
                         </q-list>
@@ -198,7 +198,7 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
-                            <q-btn class="q-mt-md" color='dark' text-color="white"
+                            <q-btn class="q-mt-md" color='secondary' text-color="white"
                                 @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
@@ -228,7 +228,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md" color='dark' text-color="white"
+                                <q-btn class="q-mt-md" color='secondary' text-color="white"
                                     @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
@@ -260,7 +260,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md" color='dark' text-color="white"
+                                <q-btn class="q-mt-md" color='secondary' text-color="white"
                                     @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
