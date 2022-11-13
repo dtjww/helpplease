@@ -146,7 +146,7 @@
                     <!-- FOR INPUT OF TEXT -->
                     <q-input class="textinput" rounded outlined v-model="myMsg" placeholder="Send a Text Here" @keyup.enter="sendMessage()" style="margin: 10px; width:100%">
                       <template v-slot:after>
-                        <q-btn round dense flat color="accent" icon="send" @click="sendMessage()"/>
+                        <q-btn round dense flat color="secondary" icon="send" @click="sendMessage()"/>
                       </template>
                     </q-input>
                   </q-item>
@@ -155,7 +155,7 @@
 
                     </q-tab-panel>
             
-                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230);">
+                    <q-tab-panel name="chat2" class="justify-content-center bg-grey-4 text-center" style="height: 100%; border: 2px solid; border-color:rgb(230, 230, 230);">
                       <!-- <div class="text-h6">chat2</div> -->
                       <!-- <q-card class="justify-content-center text-center" style="height: 100%;">  -->
                         <h3 style="color: grey; font-family:Georgia, 'Times New Roman', Times, serif; font-style:italic; margin-bottom:0; margin-top:40vh"> No Chats Selected</h3>
@@ -485,6 +485,15 @@ export default {
           this.$router.push({ name: 'Task Details', params: { id: this.$route.params.id, poster: this.postUsername} })
           // window.location.href = "http://localhost:8080/Task/" + this.$route.params.id
         },
+        checkCurr(){
+          if(storeName.username == "" || storeName.username == null || this.currUser == "" || this.currUser == null){
+            alert("Login not registered! Please login again to continue!")
+            setTimeout(() => {
+              this.$router.push({ name: 'Login' })
+            }, 1000);
+            
+          }
+        },
       },
     mounted() {
 
@@ -505,6 +514,7 @@ export default {
       
       setTimeout(() => {
         this.tablist();
+        this.checkCurr();
       }, 1000);
     },
 
