@@ -58,7 +58,7 @@
   <q-layout>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
       <q-page-container>
-        <q-page class="page-height page-width row justify-center items-center ">
+        <q-page class="page-height page-width row justify-center items-center">
           <q-card square bordered class="q-pa-lg shadow-1">
             <q-card-section>
               <router-link to="/" style="width:170px;padding:0%">
@@ -347,11 +347,6 @@ export default {
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
 }
 
 .header {
