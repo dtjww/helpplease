@@ -8,11 +8,11 @@
         <div class="q-pa-none">
 
 
-            <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+            <q-toolbar class="text-dark q-my-none shadow-2" :style="style" id="navbar">
 
                 <q-toolbar-title shrink>
-                    <router-link to="/home/angel" style="color: white; text-decoration: none">
-                        <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                    <router-link to="/home/angel" style="text-decoration: none">
+                        <q-img src="../assets/MainLogoBlue.png" style="width:170px"></q-img>
                     </router-link>
                 </q-toolbar-title>
                 <q-space />
@@ -629,11 +629,11 @@ export default {
         this.getOwnTask();
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
-            this.style = 'background-color: #3760b8'
+            this.style = 'background-color: #ffffff'
         }
         else {
             this.targetP = 'mortal'
-            this.style = 'background-color: #efa2a4'
+            this.style = 'background-color: #fffff'
         }
         if (storeName.username == '') {
             this.$router.push('/login')
