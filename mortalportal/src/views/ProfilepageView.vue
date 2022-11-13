@@ -40,16 +40,6 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple :active="tab === 'MyChats'" @click=gotoChats>
-            <q-item-section avatar>
-              <q-icon name="question_answer"/>
-            </q-item-section>
-
-            <q-item-section>
-              Chats
-            </q-item-section>
-          </q-item>
-
           <q-item clickable v-ripple >
             <q-item-section avatar>
               <q-icon name="logout" />
