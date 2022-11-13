@@ -30,7 +30,7 @@
                     <h7 class="q-pr-md">Full Name: </h7>
                 </div>
                 <div class="col border">
-                    <q-input rounded outlined input-class="text-left" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.name" />
+                    <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.name" />
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                     <h7 class="q-pr-md">Email: </h7>
                 </div>
                 <div class="col border">
-                    <q-input rounded outlined input-class="text-left" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.email" />
+                    <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.email" />
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                     <h7 class="q-pr-md">Password: </h7>
                 </div>
                 <div class="col border">
-                    <q-input input-class="text-left" class="self-center full-width no-outline" v-model="this.loginData.password" rounded outlined :type="isPwd ? 'password' : 'text'" >
+                    <q-input input-class="text-left" class="self-center no-outline" v-model="this.loginData.password" rounded outlined :type="isPwd ? 'password' : 'text'" >
                         <template v-slot:append>
                         <q-icon
                             :name="isPwd ? 'visibility_off' : 'visibility'"
