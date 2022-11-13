@@ -354,7 +354,7 @@
             </q-card-section>
             <q-card-actions align="right">
                 <q-btn flat label="Make Offer" color="secondary" v-close-popup @click=makeAnOffer />
-                <q-btn flat label="Cancel" color="black" v-close-popup />
+                <q-btn flat label="Cancel" color="positive" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
