@@ -26,7 +26,7 @@
                 <div class="text-h7"><strong>Would you like to accept this Angel?</strong></div>
                 <div align="center" class="q-mt-sm">
                     <q-btn flat label="Yes" color="secondary" v-close-popup @click="updateDB()" />
-                    <q-btn flat label="No" color="positive" v-close-popup />
+                    <q-btn flat label="No" color="negative" v-close-popup />
                 </div>
 
             </q-card-section>
@@ -39,7 +39,7 @@
     </q-dialog>
 
     <q-dialog v-model="reject">
-        <q-card>
+        <q-card class="q-px-lg q-py-md">
             <q-card-section>
                 <div class="text-h6">Confirm</div>
             </q-card-section>
@@ -47,9 +47,9 @@
             <q-card-section class="q-pt-none">
                 <div> Do you want to reject offer ?</div>
             </q-card-section>
-            <q-card-actions align="right">
-                <q-btn label="Yes" color="green" v-close-popup @click="updateReject()" />
-                <q-btn label="No" color="red" v-close-popup />
+            <q-card-actions align="center" class="q-mt-sm">
+                <q-btn flat label="Yes" color="secondary" v-close-popup @click="updateReject()" />
+                <q-btn flat label="No" color="negative" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
