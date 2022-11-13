@@ -502,7 +502,7 @@ export default {
       
       this.showLoading();
       this.toload();
-      // console.log(this.$route)
+      console.log(this.$route)
       console.log(this.$route.params.id)
       this.id = this.$route.params.id;
       this.chatId = this.$route.params.chatid;

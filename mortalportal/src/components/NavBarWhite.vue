@@ -10,13 +10,17 @@
             <q-space />
             
             <div class="lt-xs">
+            <template v-if="!this.$route.fullPath.includes('/Chat') && !this.$route.fullPath.includes('/chat') "> 
             <q-btn rounded flat label="Chats" @click="gotoChat()" style="font-size: medium" @mouseover="chatColor = true"
                 @mouseleave="chatColor = false"
                 :class="{ onHover: chatColor }"/>
+            </template>
 
+            <template v-if="!this.$route.fullPath.includes('/profile')">
             <q-btn rounded flat label="My Account" @click="handleClick()" style="font-size: medium" @mouseover="profileColor = true"
             @mouseleave="profileColor = false"
             :class="{ onHover: profileColor }"/>
+            </template>
 
             <q-btn rounded flat label="Log Out" @click="exit()" style="font-size: medium" @mouseover="logColor = true"
             @mouseleave="logColor = false"
@@ -32,19 +36,22 @@
                 <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
                 <q-list>
                     <q-item-label header>Menu</q-item-label>
+                    <template v-if="!this.$route.fullPath.includes('/Chat') && !this.$route.fullPath.includes('/chat') ">
                     <q-item clickable v-ripple @click="gotoChat()">
                         <q-item-section avatar>
                             <q-icon name="chat" />
                         </q-item-section>
                         <q-item-section>Chat</q-item-section>
                     </q-item>
-                    
+                    </template>
+                    <template v-if="!this.$route.fullPath.includes('/profile')">
                     <q-item clickable v-ripple @click="handleClick()">
                         <q-item-section avatar>
                             <q-icon name="person" />
                         </q-item-section>
                         <q-item-section>My Account</q-item-section>
                     </q-item>
+                    </template>
                     <q-item clickable v-ripple @click="exit()">
                         <q-item-section avatar>
                             <q-icon name="logout" />
