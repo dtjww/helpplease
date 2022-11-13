@@ -232,7 +232,7 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
-                            <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
@@ -261,7 +261,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -292,7 +292,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-secondary text-white" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
