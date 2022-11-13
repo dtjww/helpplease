@@ -52,33 +52,35 @@
                 </q-carousel>
               </div>
 
-              <div class="font" style="margin:0;padding:0;width:100%">
-                <div v-motion-fade-visible>
-                  <q-parallax src="@/assets/testing2.jpg" :speed="1" style="opacity: 0.9; height: 100vh;">
-                    <div class="row bg-transparent center" style="height: 100vh;width:98vw;">
-                      <div class="col q-pl-xl bg-transparent" style="padding:0px;">
-                        <div class="bg-transparent"
-                          style="max-width: 80vw; text-align: center; margin-left:auto; margin-right: auto">
-                          <div class="text-h5 text-italic text-bold text-white bg-transparent textShadow">
-                            <div class="text-h1 text-bold text-white q-pb-md bg-transparent"> Find an angel on Mortal
-                              Portal</div>
-                            <div class="text-h4 text-italic text-white bg-transparent">
-                              As a mortal, leverage on local residents to complete tasks you don't have time or
-                              knowledge
-                              to carry out.
-                              <br>
-                              Ask for more, with angels at your door!
-                            </div>
-                            <div class="text-h3 text-bold text-white q-pl-lg q-pr-lg q-pb-sm bg-transparent textShadow">
-                              What do you need help with today?
-                            </div>
-                          </div>
+
+              <div v-motion-fade-visible>
+                <div class="container-fluid bg-teal-1" style="width:100vw;height:90vh">
+                  <div class="row">
+                    <q-parallax src="@/assets/testing2.jpg" :speed="1"
+                      style="opacity: 0.9; height: 80vh;width:50vw;display:flex;margin:5vh;"
+                      class="col-6 rounded-borders">
+                    </q-parallax>
+                    <div class="col-6 bg-transparent center"
+                      style="display:flex;margin-left:auto;margin-right:auto;width:40vw;">
+
+                      <div class="text-bold text-black bg-transparent fonts">
+                        <div class="text-h2 text-bold text-black q-pb-md bg-transparent fonts"> Find
+                          an angel on Mortal
+                          Portal</div>
+                        <div class="text-h5 text-black bg-transparent fonts fonts" >
+                          As a mortal, leverage on local residents to complete tasks you don't have time or
+                          knowledge
+                          to carry out.
+                          <br>
+                          <b>Ask for more, with angels at your door!</b>
                         </div>
                       </div>
                     </div>
-                  </q-parallax>
+                  </div>
                 </div>
+              </div>
 
+              <div class="font" style="margin:0;padding:0;width:100%">
                 <div style="padding-top:7vw" v-motion-fade-visible>
                   <div class="text-h3 text-bold text-left font" style="margin-left:7.5vw;"> Services provided
                   </div>
@@ -239,6 +241,7 @@ import NavBarLogIn from '@/components/NavBarLogIn.vue';
 import NavBarLogIn2 from '@/components/NavBarLogIn2.vue';
 import 'animate.css';
 import { ref } from 'vue';
+
 
 export default {
   name: 'HomeView',
@@ -442,4 +445,11 @@ h1 {
 .textShadow {
   text-shadow: #000 5px 2px 5px;
 }
+
+.fonts{
+  font-family: karla;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins"); 
+@import url("https://fonts.googleapis.com/css?family=Karla")
 </style>

@@ -1,6 +1,5 @@
 <template>
-
-    <table align="center">
+    <table align="center" class="q-pb-sm ">
         <tr>
             <td class="actionbtns">
                 <q-btn flat rounded v-model="Selection" @click='activeBtn' label='Active' />
@@ -16,7 +15,7 @@
 
     </table>
 
-    <div class="myContainer myBox">
+    <div class="myContainer myBox" >
         <div v-if="Selection == 'Active'">
             <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
             <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
@@ -67,7 +66,7 @@
                             Status: Offered
                         </div>
 
-                        <q-btn class="q-mt-md" color='positive' text-color="white"
+                        <q-btn class="q-mt-md" color='secondary' text-color="white"
                             @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
@@ -88,7 +87,7 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <q-btn class="q-mt-md" color='positive' text-color="white" @click="iTask(post.id, post.username)">
+                        <q-btn class="q-mt-md" color='secondary' text-color="white" @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
@@ -113,9 +112,6 @@
             </figure>
         </div>
     </div>
-
-
-
 
 </template>
 

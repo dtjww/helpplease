@@ -15,17 +15,44 @@
                 <div class="lt-xs mainMenu">
 
 
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == false && currUser != poster" />
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-teal-5"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == true && currUser != poster" />
+
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == false && currUser != posts.username" />
+                        v-if="hover == false && currUser != poster" />
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
                         @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == true && currUser != posts.username" />
+                        v-if="hover == true && currUser != poster" />
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser != posts.username" />
+                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser != poster" />
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser != posts.username" />
+                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser != poster" />
+
+                        
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == false && currUser == poster" />
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == true && currUser == poster" />
+
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false && currUser == poster" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true && currUser == poster" />
+
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser == poster" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == poster" />
 
                 </div>
 
@@ -128,12 +155,12 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="completedCheck(posts) == 'accepted' && currUser != posts.poster">
-                    <q-btn color="red" class="btn" @click="taskComplete = true">Task Completed</q-btn>
+                <div v-if="completedCheck(posts) == 'accepted' && currUser != poster">
+                    <q-btn color="teal-5" class="btn text-white" @click="taskComplete = true">Task Completed</q-btn>
                 </div>
 
-                <div v-else-if="completedCheck(posts) == 'pending' && currUser == posts.poster">
-                    <q-btn color="red" class="btn" @click="confirmComplete = true">Confirm Completed Task
+                <div v-else-if="completedCheck(posts) == 'pending' && currUser == poster">
+                    <q-btn color="indigo-6" class="btn text-white" @click="confirmComplete = true">Confirm Completed Task
                     </q-btn>
                 </div>
             </q-card>
@@ -150,17 +177,24 @@
                 <q-space />
                 <div class="lt-xs mainMenu">
 
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == false && currUser == poster" />
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == true && currUser == poster" />
+
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == false && currUser == posts.username" />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
+                        v-if="hover == false && currUser == poster" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
                         @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == true && currUser == posts.username" />
+                        v-if="hover == true && currUser == poster" />
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser == posts.username" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == posts.username" />
+                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser == poster" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == poster" />
 
                 </div>
 
@@ -328,15 +362,15 @@
     <q-dialog v-model="taskComplete">
         <q-card class="q-pa-md">
             <q-card-section>
-                <div class="text-h6 text-center text-dark">Confirm Mission Success</div>
+                <div class="text-h6 text-center text-secondary">Confirm Mission Success</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
                 Do you confirm you have completed the task?
             </q-card-section>
             <q-card-actions align="right">
-                <q-btn flat label="Yes" color="dark" v-close-popup @click=updateCompleted />
-                <q-btn flat label="No" color="secondary" v-close-popup />
+                <q-btn flat label="Yes" color="secondary" v-close-popup @click=updateCompleted />
+                <q-btn flat label="No" style="color:#ac5147" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -344,15 +378,15 @@
     <q-dialog v-model="confirmComplete">
         <q-card class="q-pa-md">
             <q-card-section>
-                <div class="text-h6 text-center text-positive">Confirm Mission Success</div>
+                <div class="text-h6 text-center text-secondary">Confirm Mission Success</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
                 Do you confirm that your Angel has completed the task?
             </q-card-section>
             <q-card-actions align="right">
-                <q-btn flat label="Yes" color="positive" v-close-popup @click=updateConfirmCompleted />
-                <q-btn flat label="No" color="negative" v-close-popup />
+                <q-btn flat label="Yes" color="secondary" v-close-popup @click=updateConfirmCompleted />
+                <q-btn flat label="No" style="color:#ac5147" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -512,6 +546,7 @@ export default {
             chatId: '',
             hover: false,
             hover2: false,
+            hover3:false,
 
 
         }

@@ -2,7 +2,7 @@
 <template>
   <NavBar />
   <div class="q-pa-none">
-    <q-layout view="lHh Lpr lff" container style="height: 90.5vh" class="shadow-2 rounded-borders">
+    <q-layout view="lHh Lpr lff" container style="height: 86vh" class="shadow-2 rounded-borders">
 
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
         <q-list class="menu-list bg-teal-1" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
@@ -80,7 +80,7 @@
           <q-tab-panels v-model="tab">
             
             <q-tab-panel name="MyAccount">
-              <div class="q-pa-md">
+              <div class="q-pa-sm">
                 <q-header elevated>
                 </q-header>                
                 <MyAccount />                
@@ -88,7 +88,7 @@
             </q-tab-panel>
 
             <q-tab-panel name="MyTasks">
-              <div class="q-pa-md">
+              <div class="q-pa-none">
                 <q-header elevated>              
                 </q-header>                
                 <MyTask />
@@ -96,7 +96,7 @@
             </q-tab-panel>
 
             <q-tab-panel name="MyEarnings">
-              <div class="q-pa-md">
+              <div class="q-pa-sm">
                 <q-header elevated>              
                 </q-header>     
                 <MyEarnings />
