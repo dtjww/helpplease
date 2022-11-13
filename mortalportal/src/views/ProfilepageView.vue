@@ -2,10 +2,10 @@
 <template>
   <NavBar />
   <div class="q-pa-none">
-    <q-layout view="lHh Lpr lff" container style="height: 90.5vh" class="shadow-2 rounded-borders">
+    <q-layout view="lHh Lpr lff" container style="height: 86vh" class="shadow-2 rounded-borders">
 
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
-        <q-list class="menu-list" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
+        <q-list class="menu-list bg-teal-1" v-model="tab" style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
           padding>
 
           <q-item clickable v-ripple :active="tab === 'MyAccount'" @click="tab = 'MyAccount'" active-class="text-secondary">
@@ -61,14 +61,17 @@
           </q-item>
 
         </q-list>
-        <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+        <!-- <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px"> -->
+          <q-item class="absolute-top bg-teal-1" style="height: 150px">
           <div class="absolute-bottom bg-transparent">
-            <q-avatar size="66px" class="q-mb-sm" color="accent"> {{getUsername().slice(0,1)}}
-            </q-avatar>
+            <q-avatar size="66px" class="q-mb-sm font" color="white">{{getUsername().slice(0,1)}}</q-avatar>
+            <!-- <q-avatar size="66px" class="q-mb-sm" color="accent"> {{getUsername().slice(0,1)}}
+            </q-avatar> -->
             <div class="text-weight-bold"> {{loginData.name}} </div>
             <div>@{{loginData.username}}</div>
           </div>
-        </q-img>
+        </q-item>
+        <!-- </q-img> -->
 
       </q-drawer>
 
@@ -77,7 +80,7 @@
           <q-tab-panels v-model="tab">
             
             <q-tab-panel name="MyAccount">
-              <div class="q-pa-md">
+              <div class="q-pa-sm">
                 <q-header elevated>
                 </q-header>                
                 <MyAccount />                
@@ -85,7 +88,7 @@
             </q-tab-panel>
 
             <q-tab-panel name="MyTasks">
-              <div class="q-pa-md">
+              <div class="q-pa-none">
                 <q-header elevated>              
                 </q-header>                
                 <MyTask />
@@ -93,7 +96,7 @@
             </q-tab-panel>
 
             <q-tab-panel name="MyEarnings">
-              <div class="q-pa-md">
+              <div class="q-pa-sm">
                 <q-header elevated>              
                 </q-header>     
                 <MyEarnings />
@@ -185,7 +188,13 @@ export default {
 }
 
 </script>
+<style>
 
+.font {
+  font-family: radley;
+  font-weight: bold;
+}
+</style>
 <style lang="sass" scoped>
 .menu-list .q-item
   border-radius: 0 32px 32px 0

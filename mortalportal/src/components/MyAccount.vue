@@ -1,10 +1,10 @@
 <template>
-    <div class="row text-h4 text-bold justify-left">
+    
+
+    <form @submit.prevent="simulateSubmit" class="q-px-md" style=" height: calc(100vh - 200px)">
+        <div class="row text-h4 text-bold justify-left">
         Edit Profile
     </div>
-
-    <form @submit.prevent="simulateSubmit" class="q-px-md">
-
         <!-- Profile photo change (should remove tbh)
         <div class="row q-pa-md q-gutter-sm justify-left">
             <q-img src="https://placeimg.com/500/300/nature" spinner-color="white"
@@ -17,37 +17,37 @@
         </div> -->
         <div class="q-pa-md">
             <div class="row border q-mb-none">
-                <div class="col-2 text-right border self-center">
+                <div class="col-md-2 text-right border self-center">
                     <h7 class="q-pr-md">Username: </h7>
                 </div>
-                <div class="col border">
+                <div class="col-md-10 border">
                     <q-input borderless readonly input-class="text-left" class="self-center full-width no-outline" tabindex="0" v-model="this.loginData.username" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
-                <div class="col-2 text-right border self-center">
+                <div class="col-md-2 text-right border self-center">
                     <h7 class="q-pr-md">Full Name: </h7>
                 </div>
-                <div class="col border">
+                <div class="col-md-10 border">
                     <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.name" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
-                <div class="col-2 text-right border self-center">
+                <div class="col-md-2 text-right border self-center">
                     <h7 class="q-pr-md">Email: </h7>
                 </div>
-                <div class="col border">
+                <div class="col-md-10 border">
                     <q-input rounded outlined input-class="text-left" class="self-center no-outline" tabindex="0" v-model="this.loginData.email" />
                 </div>
             </div>
 
             <div class="row border q-mb-sm">
-                <div class="col-2 text-right border self-center">
+                <div class="col-md-2 text-right border self-center">
                     <h7 class="q-pr-md">Password: </h7>
                 </div>
-                <div class="col border">
+                <div class="col-md-10 border">
                     <q-input input-class="text-left" class="self-center no-outline" v-model="this.loginData.password" rounded outlined :type="isPwd ? 'password' : 'text'" >
                         <template v-slot:append>
                         <q-icon
@@ -103,7 +103,7 @@
         </div> -->
 
         <div class="row justify-end q-mb-md">
-            <q-btn flat type="submit" label="Save" class="q-mt-md" color="accent" @click="saveChanges()"> 
+            <q-btn flat type="submit" label="Save" class="q-mt-md" color="secondary" @click="saveChanges()"> 
 
                 <template v-slot:loading>
                     <q-spinner-facebook />
@@ -118,7 +118,7 @@
         <q-card class="q-pa-md">
             <q-card-section>
                 <!-- <div class="text-h5">Success!</div> -->
-                <q-icon name="task_alt" color="accent" size="50px" class="center"/>
+                <q-icon name="task_alt" color="secondary" size="50px" class="center"/>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
@@ -149,7 +149,6 @@ export default {
 
         function simulateSubmit() {
             submitting.value = true
-
             // Simulating a delay here.
             // When we are done, we reset "submitting"
             // Boolean to false to restore the

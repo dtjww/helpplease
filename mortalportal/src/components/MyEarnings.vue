@@ -1,4 +1,5 @@
 <template>
+  <div >
     <q-card-section>
         <div class="text-h5 text-black-8 text-weight-bold">
             Summarised Earnings
@@ -7,9 +8,10 @@
         </div>
     </q-card-section>
 
-    <q-card-section class="q-pa-none map_height" style="height: 500px;">
+    <q-card-section class="q-pa-none map_height" style="height: calc(100vh - 225px);">
         <IEcharts :option="getBarChartOptions" :resizable="true" notMerge/>
     </q-card-section>
+  </div>
 </template>
 
 <script>

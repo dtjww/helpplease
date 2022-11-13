@@ -65,7 +65,7 @@
                 <img src="@/assets/MainLogo2.png" style="width:75%;padding:0%;margin:0" />
               </router-link>
             </q-card-section>
-            <q-tabs v-model="tab" class="text-accent">
+            <q-tabs v-model="tab" class="text-secondary">
               <q-tab label="Login" name="Login" @click=gotoLogin() />
               <q-tab label="Sign Up" name="Sign Up" />
             </q-tabs>
@@ -78,22 +78,22 @@
 
                 <q-card-section>
                   <q-form class="q-gutter-md">
-                    <q-input rounded outlined clearable color="accent" v-model="username" type="text" lazy-rules 
+                    <q-input rounded outlined clearable color="secondary" v-model="username" type="text" lazy-rules 
                     label="Username"
                     :rules="[val => val && val.length > 0 || 'Enter a username']" @keyup.enter="submitData"/>
-                    <q-input rounded outlined clearable color="accent" v-model="name" type="text" label="Full Name" @keyup.enter="submitData"
+                    <q-input rounded outlined clearable color="secondary" v-model="name" type="text" label="Full Name" @keyup.enter="submitData"
                     lazy-rules :rules="[val => val && val.length > 0 || 'Enter your name']" />
-                    <q-input rounded outlined clearable color="accent" v-model="password" type="password" label="Password" @keyup.enter="submitData"
+                    <q-input rounded outlined clearable color="secondary" v-model="password" type="password" label="Password" @keyup.enter="submitData"
                     lazy-rules :rules="[val => val && val.length > 0 || 'Enter your password',
                   val => val.length > 5 && val.length < 21 || 'Password has to be 6-20 characters long']" />
-                    <q-input rounded outlined clearable color="accent" v-model="cPassword" type="password" label="Confirm Password" @keyup.enter="submitData"/>
-                    <q-input rounded outlined clearable color="accent" v-model="email" type="email" label="Email" @keyup.enter="submitData"
+                    <q-input rounded outlined clearable color="secondary" v-model="cPassword" type="password" label="Confirm Password" @keyup.enter="submitData"/>
+                    <q-input rounded outlined clearable color="secondary" v-model="email" type="email" label="Email" @keyup.enter="submitData"
                     lazy-rules :rules="[val => val && val.length > 0 || 'Enter your email',
                   val => val.includes('@') && val.includes('.') || 'Enter a valid email']" />
                   </q-form>
                 </q-card-section>
                 <q-card-actions class="q-px-md">
-                  <q-btn unelevated color="accent" size="md" style="width:17vw;margin-left:auto;margin-right:auto;"
+                  <q-btn unelevated color="secondary" size="md" style="width:17vw;margin-left:auto;margin-right:auto;"
                     label="Sign up" @click=submitData  />
                 </q-card-actions>
                 <br>
@@ -109,7 +109,6 @@
                       <button @click="getGoogleAuth().handleSignOut">Sign Out</button>
                     </div>
                   </div>
-
                 </q-card-section>
               </q-tab-panel>
 

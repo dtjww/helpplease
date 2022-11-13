@@ -3,7 +3,7 @@
 <template>
 
   <div class="back">
-    <NavBarWhite/>
+    <NavBar/>
     <!-- <div class="about">
       <h1> hellooo </h1>
       <h2 class="format1"> {{message}} </h2>
@@ -44,7 +44,7 @@
                           </q-item-section>
                           <q-item-section>
                           <q-item-label>{{value.userB}}</q-item-label>
-                          <q-item-label caption>{{value.title}}</q-item-label>
+                          <q-item-label caption>"{{value.title}}"</q-item-label>
                           </q-item-section>
                         </template>
                         <template v-else>
@@ -53,7 +53,7 @@
                             </q-item-section>
                             <q-item-section>
                             <q-item-label>{{value.userA}}</q-item-label>
-                            <q-item-label caption>{{value.title}}</q-item-label>
+                            <q-item-label caption>"{{value.title}}"</q-item-label>
                             </q-item-section>
                         </template>
               </q-item>
@@ -66,7 +66,7 @@
                     </q-item-section>
                     <q-item-section>
                     <q-item-label>{{value.userB}}</q-item-label>
-                    <q-item-label caption>{{value.title}}</q-item-label>
+                    <q-item-label caption>"{{value.title}}"</q-item-label>
                     </q-item-section>
                   </template>
                   <template v-else>
@@ -75,7 +75,7 @@
                       </q-item-section>
                       <q-item-section>
                       <q-item-label>{{value.userA}}</q-item-label>
-                      <q-item-label caption>{{value.title}}</q-item-label>
+                      <q-item-label caption>"{{value.title}}"</q-item-label>
                       </q-item-section>
                   </template>
               </q-item>
@@ -181,7 +181,7 @@
 </template>
 
 <script>
-import NavBarWhite from '@/components/NavBarWhite.vue'
+import NavBar from '@/components/NavBar.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { db } from '../firebase.js';
@@ -202,7 +202,7 @@ const scrollAreaComponent = ref();
 export default {
   name: 'ChatpageView',
       components: {
-    NavBarWhite,
+    NavBar,
     ChatMsg
 },
   data () {
