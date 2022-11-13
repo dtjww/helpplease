@@ -46,29 +46,31 @@
     </q-toolbar>
     <div>
         <div v-if="this.status == 'completed'">
-            <h2>
+            <h3 class="q-mt-lg"><strong>
                 Great !<br>
                 Task Status: Completed
-            </h2>
+                </strong>
+            </h3>
         </div>
 
         <div v-else-if="this.status == 'pending'">
-            <h2>
-                Good Job !<br>
+            <h3 class="q-mt-lg"><strong>
+                Good Job!<br>
                 Task Status: Pending Confirmation
-            </h2>
+                </strong>
+            </h3>
         </div>
 
-        <q-card class="card">
-            <h3>{{ posts.name }}</h3><br>
+        <q-card class="card text-dark">
+            <h3>Task: {{ posts.name }}</h3><br>
             <img :src="posts.file">
             <table>
                 <tr>
                     <td>
                         <h6>Description</h6>
-                        <q-field readonly>
+                        <q-field disable dense class="q-mb-md">
                             <template v-slot:control>
-                                <div>{{ posts.desc }}</div>
+                                <div><strong>{{ posts.desc }}</strong></div>
                             </template>
                         </q-field>
                     </td>
@@ -76,9 +78,9 @@
                 <tr>
                     <td>
                         <h6>Category</h6>
-                        <q-field readonly>
+                        <q-field disable dense class="q-mb-md">
                             <template v-slot:control>
-                                <div>{{ posts.category }}</div>
+                                <div><strong>{{ posts.category }}</strong></div>
                             </template>
                         </q-field>
                     </td>
@@ -86,9 +88,9 @@
                 <tr>
                     <td>
                         <h6>Location</h6>
-                        <q-field readonly>
+                        <q-field disable dense class="q-mb-md">
                             <template v-slot:control>
-                                <div>{{ posts.loc }}</div>
+                                <div><strong>{{ posts.loc }}</strong></div>
                             </template>
                         </q-field>
                     </td>
@@ -96,9 +98,9 @@
                 <tr>
                     <td>
                         <h6>Date & Time</h6>
-                        <q-field readonly>
+                        <q-field disable dense class="q-mb-md">
                             <template v-slot:control>
-                                <div>{{ posts.date }} {{ posts.time }}</div>
+                                <div><b>{{ posts.date }} {{ posts.time }}</b></div>
                             </template>
                         </q-field>
                     </td>
@@ -119,7 +121,7 @@
 
                 </tr>
             </table>
-            <q-btn label="Back to Home" v-close-popup @click="BackToHome"></q-btn>
+            <q-btn flat color="accent" class="q-mt-md" icon="arrow_back" label="Back to Home" v-close-popup @click="BackToHome"></q-btn>
         </q-card>
     </div>
 </template>

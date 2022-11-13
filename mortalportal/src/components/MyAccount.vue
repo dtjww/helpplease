@@ -115,13 +115,14 @@
 
     </form>
     <q-dialog v-model="submit">
-        <q-card>
+        <q-card class="q-pa-md">
             <q-card-section>
-                <div class="text-h5">Success!</div>
+                <!-- <div class="text-h5">Success!</div> -->
+                <q-icon name="task_alt" color="accent" size="50px" class="center"/>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                Your account details have been updated. 
+                Your account details have been updated successfully. 
             </q-card-section>
 
             <q-card-actions align="right">
@@ -213,5 +214,11 @@ export default {
 <style>
 .border {
     border: none;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 </style>
