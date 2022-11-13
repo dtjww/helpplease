@@ -5,7 +5,7 @@
 
             <q-toolbar-title shrink>
             <router-link to="/home/angel" style="color: white; text-decoration: none">
-                <q-img src="@/assets/MainLogo2.png"  style="width:170px;"></q-img>
+                <q-img src="@/assets/MainLogoBlack.png"  style="width:170px;"></q-img>
             </router-link>      
             </q-toolbar-title>
     
@@ -38,6 +38,34 @@
                 @mouseleave="logColor = false"
                 :class="{ onHover: logColor }">
             <q-btn rounded flat label="Log Out" style="font-size: medium;" @click="exit()"/>
+            </div>
+
+            <div class="lt-xs">
+                <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+                <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
+                <q-list>
+                    <q-item-label header>Menu</q-item-label>
+                    <q-item clickable v-ripple >
+                        <q-item-section avatar>
+                            <q-icon name="favorite" />
+                        </q-item-section>
+                        <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                    </q-item>
+                    
+                    <q-item clickable v-ripple>
+                        <q-item-section avatar>
+                            <q-icon name="person" />
+                        </q-item-section>
+                        <q-item-section @click="handleClick()">My Account</q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple>
+                        <q-item-section avatar>
+                            <q-icon name="logout" />
+                        </q-item-section>
+                        <q-item-section @click="exit()">Log Out</q-item-section>
+                    </q-item>
+                </q-list>
+            </q-btn-dropdown>
             </div>
         
             <!-- <div class="gt-s hamburgMenu">
@@ -263,9 +291,9 @@ const storeName = useCounterStore()
             //     this.$router.push('/home/angel/saved')
             //     // need to include a way to select the saved tasks filter
             // },
-            // gotoChat(){
-            //     this.$router.push('/chat')
-            // },
+            gotoChat(){
+                this.$router.push('/chat')
+            },
             exit(){
                 storeName.username = ''
                 storeName.email = ''

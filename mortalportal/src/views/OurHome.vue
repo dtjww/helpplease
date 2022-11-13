@@ -8,7 +8,7 @@
         <div class="q-pa-none">
 
 
-            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
+            <q-toolbar class="text-white q-my-none shadow-2 bg-white karla" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="color: white; text-decoration: none">

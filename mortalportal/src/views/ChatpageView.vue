@@ -3,7 +3,7 @@
 <template>
 
   <div class="back">
-    <NavBar/>
+    <NavBarWhite/>
     <!-- <div class="about">
       <h1> hellooo </h1>
       <h2 class="format1"> {{message}} </h2>
@@ -181,7 +181,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBarWhite from '@/components/NavBarWhite.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { db } from '../firebase.js';
@@ -202,7 +202,7 @@ const scrollAreaComponent = ref();
 export default {
   name: 'ChatpageView',
       components: {
-    NavBar,
+    NavBarWhite,
     ChatMsg
 },
   data () {
@@ -502,7 +502,7 @@ export default {
       
       this.showLoading();
       this.toload();
-      // console.log(this.$route)
+      console.log(this.$route)
       console.log(this.$route.params.id)
       this.id = this.$route.params.id;
       this.chatId = this.$route.params.chatid;
