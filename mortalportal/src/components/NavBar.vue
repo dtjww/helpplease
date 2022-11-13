@@ -1,9 +1,9 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-none">
-        <q-toolbar class="text-black q-my-none bg-white" style="padding-left:50px;padding-top:10px;padding-bottom:10px">
+        <q-toolbar class="text-black q-my-none bg-white" style="padding-left:50px;">
             <router-link to="/home/angel" style="width:170px; padding: 0%">
-                <q-img src="@/assets/MainLogo2.png"  style="width:170px;"></q-img>
+                <q-img src="@/assets/MainLogoBlack.png"  style="width:170px;"></q-img>
             </router-link>      
     
             <q-space />
@@ -13,7 +13,7 @@
                 @mouseover="chatColor = true"
                 @mouseleave="chatColor = false"
                 :class="{ onHover: chatColor }">
-                <q-btn stretch flat label="Chats" style="font-size: large"  />
+                <q-btn stretch flat label="Chats" style="font-size: medium"  />
                 </div>
             </router-link>
 
@@ -24,7 +24,7 @@
                 @mouseover="profileColor = true"
                 @mouseleave="profileColor = false"
                 :class="{ onHover: profileColor }">
-                    <q-btn stretch flat label="Profile" style="font-size: large;" />
+                    <q-btn stretch flat label="Profile" style="font-size: medium;" />
                 </div>
                 </router-link>
 
@@ -34,7 +34,7 @@
                 @mouseover="logColor = true"
                 @mouseleave="logColor = false"
                 :class="{ onHover: logColor }">
-            <q-btn stretch flat label="Log Out" style="font-size: large;" @click="exit()"/>
+            <q-btn stretch flat label="Log Out" style="font-size: medium;" @click="exit()"/>
             </div>
 
              <!--    </div> 
