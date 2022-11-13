@@ -9,13 +9,17 @@
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
                 sent
+                bg-color="info"
+                text-color="white"
                 />
         </template>
         <template v-else>
-            <q-chat-message
+            <q-chat-message class="bubbleOther"
                 :name= msg.username
                 :text= Array(msg.text)
                 :stamp=reformatDate(msg.date)
+                bg-color="warning"
+                text-color="white"
                 />
         </template>
     </template>
@@ -29,34 +33,33 @@
 
 
 export default {
-  name: 'ChatMsg',
-    props: {
-        textList: Object,
-        username: String,
-        myUsername: String,
-    },
-  methods: {
-    getMyUsername(variable){
-            console.log("called getMyUsername")
-            // console.log(variable)
-            // console.log(this.myUsername)
-            if (variable == this.myUsername){
-                return true
-            }
-            else{
-                return false
-            }
+    name: 'ChatMsg',
+        props: {
+            textList: Object,
+            username: String,
+            myUsername: String,
         },
-    reformatDate(dateString){
-        var date = new Date(dateString)
-        var month = (date.getMonth() + 1).toLocaleString('en-US', {month: 'short'});
-        if ( dateString == null){
-            return " "
+    methods: {
+        getMyUsername(variable){
+                console.log("called getMyUsername")
+                // console.log(variable)
+                // console.log(this.myUsername)
+                if (variable == this.myUsername){
+                    return true
+                }
+                else{
+                    return false
+                }
+            },
+        reformatDate(dateString){
+            var date = new Date(dateString)
+            var month = (date.getMonth() + 1).toLocaleString('en-US', {month: 'short'});
+            if ( dateString == null){
+                return " "
+            }
+            return date.getDate() + "/" + month + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
         }
-        return date.getDate() + "/" + month + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
-    }
     },
 
 }
 </script>
-
