@@ -26,7 +26,7 @@
         :breakpoint="400"
         class="bg-teal-1 adjust"
       >
-          <q-list padding style=" border-right: 1px solid #ddd; text-align:left;">
+          <q-list style=" padding:0px ;border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -37,38 +37,47 @@
                 active-class="active"
                 @click="paramTask(value.task, value.index)" 
                 style="padding:3%">
-                      <q-item-section side style="width: 5rem;">
-                        <q-avatar rounded size="4rem">
-                          <img :src="value.taskPic" style="width:max-content"/>
-                        </q-avatar>
-                      </q-item-section>
-                      <q-item-section>
+                      
                         <template v-if="value.userA == this.currUser">
-                        <q-item-label>{{value.userB}}</q-item-label>
-                      </template>
-                      <template v-else>
-                        <q-item-label>{{value.userA}}</q-item-label>
-                      </template>
-                        <q-item-label caption>{{value.title}}</q-item-label>
-                      </q-item-section>
+                          <q-item-section side style="width: 5rem;">
+                          <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.bSlice}}</q-avatar>
+                          </q-item-section>
+                          <q-item-section>
+                          <q-item-label>{{value.userB}}</q-item-label>
+                          <q-item-label caption>{{value.title}}</q-item-label>
+                          </q-item-section>
+                        </template>
+                        <template v-else>
+                          <q-item-section side style="width: 5rem;">
+                            <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.aSlice}}</q-avatar>
+                            </q-item-section>
+                            <q-item-section>
+                            <q-item-label>{{value.userA}}</q-item-label>
+                            <q-item-label caption>{{value.title}}</q-item-label>
+                            </q-item-section>
+                        </template>
               </q-item>
               </template>
               <template v-else>
                 <q-item clickable v-ripple @click="paramTask(value.task, value.index)" style="padding:3%">
-                  <q-item-section side style="width: 5rem;">
-                    <q-avatar rounded size="4rem">
-                      <img :src="value.taskPic" style="width:max-content" />
-                    </q-avatar>
-                  </q-item-section>
-                  <q-item-section>
-                    <template v-if="value.userA == this.currUser">
-                      <q-item-label>{{value.userB}}</q-item-label>
-                    </template>
-                    <template v-else>
+                  <template v-if="value.userA == this.currUser">
+                    <q-item-section side style="width: 5rem;">
+                    <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.bSlice}}</q-avatar>
+                    </q-item-section>
+                    <q-item-section>
+                    <q-item-label>{{value.userB}}</q-item-label>
+                    <q-item-label caption>{{value.title}}</q-item-label>
+                    </q-item-section>
+                  </template>
+                  <template v-else>
+                    <q-item-section side style="width: 5rem;">
+                      <q-avatar size="50px" class="q-ml-sm font" color="white">{{value.aSlice}}</q-avatar>
+                      </q-item-section>
+                      <q-item-section>
                       <q-item-label>{{value.userA}}</q-item-label>
-                    </template>
-                        <q-item-label caption>{{value.title}}</q-item-label>
-                  </q-item-section>
+                      <q-item-label caption>{{value.title}}</q-item-label>
+                      </q-item-section>
+                  </template>
               </q-item>
               </template>
             </template>
@@ -96,10 +105,11 @@
                       
                       <q-card>
                       <q-item class="bg-grey-3" style="margin:0%; border-radius:0px; text-align:left; font-style:italic; height:100px; text-align:left">
-                        
+
                         <q-item-section side class="displayhide" style="height:max-content">
                           <img :src="posts.file" style="height:80px; display: block; margin: 5px; border-radius:0px">
                         </q-item-section>
+
                         <q-item-section>
                           <q-item-label >{{postUsername}}</q-item-label>
                           <q-item-label caption>{{postDesc}}</q-item-label>
@@ -128,7 +138,7 @@
                               <q-scroll-observer />
                               
                         </q-scroll-area>
-                        <q-btn push round class="absolute-bottom" style="margin: auto; width:20px; height:20px; margin-bottom:10px" color="accent" icon="arrow_downward" @click="scrollBtm()" />
+                        <q-btn round class="absolute-bottom-right bg-white" text-color="grey" style="color:grey ;margin: auto; width:15px; height:15px; margin-bottom:10px; margin-left: 20px" color="accent" icon="arrow_downward" @click="scrollBtm()" />
                     </div>
                   </q-item>
               
@@ -436,7 +446,9 @@ export default {
                     // let tempTitle = tempPost.name
                     this.tempList[count]['title'] = tempPost.name
                     this.tempList[count]['userA'] = tempPost.username
+                    this.tempList[count]['aSlice'] = this.tempList[count]['userA'].slice(0,1)
                     this.tempList[count]['userB'] = tempPost.chats[variable2]
+                    this.tempList[count]['bSlice'] = this.tempList[count]['userB'].slice(0,1)
                     this.tempList[count]['taskPic'] = tempPost.file
                     // let tempUserA = tempPost.username
                     // let tempUserB = tempPost.chats[variable2]
@@ -538,7 +550,10 @@ html, body {
   background-color: #669c9c;
   color: #fff;
 }
-
+.font {
+  font-family: radley;
+  font-weight: bold;
+}
 
 
 </style>
