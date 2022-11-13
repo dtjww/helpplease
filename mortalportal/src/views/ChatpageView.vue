@@ -27,7 +27,7 @@
         class="bg-blue-1 adjust"
         style="border-radius: 4px"
       >
-          <q-list active-color="white" indicator-color="transparent" padding style="margin-top: 193px; border-right: 1px solid #ddd; text-align:left;">
+          <q-list padding style=" border-right: 1px solid #ddd; text-align:left;">
             
             <template v-for="(value,key) in this.tempList" :key="key">
               <!-- <p> {{value}}</p> -->
@@ -83,8 +83,7 @@
             <!-- <div class="text-weight-bold">{{loginData.fName}} {{loginData.lName}} </div> -->
             <h6 style="margin:0;padding:0; margin-bottom:40px;">{{myUsername}}</h6>
           </div>
-        <!-- </q-img> -->
-      </q-item>
+      </q-item> -->
       </q-drawer>
 
       <q-page-container style="display:inherit;">

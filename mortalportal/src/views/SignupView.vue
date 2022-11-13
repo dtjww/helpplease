@@ -66,7 +66,7 @@
               </router-link>
             </q-card-section>
             <q-tabs v-model="tab" class="text-teal">
-              <q-tab label="Login" name="Login" @click=gotoLogin() />
+              <q-tab label="Login" name="Login" @click=gotoLogin() style=""/>
               <q-tab label="Sign Up" name="Sign Up" />
             </q-tabs>
 
