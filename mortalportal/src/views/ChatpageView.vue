@@ -12,7 +12,7 @@
 
 
 
-  <div class="container">
+  <div class="container karla">
     <q-layout view="lHh Lpr lff" container class="shadow-2 rounded-borders" style="height: 100%">
 
       <q-drawer
@@ -554,6 +554,12 @@ html, body {
   font-family: radley;
   font-weight: bold;
 }
+.karla {
+  font-family: karla;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Karla")
+
 
 
 </style>

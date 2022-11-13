@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="karla">
     <q-card-section>
         <div class="text-h5 text-black-8 text-weight-bold">
             Summarised Earnings
@@ -365,4 +365,8 @@ export default {
 
 .menu-list .q-item
   border-radius: 0 32px 32px 0
+
+.karla 
+  font-family: karla
+
 </style>

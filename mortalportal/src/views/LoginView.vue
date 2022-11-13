@@ -1,6 +1,6 @@
 <!-- daryl-->
 <template>
-    <div class="row img-overlay img-wrapper">
+    <div class="row img-overlay img-wrapper karla">
         <div class="column">
             <img class="image"
                 src="https://images.unsplash.com/photo-1605826832916-d0ea9d6fe71e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
@@ -58,7 +58,7 @@
         <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
         <q-page-container>
-            <q-page class="page-height page-width row justify-center items-center ">
+            <q-page class="page-height page-width row justify-center items-center karla ">
                 <q-card square bordered class="q-pa-lg shadow-1">
                     <q-card-section>
                         <router-link to="/" style="width:170px;padding:0%">
@@ -340,4 +340,11 @@ body {
         max-width: 100%;
     }
 }
+.karla {
+    font-family: karla;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Karla")
+
+
 </style>

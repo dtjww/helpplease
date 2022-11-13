@@ -1,7 +1,7 @@
 <template>
-    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
+    <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle" class="karla">
 
-        <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
+        <q-toolbar class="text-white q-my-none shadow-2 bg-white karla" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: black; text-decoration: none">
@@ -300,6 +300,10 @@ export default {
     margin-top: 50px;
     padding: 50px;
 
+}
+
+.karla {
+    font-family: 'karla';
 }
 
 h6 {

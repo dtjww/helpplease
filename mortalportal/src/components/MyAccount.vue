@@ -1,7 +1,7 @@
 <template>
     
 
-    <form @submit.prevent="simulateSubmit" class="q-px-md" style=" height: calc(100vh - 200px)">
+    <form @submit.prevent="simulateSubmit" class="q-px-md karla" style=" height: calc(100vh - 200px)">
         <div class="row text-h4 text-bold justify-left karla">
         Edit Profile
     </div>
