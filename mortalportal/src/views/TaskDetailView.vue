@@ -4,19 +4,28 @@
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
         <div v-if="this.format == 'View'">
-            <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="color: white; text-decoration: none">
-                        <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                        <q-img src="../assets/MainLogo2.png" style="width:170px"></q-img>
                     </router-link>
                 </q-toolbar-title>
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn stretch flat label="My Account" @click="handleClick()" />
 
-                    <q-btn stretch flat label="Log Out" @click="exit()" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false && currUser != posts.username" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true && currUser != posts.username" />
+
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser != posts.username" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser != posts.username" />
 
                 </div>
 
@@ -25,12 +34,6 @@
                     <q-btn-dropdown flat dense dropdown-icon="menu">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="favorite" />
-                                </q-item-section>
-                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
-                            </q-item>
 
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
@@ -51,7 +54,7 @@
             </q-toolbar>
 
             <q-card class="card">
-                <h3>{{ posts.name }}</h3><br>
+                <h3 style="font-family:radley ;">{{ posts.name }}</h3><br>
                 <img :src="posts.file">
                 <div class="container-fluid">
                     <div class="row">
@@ -115,12 +118,12 @@
                         </div>
                         <div class="col-5" align="right">
                             <div v-if="posts.accepted == null">
-                                <q-btn color='dark' class="btn" @click=offerPopup>Make an Offer</q-btn>
+                                <q-btn color='teal-1' class="btn text-black" @click=offerPopup>Make an Offer</q-btn>
                             </div>
                         </div>
                         <div class="col-5" align="right">
                             <div v-if="posts.accepted == null">
-                                <q-btn color="dark" class="btn" @click=gotoChat>Chat Now</q-btn>
+                                <q-btn color="teal-1" class="btn text-black" @click=gotoChat>Chat Now</q-btn>
                             </div>
                         </div>
                     </div>
@@ -137,19 +140,27 @@
         </div>
 
         <div v-else>
-            <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
 
                 <q-toolbar-title shrink>
                     <router-link to="/home/angel" style="color: white; text-decoration: none">
-                        <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                        <q-img src="../assets/MainLogo2.png" style="width:170px"></q-img>
                     </router-link>
                 </q-toolbar-title>
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn stretch flat label="My Account" @click="handleClick()" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false && currUser == posts.username" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true && currUser == posts.username" />
 
-                    <q-btn stretch flat label="Log Out" @click="exit()" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false && currUser == posts.username" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == posts.username" />
 
                 </div>
 
@@ -241,7 +252,8 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <q-btn color="accent" label="upload new image" @click="uploadImage" class="date" />
+                            <q-btn color="accent" label="upload new image" @click="uploadImage"
+                                class="date bg-white text-indigo-6" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked /><br>
 
@@ -255,10 +267,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <q-btn color='positive' class="btn" @click=saveChanges>Save Changes</q-btn>
+                        <q-btn color='indigo-2' class="btn" @click=saveChanges>Save Changes</q-btn>
                     </div>
                     <div class="col-6">
-                        <q-btn color="secondary" class="btn" @click=delPost>Delete Task</q-btn>
+                        <q-btn color="indigo-2" class="btn" @click=delPost>Delete Task</q-btn>
                     </div>
                 </div>
             </q-card>
@@ -439,7 +451,7 @@ export default {
             thumbStyle: {
                 right: '4px',
                 borderRadius: '5px',
-                backgroundColor: '#00000',
+                backgroundColor: '#27A69A',
                 width: '5px',
                 opacity: 0.75
             },
@@ -498,6 +510,9 @@ export default {
             myUserDetails: [],
             existingChat: false,
             chatId: '',
+            hover: false,
+            hover2: false,
+
 
         }
     },
@@ -530,30 +545,26 @@ export default {
                                 this.angel = values[post].angel
                             }
                         }
-                        console.log(this.currUser,this.poster)
+                        console.log(this.currUser, this.poster)
                         if (this.currUser != this.poster) {
 
                             this.format = 'View'
-                            this.style = "background-color: #3760b8"
-                            this.thumbStyle.backgroundColor = '#3760b8'
-                        }else{
+                            this.thumbStyle.backgroundColor = '#27A69A'
+                        } else {
                             this.format = "View"
-                            this.style = "background-color: #efa2a4"
-                            this.thumbStyle.backgroundColor = '#efa2a4'
+                            this.thumbStyle.backgroundColor = '#4050B5'
                         }
                         console.log(this.style)
                     }
                     else {
                         if (this.poster == this.currUser) {
                             this.format = "Edit"
-                            this.style = "background-color: #efa2a4"
-                            this.thumbStyle.backgroundColor = '#efa2a4'
+                            this.thumbStyle.backgroundColor = '#4050B5'
 
                         }
                         else {
                             this.format = "View"
-                            this.style = "background-color: #3760b8"
-                            this.thumbStyle.backgroundColor = '#3760b8'
+                            this.thumbStyle.backgroundColor = '#27A69A'
                         }
                     }
                 })
