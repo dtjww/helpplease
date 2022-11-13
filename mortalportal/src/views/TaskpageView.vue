@@ -3,19 +3,35 @@
 <template>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
-        <q-toolbar class="text-white q-my-none shadow-2" :style="style" id="navbar">
+        <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">
-                    <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
+                    <q-img src="../assets/MainLogo2.png" style="width:170px"></q-img>
                 </router-link>
             </q-toolbar-title>
             <q-space />
             <div class="lt-xs mainMenu">
 
-                <q-btn stretch flat label="My Account" @click="handleClick()" />
+                
+                <q-btn rounded flat label="Chats" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false"  />
+                    <q-btn rounded flat label="Chats" @click="handleClick()" class="text-indigo-6"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true" />
 
-                <q-btn stretch flat label="Log Out" @click="exit()" />
+                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false"  />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true" />
+
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true" />
 
             </div>
 
@@ -24,12 +40,6 @@
                 <q-btn-dropdown flat dense dropdown-icon="menu">
                     <q-list>
                         <q-item-label header>Menu</q-item-label>
-                        <q-item clickable v-ripple>
-                            <q-item-section avatar>
-                                <q-icon name="favorite" />
-                            </q-item-section>
-                            <q-item-section @click="gotoSaved()">Saved</q-item-section>
-                        </q-item>
 
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
@@ -65,7 +75,7 @@
                             <td>
                                 <q-select outlined v-model="inputData.category" :options="task" label="Choose a Task"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Please Choose a Category']"
-                                    class="inputboxes" />
+                                    class="inputboxes" color="indigo-6" />
                             </td>
                         </tr>
 
@@ -79,7 +89,7 @@
                                 <q-input outlined v-model="inputData.name" maxlength="50" lazy-rules
                                     label="Name of Task"
                                     :rules="[val => val && val.length > 0 || 'Please Enter a Name for the Task']"
-                                    class="inputboxes" />
+                                    class="inputboxes" color="indigo-6" />
                             </td>
                         </tr>
 
@@ -92,7 +102,7 @@
                             <td>
                                 <q-input outlined v-model="inputData.desc" label="Description of Task" minlength="1"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Description']"
-                                    maxlength="500" class="inputboxes" />
+                                    maxlength="500" class="inputboxes" color="indigo-6" />
                             </td>
                         </tr>
 
@@ -105,7 +115,7 @@
                             <td>
                                 <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']"
-                                    prefix='$' type="number" style='width:15vw;' />
+                                    prefix='$' type="number" style='width:15vw;' color="indigo-6" />
                             </td>
                         </tr>
 
@@ -119,7 +129,7 @@
                                 <q-select outlined v-model="inputData.loc" :options="this.locations" lazy-rules
                                     label="Choose a Location"
                                     :rules="[val => val && val.length > 0 || 'Please Choose a Location']"
-                                    class="inputBoxes" />
+                                    class="inputBoxes" color="indigo-6" />
                             </td>
                         </tr>
 
@@ -131,9 +141,9 @@
                         <tr>
                             <td>
                                 <q-input v-model="inputData.time" outlined type="time" class='date' lazy-rules
-                                    :rules="[val => val && val.length > 0 || 'Please Input a Time']" />
+                                    :rules="[val => val && val.length > 0 || 'Please Input a Time']" color="indigo-6" />
                                 <q-input v-model="inputData.date" outlined type="date" class="date" lazy-rules
-                                    :rules="[val => val && val.length > 0 || 'Please Input a Date']" />
+                                    :rules="[val => val && val.length > 0 || 'Please Input a Date']" color="indigo-6" />
                             </td>
 
                     </tr>
@@ -144,7 +154,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-btn color="white" text-color="positive" label="upload image" @click="uploadImage" class="date" />
+                            <q-btn color="white" text-color="indigo-6" label="upload image" @click="uploadImage" class="date" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked />
 
@@ -156,7 +166,7 @@
                         </td>
                     </tr>
                 </table>
-                <q-btn color="positive" label="Post Task" class='button' type="submit" />
+                <q-btn color="indigo-2"  label="Post Task" class='button text-black' type="submit" />
             </q-form>
         </q-card>
     </div>
@@ -208,7 +218,7 @@ export default {
             thumbStyle: {
                 right: '4px',
                 borderRadius: '5px',
-                backgroundColor: '#efa2a4',
+                backgroundColor: '#4050B5',
                 width: '5px',
                 opacity: 0.75
             },
@@ -260,7 +270,8 @@ export default {
                 'Woodlands South', 'Woodleigh', 'Yew Tee', 'Yio Chu Kang', 'Yishun',],
             imageUrl: '',
             image: null,
-            style: "background: #efa2a4",
+            hover: false,
+            hover2: false,
         }
     },
     methods: {
