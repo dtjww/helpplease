@@ -325,13 +325,13 @@
 
                                 </div>
 
-                                <div v-else-if="completedCheck(post) == 'pending'">
+                                <div v-else-if="completedCheck(post) == 'pending'" class="text-dark text-bold">
                                     Status: Pending<br>
                                     <q-btn @click="confirmCompletion(post.id, post.username)"
                                         class="bg-dark text-white"> Confirm
                                     </q-btn>
                                 </div>
-                                <div v-else>
+                                <div v-else class="text-dark text-bold">
                                     Status: In Progress
                                 </div>
                             </q-card-section>
