@@ -1,6 +1,6 @@
 <!-- Mel -->
 
-<template>
+<template >
     <!-- Navigation Bar -->
     <!-- <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle"> -->
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
@@ -8,25 +8,57 @@
         <div class="q-pa-none">
 
 
-            <q-toolbar class="text-secondary q-my-none shadow-2" :style="style" id="navbar">
+            <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
 
                 <q-toolbar-title shrink>
-                    <router-link to="/home/angel" style="text-decoration: none">
-                        <q-img src="../assets/MainLogoBlue.png" style="width:170px"></q-img>
+                    <router-link to="/home/angel" style="color: white; text-decoration: none">
+                        <q-img src="../assets/MainLogo2.png" style="width:170px"></q-img>
                     </router-link>
                 </q-toolbar-title>
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn stretch flat label="My Account" @click="handleClick()" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == false && targetP == 'angel'" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == true && targetP == 'angel'" />
 
-                    <q-btn stretch flat label="Log Out" @click="exit()" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false && targetP == 'angel'" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-teal-5"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true && targetP == 'angel'" />
 
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'angel'" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == true && targetP == 'angel'" />
+
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black "
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == false && targetP == 'mortal'" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == true && targetP == 'mortal'" />
+
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == false && targetP == 'mortal'" />
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                        @mouseover="hover = true" @mouseleave="hover = false"
+                        v-if="hover == true && targetP == 'mortal'" />
+
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                        @mouseleave="hover2 = false" v-if="hover2 == false && targetP == 'mortal'" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 "
+                        @mouseover="hover2 = true" @mouseleave="hover2 = false"
+                        v-if="hover2 == true && targetP == 'mortal'" />
                 </div>
 
                 <div class="gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu">
+                    <q-btn-dropdown flat dense dropdown-icon="menu" class="text-black">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
 
@@ -54,7 +86,8 @@
         <table align="center">
             <tr>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'angel'" color="secondary" flat rounded v-model="Selection" @click='angelBtn'>
+                    <q-btn v-if="targetP == 'angel'" class="text-teal-5" flat rounded v-model="Selection"
+                        @click='angelBtn'>
                         <h5>Angel</h5>
                     </q-btn>
                     <q-btn v-else flat rounded v-model="Selection" @click='angelBtn'>
@@ -65,7 +98,7 @@
                     |
                 </td>
                 <td class="actionbtns">
-                    <q-btn v-if="targetP == 'mortal'" flat color="positive" rounded v-model="Selection"
+                    <q-btn v-if="targetP == 'mortal'" flat color="indigo-6" rounded v-model="Selection"
                         @click="mortalBtn">
                         <h5>Mortal</h5>
                     </q-btn>
@@ -83,46 +116,47 @@
             <table align="center">
                 <tr style="width:36vw">
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Find'" color="secondary" v-model="activeBtn" class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Find'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
                             @click="FindBtn">Find</q-btn>
-                        <q-btn v-else v-model="activeBtn" class="actionbtns" @click="FindBtn">Find</q-btn>
+                        <q-btn v-else v-model="activeBtn" class="actionbtns  text-black" @click="FindBtn">Find</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Saved'" color='secondary' v-model="activeBtn" class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Saved'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
                             @click="SavedBtn">Saved</q-btn>
-                        <q-btn v-else v-model="activeBtn" class="actionbtns" @click="SavedBtn">Saved</q-btn>
+                        <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="SavedBtn">Saved</q-btn>
                     </td>
                     <td align='center'>
-                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" color='secondary' class="actionbtns"
+                        <q-btn v-if="activeBtn == 'Active'" v-model="activeBtn" class="actionbtns bg-teal-1 text-black"
                             @click="ActiveBtn">Active</q-btn>
-                        <q-btn v-else v-model="activeBtn" class="actionbtns" @click="ActiveBtn">Active</q-btn>
+                        <q-btn v-else v-model="activeBtn" class="actionbtns text-black" @click="ActiveBtn">Active
+                        </q-btn>
                     </td>
 
                 </tr>
                 <tr v-if="activeBtn == 'Find'">
                     <td colspan="3" align='left'>
-                        <q-input rounded outlined label="Search" class="search" v-model="search" color="secondary"
-                            text-color="white">
+                        <q-input rounded outlined label="Search" class="search text-black" v-model="search"
+                            color="teal-1" text-color="white">
                         </q-input>
                     </td>
                 </tr>
             </table>
             <div>
 
-                <q-card flat class="dCard" v-if="activeBtn == 'Find'">
+                <q-card class="dCard bg-teal-1 rounded-borders" v-if="activeBtn == 'Find'">
                     <q-card-section>
                         <div class="text-h5">Filter</div>
                     </q-card-section>
                     <q-card-section class="q-pt-none">
-                        <q-list >
+                        <q-list>
                             <h6 class="location">Location</h6>
 
                             <q-expansion-item label="Central" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:auto">
-                                    <q-card class="qCard">
+                                    <q-card class="qCard bg-teal-1">
                                         <div v-for="station in stationCentral" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="secondary" />
+                                                color="black" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -131,10 +165,10 @@
 
                             <q-expansion-item label="East" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
+                                    <q-card class="qCard bg-teal-1">
                                         <div v-for="station in stationEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="secondary" />
+                                                color="black" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -142,10 +176,10 @@
 
                             <q-expansion-item label="North" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
+                                    <q-card class="qCard bg-teal-1">
                                         <div v-for="station in stationNorth" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="secondary" />
+                                                color="black" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -153,10 +187,10 @@
 
                             <q-expansion-item label="North-East" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
+                                    <q-card class="qCard bg-teal-1">
                                         <div v-for="station in stationNorthEast" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="secondary" />
+                                                color="black" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -164,10 +198,10 @@
 
                             <q-expansion-item label="West" class="Expand2">
                                 <q-scroll-area style="height: 200px;width:100%">
-                                    <q-card class="qCard">
+                                    <q-card class="qCard bg-teal-1">
                                         <div v-for="station in stationWest" :key="station" class="qcardsec">
                                             <q-checkbox v-model=selectedLoc :val=station.name :label=station.name
-                                                color="secondary" />
+                                                color="black" />
                                         </div>
                                     </q-card>
                                 </q-scroll-area>
@@ -178,7 +212,7 @@
                         <q-list>
                             <h6 class="location">Category</h6>
                             <div v-for="task in tasks" :key="task" class='Expand2'>
-                                <q-checkbox v-model=category :val=task :label=task color="secondary" />
+                                <q-checkbox v-model=category :val=task :label=task color="black" />
                             </div>
 
                         </q-list>
@@ -198,8 +232,7 @@
                             Date: {{ post.date }}<br>
                             Time: {{ post.time }}<br>
                             Amount: ${{ post.price }}<br>
-                            <q-btn class="q-mt-md" color='secondary' text-color="white"
-                                @click="iTask(post.id, post.username)">
+                            <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
                                 <b>Details</b>
                             </q-btn>
                         </q-card-section>
@@ -228,8 +261,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md" color='secondary' text-color="white"
-                                    @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -260,8 +292,7 @@
                             </div>
 
                             <div v-if="completedCheck(post) != 'pending'">
-                                <q-btn class="q-mt-md" color='secondary' text-color="white"
-                                    @click="iTask(post.id, post.username)">
+                                <q-btn class="q-mt-md bg-teal-1 text-black" @click="iTask(post.id, post.username)">
                                     <b>Details</b>
                                 </q-btn>
                             </div>
@@ -273,7 +304,7 @@
 
         <!-- Mortal -->
         <div v-else>
-            <q-btn color='positive' @click=goToTask>New Post</q-btn>
+            <q-btn class="bg-indigo-2 text-black" @click=goToTask>New Post</q-btn>
             <div class="containerMortal boxMortal">
                 <figure v-for="post in MortalTasks" v-bind:key="post.id">
                     <div v-if="post.username == currUser">
@@ -286,17 +317,18 @@
                                 Amount: ${{ post.price }}<br>
 
                                 <div v-if="post.accepted == null">
-                                    <q-btn class="q-mr-lg" v-if="post.username == currUser" color='positive'
-                                        text-color="white" @click="iTask(post.id, post.username)" size="sm"><b>Edit</b>
+                                    <q-btn class="q-mr-lg bg-indigo-2 text-black" v-if="post.username == currUser"
+                                        @click="iTask(post.id, post.username)" size="sm"><b>Edit</b>
                                     </q-btn>
-                                    <q-btn v-if="offerCheck(post) != null" color="positive" text-color="white"
+                                    <q-btn v-if="offerCheck(post) != null" class="bg-indigo-2 text-black"
                                         @click="viewOffer(post.id)" size="sm"><b>View Offers</b></q-btn>
 
                                 </div>
 
                                 <div v-else-if="completedCheck(post) == 'pending'">
                                     Status: Pending<br>
-                                    <q-btn @click="confirmCompletion(post.id, post.username)"> Confirm
+                                    <q-btn @click="confirmCompletion(post.id, post.username)"
+                                        class="bg-indigo-2 text-black"> Confirm
                                     </q-btn>
                                 </div>
                                 <div v-else>
@@ -325,7 +357,7 @@ export default {
             thumbStyle: {
                 right: '4px',
                 borderRadius: '5px',
-                backgroundColor: '#3760b8',
+                backgroundColor: '#27A69A',
                 width: '5px',
                 opacity: 0.75
             },
@@ -406,6 +438,11 @@ export default {
             ],
             style: '',
             Active: false,
+            hover: false,
+            hover2: false,
+            hover3: false,
+
+
         }
     }
 
@@ -450,16 +487,14 @@ export default {
         angelBtn() {
             this.Selection = 'Angel'
             this.targetP = 'angel'
-            this.style = 'background-color: #3760b8'
-            this.thumbStyle.backgroundColor = '#3760b8'
+            this.thumbStyle.backgroundColor = '#27A69A'
 
 
         },
         mortalBtn() {
             this.Selection = 'Mortal'
             this.targetP = 'mortal'
-            this.style = 'background-color: #efa2a4'
-            this.thumbStyle.backgroundColor = '#efa2a4'
+            this.thumbStyle.backgroundColor = '#C5CAE9'
 
         },
         viewOffer(id) {
@@ -485,7 +520,7 @@ export default {
             console.log(currPost)
             var values = Object.values(currPost)
 
-            var result = values.filter(post => post.angel == this.currUser && post.status == 'saved') 
+            var result = values.filter(post => post.angel == this.currUser && post.status == 'saved')
             console.log(result)
 
             return result
@@ -555,7 +590,9 @@ export default {
             storeName.email = ''
             storeName.name = ''
             this.$router.push({ name: 'Landing' })
-        }
+        },
+
+
     },
 
     computed: {
@@ -584,7 +621,7 @@ export default {
         searchForSavedTask() {
             var allTask = Object.values(this.posts)
             console.log(this.interactedTasks)
-            if(this.interactedTasks == null || this.interactedTasks == undefined){
+            if (this.interactedTasks == null || this.interactedTasks == undefined) {
                 return []
             }
             if (this.interactedTasks.saved == null || this.interactedTasks.saved == undefined) {
@@ -629,11 +666,10 @@ export default {
         this.getOwnTask();
         if (this.$route.params.targetP == 'angel') {
             this.targetP = 'angel'
-            this.style = 'background-color: #ffffff'
+
         }
         else {
             this.targetP = 'mortal'
-            this.style = 'background-color: #fffff'
         }
         if (storeName.username == '') {
             this.$router.push('/login')
@@ -654,7 +690,7 @@ export default {
     margin-left: 1.5vw;
     text-align: left;
     font-size: medium;
-    width:100%
+    width: 100%
 }
 
 .location {
@@ -675,7 +711,7 @@ export default {
     column-count: 1;
     text-align: left;
     width: auto;
-    display:block
+    display: block
 }
 
 
@@ -688,7 +724,7 @@ export default {
     float: left;
     margin-left: 5vw;
     border-radius: 0px;
-    display:block
+    display: block
 }
 
 .dActions {
@@ -816,18 +852,19 @@ figure>q-card {
     .q-card {
         max-width: 100%;
     }
+
     .qcardsec {
-    /* float: left; */
-    column-span: 1;
-    text-align: left;
-    font-size: x-small;
-}
+        /* float: left; */
+        column-span: 1;
+        text-align: left;
+        font-size: x-small;
+    }
 
 }
 
-@media (max-width:700px){
-    .dCard{
-        display:none
+@media (max-width:700px) {
+    .dCard {
+        display: none
     }
 }
 
@@ -869,5 +906,11 @@ figure>q-card {
     .mainMenu {
         display: none;
     }
+}
+
+body {
+    background-color: #000;
+    width: 100%;
+    height: 100%;
 }
 </style>
