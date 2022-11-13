@@ -451,5 +451,5 @@ h1 {
 }
 
 @import url("https://fonts.googleapis.com/css?family=Poppins"); 
-@import url("https://fonts.googleapis.com/css?family=Karla")
+@import url("https://fonts.googleapis.com/css?family=Karla");
 </style>

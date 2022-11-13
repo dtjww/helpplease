@@ -1,7 +1,7 @@
 <!-- daryl-->
 <template>
 
-  <div class="row img-overlay img-wrapper">
+  <div class="row img-overlay img-wrapper karla">
     <div class="column">
       <img class="image"
         src="https://images.unsplash.com/photo-1605826832916-d0ea9d6fe71e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
@@ -416,4 +416,9 @@ export default {
     max-width: 100%;
   }
 }
+
+.fonts {
+  font-family: karla;
+}
+@import url("https://fonts.googleapis.com/css?family=Karla");
 </style>

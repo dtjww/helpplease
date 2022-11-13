@@ -28,13 +28,13 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <div v-if="completedCheck(post) == 'pending'">
+                        <div v-if="completedCheck(post) == 'pending'" class="text-dark text-bold">
                             Status: Pending
                         </div>
-                        <div v-else-if="post.accepted != null">
+                        <div v-else-if="post.accepted != null" class="text-dark text-bold">
                             Status: In Progress
                         </div>
-                        <div v-else-if="activeCheck(post)">
+                        <div v-else-if="activeCheck(post)" class="text-dark text-bold">
                             Status: Offered
                         </div>
 
@@ -56,13 +56,13 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <div v-if="completedCheck(post) == 'pending'">
+                        <div v-if="completedCheck(post) == 'pending'" class="text-secondary text-bold">
                             Status: Pending
                         </div>
-                        <div v-else-if="post.accepted != null">
+                        <div v-else-if="post.accepted != null" class="text-secondary text-bold">
                             Status: In Progress
                         </div>
-                        <div v-else-if="activeCheck(post)">
+                        <div v-else-if="activeCheck(post)" class="text-secondary text-bold">
                             Status: Offered
                         </div>
 

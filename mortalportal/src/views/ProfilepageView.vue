@@ -1,7 +1,7 @@
 <!-- Ban -->
 <template>
   <NavBar />
-  <div class="q-pa-none">
+  <div class="q-pa-none karla">
     <q-layout view="lHh Lpr lff" container style="height: 86vh" class="shadow-2 rounded-borders">
 
       <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
@@ -13,7 +13,7 @@
               <q-icon name="person" />
             </q-item-section>
 
-            <q-item-section>
+            <q-item-section >
               Account
             </q-item-section>
           </q-item>
@@ -184,6 +184,12 @@ export default {
   font-family: radley;
   font-weight: bold;
 }
+
+.karla {
+    font-family: karla;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Karla");
 </style>
 <style lang="sass" scoped>
 .menu-list .q-item
