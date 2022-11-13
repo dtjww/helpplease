@@ -3,7 +3,7 @@
 <template>
 
   <div class="back">
-    <NavBar/>
+    <NavBarWhite/>
     <!-- <div class="about">
       <h1> hellooo </h1>
       <h2 class="format1"> {{message}} </h2>
@@ -146,7 +146,7 @@
                     <!-- FOR INPUT OF TEXT -->
                     <q-input class="textinput" rounded outlined v-model="myMsg" placeholder="Send a Text Here" @keyup.enter="sendMessage()" style="margin: 10px; width:100%">
                       <template v-slot:after>
-                        <q-btn round dense flat color="accent" icon="send" @click="sendMessage()"/>
+                        <q-btn round dense flat color="secondary" icon="send" @click="sendMessage()"/>
                       </template>
                     </q-input>
                   </q-item>
@@ -181,7 +181,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBarWhite from '@/components/NavBarWhite.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { db } from '../firebase.js';
@@ -202,7 +202,7 @@ const scrollAreaComponent = ref();
 export default {
   name: 'ChatpageView',
       components: {
-    NavBar,
+    NavBarWhite,
     ChatMsg
 },
   data () {

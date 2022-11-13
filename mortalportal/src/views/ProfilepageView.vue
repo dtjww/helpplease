@@ -1,6 +1,6 @@
 <!-- Ban -->
 <template>
-  <NavBar />
+  <NavBarWhite />
   <div class="q-pa-none karla">
     <q-layout view="lHh Lpr lff" container style="height: 86vh" class="shadow-2 rounded-borders">
 
@@ -105,7 +105,7 @@
 </template>
   
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavBarWhite from '@/components/NavBarWhite.vue';
 import MyAccount from '@/components/MyAccount.vue';
 import MyTask from '@/components/MyTask.vue';
 import MyEarnings from '@/components/MyEarnings.vue';
@@ -118,7 +118,7 @@ export default {
   name: 'ProfileView',
   props: {},
   components: {
-    NavBar,
+    NavBarWhite,
     MyAccount,
     MyTask,
     MyEarnings,
@@ -140,7 +140,7 @@ export default {
   setup() {
 
     return {
-      NavBar,
+      NavBarWhite,
       drawer: ref(false),
       active: ref(true)
     }

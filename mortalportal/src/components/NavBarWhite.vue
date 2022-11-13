@@ -1,6 +1,6 @@
 <template>
-    <div class="q-pa-none">
-        <q-toolbar class="text-black q-my-none shadow-2 bg-white" >
+    <div class="q-pa-none karla">
+        <q-toolbar class="text-black q-my-none shadow-2 bg-white" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -10,11 +10,21 @@
             <q-space />
             
             <div class="lt-xs">
-            <q-btn stretch flat label="Saved" @click="gotoSaved()"/>
+            <q-btn rounded flat label="Chats" @click="gotoChat()" style="font-size: medium" @mouseover="chatColor = true"
+                @mouseleave="chatColor = false"
+                :class="{ onHover: chatColor }"/>
 
-            <q-btn stretch flat label="My Account" @click="handleClick()"/>
+            <q-btn rounded flat label="My Account" @click="handleClick()" style="font-size: medium" @mouseover="profileColor = true"
+            @mouseleave="profileColor = false"
+            :class="{ onHover: profileColor }"/>
 
-            <q-btn stretch flat label="Log Out" @click="exit()"/>
+            <q-btn rounded flat label="Log Out" @click="exit()" style="font-size: medium" @mouseover="logColor = true"
+            @mouseleave="logColor = false"
+            :class="{ onHover: logColor }"/>
+
+            <!-- <q-btn stretch flat label="My Account" @click="handleClick()"/>
+
+            <q-btn stretch flat label="Log Out" @click="exit()"/> -->
             </div>
 
             <div class="gt-s">
@@ -22,24 +32,24 @@
                 <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
                 <q-list>
                     <q-item-label header>Menu</q-item-label>
-                    <q-item clickable v-ripple >
+                    <q-item clickable v-ripple @click="gotoChat()">
                         <q-item-section avatar>
-                            <q-icon name="favorite" />
+                            <q-icon name="chat" />
                         </q-item-section>
-                        <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                        <q-item-section>Chat</q-item-section>
                     </q-item>
                     
-                    <q-item clickable v-ripple>
+                    <q-item clickable v-ripple @click="handleClick()">
                         <q-item-section avatar>
                             <q-icon name="person" />
                         </q-item-section>
-                        <q-item-section @click="handleClick()">My Account</q-item-section>
+                        <q-item-section>My Account</q-item-section>
                     </q-item>
-                    <q-item clickable v-ripple>
+                    <q-item clickable v-ripple @click="exit()">
                         <q-item-section avatar>
                             <q-icon name="logout" />
                         </q-item-section>
-                        <q-item-section @click="exit()">Log Out</q-item-section>
+                        <q-item-section>Log Out</q-item-section>
                     </q-item>
                 </q-list>
             </q-btn-dropdown>
@@ -54,6 +64,18 @@
     /* .navbar-bg {
         background-color: #eaac8b;
     } */
+    .onHover {
+        color: #27A69A;
+    }
+    .hamburgMenu {
+    display: none;
+    }
+    .karla {
+    font-family: karla;
+    }
+    .mainMenu {
+    display: inline-block
+    }   
     @media (max-width: 729px) {
         .lt-xs {
             display: none;
@@ -91,17 +113,18 @@ const storeName = useCounterStore()
                         to: "/",
                         icon: "exit_to_app"
                     }
-                ]
+                ],
+                style: '',
+                
+                profileColor: false,
+                chatColor:false,
+                logColor: false,
             }
         },
 
         methods: {
             handleClick () {
                 this.$router.push('/profile')
-            },
-            gotoSaved() {
-                this.$router.push('/home/angel/saved')
-                // need to include a way to select the saved tasks filter
             },
             gotoChat(){
                 this.$router.push('/chat')
@@ -110,7 +133,15 @@ const storeName = useCounterStore()
                 storeName.username = ''
                 storeName.email = ''
                 this.$router.push({name:'Landing'})
-            }
+            },
+        },
+        created (){
+            if (storeName.username == '') {
+            this.$router.push('/login')
+        }
+        else {
+            this.currUser = storeName.username
+        }
         }
     }
 
