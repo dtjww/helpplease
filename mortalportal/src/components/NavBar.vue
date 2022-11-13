@@ -1,25 +1,48 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-none">
-        <q-toolbar class="text-white q-my-none shadow-2 bg-dark" >
-
-            <q-toolbar-title shrink>
-                <router-link to="/home/angel" style="color: white; text-decoration: none">
-                    <q-img src="../assets/MainLogoWhite.png" style="width:170px"></q-img>
-                </router-link>
-            </q-toolbar-title>
-            
-        
+        <q-toolbar class="text-black q-my-none bg-white" style="padding-left:50px;padding-top:10px;padding-bottom:10px">
+            <router-link to="/home/angel" style="width:170px; padding: 0%">
+                <q-img src="@/assets/MainLogo2.png"  style="width:170px;"></q-img>
+            </router-link>      
     
             <q-space />
             
-            <div class="lt-xs">
-            <q-btn stretch flat label="Saved" @click="gotoSaved()"/>
+            <router-link to="/chat" style="color: black; text-decoration: none">
+                <div 
+                @mouseover="chatColor = true"
+                @mouseleave="chatColor = false"
+                :class="{ onHover: chatColor }">
+                <q-btn stretch flat label="Chats" style="font-size: large"  />
+                </div>
+            </router-link>
 
-            <q-btn stretch flat label="My Account" @click="handleClick()"/>
+            <q-separator />
 
-            <q-btn stretch flat label="Log Out" @click="exit()"/>
+            <router-link to="/profile" style="color: black; text-decoration: none">
+                <div 
+                @mouseover="profileColor = true"
+                @mouseleave="profileColor = false"
+                :class="{ onHover: profileColor }">
+                    <q-btn stretch flat label="Profile" style="font-size: large;" />
+                </div>
+                </router-link>
 
+            <q-separator />
+            
+            <div 
+                @mouseover="logColor = true"
+                @mouseleave="logColor = false"
+                :class="{ onHover: logColor }">
+            <q-btn stretch flat label="Log Out" style="font-size: large;" @click="exit()"/>
+            </div>
+
+             <!--    </div> 
+            <q-btn stretch flat label="Chats" @click="gotoChat()"/>
+
+            <q-btn stretch flat label="Profile" @click="handleClick()"/> -->
+            
+            
 
             <!-- <q-btn stretch flat label="Notifications" /> -->
             <!-- <q-btn-dropdown stretch flat label="Notifications"> 
@@ -108,11 +131,11 @@
                 </q-list>
             </q-btn-dropdown> -->
 
-            </div>
+            <!-- </div>
 
-            <div class="gt-s">
+            <div class="gt-s"> -->
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
+                <!-- <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True> 
                 <q-list>
                     <q-item-label header>Menu</q-item-label>
                     <q-item clickable v-ripple >
@@ -134,9 +157,9 @@
                         </q-item-section>
                         <q-item-section @click="exit()">Log Out</q-item-section>
                     </q-item>
-                </q-list>
-            </q-btn-dropdown>
-            </div>
+                </q-list> -->
+            <!-- </q-btn-dropdown>
+            </div> -->
 
         </q-toolbar>
     </div>
@@ -144,9 +167,7 @@
 </template>
 
 <style>
-    /* .navbar-bg {
-        background-color: #eaac8b;
-    } */
+
     @media (max-width: 729px) {
         .lt-xs {
             display: none;
@@ -157,6 +178,10 @@
             display: none;
         }
     }
+    .onHover {
+        color: #27A69A;
+    }
+
 </style>
 
 <script>
@@ -168,37 +193,41 @@ const storeName = useCounterStore()
     
         data() {
             return {
-                menuItems: [
-                    {
-                        label: "My Account",
-                        to: "/profile",
-                        icon: "person"
-                    },
-                    {
-                        label: "My Tasks",
-                        to: "/profile",
-                        icon: "assignment"
-                    },
-                    {
-                        label: "Logout",
-                        to: "/",
-                        icon: "exit_to_app"
-                    }
-                ]
-            }
+                // menuItems: [
+                //     {
+                //         label: "My Account",
+                //         to: "/profile",
+                //         icon: "person"
+                //     },
+                //     {
+                //         label: "My Tasks",
+                //         to: "/profile",
+                //         icon: "assignment"
+                //     },
+                //     {
+                //         label: "Logout",
+                //         to: "/",
+                //         icon: "exit_to_app"
+                //     }
+                // ]
+                
+                profileColor: false,
+                chatColor:false,
+                logColor: false,
+                }
         },
 
         methods: {
-            handleClick () {
-                this.$router.push('/profile')
-            },
-            gotoSaved() {
-                this.$router.push('/home/angel/saved')
-                // need to include a way to select the saved tasks filter
-            },
-            gotoChat(){
-                this.$router.push('/chat')
-            },
+            // handleClick () {
+            //     this.$router.push('/profile')
+            // },
+            // gotoSaved() {
+            //     this.$router.push('/home/angel/saved')
+            //     // need to include a way to select the saved tasks filter
+            // },
+            // gotoChat(){
+            //     this.$router.push('/chat')
+            // },
             exit(){
                 storeName.username = ''
                 storeName.email = ''
