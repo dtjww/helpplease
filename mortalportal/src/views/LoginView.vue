@@ -65,7 +65,7 @@
                             <img src="@/assets/MainLogo2.png" style="width:75%;padding:0%;margin:0" />
                         </router-link>
                     </q-card-section>
-                    <q-tabs v-model="tab" class="text-teal">
+                    <q-tabs v-model="tab" class="text-accent">
                         <q-tab label="Login" name="Login" />
                         <q-tab label="Sign Up" name="Sign Up" @click="gotoSignUp()" />
                     </q-tabs>
@@ -77,13 +77,15 @@
 
                             <q-card-section>
                                 <q-form class="q-gutter-md">
-                                    <q-input square filled clearable v-model="email_login" type="text" label="Email" />
-                                    <q-input square filled clearable v-model="password_login" type="password"
-                                        label="Password" />
+                                    <q-input rounded outlined color="accent" clearable v-model="email_login" type="text" label="Email"
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Enter your email',
+                                     val => val.includes('@') && val.includes('.') || 'Enter a valid email']" />
+                                    <q-input rounded outlined color="accent" clearable v-model="password_login" type="password" label="Password"
+                                    lazy-rules :rules="[val => val && val.length > 0 || 'Enter your password']" />
                                 </q-form>
                             </q-card-section>
                             <q-card-actions class="q-px-md">
-                                <q-btn unelevated color="primary" size="md"
+                                <q-btn unelevated color="accent" size="md"
                                     style="width:17vw;margin-left:auto;margin-right:auto;" label="Login"
                                     @click=getUser />
                             </q-card-actions>
@@ -177,7 +179,7 @@ export default {
                         }
                     }
                     if (!valid) {
-                        alert("Invalid Credentials")
+                        alert("Username and/or Password is incorrect")
                     }
                 }
                 )
