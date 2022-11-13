@@ -1,7 +1,7 @@
 <!-- Renee -->
 <template>
     <div class="q-pa-none karla" >
-        <q-toolbar class="text-black q-my-none shadow-2 bg-white">
+        <q-toolbar class="text-black q-my-none shadow-2 bg-white" id="navbar">
 
             <q-toolbar-title shrink>
             <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -27,7 +27,7 @@
                 @mouseover="profileColor = true"
                 @mouseleave="profileColor = false"
                 :class="{ onHover: profileColor }">
-                    <q-btn rounded flat label="Profile" style="font-size: medium;" />
+                    <q-btn rounded flat label="Account" style="font-size: medium;" />
                 </div>
                 </router-link>
 
@@ -39,24 +39,18 @@
                 :class="{ onHover: logColor }">
             <q-btn rounded flat label="Log Out" style="font-size: medium;" @click="exit()"/>
             </div>
-            <div class="gt-s hamburgMenu">
-                    <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
+        
+            <!-- <div class="gt-s hamburgMenu">
+                    <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" />
                     <q-btn-dropdown flat dense dropdown-icon="menu" class="text-black">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-
+                           
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
                                     <q-icon name="person" />
                                 </q-item-section>
-                                <q-item-section @click="handleClick()">My Account</q-item-section>
-                            </q-item>
-
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="person" />
-                                </q-item-section>
-                                <q-item-section @click="handleClick()">My Account</q-item-section>
+                                <q-item-section @click="handleClick()">Account</q-item-section>
                             </q-item>
 
                             <q-item clickable v-ripple>
@@ -65,11 +59,13 @@
                                 </q-item-section>
                                 <q-item-section @click="exit()">Log Out</q-item-section>
                             </q-item>
+
                         </q-list>
                     </q-btn-dropdown>
-                </div>
+                </div> -->
 
-            
+            </q-toolbar>
+    </div>     
 
              <!--    </div> 
             <q-btn stretch flat label="Chats" @click="gotoChat()"/>
@@ -195,23 +191,12 @@
             <!-- </q-btn-dropdown>
             </div> -->
 
-        </q-toolbar>
-    </div>
+
     
 </template>
 
 <style>
 
-    @media (max-width: 729px) {
-        .lt-xs {
-            display: none;
-        }
-    }
-    @media (min-width: 730px) {
-        .gt-s {
-            display: none;
-        }
-    }
     .onHover {
         color: #27A69A;
     }
@@ -221,6 +206,18 @@
     .karla {
     font-family: karla;
     }
+    .mainMenu {
+    display: inline-block
+}
+@media (max-width:700px) {
+    .hamburgMenu {
+        display: block;
+    }
+
+    .mainMenu {
+        display: none;
+    }
+}
 
 </style>
 
@@ -233,23 +230,24 @@ const storeName = useCounterStore()
     
         data() {
             return {
-                // menuItems: [
-                //     {
-                //         label: "My Account",
-                //         to: "/profile",
-                //         icon: "person"
-                //     },
-                //     {
-                //         label: "My Tasks",
-                //         to: "/profile",
-                //         icon: "assignment"
-                //     },
-                //     {
-                //         label: "Logout",
-                //         to: "/",
-                //         icon: "exit_to_app"
-                //     }
-                // ]
+                menuItems: [
+                    {
+                        label: "My Account",
+                        to: "/profile",
+                        icon: "person"
+                    },
+                    {
+                        label: "My Tasks",
+                        to: "/profile",
+                        icon: "assignment"
+                    },
+                    {
+                        label: "Logout",
+                        to: "/",
+                        icon: "exit_to_app"
+                    }
+                ],
+                style: '',
                 
                 profileColor: false,
                 chatColor:false,
@@ -258,9 +256,9 @@ const storeName = useCounterStore()
         },
 
         methods: {
-            // handleClick () {
-            //     this.$router.push('/profile')
-            // },
+            handleClick () {
+                this.$router.push('/profile')
+            },
             // gotoSaved() {
             //     this.$router.push('/home/angel/saved')
             //     // need to include a way to select the saved tasks filter
@@ -272,7 +270,15 @@ const storeName = useCounterStore()
                 storeName.username = ''
                 storeName.email = ''
                 this.$router.push({name:'Landing'})
-            }
+            },
+        },
+        created (){
+            if (storeName.username == '') {
+            this.$router.push('/login')
+        }
+        else {
+            this.currUser = storeName.username
+        }
         }
     }
 
