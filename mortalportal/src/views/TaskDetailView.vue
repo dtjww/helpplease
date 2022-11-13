@@ -15,12 +15,10 @@
                 <div class="lt-xs mainMenu">
 
 
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == false && currUser != poster" />
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-teal-5"
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == true && currUser != poster" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == false && currUser != poster" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == true && currUser != poster" />
 
                     <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
                         @mouseover="hover = true" @mouseleave="hover = false"
@@ -34,10 +32,9 @@
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-teal-5 " @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == true && currUser != poster" />
 
-                        
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == false && currUser == poster" />
+
+                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == false && currUser == poster" />
                     <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && currUser == poster" />
@@ -51,17 +48,23 @@
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && currUser == poster" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == poster" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 "
+                        @mouseover="hover2 = true" @mouseleave="hover2 = false"
+                        v-if="hover2 == true && currUser == poster" />
 
                 </div>
 
                 <div class="gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu">
+                    <q-btn-dropdown flat dense color='black' dropdown-icon="menu">
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
-
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="chat" />
+                                </q-item-section>
+                                <q-item-section @click=gotoChat2()>Chats</q-item-section>
+                            </q-item>
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
                                     <q-icon name="person" />
@@ -116,8 +119,8 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h6>Price</h6>
-                            <q-field disabled dense prefix="$" style="margin-bottom:2vh;">
+                            <h6>Price ($)</h6>
+                            <q-field disabled dense style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.price }}</div>
                                 </template>
@@ -156,11 +159,13 @@
                     </div>
                 </div>
                 <div v-if="completedCheck(posts) == 'accepted' && currUser != poster">
-                    <q-btn color="secondary" class="karla btn text-white" @click="taskComplete = true">Task Completed</q-btn>
+                    <q-btn color="secondary" class="karla btn text-white" @click="taskComplete = true">Task Completed
+                    </q-btn>
                 </div>
 
                 <div v-else-if="completedCheck(posts) == 'pending' && currUser == poster">
-                    <q-btn color="dark" class="karla btn text-white" @click="confirmComplete = true">Confirm Completed Task
+                    <q-btn color="dark" class="karla btn text-white" @click="confirmComplete = true">Confirm Completed
+                        Task
                     </q-btn>
                 </div>
             </q-card>
@@ -177,10 +182,9 @@
                 <q-space />
                 <div class="lt-xs mainMenu">
 
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-black "
-                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
-                        v-if="hover3 == false && currUser == poster" />
-                    <q-btn rounded flat label="Chat" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
+                        @mouseleave="hover3 = false" v-if="hover3 == false && currUser == poster" />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true && currUser == poster" />
 
@@ -193,21 +197,22 @@
 
                     <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false && currUser == poster" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
-                        @mouseleave="hover2 = false" v-if="hover2 == true && currUser == poster" />
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 "
+                        @mouseover="hover2 = true" @mouseleave="hover2 = false"
+                        v-if="hover2 == true && currUser == poster" />
 
                 </div>
 
                 <div class="karla gt-s hamburgMenu">
                     <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True>
+                    <q-btn-dropdown flat dense dropdown-icon="menu" no-icon-animation=True color=black>
                         <q-list>
                             <q-item-label header>Menu</q-item-label>
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
-                                    <q-icon name="favorite" />
+                                    <q-icon name="chat" />
                                 </q-item-section>
-                                <q-item-section @click="gotoSaved()">Saved</q-item-section>
+                                <q-item-section @click=gotoChat2()>Chats</q-item-section>
                             </q-item>
 
                             <q-item clickable v-ripple>
@@ -263,9 +268,8 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h6>Price</h6>
-                            <q-input prefix="$" dense type="number" class="price" v-model="this.posts.price"
-                                style="width:15vw;">
+                            <h6>Price ($)</h6>
+                            <q-input dense type="number" class="price" v-model="this.posts.price" style="width:15vw;">
                             </q-input>
                         </div>
                     </div>
@@ -350,7 +354,7 @@
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                <q-input type="number" v-model="this.offer_price" prefix="$"></q-input>
+                <q-input type="number" v-model="this.offer_price"></q-input>
             </q-card-section>
             <q-card-actions align="right">
                 <q-btn flat label="Make Offer" color="secondary" v-close-popup @click=makeAnOffer />
@@ -546,7 +550,7 @@ export default {
             chatId: '',
             hover: false,
             hover2: false,
-            hover3:false,
+            hover3: false,
 
 
         }
@@ -825,8 +829,23 @@ export default {
             });
             this.$router.push({ name: 'Task Complete', params: { id: this.id, status: 'completed' } })
         },
+        handleClick() {
+            this.$router.push({ name: 'Profile' })
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        gotoChat2(){
+            this.$router.push({ name: 'Chat' })
+        },
+        
 
-    },
+    }
+
+    ,
 
     created() {
         this.poster = this.$route.params.poster
@@ -967,8 +986,12 @@ q-input {
         display: none;
     }
 }
+
 @import url("https://fonts.googleapis.com/css?family=Karla");
+
 .karla {
     font-family: karla;
-};
+}
+
+;
 </style>

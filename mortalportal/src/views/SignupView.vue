@@ -328,7 +328,8 @@ export default {
     },
     gotoLogin() {
       this.$router.push('/login')
-    }
+    },
+    
   },
   mounted:
     function () {

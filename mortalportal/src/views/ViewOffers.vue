@@ -17,7 +17,7 @@
         <q-card class="q-px-lg q-py-md">
 
             <q-card-section class="q-pt-lg">
-                <h7 class="q-mb-sm"><strong>Task:</strong> {{ currPost.name }}</h7><br>
+                <h7 class="q-mb-sm "><strong>Task:</strong> {{ currPost.name }}</h7><br>
                 <h7 class="q-mb-sm"><strong>Angel:</strong> {{ currRow.Angel }}</h7><br>
                 <h7><strong>Offered Price:</strong> ${{ currRow.Offer }}</h7>
             </q-card-section>
@@ -112,6 +112,23 @@ export default {
                     timer = void 0
                 }, 2500)
             },
+            showDeleting() {
+                $q.loading.show(
+                    {
+                        spinner: QSpinnerOval,
+                        spinnerSize: 100,
+                        message: 'Rejecting...',
+                        messageColor: 'white',
+                        backgroundColor: 'black'
+                    }
+                )
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.go()
+                    timer = void 0
+                }, 2500)
+            },
 
         }
     },
@@ -197,14 +214,31 @@ export default {
             this.reject = true
         },
         updateReject() {
+            console.log(this.currRow.Angel)
             update(dbRef(db, 'TaskData/' + this.id + "/offer/" + this.currRow.Angel), {
                 status: 'rejected'
             })
-            window.reload()
+            update(dbRef(db, 'Login/' + this.currRow.Angel + '/tasksInteracted/active/' + this.id), {
+                status: 'rejected'
+            })
+            this.showDeleting()
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
+        gotoChat() {
+            this.$router.push({ name: 'Chat', params: { id: this.id } })
         }
     },
     created() {
         this.getPost()
+        this.getcurrPost()
     }
 }
 
@@ -229,4 +263,6 @@ export default {
     margin-top: 20px;
     padding: 20px;
 }
+
+
 </style>

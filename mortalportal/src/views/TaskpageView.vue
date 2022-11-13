@@ -37,10 +37,15 @@
 
             <div class="gt-s hamburgMenu karla">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
-                <q-btn-dropdown flat dense dropdown-icon="menu">
+                <q-btn-dropdown flat dense dropdown-icon="menu" color="black">
                     <q-list>
                         <q-item-label header>Menu</q-item-label>
-
+                        <q-item clickable v-ripple>
+                            <q-item-section avatar>
+                                <q-icon name="chat" />
+                            </q-item-section>
+                            <q-item-section @click=gotoChat()>Chats</q-item-section>
+                        </q-item>
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
                                 <q-icon name="person" />
@@ -108,14 +113,14 @@
 
                         <tr>
                             <td>
-                                <h6>Price</h6>
+                                <h6>Price ($)</h6>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <q-input outlined v-model="inputData.price" label="Price" maxlength="30" class="price"
                                     lazy-rules :rules="[val => val && val.length > 0 || 'Please Enter a Price']"
-                                    prefix='$' type="number" style='width:15vw;' color="indigo-6" />
+                                    type="number" style='width:15vw;' color="indigo-6" />
                             </td>
                         </tr>
 
@@ -146,30 +151,31 @@
                                     :rules="[val => val && val.length > 0 || 'Please Input a Date']" color="indigo-6" />
                             </td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Image (Optional)</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <q-btn class="bg-info date" color="white" text-color="dark" label="upload image" @click="uploadImage" />
-                            <input type="file" style="display: none" ref="fileInput" accept='image/*'
-                                @change=onFilePicked />
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>Image (Optional)</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <q-btn class="date" color="white" text-color="dark" label="upload image"
+                                    @click="uploadImage" />
+                                <input type="file" style="display: none" ref="fileInput" accept='image/*'
+                                    @change=onFilePicked />
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
-                        </td>
-                    </tr>
-                </table>
-                <q-btn color="dark"  label="Post Task" class='button text-white' type="submit" />
-            </q-form>
-        </q-card>
-    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img v-if='imageUrl != ""' :src="imageUrl" height="150" class="date">
+                            </td>
+                        </tr>
+                    </table>
+                    <q-btn color="dark" label="Post Task" class='button text-white' type="submit" />
+                </q-form>
+            </q-card>
+        </div>
     </q-scroll-area>
 
 </template>
@@ -272,6 +278,7 @@ export default {
             image: null,
             hover: false,
             hover2: false,
+            hover3: false,
         }
     },
     methods: {
@@ -334,6 +341,18 @@ export default {
                     console.log(error)
                 })
         },
+        gotoChat() {
+            this.$router.push('/chat')
+        },
+        exit() {
+            storeName.username = ''
+            storeName.email = ''
+            storeName.name = ''
+            this.$router.push({ name: 'Landing' })
+        },
+        handleClick() {
+            this.$router.push('/profile')
+        },
     }
 
 }
@@ -366,7 +385,7 @@ h6 {
 }
 
 .price {
-    width: 100px;
+
     text-align: center;
 
 }
@@ -432,16 +451,16 @@ h3 {
         float: left;
         margin-right: 0px;
     }
-    
+
 }
 
 .hamburgMenu {
-        display: none;
-    }
+    display: none;
+}
 
-    .mainMenu {
-        display: block;
-    }
+.mainMenu {
+    display: block;
+}
 
 @media (max-width:700px) {
     .hamburgMenu {

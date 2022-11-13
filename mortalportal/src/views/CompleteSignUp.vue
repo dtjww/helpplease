@@ -63,7 +63,7 @@
     </div>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
-        <q-card class="qcard font">
+        <q-card class="qcard font" style="margin-top:10vh;">
             <q-card-section>
                 <h2>Complete your profile!</h2>
             </q-card-section>
@@ -197,8 +197,9 @@ export default {
             storeName.username = this.username
             set(dbRef(db, 'Login/' + this.username), {
                 username: this.username,
-                fullname: this.fullname,
-                email: this.email
+                name: this.fullname,
+                email: this.email,
+                password: this.password
             })
             this.$router.push('/home/angel')
         },

@@ -15,7 +15,7 @@
 
     </table>
 
-    <div class="myContainer myBox" >
+    <div class="myContainer myBox">
         <div v-if="Selection == 'Active'">
             <!-- only returns user's active tasks as an angel, not user's tasks uploaded as mortal -->
             <figure v-for="post in activeAngelTasks" v-bind:key="post.id">
@@ -65,9 +65,10 @@
                         <div v-else-if="activeCheck(post)" class="text-dark text-bold">
                             Status: Offered
                         </div>
-
-                        <q-btn class="q-mt-md" color='dark' text-color="white"
-                            @click="iTask(post.id, post.username)">
+                        <div v-else class="text-dark text-bold">
+                            Status: Active
+                        </div>
+                        <q-btn class="q-mt-md" color='dark' text-color="white" @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
@@ -104,7 +105,8 @@
                         Time: {{ post.time }}<br>
                         Amount: ${{ post.price }}<br>
 
-                        <q-btn class="q-mt-md" color='secondary' text-color="white" @click="iTask(post.id, post.username)">
+                        <q-btn class="q-mt-md" color='secondary' text-color="white"
+                            @click="iTask(post.id, post.username)">
                             <b>Details</b>
                         </q-btn>
                     </q-card-section>
@@ -165,12 +167,12 @@ export default {
         },
         activeCheck(currPost) {
             console.log(currPost)
-            var values = Object.values(currPost)
-
-            var result = values.filter(post => post.angel == this.currUser)
-            console.log(result)
-
-            return result
+            if(currPost.username == this.currUser && currPost.offer != null){
+                return true
+            }
+            else{
+                return false
+            }
         },
         completedCheck(currPost) {
 
@@ -248,9 +250,9 @@ export default {
         activeMortalTasks() {
             var allTask = Object.values(this.posts)
             var result = allTask.filter(post => post.username == this.currUser)
-           
-                return result
-            
+
+            return result
+
         },
 
 
