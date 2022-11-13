@@ -9,7 +9,7 @@
                 </router-link>
             </q-toolbar-title>
             <q-space />
-            <div class="lt-xs mainMenu">
+            <div class="lt-xs mainMenu karla">
                 <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black " @mouseover="hover3 = true"
                     @mouseleave="hover3 = false" v-if="hover3 == false && status == 'pending'" />
                 <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-teal-5" @mouseover="hover3 = true"
@@ -305,6 +305,7 @@ export default {
 .karla {
     font-family: 'karla';
 }
+@import url("https://fonts.googleapis.com/css?family=Karla");
 
 h6 {
     margin: auto;

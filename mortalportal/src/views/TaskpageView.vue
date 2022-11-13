@@ -3,7 +3,7 @@
 <template>
     <q-scroll-area style="height: 100vh; max-width: 100vw;" :thumb-style="thumbStyle" :bar-style="barStyle">
 
-        <q-toolbar class="text-white q-my-none shadow-2 bg-white" id="navbar">
+        <q-toolbar class="text-white q-my-none shadow-2 bg-white karla" id="navbar">
 
             <q-toolbar-title shrink>
                 <router-link to="/home/angel" style="color: white; text-decoration: none">
@@ -11,31 +11,31 @@
                 </router-link>
             </q-toolbar-title>
             <q-space />
-            <div class="lt-xs mainMenu">
+            <div class="lt-xs mainMenu karla">
 
                 
-                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black "
+                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black karla"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == false"  />
-                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6"
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6 karla"
                         @mouseover="hover3 = true" @mouseleave="hover3 = false"
                         v-if="hover3 == true" />
 
-                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
+                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black karla"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == false"  />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6 karla"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == true" />
 
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black karla" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 karla" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == true" />
 
             </div>
 
-            <div class="gt-s hamburgMenu">
+            <div class="gt-s hamburgMenu karla">
                 <!-- <q-btn flat dense icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" /> -->
                 <q-btn-dropdown flat dense dropdown-icon="menu">
                     <q-list>
@@ -61,7 +61,7 @@
 
 
         <div>
-            <q-card class="card">
+            <q-card class="card karla">
                 <h3>Create a New Task</h3><br>
                 <q-form @submit="submitDB">
 
@@ -154,7 +154,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <q-btn class="date" color="white" text-color="dark" label="upload image" @click="uploadImage" />
+                            <q-btn class="bg-info date" color="white" text-color="dark" label="upload image" @click="uploadImage" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked />
 
@@ -272,7 +272,6 @@ export default {
             image: null,
             hover: false,
             hover2: false,
-            hover3: false,
         }
     },
     methods: {
@@ -335,9 +334,6 @@ export default {
                     console.log(error)
                 })
         },
-        gotoChat(){
-            this.$router.push('/chat')
-        }
     }
 
 }
@@ -456,4 +452,8 @@ h3 {
         display: none;
     }
 }
+@import url("https://fonts.googleapis.com/css?family=Karla");
+.karla {
+    font-family: karla;
+};
 </style>
