@@ -149,7 +149,6 @@ export default {
 
         function simulateSubmit() {
             submitting.value = true
-
             // Simulating a delay here.
             // When we are done, we reset "submitting"
             // Boolean to false to restore the
