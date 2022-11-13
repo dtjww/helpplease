@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Description</h6>
-                            <q-field readonly>
+                            <q-field disabled dense style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.desc }}</div>
                                 </template>
@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Category</h6>
-                            <q-field readonly>
+                            <q-field disabled dense style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.category }}</div>
                                 </template>
@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Location</h6>
-                            <q-field readonly>
+                            <q-field disabled dense style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.loc }}</div>
                                 </template>
@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Price</h6>
-                            <q-field readonly prefix="$">
+                            <q-field disabled dense prefix="$" style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.price }}</div>
                                 </template>
@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col">
                             <h6>Date & Time</h6>
-                            <q-field readonly>
+                            <q-field disabled dense style="margin-bottom:2vh;">
                                 <template v-slot:control>
                                     <div>{{ posts.date }} {{ posts.time }}</div>
                                 </template>
@@ -419,6 +419,25 @@ export default {
                 }, 2500)
 
             },
+            showOffer() {
+                $q.loading.show(
+                    {
+                        message: 'Sending Offer...',
+                        spinnerSize: 100,
+                        backgroundColor: 'black',
+                        spinner: QSpinnerOval
+                    }
+                )
+
+
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
+                    timer = void 0
+                }, 2500)
+
+            },
             thumbStyle: {
                 right: '4px',
                 borderRadius: '5px',
@@ -515,17 +534,22 @@ export default {
                             }
                         }
                         this.format = 'View'
+                        this.style = "background-color: #3760b8"
+                        this.thumbStyle.backgroundColor = '#3760b8'
                         return "View"
                     }
                     else {
                         if (this.poster == this.currUser) {
+                            console.log('view')
                             this.format = "Edit"
                             this.style = "background-color: #efa2a4"
                             this.thumbStyle.backgroundColor = '#efa2a4'
+
                             return 'Edit'
                         }
                         else {
                             this.format = "View"
+                            console.log('edit')
                             this.style = "background-color: #3760b8"
                             this.thumbStyle.backgroundColor = '#3760b8'
                             return 'View'
@@ -689,6 +713,7 @@ export default {
             this.Offer = true
         },
         makeAnOffer() {
+            this.showOffer()
             const date = (new Date()).getDate() + '/' + ((new Date()).getMonth() + 1) + '/' + (new Date()).getFullYear()
             set(dbRef(db, 'Login/' + storeName.username + "/tasksInteracted/active/" + this.id), {
                 status: 'offer',
@@ -703,7 +728,6 @@ export default {
                 angel: storeName.username,
                 dateOffer: date
             })
-            this.$router.push({ name: 'Home', params: { targetP: 'angel' } })
         },
         updateCompleted() {
 

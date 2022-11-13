@@ -240,7 +240,7 @@ export default {
         })
     },
     submitData() {
-      if (this.signupData.email != '' && this.signupData.password != '' && this.signupData.username != '' && this.signupData.name != '' && this.cPassword != '') {
+      if (this.email != '' && this.password != '' && this.username != '' && this.name != '' && this.cPassword != '') {
         if (this.password == this.cPassword) {
           this.signupData.email = this.email
           this.signupData.password = this.password

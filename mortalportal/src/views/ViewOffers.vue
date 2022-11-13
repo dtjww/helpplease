@@ -64,6 +64,9 @@ import { update, ref as dbRef, remove, set } from "firebase/database";
 import { db } from '../firebase.js'
 import { useCounterStore } from "@/store/store";
 const storeName = useCounterStore()
+import { useQuasar, QSpinnerOval } from 'quasar'
+import { onBeforeUnmount } from 'vue'
+
 
 const columns = [
 
@@ -80,9 +83,35 @@ const columns = [
 ]
 export default {
     setup() {
+        const $q = useQuasar()
+        let timer
+
+        onBeforeUnmount(() => {
+            if (timer !== void 0) {
+                clearTimeout(timer)
+                $q.loading.hide()
+            }
+        })
         return {
             columns,
-            selected: ref([])
+            selected: ref([]),
+            showLoading() {
+                $q.loading.show(
+                    {
+                        spinner: QSpinnerOval,
+                        spinnerSize: 100,
+                        message: 'Loading...',
+                        messageColor: 'white',
+                        backgroundColor: 'black'
+                    }
+                )
+                // hiding in 2s
+                timer = setTimeout(() => {
+                    $q.loading.hide()
+                    this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
+                    timer = void 0
+                }, 2500)
+            },
 
         }
     },
@@ -161,12 +190,7 @@ export default {
             update(dbRef(db, 'Login/' + this.currRow.Angel + "/tasksInteracted/active/" + this.id), {
                 dateAccepted: date
             })
-            setTimeout(() => {
-                this.$router.push({ name: 'Home', params: { targetP: 'mortal' } })
-            }, 1500)
-
-
-
+            this.showLoading()
         },
         rejectOffer(row) {
             this.currRow = row
