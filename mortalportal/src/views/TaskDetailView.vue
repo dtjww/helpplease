@@ -243,7 +243,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <q-btn color="dark" label="upload new image" @click="uploadImage" class="date" />
+                            <q-btn color="accent" label="upload new image" @click="uploadImage" class="date" />
                             <input type="file" style="display: none" ref="fileInput" accept='image/*'
                                 @change=onFilePicked /><br>
 
@@ -257,10 +257,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <q-btn color='info' class="btn" @click=saveChanges>Save Changes</q-btn>
+                        <q-btn color='positive' class="btn" @click=saveChanges>Save Changes</q-btn>
                     </div>
                     <div class="col-6">
-                        <q-btn color="black" class="btn" @click=delPost>Delete Task</q-btn>
+                        <q-btn color="secondary" class="btn" @click=delPost>Delete Task</q-btn>
                     </div>
                 </div>
             </q-card>
@@ -316,9 +316,9 @@
     </q-dialog>
 
     <q-dialog v-model="taskComplete">
-        <q-card>
+        <q-card class="q-pa-md">
             <q-card-section>
-                <div class="text-h6">Confirm</div>
+                <div class="text-h6 text-center text-dark">Confirm Mission Success</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
@@ -326,23 +326,23 @@
             </q-card-section>
             <q-card-actions align="right">
                 <q-btn flat label="Yes" color="dark" v-close-popup @click=updateCompleted />
-                <q-btn flat label="No" color="black" v-close-popup />
+                <q-btn flat label="No" color="secondary" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
 
     <q-dialog v-model="confirmComplete">
-        <q-card>
+        <q-card class="q-pa-md">
             <q-card-section>
-                <div class="text-h6">Confirm Task Completion</div>
+                <div class="text-h6 text-center text-positive">Confirm Mission Success</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                Do you confirm your Angel had completed the task?
+                Do you confirm that your Angel has completed the task?
             </q-card-section>
             <q-card-actions align="right">
-                <q-btn flat label="Yes" color="dark" v-close-popup @click=updateConfirmCompleted />
-                <q-btn flat label="No" color="black" v-close-popup />
+                <q-btn flat label="Yes" color="positive" v-close-popup @click=updateConfirmCompleted />
+                <q-btn flat label="No" color="negative" v-close-popup />
             </q-card-actions>
         </q-card>
     </q-dialog>
