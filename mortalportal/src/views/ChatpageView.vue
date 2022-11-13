@@ -121,7 +121,7 @@
                           <template v-else>
                             <q-item-label><q-btn flat icon="money" color="red" label="Make Offer"/></q-item-label>
                           </template> -->
-                          <q-item-label><q-btn flat color="accent" label="Back To Task" @click="toTask()"/></q-item-label>
+                          <q-item-label><q-btn flat color="secondary" label="Back To Task" @click="toTask()"/></q-item-label>
                         </q-item-section>
                       
                       </q-item>

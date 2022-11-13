@@ -14,23 +14,23 @@
             <div class="lt-xs mainMenu karla">
 
                 
-                <q-btn rounded flat label="Chats" @click="handleClick()" class="text-black "
+                <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-black karla"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == false"  />
+                    <q-btn rounded flat label="Chats" @click="gotoChat()" class="text-indigo-6 karla"
+                        @mouseover="hover3 = true" @mouseleave="hover3 = false"
+                        v-if="hover3 == true" />
+
+                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black karla"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == false"  />
-                    <q-btn rounded flat label="Chats" @click="handleClick()" class="text-indigo-6"
+                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6 karla"
                         @mouseover="hover = true" @mouseleave="hover = false"
                         v-if="hover == true" />
 
-                <q-btn rounded flat label="My Account" @click="handleClick()" class="text-black "
-                        @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == false"  />
-                    <q-btn rounded flat label="My Account" @click="handleClick()" class="text-indigo-6"
-                        @mouseover="hover = true" @mouseleave="hover = false"
-                        v-if="hover == true" />
-
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black" @mouseover="hover2 = true"
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-black karla" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == false" />
-                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 " @mouseover="hover2 = true"
+                    <q-btn rounded flat label="Log Out" @click="exit()" class="text-indigo-6 karla" @mouseover="hover2 = true"
                         @mouseleave="hover2 = false" v-if="hover2 == true" />
 
             </div>
@@ -452,9 +452,8 @@ h3 {
         display: none;
     }
 }
-
-.karla {
-    font-family: 'karla';
-}
 @import url("https://fonts.googleapis.com/css?family=Karla");
+.karla {
+    font-family: karla;
+};
 </style>
