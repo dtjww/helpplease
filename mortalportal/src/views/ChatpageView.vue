@@ -44,7 +44,7 @@
                           </q-item-section>
                           <q-item-section>
                           <q-item-label>{{value.userB}}</q-item-label>
-                          <q-item-label caption>{{value.title}}</q-item-label>
+                          <q-item-label caption>"{{value.title}}"</q-item-label>
                           </q-item-section>
                         </template>
                         <template v-else>
@@ -53,7 +53,7 @@
                             </q-item-section>
                             <q-item-section>
                             <q-item-label>{{value.userA}}</q-item-label>
-                            <q-item-label caption>{{value.title}}</q-item-label>
+                            <q-item-label caption>"{{value.title}}"</q-item-label>
                             </q-item-section>
                         </template>
               </q-item>
@@ -66,7 +66,7 @@
                     </q-item-section>
                     <q-item-section>
                     <q-item-label>{{value.userB}}</q-item-label>
-                    <q-item-label caption>{{value.title}}</q-item-label>
+                    <q-item-label caption>"{{value.title}}"</q-item-label>
                     </q-item-section>
                   </template>
                   <template v-else>
@@ -75,7 +75,7 @@
                       </q-item-section>
                       <q-item-section>
                       <q-item-label>{{value.userA}}</q-item-label>
-                      <q-item-label caption>{{value.title}}</q-item-label>
+                      <q-item-label caption>"{{value.title}}"</q-item-label>
                       </q-item-section>
                   </template>
               </q-item>
